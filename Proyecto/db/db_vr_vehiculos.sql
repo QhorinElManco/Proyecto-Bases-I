@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 12-03-2019 a las 03:03:20
+-- Tiempo de generación: 17-03-2019 a las 03:13:17
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -113,9 +113,10 @@ CREATE TABLE IF NOT EXISTS `descuento` (
 CREATE TABLE IF NOT EXISTS `empleado` (
   `idEmpleado` int(11) NOT NULL AUTO_INCREMENT,
   `fechaInicio` date NOT NULL,
-  `fechaFin` date NOT NULL,
+  `fechaFin` date DEFAULT NULL,
   `idPersona` int(11) NOT NULL,
   `idCargo` int(11) NOT NULL,
+  `contraseña` varchar(45) NOT NULL,
   PRIMARY KEY (`idEmpleado`),
   KEY `FK_EMPLEADO_PERSONA` (`idPersona`),
   KEY `FK_EMPLEADO_CARGO` (`idCargo`)
@@ -145,16 +146,16 @@ CREATE TABLE IF NOT EXISTS `factura` (
   `fechaEmision` date NOT NULL,
   `Total` decimal(10,0) NOT NULL,
   `idCliente` int(11) NOT NULL,
-  `idEmpleado` int(11) NOT NULL,
+  `idEmpleado` int(11) DEFAULT NULL,
   `idFormaPago` int(11) NOT NULL,
   `idImpuesto` int(11) NOT NULL,
   `idFacturaMantenimiento` int(11) NOT NULL,
   PRIMARY KEY (`idFactura`),
   KEY `FK_FACTURA_CLIENTE` (`idCliente`),
   KEY `FK_FACTURA_EMPLEADO` (`idEmpleado`),
-  KEY `FK_FACTURA_FORMA_PAGO` (`idFormaPago`),
+  KEY `FK_FACTURA_FORMAPAGO` (`idFormaPago`),
   KEY `FK_FACTURA_IMPUESTO` (`idImpuesto`),
-  KEY `FK_FACTURA_FACTURA_MANTENIMIENTO` (`idFacturaMantenimiento`)
+  KEY `FK_FACTURA_FACTURAMANTENIMIENTO` (`idFacturaMantenimiento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -172,15 +173,15 @@ CREATE TABLE IF NOT EXISTS `facturapormantenimiento` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `factura_has_descuento`
+-- Estructura de tabla para la tabla `factura_descuento`
 --
 
-CREATE TABLE IF NOT EXISTS `factura_has_descuento` (
+CREATE TABLE IF NOT EXISTS `factura_descuento` (
   `idFactura` int(11) NOT NULL,
   `idDescuento` int(11) NOT NULL,
   `fecha` date NOT NULL,
   PRIMARY KEY (`idFactura`,`idDescuento`),
-  KEY `PK_FACTURA_DESCUENTO_DESCUENTO` (`idDescuento`)
+  KEY `FK_FACTURADESCUENTO_DESCUENTO` (`idDescuento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -204,10 +205,9 @@ CREATE TABLE IF NOT EXISTS `formapago` (
 CREATE TABLE IF NOT EXISTS `fotos` (
   `idFotos` int(11) NOT NULL AUTO_INCREMENT,
   `direccionEnDisco` varchar(45) NOT NULL,
-  `idVehiculo` int(11) NOT NULL,
+  `Vehiculo_idVehiculo` int(11) NOT NULL,
   PRIMARY KEY (`idFotos`),
-  UNIQUE KEY `direccionEnDisco` (`direccionEnDisco`),
-  KEY `FK_FOTOS_VEHICULO` (`idVehiculo`)
+  KEY `FK_FOTOS_VEHICULO` (`Vehiculo_idVehiculo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -245,15 +245,13 @@ CREATE TABLE IF NOT EXISTS `mantenimiento` (
   `idMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idEmpleado` int(11) NOT NULL,
   `idTaller` int(11) NOT NULL,
-  `idTipoMantenimiento` int(11) NOT NULL,
   `descripcionReparaciones` varchar(45) NOT NULL,
   `costo` decimal(10,0) NOT NULL,
   `idFacturaMantenimiento` int(11) NOT NULL,
   PRIMARY KEY (`idMantenimiento`),
   KEY `FK_MANTENIMIENTO_EMPLEADO` (`idEmpleado`),
   KEY `FK_MANTENIMIENTO_TALLER` (`idTaller`),
-  KEY `FK_MANTENIMIENTO_TIPO_MANTENIMIENTO` (`idTipoMantenimiento`),
-  KEY `FK_MANTENIMIENTO_FACTURA_MANTENIMIENTO` (`idFacturaMantenimiento`)
+  KEY `FK_MANTENIMIENTO_FACTURAMANTENIMIENTO` (`idFacturaMantenimiento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -302,12 +300,12 @@ CREATE TABLE IF NOT EXISTS `modelo` (
 
 CREATE TABLE IF NOT EXISTS `persona` (
   `idPersona` int(11) NOT NULL AUTO_INCREMENT,
-  `pnombre` varchar(25) NOT NULL,
-  `snombre` varchar(25) DEFAULT NULL,
-  `papellido` varchar(25) NOT NULL,
-  `sapellido` varchar(25) DEFAULT NULL,
+  `pnombre` varchar(45) NOT NULL,
+  `snombre` varchar(45) DEFAULT NULL,
+  `papellido` varchar(45) NOT NULL,
+  `sapellido` varchar(45) DEFAULT NULL,
   `correo` varchar(45) NOT NULL,
-  `direccion` varchar(60) NOT NULL,
+  `direccion` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`idPersona`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -358,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `repuestos` (
   `idMantenimiento` int(11) NOT NULL,
   PRIMARY KEY (`idRepuestos`),
   KEY `FK_REPUESTOS_INVENTARIO` (`idInventario`),
-  KEY `FK_REPUESTOS_MARCA_REPUESTO` (`idMarcaRepuesto`),
+  KEY `FK_REPUESTOS_MARCARESPUESTO` (`idMarcaRepuesto`),
   KEY `FK_REPUESTOS_MANTENIMIENTO` (`idMantenimiento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -394,15 +392,19 @@ CREATE TABLE IF NOT EXISTS `salida` (
 --
 
 CREATE TABLE IF NOT EXISTS `solicitudmantenimiento` (
+  `idSolicitudMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idVehiculo` int(11) NOT NULL,
   `idMantenimiento` int(11) NOT NULL,
   `fechaSolicitud` date NOT NULL,
   `estado` varchar(20) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
-  PRIMARY KEY (`idVehiculo`,`idMantenimiento`),
-  KEY `FK_SOLICITUD_MANTENIMIENTO_MANTENIMIENTO` (`idMantenimiento`),
-  KEY `FK_SOLICITUD_MANTENIMIENTO_EMPLEADO` (`idEmpleado`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `idTipoMantenimiento` int(11) NOT NULL,
+  PRIMARY KEY (`idSolicitudMantenimiento`),
+  KEY `FK_SOLICITUDMANTENIMIENTO_VEHICULO` (`idVehiculo`),
+  KEY `FK_SOLICITUDMANTENIMIENTO_MANTENIMIENTO` (`idMantenimiento`),
+  KEY `FK_SOLICITUDMANTENIMIENTO_EMPLEADO` (`idEmpleado`),
+  KEY `FK_SOLICITUDMANTENIMIENTO_TIPOMANTENIMIENTO` (`idTipoMantenimiento`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -419,24 +421,24 @@ CREATE TABLE IF NOT EXISTS `solicitudrenta` (
   `idAgenda` int(11) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
   PRIMARY KEY (`idSolicitudRenta`),
-  KEY `FK_SOLICITUD_CLIENTE` (`idCliente`),
-  KEY `FK_SOLICITUD_VEHICULO` (`idVehiculo`),
-  KEY `FK_SOLICITUD_AGENDA` (`idAgenda`),
-  KEY `FK_SOLICITUD_EMPLEADO` (`idEmpleado`)
+  KEY `FK_SOLICITUDRENTA_CLIENTE` (`idCliente`),
+  KEY `FK_SOLICITUDRENTA_VEHICULO` (`idVehiculo`),
+  KEY `FK_SOLICITUDRENTA_AGENDA` (`idAgenda`),
+  KEY `FK_SOLICITUDRENTA_EMPLEADO` (`idEmpleado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `solicitudrenta_has_requisitos`
+-- Estructura de tabla para la tabla `solicitudrequisitos`
 --
 
-CREATE TABLE IF NOT EXISTS `solicitudrenta_has_requisitos` (
+CREATE TABLE IF NOT EXISTS `solicitudrequisitos` (
   `idSolicitudRenta` int(11) NOT NULL,
   `idRequisitos` int(11) NOT NULL,
   `estado` varchar(45) NOT NULL,
   PRIMARY KEY (`idSolicitudRenta`,`idRequisitos`),
-  KEY `FK_SOLICITUD_REQUISITO_REQUISITOS` (`idRequisitos`)
+  KEY `FK_SOLICITUDREQUISITOS_REQUISITOS` (`idRequisitos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -474,7 +476,7 @@ CREATE TABLE IF NOT EXISTS `taller` (
 
 CREATE TABLE IF NOT EXISTS `telefonos` (
   `idTelefonos` int(11) NOT NULL AUTO_INCREMENT,
-  `telefono` varchar(12) NOT NULL,
+  `telefono` varchar(45) NOT NULL,
   `idPersona` int(11) NOT NULL,
   PRIMARY KEY (`idTelefonos`),
   KEY `FK_TELEFONOS_PERSONA` (`idPersona`)
@@ -575,20 +577,20 @@ CREATE TABLE IF NOT EXISTS `vehiculo` (
   `precioVenta` decimal(10,0) NOT NULL,
   `precioRentaHora` varchar(45) NOT NULL,
   `precioRentaDia` varchar(45) NOT NULL,
-  `placa` varchar(8) NOT NULL,
-  `idTransmision` int(11) NOT NULL,
-  `idCilindraje` int(11) NOT NULL,
+  `placa` varchar(8) DEFAULT NULL,
   `idModelo` int(11) NOT NULL,
-  `idTipoGasolina` int(11) NOT NULL,
   `idInventario` int(11) NOT NULL,
   `idTipoVehiculo` int(11) NOT NULL,
+  `idTipoGasolina` int(11) NOT NULL,
+  `idTransmision` int(11) NOT NULL,
+  `idCilindraje` int(11) NOT NULL,
   PRIMARY KEY (`idVehiculo`),
-  KEY `FK_VEHICULO_TRANSMISION` (`idTransmision`),
-  KEY `FK_VEHICULO_CILINDRAJE` (`idCilindraje`),
   KEY `FK_VEHICULO_MODELO` (`idModelo`),
-  KEY `FK_VEHICULO_TIPO_MOTOR` (`idTipoGasolina`),
   KEY `FK_VEHICULO_INVENTARIO` (`idInventario`),
-  KEY `FK_VEHICULO_TIPO_VEHICULO` (`idTipoVehiculo`)
+  KEY `FK_VEHICULO_TIPOVEHICULO` (`idTipoVehiculo`),
+  KEY `FK_VEHICULO_TIPOMOTOR` (`idTipoGasolina`),
+  KEY `FK_VEHICULO_TRANSMISION` (`idTransmision`),
+  KEY `FK_VEHICULO_CILINDRAJE` (`idCilindraje`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -629,8 +631,8 @@ ALTER TABLE `control`
 -- Filtros para la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  ADD CONSTRAINT `FK_EMPLEADO_CARGO` FOREIGN KEY (`idCargo`) REFERENCES `cargo` (`idCargo`),
-  ADD CONSTRAINT `FK_EMPLEADO_PERSONA` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`);
+  ADD CONSTRAINT `FK_EMPLEADO_PERSONA` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`),
+  ADD CONSTRAINT `FK_EMPLEADO_CARGO` FOREIGN KEY (`idCargo`) REFERENCES `cargo` (`idCargo`);
 
 --
 -- Filtros para la tabla `factura`
@@ -638,31 +640,30 @@ ALTER TABLE `empleado`
 ALTER TABLE `factura`
   ADD CONSTRAINT `FK_FACTURA_CLIENTE` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`),
   ADD CONSTRAINT `FK_FACTURA_EMPLEADO` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`),
-  ADD CONSTRAINT `FK_FACTURA_FORMA_PAGO` FOREIGN KEY (`idFormaPago`) REFERENCES `formapago` (`idFormaPago`),
+  ADD CONSTRAINT `FK_FACTURA_FORMAPAGO` FOREIGN KEY (`idFormaPago`) REFERENCES `formapago` (`idFormaPago`),
   ADD CONSTRAINT `FK_FACTURA_IMPUESTO` FOREIGN KEY (`idImpuesto`) REFERENCES `impuesto` (`idImpuesto`),
-  ADD CONSTRAINT `FK_FACTURA_FACTURA_MANTENIMIENTO` FOREIGN KEY (`idFacturaMantenimiento`) REFERENCES `facturapormantenimiento` (`idFacturaMantenimiento`);
+  ADD CONSTRAINT `FK_FACTURA_FACTURAMANTENIMIENTO` FOREIGN KEY (`idFacturaMantenimiento`) REFERENCES `facturapormantenimiento` (`idFacturaMantenimiento`);
 
 --
--- Filtros para la tabla `factura_has_descuento`
+-- Filtros para la tabla `factura_descuento`
 --
-ALTER TABLE `factura_has_descuento`
-  ADD CONSTRAINT `FK_FACTURA_DESCUENTO_FACTURA` FOREIGN KEY (`idFactura`) REFERENCES `factura` (`idFactura`),
-  ADD CONSTRAINT `PK_FACTURA_DESCUENTO_DESCUENTO` FOREIGN KEY (`idDescuento`) REFERENCES `descuento` (`idDescuento`);
+ALTER TABLE `factura_descuento`
+  ADD CONSTRAINT `FK_FACTURADESCUENTO_FACTURA` FOREIGN KEY (`idFactura`) REFERENCES `factura` (`idFactura`),
+  ADD CONSTRAINT `FK_FACTURADESCUENTO_DESCUENTO` FOREIGN KEY (`idDescuento`) REFERENCES `descuento` (`idDescuento`);
 
 --
 -- Filtros para la tabla `fotos`
 --
 ALTER TABLE `fotos`
-  ADD CONSTRAINT `FK_FOTOS_VEHICULO` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`);
+  ADD CONSTRAINT `FK_FOTOS_VEHICULO` FOREIGN KEY (`Vehiculo_idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`);
 
 --
 -- Filtros para la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
   ADD CONSTRAINT `FK_MANTENIMIENTO_EMPLEADO` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`),
-  ADD CONSTRAINT `FK_MANTENIMIENTO_FACTURA_MANTENIMIENTO` FOREIGN KEY (`idFacturaMantenimiento`) REFERENCES `facturapormantenimiento` (`idFacturaMantenimiento`),
   ADD CONSTRAINT `FK_MANTENIMIENTO_TALLER` FOREIGN KEY (`idTaller`) REFERENCES `taller` (`idTaller`),
-  ADD CONSTRAINT `FK_MANTENIMIENTO_TIPO_MANTENIMIENTO` FOREIGN KEY (`idTipoMantenimiento`) REFERENCES `tipomantenimiento` (`idTipoMantenimiento`);
+  ADD CONSTRAINT `FK_MANTENIMIENTO_FACTURAMANTENIMIENTO` FOREIGN KEY (`idFacturaMantenimiento`) REFERENCES `facturapormantenimiento` (`idFacturaMantenimiento`);
 
 --
 -- Filtros para la tabla `modelo`
@@ -689,32 +690,33 @@ ALTER TABLE `renta`
 --
 ALTER TABLE `repuestos`
   ADD CONSTRAINT `FK_REPUESTOS_INVENTARIO` FOREIGN KEY (`idInventario`) REFERENCES `inventario` (`idInventario`),
-  ADD CONSTRAINT `FK_REPUESTOS_MANTENIMIENTO` FOREIGN KEY (`idMantenimiento`) REFERENCES `mantenimiento` (`idMantenimiento`),
-  ADD CONSTRAINT `FK_REPUESTOS_MARCA_REPUESTO` FOREIGN KEY (`idMarcaRepuesto`) REFERENCES `marcarepuesto` (`idMarcaRepuesto`);
+  ADD CONSTRAINT `FK_REPUESTOS_MARCARESPUESTO` FOREIGN KEY (`idMarcaRepuesto`) REFERENCES `marcarepuesto` (`idMarcaRepuesto`),
+  ADD CONSTRAINT `FK_REPUESTOS_MANTENIMIENTO` FOREIGN KEY (`idMantenimiento`) REFERENCES `mantenimiento` (`idMantenimiento`);
 
 --
 -- Filtros para la tabla `solicitudmantenimiento`
 --
 ALTER TABLE `solicitudmantenimiento`
-  ADD CONSTRAINT `FK_SOLICITUD_MANTENIMIENTO_VEHICULO` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`),
-  ADD CONSTRAINT `FK_SOLICITUD_MANTENIMIENTO_MANTENIMIENTO` FOREIGN KEY (`idMantenimiento`) REFERENCES `mantenimiento` (`idMantenimiento`),
-  ADD CONSTRAINT `FK_SOLICITUD_MANTENIMIENTO_EMPLEADO` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`);
+  ADD CONSTRAINT `FK_SOLICITUDMANTENIMIENTO_VEHICULO` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`),
+  ADD CONSTRAINT `FK_SOLICITUDMANTENIMIENTO_MANTENIMIENTO` FOREIGN KEY (`idMantenimiento`) REFERENCES `mantenimiento` (`idMantenimiento`),
+  ADD CONSTRAINT `FK_SOLICITUDMANTENIMIENTO_EMPLEADO` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`),
+  ADD CONSTRAINT `FK_SOLICITUDMANTENIMIENTO_TIPOMANTENIMIENTO` FOREIGN KEY (`idTipoMantenimiento`) REFERENCES `tipomantenimiento` (`idTipoMantenimiento`);
 
 --
 -- Filtros para la tabla `solicitudrenta`
 --
 ALTER TABLE `solicitudrenta`
-  ADD CONSTRAINT `FK_SOLICITUD_CLIENTE` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`),
-  ADD CONSTRAINT `FK_SOLICITUD_VEHICULO` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`),
-  ADD CONSTRAINT `FK_SOLICITUD_AGENDA` FOREIGN KEY (`idAgenda`) REFERENCES `agenda` (`idAgenda`),
-  ADD CONSTRAINT `FK_SOLICITUD_EMPLEADO` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`);
+  ADD CONSTRAINT `FK_SOLICITUDRENTA_CLIENTE` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`),
+  ADD CONSTRAINT `FK_SOLICITUDRENTA_VEHICULO` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`),
+  ADD CONSTRAINT `FK_SOLICITUDRENTA_AGENDA` FOREIGN KEY (`idAgenda`) REFERENCES `agenda` (`idAgenda`),
+  ADD CONSTRAINT `FK_SOLICITUDRENTA_EMPLEADO` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`);
 
 --
--- Filtros para la tabla `solicitudrenta_has_requisitos`
+-- Filtros para la tabla `solicitudrequisitos`
 --
-ALTER TABLE `solicitudrenta_has_requisitos`
-  ADD CONSTRAINT `FK_SOLICITUD_REQUISITO_SOLICITUD` FOREIGN KEY (`idSolicitudRenta`) REFERENCES `solicitudrenta` (`idSolicitudRenta`),
-  ADD CONSTRAINT `FK_SOLICITUD_REQUISITO_REQUISITOS` FOREIGN KEY (`idRequisitos`) REFERENCES `requisitos` (`idRequisitos`);
+ALTER TABLE `solicitudrequisitos`
+  ADD CONSTRAINT `FK_SOLICITUDREQUISITOS_SOLICITUD` FOREIGN KEY (`idSolicitudRenta`) REFERENCES `solicitudrenta` (`idSolicitudRenta`),
+  ADD CONSTRAINT `FK_SOLICITUDREQUISITOS_REQUISITOS` FOREIGN KEY (`idRequisitos`) REFERENCES `requisitos` (`idRequisitos`);
 
 --
 -- Filtros para la tabla `taller`
@@ -747,12 +749,12 @@ ALTER TABLE `tiposalida`
 -- Filtros para la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  ADD CONSTRAINT `FK_VEHICULO_CILINDRAJE` FOREIGN KEY (`idCilindraje`) REFERENCES `cilindraje` (`idCilindraje`),
-  ADD CONSTRAINT `FK_VEHICULO_INVENTARIO` FOREIGN KEY (`idInventario`) REFERENCES `inventario` (`idInventario`),
   ADD CONSTRAINT `FK_VEHICULO_MODELO` FOREIGN KEY (`idModelo`) REFERENCES `modelo` (`idModelo`),
-  ADD CONSTRAINT `FK_VEHICULO_TIPO_MOTOR` FOREIGN KEY (`idTipoGasolina`) REFERENCES `tipomotor` (`idTipoGasolina`),
-  ADD CONSTRAINT `FK_VEHICULO_TIPO_VEHICULO` FOREIGN KEY (`idTipoVehiculo`) REFERENCES `tipovehiculo` (`idTipoVehiculo`),
-  ADD CONSTRAINT `FK_VEHICULO_TRANSMISION` FOREIGN KEY (`idTransmision`) REFERENCES `transmision` (`idTransmision`);
+  ADD CONSTRAINT `FK_VEHICULO_INVENTARIO` FOREIGN KEY (`idInventario`) REFERENCES `inventario` (`idInventario`),
+  ADD CONSTRAINT `FK_VEHICULO_TIPOVEHICULO` FOREIGN KEY (`idTipoVehiculo`) REFERENCES `tipovehiculo` (`idTipoVehiculo`),
+  ADD CONSTRAINT `FK_VEHICULO_TIPOMOTOR` FOREIGN KEY (`idTipoGasolina`) REFERENCES `tipomotor` (`idTipoGasolina`),
+  ADD CONSTRAINT `FK_VEHICULO_TRANSMISION` FOREIGN KEY (`idTransmision`) REFERENCES `transmision` (`idTransmision`),
+  ADD CONSTRAINT `FK_VEHICULO_CILINDRAJE` FOREIGN KEY (`idCilindraje`) REFERENCES `cilindraje` (`idCilindraje`);
 
 --
 -- Filtros para la tabla `ventas`
