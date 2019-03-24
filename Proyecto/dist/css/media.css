@@ -1,0 +1,29 @@
+@media all and (max-width: 600px){
+    div{
+        width:100%;
+        height:auto;
+        margin-left:10px;
+    }
+}
+@media all and (max-width: 1200px) {
+    a.menu {
+        display: inline-block;
+        padding:0px 6px;
+        margin:0px 4px;
+    }
+}
+@media all and (max-width: 840px) {
+    a.menu{
+        margin:0px;
+        padding:0px;
+        padding-left:5%;
+        display:block;
+        float:none;
+        text-align:left;
+    }
+}
+@media all and (max-width: 520px) {
+    a.menu{
+        padding-left:20%;
+    }
+}
