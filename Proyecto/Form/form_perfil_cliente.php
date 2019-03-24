@@ -9,12 +9,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Auto Motor</title>
     <!-- Custom CSS -->
-    <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="dist/css/style.min.css" rel="stylesheet">
+    <link href="../dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -49,19 +49,19 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="../index.html">
                         <!-- Logo icon -->
                         <b class="logo-icon p-l-10">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+                            <img src="../assets/images/logo-icon.png" alt="homepage" class="light-logo" />
 
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="assets/images/logo2.png" alt="homepage" class="light-logo" />
+                            <img src="../assets/images/logo2.png" alt="homepage" class="light-logo" />
 
                         </span>
                         <!-- Logo icon -->
@@ -119,7 +119,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                                    src="../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
                                     My Profile</a>
@@ -141,6 +141,10 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
+                        
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
                     </ul>
                 </div>
             </nav>
@@ -158,19 +162,19 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="lista_autos_renta.html" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
+                                href="../index.html" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
                                     class="hide-menu">Compra</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="charts.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
+                                href="../charts.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
                                     class="hide-menu">Renta</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
+                                href="../widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
                                     class="hide-menu">Historial</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="tables.html" aria-expanded="false"><i class="mdi mdi-oil"></i><span
+                                href="../tables.html" aria-expanded="false"><i class="mdi mdi-oil"></i><span
                                     class="hide-menu">Mantenimiento</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
+                                href="../grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
                                     class="hide-menu">Repuestos</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
@@ -199,55 +203,83 @@
         <div class="page-wrapper">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="padding: 0">
+            <div class="container-fluid" style="padding: 50px">
                 <!-- ============================================================== -->
-                <!-- Banner Principal -->
+                <!-- Inicio Formulario -->
                 <!-- ============================================================== -->
+                <h4><p class="text-center">Bienvenido, Usuario ----------</p></h4>
+                <p class="text-center"> Administra tu información y las opciones de privacidad y seguridad a fin de que Google sea más relevante para ti.</p>
                 <div class="row">
-                    <div class="col-md-12">
-                        <div
-                            style="background-image: url(assets/images/background/img1.jpg);background-repeat: no-repeat;background-size:cover; height:910px; width:auto;">
-                            <div style="background-color: rgba(0, 0, 0, 0.5); height:100%; width:100%;">
-                                <div style="width:525px; height:400px; margin: auto; padding-top: 220px">
-                                    <h5 style="color: rgba(255, 255, 255, 0.7)">La empresa numero uno de vehiculos en el
-                                        país</h5>
-                                    <br>
-                                    <h2 style="color: white;">LA COMODIDAD AL ALCANCE DE TUS MANOS</h2>
-                                    <br>
-                                    <p style="color: rgba(255, 255, 255, 0.9)">La empresa con la mejor atencion y los
-                                        mejores precios en renta y venta de vehiculos con
-                                        cobertura a nivel nacional</p>
-                                    <br>
-                                    <button type="button" class="btn btn-outline-warning"><a
-                                            href="#Explorar">Explorar</a></button>
-                                </div>
+                    <div class="col-sm-5 p-3 mb-2 bg-secondary text-white border border-dark" style="margin: 5px">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h3>Se encontraron problemas de seguridad</h3>
+                                <p>Soluciona estos problemas ahora mismo para proteger tu cuenta</p>
                             </div>
-                        </div>
+                            <div class="col">
+                                <img src="../ima/icon1.png">
+                            </div>
+                        </div><hr />
+                        <div class="row"><a href="#example">Comenzar</a></div>
+                    </div>
+                    <div class="col-sm-5 p-3 mb-2 bg-secondary text-white border border-dark" style="margin: 5px">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h3>Personalizar Cuenta</h3>
+                                <p>Para personalizar tu experiencia en AutoMotor, elige la actividad de tu cuenta que quieras guardar</p>
+                            </div>
+                            <div class="col">
+                                <img src="../ima/icon2.png">
+                            </div>
+                        </div><hr />
+                        <div class="row"><a href="#example">Comenzar</a></div>
+                    </div>
+                    <div class="col-sm-5 p-3 mb-2 bg-secondary text-white border border-dark" style="margin: 5px">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h3>Historial de compras</h3>
+                                <p>El almacenamiento de tu cuenta se comparte en los servicios de Google, como Gmail y Fotos</p>
+                            </div>
+                            <div class="col">
+                                <img src="../ima/icon3.png">
+                            </div>
+                        </div><hr />
+                        <div class="row"><a href="#example">Comenzar</a></div>
+                    </div>
+                    <div class="col-sm-5 p-3 mb-2 bg-secondary text-white border border-dark" style="margin: 5px">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h3>Revisar la configuración de privacidad</h3>
+                                <p>Realiza la Verificación de privacidad, una guía paso a paso donde puedes establecer la configuración de privacidad</p>
+                            </div>
+                            <div class="col">
+                                <img src="../ima/icon4.png">
+                            </div>
+                        </div><hr />
+                        <div class="row"><a href="#example">Comenzar</a></div>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- Fin Banner Principal -->
-                <!-- ============================================================== -->
-                <br>
-                <br>
-                <br><A name="Explorar"></a>
-                <br>
-                <br>
-                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
                 <!-- Galeria -->
                 <!-- ============================================================== -->
-
-                <div class="row el-element-overlay" style="padding:100px;">
+                <div class="row">
+                    <div class="col"><h3><p class="text-center">Explorar</p></h3></div>
+                
+                </div>
+                
+                <div class="row el-element-overlay" style="padding:0px 100px 100px 100px;">
+                
                     <div class="col-lg-4 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="assets/images/big/img1.jpg"
+                                <div class="el-card-avatar el-overlay-1"> <img src="../ima/1.jpg"
                                         alt="user" />
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
                                             <li class="el-item"><a
                                                     class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="assets/images/big/img1.jpg"><i
+                                                    href="../ima/1.jpg"><i
                                                         class="mdi mdi-magnify-plus"></i></a></li>
                                             <li class="el-item"><a class="btn default btn-outline el-link"
                                                     href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
@@ -264,13 +296,13 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="assets/images/big/img2.jpg"
+                                <div class="el-card-avatar el-overlay-1"> <img src="../ima/2.jpg"
                                         alt="user" />
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
                                             <li class="el-item"><a
                                                     class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="assets/images/big/img2.jpg"><i
+                                                    href="../ima/2.jpg"><i
                                                         class="mdi mdi-magnify-plus"></i></a></li>
                                             <li class="el-item"><a class="btn default btn-outline el-link"
                                                     href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
@@ -287,13 +319,13 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="assets/images/big/img3.jpg"
+                                <div class="el-card-avatar el-overlay-1"> <img src="../ima/3.jpg"
                                         alt="user" />
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
                                             <li class="el-item"><a
                                                     class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="assets/images/big/img3.jpg"><i
+                                                    href="../ima/3.jpg"><i
                                                         class="mdi mdi-magnify-plus"></i></a></li>
                                             <li class="el-item"><a class="btn default btn-outline el-link"
                                                     href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
@@ -310,13 +342,13 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="assets/images/big/img4.jpg"
+                                <div class="el-card-avatar el-overlay-1"> <img src="../ima/4.jpg"
                                         alt="user" />
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
                                             <li class="el-item"><a
                                                     class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="assets/images/big/img4.jpg"><i
+                                                    href="../ima/4.jpg"><i
                                                         class="mdi mdi-magnify-plus"></i></a></li>
                                             <li class="el-item"><a class="btn default btn-outline el-link"
                                                     href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
@@ -333,13 +365,13 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="assets/images/big/img3.jpg"
+                                <div class="el-card-avatar el-overlay-1"> <img src="../ima/5.jpg"
                                         alt="user" />
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
                                             <li class="el-item"><a
                                                     class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="assets/images/big/img3.jpg"><i
+                                                    href="../ima/5.jpg"><i
                                                         class="mdi mdi-magnify-plus"></i></a></li>
                                             <li class="el-item"><a class="btn default btn-outline el-link"
                                                     href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
@@ -356,13 +388,13 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="assets/images/big/img5.jpg"
+                                <div class="el-card-avatar el-overlay-1"> <img src="../ima/6.jpg"
                                         alt="user" />
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
                                             <li class="el-item"><a
                                                     class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="assets/images/big/img5.jpg"><i
+                                                    href="../ima/6.jpg"><i
                                                         class="mdi mdi-magnify-plus"></i></a></li>
                                             <li class="el-item"><a class="btn default btn-outline el-link"
                                                     href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
@@ -380,7 +412,6 @@
                 <!-- ============================================================== -->
                 <!-- Fin Galeria -->
                 <!-- ============================================================== -->
-            </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
@@ -407,29 +438,29 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
+    <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../assets/extra-libs/sparkline/sparkline.js"></script>
     <!--Wave Effects -->
-    <script src="dist/js/waves.js"></script>
+    <script src="../dist/js/waves.js"></script>
     <!--Menu sidebar -->
-    <script src="dist/js/sidebarmenu.js"></script>
+    <script src="../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="dist/js/custom.min.js"></script>
+    <script src="../dist/js/custom.min.js"></script>
     <!--This page JavaScript -->
     <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
     <!-- Charts js Files -->
-    <script src="assets/libs/flot/excanvas.js"></script>
-    <script src="assets/libs/flot/jquery.flot.js"></script>
-    <script src="assets/libs/flot/jquery.flot.pie.js"></script>
-    <script src="assets/libs/flot/jquery.flot.time.js"></script>
-    <script src="assets/libs/flot/jquery.flot.stack.js"></script>
-    <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
-    <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="dist/js/pages/chart/chart-page-init.js"></script>
+    <script src="../assets/libs/flot/excanvas.js"></script>
+    <script src="../assets/libs/flot/jquery.flot.js"></script>
+    <script src="../assets/libs/flot/jquery.flot.pie.js"></script>
+    <script src="../assets/libs/flot/jquery.flot.time.js"></script>
+    <script src="../assets/libs/flot/jquery.flot.stack.js"></script>
+    <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
+    <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="../dist/js/pages/chart/chart-page-init.js"></script>
 
 </body>
 
