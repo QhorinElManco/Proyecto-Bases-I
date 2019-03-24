@@ -141,7 +141,7 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-                        
+
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -207,211 +207,213 @@
                 <!-- ============================================================== -->
                 <!-- Inicio Formulario -->
                 <!-- ============================================================== -->
-                <h4><p class="text-center">Bienvenido, Usuario ----------</p></h4>
-                <p class="text-center"> Administra tu información y las opciones de privacidad y seguridad a fin de que Google sea más relevante para ti.</p>
-                <div class="row">
-                    <div class="col-sm-5 p-3 mb-2 bg-secondary text-white border border-dark" style="margin: 5px">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <h3>Se encontraron problemas de seguridad</h3>
-                                <p>Soluciona estos problemas ahora mismo para proteger tu cuenta</p>
+                <h4>
+                    <p class="text-center">Bienvenido, Usuario ----------</p>
+                </h4>
+                <p class="text-center"> Administra tu información y las opciones de privacidad y seguridad a fin de que
+                    Google sea más relevante para ti.</p>
+                <div style="padding-left:150px;">
+                    <div class="row">
+                        <div class="col-sm-5 p-3 mb-2 bg-secondary text-white border border-dark" style="margin: 5px">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h3>Se encontraron problemas de seguridad</h3>
+                                    <p>Soluciona estos problemas ahora mismo para proteger tu cuenta</p>
+                                </div>
+                                <div class="col">
+                                    <img src="../ima/icon1.png">
+                                </div>
                             </div>
-                            <div class="col">
-                                <img src="../ima/icon1.png">
+                            <hr />
+                            <div class="row"><a href="#example">Comenzar</a></div>
+                        </div>
+                        <div class="col-sm-5 p-3 mb-2 bg-secondary text-white border border-dark" style="margin: 5px">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h3>Personalizar Cuenta</h3>
+                                    <p>Para personalizar tu experiencia en AutoMotor, elige la actividad de tu cuenta
+                                        que quieras guardar</p>
+                                </div>
+                                <div class="col">
+                                    <img src="../ima/icon2.png">
+                                </div>
                             </div>
-                        </div><hr />
-                        <div class="row"><a href="#example">Comenzar</a></div>
-                    </div>
-                    <div class="col-sm-5 p-3 mb-2 bg-secondary text-white border border-dark" style="margin: 5px">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <h3>Personalizar Cuenta</h3>
-                                <p>Para personalizar tu experiencia en AutoMotor, elige la actividad de tu cuenta que quieras guardar</p>
+                            <hr />
+                            <div class="row"><a href="#example">Comenzar</a></div>
+                        </div>
+                        <div class="col-sm-5 p-3 mb-2 bg-secondary text-white border border-dark" style="margin: 5px">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h3>Historial de compras</h3>
+                                    <p>El almacenamiento de tu cuenta se comparte en los servicios de Google, como Gmail
+                                        y Fotos</p>
+                                </div>
+                                <div class="col">
+                                    <img src="../ima/icon3.png">
+                                </div>
                             </div>
-                            <div class="col">
-                                <img src="../ima/icon2.png">
+                            <hr />
+                            <div class="row"><a href="#example">Comenzar</a></div>
+                        </div>
+                        <div class="col-sm-5 p-3 mb-2 bg-secondary text-white border border-dark" style="margin: 5px">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h3>Revisar la configuración de privacidad</h3>
+                                    <p>Realiza la Verificación de privacidad, una guía paso a paso donde puedes
+                                        establecer la configuración de privacidad</p>
+                                </div>
+                                <div class="col">
+                                    <img src="../ima/icon4.png">
+                                </div>
                             </div>
-                        </div><hr />
-                        <div class="row"><a href="#example">Comenzar</a></div>
-                    </div>
-                    <div class="col-sm-5 p-3 mb-2 bg-secondary text-white border border-dark" style="margin: 5px">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <h3>Historial de compras</h3>
-                                <p>El almacenamiento de tu cuenta se comparte en los servicios de Google, como Gmail y Fotos</p>
-                            </div>
-                            <div class="col">
-                                <img src="../ima/icon3.png">
-                            </div>
-                        </div><hr />
-                        <div class="row"><a href="#example">Comenzar</a></div>
-                    </div>
-                    <div class="col-sm-5 p-3 mb-2 bg-secondary text-white border border-dark" style="margin: 5px">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <h3>Revisar la configuración de privacidad</h3>
-                                <p>Realiza la Verificación de privacidad, una guía paso a paso donde puedes establecer la configuración de privacidad</p>
-                            </div>
-                            <div class="col">
-                                <img src="../ima/icon4.png">
-                            </div>
-                        </div><hr />
-                        <div class="row"><a href="#example">Comenzar</a></div>
+                            <hr />
+                            <div class="row"><a href="#example">Comenzar</a></div>
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- ============================================================== -->
-                <!-- Galeria -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col"><h3><p class="text-center">Explorar</p></h3></div>
-                
+            <!-- Galeria -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col">
+                    <h3>
+                        <p class="text-center">Explorar</p>
+                    </h3>
                 </div>
-                
-                <div class="row el-element-overlay" style="padding:0px 100px 100px 100px;">
-                
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../ima/1.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a
-                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="../ima/1.jpg"><i
-                                                        class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link"
-                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
-                                        project</span>
+            </div>
+            <div class="row el-element-overlay" style="padding:0px 100px 100px 100px;">
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="el-card-item">
+                            <div class="el-card-avatar el-overlay-1"> <img src="../ima/1.jpg" alt="user" />
+                                <div class="el-overlay">
+                                    <ul class="list-style-none el-info">
+                                        <li class="el-item"><a
+                                                class="btn default btn-outline image-popup-vertical-fit el-link"
+                                                href="../ima/1.jpg"><i class="mdi mdi-magnify-plus"></i></a></li>
+                                        <li class="el-item"><a class="btn default btn-outline el-link"
+                                                href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
+                                    </ul>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../ima/2.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a
-                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="../ima/2.jpg"><i
-                                                        class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link"
-                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
-                                        project</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../ima/3.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a
-                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="../ima/3.jpg"><i
-                                                        class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link"
-                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
-                                        project</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../ima/4.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a
-                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="../ima/4.jpg"><i
-                                                        class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link"
-                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
-                                        project</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../ima/5.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a
-                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="../ima/5.jpg"><i
-                                                        class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link"
-                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
-                                        project</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../ima/6.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a
-                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="../ima/6.jpg"><i
-                                                        class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link"
-                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
-                                        project</span>
-                                </div>
+                            <div class="el-card-content">
+                                <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
+                                    project</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- Fin Galeria -->
-                <!-- ============================================================== -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="el-card-item">
+                            <div class="el-card-avatar el-overlay-1"> <img src="../ima/2.jpg" alt="user" />
+                                <div class="el-overlay">
+                                    <ul class="list-style-none el-info">
+                                        <li class="el-item"><a
+                                                class="btn default btn-outline image-popup-vertical-fit el-link"
+                                                href="../ima/2.jpg"><i class="mdi mdi-magnify-plus"></i></a></li>
+                                        <li class="el-item"><a class="btn default btn-outline el-link"
+                                                href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="el-card-content">
+                                <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
+                                    project</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="el-card-item">
+                            <div class="el-card-avatar el-overlay-1"> <img src="../ima/3.jpg" alt="user" />
+                                <div class="el-overlay">
+                                    <ul class="list-style-none el-info">
+                                        <li class="el-item"><a
+                                                class="btn default btn-outline image-popup-vertical-fit el-link"
+                                                href="../ima/3.jpg"><i class="mdi mdi-magnify-plus"></i></a></li>
+                                        <li class="el-item"><a class="btn default btn-outline el-link"
+                                                href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="el-card-content">
+                                <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
+                                    project</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="el-card-item">
+                            <div class="el-card-avatar el-overlay-1"> <img src="../ima/4.jpg" alt="user" />
+                                <div class="el-overlay">
+                                    <ul class="list-style-none el-info">
+                                        <li class="el-item"><a
+                                                class="btn default btn-outline image-popup-vertical-fit el-link"
+                                                href="../ima/4.jpg"><i class="mdi mdi-magnify-plus"></i></a></li>
+                                        <li class="el-item"><a class="btn default btn-outline el-link"
+                                                href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="el-card-content">
+                                <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
+                                    project</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="el-card-item">
+                            <div class="el-card-avatar el-overlay-1"> <img src="../ima/5.jpg" alt="user" />
+                                <div class="el-overlay">
+                                    <ul class="list-style-none el-info">
+                                        <li class="el-item"><a
+                                                class="btn default btn-outline image-popup-vertical-fit el-link"
+                                                href="../ima/5.jpg"><i class="mdi mdi-magnify-plus"></i></a></li>
+                                        <li class="el-item"><a class="btn default btn-outline el-link"
+                                                href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="el-card-content">
+                                <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
+                                    project</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="el-card-item">
+                            <div class="el-card-avatar el-overlay-1"> <img src="../ima/6.jpg" alt="user" />
+                                <div class="el-overlay">
+                                    <ul class="list-style-none el-info">
+                                        <li class="el-item"><a
+                                                class="btn default btn-outline image-popup-vertical-fit el-link"
+                                                href="../ima/6.jpg"><i class="mdi mdi-magnify-plus"></i></a></li>
+                                        <li class="el-item"><a class="btn default btn-outline el-link"
+                                                href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="el-card-content">
+                                <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
+                                    project</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- Fin Galeria -->
+            <!-- ============================================================== -->
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->

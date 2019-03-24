@@ -47,7 +47,7 @@ INSERT INTO `cargo` (`idCargo`, `descripcion`) VALUES
 (4, 'Mecanico'),
 (5, 'Conductor'),
 (6, 'Guardia de seguridad'),
-(7, 'Conserge'),
+(7, 'Conserje'),
 (8, 'Contador'),
 (9, 'Publicista'),
 (10, 'Cajero');
@@ -647,7 +647,8 @@ INSERT INTO `tipomotor` (`idTipoGasolina`, `descripcion`) VALUES
 (1, 'Diesel'),
 (2, 'Regular'),
 (3, 'Superior'),
-(4, 'Gas LPG');
+(4, 'Gas LPG')
+(5, 'Electrico');
 
 --
 -- Volcado de datos para la tabla `tiposalida`
