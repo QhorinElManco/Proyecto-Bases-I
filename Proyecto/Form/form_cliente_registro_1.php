@@ -21,6 +21,11 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+    <style>
+        label {
+            color: rgba(255, 255, 255, 1)
+        }
+    </style>
 </head>
 
 <body>
@@ -116,7 +121,7 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-                        
+
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -178,64 +183,84 @@
         <div class="page-wrapper">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="padding: 50px">
+            <div class="container-fluid" style="padding:100px;">
                 <!-- ============================================================== -->
                 <!-- Inicio Formulario -->
                 <!-- ============================================================== -->
-                <IMG SRC="../logo/logo_automotor.png"  style="margin: 0px 0px 30px 0px;"> 
-                <h3 style="margin: 0px 0px 30px 0px;">Crear su cuenta de AutoMotor</h3>
-                <input type="hidden" id="idPersona">
-                <input type="hidden" id="idCliente">
                 <div class="row">
-                    <div class="col-sm-2">                            
-                        <label for="txt_pnombre"><b>Nombre:</b></label>
+                    <div class="col-md-3"></div>
+                    <!--Margen de 3 columnas a la izquierda-->
+                    <div class="col-md-6 auth-box bg-dark border-top border-secondary">
+                        <div class="card" style="background-color: #343a40">
+                            <form class="form-horizontal">
+                                <div class="card-body" style="text-align:center;">
+                                    <div class="text-center p-t-20 p-b-20">
+                                        <IMG SRC="../assets/images/logo2.png">
+                                    </div>
+                                    <h3 style="margin: 20px 0px 30px 0px; color: rgba(255, 255, 255, 1)">Crear su cuenta
+                                        de AutoMotor</h3>
+                                    <input type="hidden" id="idPersona">
+                                    <input type="hidden" id="idCliente">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-left control-label col-form-label">Nombres</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="txt_pnombre"
+                                                placeholder="Primer nombre">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="txt_snombre"
+                                                placeholder="Segundo nombre">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-left control-label col-form-label">Apellidos</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="txt_papellido"
+                                                placeholder="Primer apellido">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="txt_saptxt_papellido"
+                                                placeholder="Segundo apellido">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-left control-label col-form-label">Correo</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" id="txt_correo"
+                                                placeholder="Correo electronico">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label
+                                            class="col-sm-3 text-left control-label col-form-label">Contraseña</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" id="txt_Contraseña"
+                                                placeholder="Ingrese su contraseña">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-left control-label col-form-label">Verifique su
+                                            contraseña</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" id="txt_Contraseña2"
+                                                placeholder="Ingrese nuevamente la contraseña">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-left control-label col-form-label">Direccion</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" id="txt_Contraseña2"
+                                                placeholder="Ingrese su direccion">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="text-align:center">
+                                    <button type="button" class="btn btn-success btn-lg">Siguiente</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="row " style="margin: 0px 0px 30px 0px;" >
-                    <div class="col-sm-3 " >
-                        <input type="text" class="form-control border border-secondary" id="txt_pnombre" maxlength="50" placeholder="Primer nombre">
-                    </div>
-                    <div class="col-sm-3 " >
-                        <input type="text" class="form-control border border-secondary" id="txt_snombre" maxlength="50"placeholder="segundo nombre">
-                    </div>
-                    <div class="col-sm-3 " >
-                        <input type="text" class="form-control border border-secondary" id="txt_papellido" maxlength="50" placeholder="Primer apellido">
-                    </div>
-                    <div class="col-sm-3 " >
-                        <input type="text" class="form-control border border-secondary" id="txt_sapellido" maxlength="50" placeholder="Segundo apellido">
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-3">
-                        <label for="txt_correo"><b>Correo:</b></label>
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 0px 30px 0px;">
-                    <div class="col-sm-4">
-                        <input type="text" id="txt_correo" class="form-control border border-secondary" maxlength="50" placeholder="Ingrese su correo electronico">
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-3">
-                        <label for="txt_contraseña"><b>Contraseña:</b></label>
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 0px 30px 0px;">
-                    <div class="col-sm-4">
-                        <input type="password" id="txt_contraseña" class="form-control border border-secondary" maxlength="50" placeholder="Ingrese su contraseña">
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-3">
-                        <label for="txt_contraseña2"><b>Confirmacion de contraseña:</b></label>
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 0px 30px 0px;">
-                    <div class="col-sm-4">
-                        <input type="password" id="txt_contraseña2" class="form-control border border-secondary" maxlength="50" placeholder="Reingrese su contraseña">
-                    </div>
-                </div>
-                <button type="button" class="btn btn-success">Siguiente</button>
                 <!-- ============================================================== -->
                 <!-- Fin Formulario -->
                 <!-- ============================================================== -->
