@@ -56,7 +56,7 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="../index.html">
+                    <a class="navbar-brand" href="../index.php">
                         <!-- Logo icon -->
                         <b class="logo-icon p-l-10">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -158,6 +158,23 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="../grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
                                     class="hide-menu">Repuestos</span></a></li>
+
+                                    
+                                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
+                                    class="hide-menu">Facturacion</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta </span></a>
+                                </li>
+                                <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
+                                        </span></a></li>
+                                 <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Mantenimiento
+                                        </span></a></li>
+                            </ul>
+                        </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
                                     class="hide-menu">Authentication </span></a>
@@ -185,178 +202,96 @@
         <div class="page-wrapper">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div  class="container-fluid" style="padding:100px;">
-                <!-- ============================================================== -->
-                <!-- Inicio Formulario -->
-                <!-- ============================================================== -->
-                <div id='div_registro1' class="row" >
-                    <div class="col-md-2"></div>
-                    <!--Margen de 3 columnas a la izquierda-->
-                    <div class="col-md-8 auth-box bg-dark border-top border-secondary" style='box-shadow: 10px 10px 3px rgb(158, 157, 157);'>
-                        <div class="card" style="background-color: #343a40">
-                                <div class="card-body" style="text-align:center;">
-                                    <div class="text-center p-t-20 p-b-20">
-                                        <IMG SRC="../assets/images/logo2.png">
-                                    </div>
-                                    <h3 style="margin: 20px 0px 30px 0px; color: rgba(255, 255, 255, 1)">Crear su cuenta
-                                        de AutoMotor</h3>
-                                    <input type="hidden" id="idPersona">
-                                    <input type="hidden" id="idCliente">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 text-left control-label col-form-label">Nombres</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="txt_pnombre"
-                                                placeholder="Primer nombre">
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="txt_snombre"
-                                                placeholder="Segundo nombre">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 text-left control-label col-form-label">Apellidos</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="txt_papellido"
-                                                placeholder="Primer apellido">
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="txt_saptxt_papellido"
-                                                placeholder="Segundo apellido">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 text-left control-label col-form-label">Correo</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="txt_correo"
-                                                placeholder="Correo electronico">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label
-                                            class="col-sm-3 text-left control-label col-form-label">Contraseña</label>
-                                        <div class="col-sm-8">
-                                            <input type="password" class="form-control" id="txt_contraseña"
-                                                placeholder="Ingrese su contraseña">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 text-left control-label col-form-label">Verifique su
-                                            contraseña</label>
-                                        <div class="col-sm-8">
-                                            <input type="password" class="form-control" id="txt_Contraseña2"
-                                                placeholder="Ingrese nuevamente la contraseña">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 text-left control-label col-form-label">Direccion</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="txt_direccion"
-                                                placeholder="Ingrese su direccion">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body" style="text-align:center">
-                                    <button id="btn_sig" onclick="ocultarRegistro1();" class="btn btn-success btn-lg">Siguiente</button>
-                                </div>
-                         </div>
-                    </div>
-                </div>
-                <div id="div1"></div>
-                <!-- Formulario parte 2 -->
-                <div id='div_registro2' class="row">
-                    <div class="col-md-2"></div>
-                    <!--Margen de 3 columnas a la izquierda-->
-                    <div class="col-md-8 auth-box bg-dark border-top border-secondary" style='box-shadow: 10px 10px 3px rgb(158, 157, 157);'>
-                        <div class="card" style="background-color: #343a40">
-                                <div class="card-body" style="text-align:center;">
-                                    <div class="text-center p-t-20 p-b-20">
-                                        <IMG SRC="../logo/logo_automotor.png"  style="margin: 0px 0px 30px 0px;"> 
-                                        <h3 style="margin: 0px 0px 30px 0px; color: rgba(255, 255, 255, 1)" >Bienvenido a AutoMotor</h3>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 text-left control-label col-form-label">Telefono</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control border border-secondary" id="txt_telefono" maxlength="50" placeholder="Ingrese su numero de telefono">
+            <div class="container-fluid" style="" >
+                    <div style="width:100%; height:100%">
+                        <!-- ============================================================== -->
+                        <!-- Inicio Formulario -->
+                        <!-- ============================================================== -->
+                    
+                        <div class="row" style="" >
+                        
+                        
+                            <!--Margen de 3 columnas a la izquierda-->
+                            <div class="col-md-6 auth-box  border-top border-secondary float-left mx-auto" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                            
+                                    <form class="form-horizontal">
+                                        <div class="card-body" style="text-align:center;">
+                                            <div class="text-center p-t-20 p-b-20">
+                                                <IMG SRC="../assets/images/logo2.png">
+                                            </div>
+                                            <h3 style="margin: 20px 0px 30px 0px; color: rgba(255, 255, 255, 1)">¡BIENVENIDO!</h3>
+                                            <h3 style="margin: 20px 0px 30px 0px; color: rgba(255, 255, 255, 1)">Cree su cuenta
+                                                en AutoMotor</h3>
+                                            <input type="hidden" id="idPersona">
+                                            <input type="hidden" id="idCliente">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 text-left control-label col-form-label">Nombres</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" id="txt_pnombre"
+                                                        placeholder="Primer nombre">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="txt_snombre"
+                                                        placeholder="Segundo nombre">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 text-left control-label col-form-label">Apellidos</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" id="txt_papellido"
+                                                        placeholder="Primer apellido">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="txt_saptxt_papellido"
+                                                        placeholder="Segundo apellido">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 text-left control-label col-form-label">Correo</label>
+                                                <div class="col-sm-9">
+                                                    <input type="password" class="form-control" id="txt_correo"
+                                                        placeholder="Correo electronico">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label
+                                                    class="col-sm-3 text-left control-label col-form-label">Contraseña</label>
+                                                <div class="col-sm-9">
+                                                    <input type="password" class="form-control" id="txt_Contraseña"
+                                                        placeholder="Ingrese su contraseña">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 text-left control-label col-form-label">Verifique su
+                                                    contraseña</label>
+                                                <div class="col-sm-9">
+                                                    <input type="password" class="form-control" id="txt_Contraseña2"
+                                                        placeholder="Ingrese nuevamente la contraseña">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 text-left control-label col-form-label">Direccion</label>
+                                                <div class="col-sm-9">
+                                                    <input type="password" class="form-control" id="txt_Contraseña2"
+                                                        placeholder="Ingrese su direccion">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 text-left control-label col-form-label">No. Identidad</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control border border-secondary" id="txt_identidad" maxlength="50" placeholder="Ingrese su numero de identidad">
-                                            </div>
+                                        <div class="card-body" style="text-align:center">
+                                            <button type="button" class="btn btn-success btn-lg">Siguiente</button>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="txt_fechaNacimiento"><b>Fecha de Nacimiento:</b></label>
-                                            <div class="col-sm-8">
-                                                <input type="date" id="date_fechaNacimiento" class="form-control border border-secondary">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="txt_Genero" class="col-sm-3 text-left control-label col-form-label"><b>Genero:</b></label>
-                                            <div class="col-sm-8">
-                                                <select id="slc_genero" class="form-control border border-secondary" placeholder="Ingrese su genero">
-                                                    <option value="">Hombre</option>
-                                                    <option value="">Mujer</option>
-                                                </select>
-                                            </div>                                            
-                                        </div>
-                                        <div class="row">
-                                            <div class="col float-left" >                                           
-                                                <button id="btn_atras" onclick="botonAtras();" type="button" class="btn btn-danger btn-lg">Atras</button>
-                                            </div>
-                                            <div class="col " >
-                                                <button id="btn_sig" onclick="botonSiguiente();" type="button" class="btn btn-success btn-lg float-right">Siguiente</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </form>
+                                
                             </div>
-                        </div>
-                    </div>
-                </div>
-                     <!-- Formulario parte 3 -->
 
-                <div id='div_registro3' class="row">
-                    <div class="col-md-2"></div>
-                    <!--Margen de 3 columnas a la izquierda-->
-                    <div class="col-md-8 auth-box bg-dark border-top border-secondary" style='box-shadow: 10px 10px 3px rgb(158, 157, 157);'>
-                        <div class="card" style="background-color: #343a40">
-                                <div class="card-body" style="text-align:center;">
-                                    <div class="text-center p-t-20 p-b-20">
-                                        <IMG SRC="../logo/logo_automotor.png"  style="margin: 0px 0px 30px 0px;">
-                                        <h3 style="margin: 0px 0px 30px 0px;">Pivacidad y condiciones</h3>
-                                        <div class="form-group row" style="color: rgba(255, 255, 255, 1)">
-                                        <p>Para crear una cuenta de AutoMotor, deberás aceptar las Condiciones del servicio que se encuentran a continuación.
-                                        </p>
-                                        <p>Además, cuando creas una cuenta, procesamos tu información como se describe en nuestra Política de Privacidad, incluidos estos puntos clave:</p>
-                                        <p>Datos que procesamos cuando usa AutoMotor
-                                        Cuando configura una cuenta de AutoMotor, almacenamos la información que proporciona, como su nombre, dirección de correo electrónico y número de teléfono.
-                                        </p>
-                                        <p>
-                                        Por ejemplo, cuando usa los servicios de AutoMotor para escribir un mensaje a nuestro sistema, almacenamos la información que genera.
-                                        </p>
-                                        <p>
-                                        Por ejemplo, cuando busca un restaurante en AutoMotor Maps o mira las imagenes, procesamos información sobre esa actividad, lo que incluye los siguientes datos: el video que miró, los ID del dispositivo, las direcciones IP, los datos de cookie y la ubicación.
-                                        </p>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label><a href="../index.php">Cancelar</a></label>
-                                        </div>
-                                        <div class="col">
-                                            <button id="btnGuardar" onclick="botonGuardar();" type="button" class="btn btn-primary">Acepto</button>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="divMensaje"><</div>
-                
+                            </div>
 
-                <!-- ============================================================== -->
-                <!-- Fin Formulario -->
-                <!-- ============================================================== -->
+                        </div> 
+                        
+                        <!-- ============================================================== -->
+                        <!-- Fin Formulario -->
+                        <!-- ============================================================== -->
+                    </div> 
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
