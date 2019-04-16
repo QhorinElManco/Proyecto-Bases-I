@@ -203,8 +203,14 @@
                 <!-- ============================================================== -->
                 <!-- Inicio de formulario  -->
                 <!-- ============================================================== -->
-                <div class="form">
-                    <IMG SRC="../logo/logo_automotor.png" style="margin: 0px 0px 30px 0px;">
+                <div class="col-md-6 auth-box  border-top border-secondary float-left mx-auto" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                            
+                                    
+                    <div class="card-body" style="text-align:center;">
+                        <div class="text-center p-t-20 p-b-20">
+                            <IMG SRC="../assets/images/logo2.png">
+                        </div>
+                        <IMG SRC="../logo/logo_automotor.png" style="margin: 0px 0px 30px 0px;">
                     <h3 style="margin: 0px 0px 30px 0px;">Registro de vehiculo</h3>
                     <div class="row">
                         <div class="col-sm-3">
@@ -368,6 +374,16 @@
 
                         </div>
                     </div>
+                    </div>
+                    <div class="card-body" style="text-align:center">
+                        <button type="button" class="btn btn-success btn-lg">Siguiente</button>
+                    </div>
+    
+            
+                    </div>
+
+                </div>
+                    
                     <button type="button" class="btn btn-success">Siguiente</button>
                 </div>
                 <!-- ============================================================== -->

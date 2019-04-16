@@ -21,6 +21,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+    
 </head>
 
 <body>
@@ -182,60 +183,177 @@
                 <!-- ============================================================== -->
                 <!-- Inicio Formulario -->
                 <!-- ============================================================== -->
-                <IMG SRC="../logo/logo_automotor.png"  style="margin: 0px 0px 30px 0px;"> 
-                <h3 style="margin: 0px 0px 30px 0px;">ingresar empleado de AutoMotor</h3>
-                <input type="hidden" id="idPersona">
-                <input type="hidden" id="idCliente">
-                <div class="row">
-                    <div class="col-sm-2">                            
-                        <label for="txt_pnombre"><b>Nombre:</b></label>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Usuario</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Empleado</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Foto</a>
+                </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                          
+                        <IMG class="pt-3" SRC="../logo/logo_automotor.png"  style="margin: 0px 0px 30px 0px;"> 
+                        <h3 style="margin: 0px 0px 30px 0px;">ingresar empleado de AutoMotor</h3>
+                        <input type="hidden" id="idPersona">
+                        <input type="hidden" id="idCliente">
+                        <div class="row">
+                            <div class="col-sm-2">                            
+                                <label for="txt_pnombre"><b>Nombre:</b></label>
+                            </div>
+                        </div>
+                        <div class="row " style="margin: 0px 0px 30px 0px;" >
+                            <div class="col-sm-3 " >
+                                <input type="text" class="form-control border border-secondary" id="txt_pnombre" maxlength="50" placeholder="Primer nombre">
+                            </div>
+                            <div class="col-sm-3 " >
+                                <input type="text" class="form-control border border-secondary" id="txt_snombre" maxlength="50"placeholder="segundo nombre">
+                            </div>
+                            <div class="col-sm-3 " >
+                                <input type="text" class="form-control border border-secondary" id="txt_papellido" maxlength="50" placeholder="Primer apellido">
+                            </div>
+                            <div class="col-sm-3 " >
+                                <input type="text" class="form-control border border-secondary" id="txt_sapellido" maxlength="50" placeholder="Segundo apellido">
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-sm-3">
+                                <label for="txt_correo"><b>Correo:</b></label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 0px 0px 30px 0px;">
+                            <div class="col-sm-4">
+                                <input type="text" id="txt_correo" class="form-control border border-secondary" maxlength="50" placeholder="Ingrese su correo electronico">
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-sm-3">
+                                <label for="txt_contraseña"><b>Contraseña:</b></label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 0px 0px 30px 0px;">
+                            <div class="col-sm-4">
+                                <input type="password" id="txt_contraseña" class="form-control border border-secondary" maxlength="50" placeholder="Ingrese su contraseña">
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-sm-3">
+                                <label for="txt_contraseña2"><b>Confirmacion de contraseña:</b></label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 0px 0px 30px 0px;">
+                            <div class="col-sm-4">
+                                <input type="password" id="txt_contraseña2" class="form-control border border-secondary" maxlength="50" placeholder="Reingrese su contraseña">
+                            </div>
+                        </div>
+                                     
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        
+                        <IMG class="pt-3" SRC="../logo/logo_automotor.png"  style="margin: 0px 0px 30px 0px;"> 
+                        <h3 style="margin: 0px 0px 30px 0px;">Bienvenido a AutoMotor</h3>
+                        <div class="row">
+                            <div class="col-sm-2">                            
+                                <label for="txt_telefono"><b>Telefono:</b></label>
+                            </div>
+                        </div>
+                        <div class="row " style="margin: 0px 0px 30px 0px;" >
+                            <div class="col-sm-3 " >
+                                <input type="text" class="form-control border border-secondary" id="txt_telefono" maxlength="50" placeholder="Ingrese su numero de telefono">
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-sm-3">
+                                <label for="txt_fechaNacimiento"><b>Fecha de Nacimiento:</b></label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 0px 0px 30px 0px;">
+                            <div class="col-sm-4">
+                                <input type="date" id="date_fechaNacimiento" class="form-control border border-secondary">
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-sm-3">
+                                <label for="txt_Genero"><b>Genero:</b></label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 0px 0px 30px 0px;">
+                            <div class="col-sm-4">
+                                <select id="slc_genero" class="form-control border border-secondary" placeholder="Ingrese su genero">
+                                    <option value="">Hombre</option>
+                                    <option value="">Mujer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-sm-3">
+                                <label for="date_fechaInicio"><b>Fecha de inicio:</b></label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 0px 0px 30px 0px;">
+                            <div class="col-sm-4">
+                                <input type="date" id="date_fechaInicio" class="form-control border border-secondary">
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-sm-3">
+                                <label for="date_fechaFin"><b>Fecha fin:</b></label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 0px 0px 30px 0px;">
+                            <div class="col-sm-4">
+                                <input type="date" id="date_fechaFin" class="form-control border border-secondary">
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-sm-3">
+                                <label for="slc_cargo"><b>Cargo:</b></label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 0px 0px 30px 0px;">
+                            <div class="col-sm-4">
+                                <select id="slc_cargo" class="form-control border border-secondary" placeholder="Ingrese su genero">
+                                    <option value="">Vendedor</option>
+                                    <option value="">Mantenimiento</option>
+                                    <option value="">Ingeniero </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-sm-3">
+                                
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 0px 0px 30px 0px;">
+                            <div class="col-sm-4">
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        
+                        <IMG class='pt-3' SRC="../logo/logo_automotor.png"  style="margin: 0px 0px 30px 0px;"> 
+                        <h3 style="margin: 0px 0px 30px 0px;">Añadir fotos del empleado</h3>
+                        <div class="container">
+                            <form enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <input id="file-1" type="file" class="file" multiple=true data-preview-file-type="any">
+                                </div>
+                            </form>
+                        </div>
+                                               
                     </div>
                 </div>
-                <div class="row " style="margin: 0px 0px 30px 0px;" >
-                    <div class="col-sm-3 " >
-                        <input type="text" class="form-control border border-secondary" id="txt_pnombre" maxlength="50" placeholder="Primer nombre">
-                    </div>
-                    <div class="col-sm-3 " >
-                        <input type="text" class="form-control border border-secondary" id="txt_snombre" maxlength="50"placeholder="segundo nombre">
-                    </div>
-                    <div class="col-sm-3 " >
-                        <input type="text" class="form-control border border-secondary" id="txt_papellido" maxlength="50" placeholder="Primer apellido">
-                    </div>
-                    <div class="col-sm-3 " >
-                        <input type="text" class="form-control border border-secondary" id="txt_sapellido" maxlength="50" placeholder="Segundo apellido">
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-3">
-                        <label for="txt_correo"><b>Correo:</b></label>
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 0px 30px 0px;">
-                    <div class="col-sm-4">
-                        <input type="text" id="txt_correo" class="form-control border border-secondary" maxlength="50" placeholder="Ingrese su correo electronico">
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-3">
-                        <label for="txt_contraseña"><b>Contraseña:</b></label>
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 0px 30px 0px;">
-                    <div class="col-sm-4">
-                        <input type="password" id="txt_contraseña" class="form-control border border-secondary" maxlength="50" placeholder="Ingrese su contraseña">
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-3">
-                        <label for="txt_contraseña2"><b>Confirmacion de contraseña:</b></label>
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 0px 30px 0px;">
-                    <div class="col-sm-4">
-                        <input type="password" id="txt_contraseña2" class="form-control border border-secondary" maxlength="50" placeholder="Reingrese su contraseña">
-                    </div>
-                </div>
-                <button type="button" class="btn btn-success">Siguiente</button>
+                <button type="button" class="btn btn-primary">Añadir Empleado</button>
+                <button type="button" class="btn btn-danger">Cancelar</button>
+
+
+                
                 <!-- ============================================================== -->
                 <!-- Fin Formulario -->
                 <!-- ============================================================== -->
@@ -289,7 +407,8 @@
     <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="../dist/js/pages/chart/chart-page-init.js"></script>
-
+    
+        
 </body>
 
 </html>
