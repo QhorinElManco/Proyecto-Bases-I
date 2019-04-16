@@ -15,17 +15,16 @@
     <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="../assets/extra-libs/multicheck/multicheck.css">
+    <link href="../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="../dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-    <style>
-        label {
-            color: rgba(255, 255, 255, 1)
-        }
-    </style>
 </head>
 
 <body>
@@ -142,11 +141,11 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../index.html" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
-                                    class="hide-menu">Compra</span></a></li>
+                                href="gestion_sucursal.php" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
+                                    class="hide-menu">Gestion Sucursal</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../charts.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
-                                    class="hide-menu">Renta</span></a></li>
+                                href="gestion_taller.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
+                                    class="hide-menu">Gestion de talleres</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="../widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
                                     class="hide-menu">Historial</span></a></li>
@@ -157,19 +156,21 @@
                                 href="../grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
                                     class="hide-menu">Repuestos</span></a></li>
 
-                                    
-                                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
                                     class="hide-menu">Facturacion</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta </span></a>
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta
+                                        </span></a>
                                 </li>
                                 <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
                                             class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
                                         </span></a></li>
-                                 <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Mantenimiento
+                                <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura
+                                            Mantenimiento
                                         </span></a></li>
                             </ul>
                         </li>
@@ -200,102 +201,138 @@
         <div class="page-wrapper">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="" >
-                    <div style="width:100%; height:100%">
-                        <!-- ============================================================== -->
-                        <!-- Inicio Formulario -->
-                        <!-- ============================================================== -->
-                    
-                        <div class="row" style="" >
-                        
-                        
-                            <!--Margen de 3 columnas a la izquierda-->
-                            <div class="col-md-6 auth-box  border-top border-secondary float-left mx-auto" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
-                            
-                                    <form class="form-horizontal">
-                                        <div class="card-body" style="text-align:center;">
-                                            <div class="text-center p-t-20 p-b-20">
-                                                <IMG SRC="../assets/images/logo2.png">
-                                            </div>
-                                            <h3 style="margin: 20px 0px 30px 0px; color: rgba(255, 255, 255, 1)">¡BIENVENIDO!</h3>
-                                            <h3 style="margin: 20px 0px 30px 0px; color: rgba(255, 255, 255, 1)">Cree su cuenta
-                                                en AutoMotor</h3>
-                                            <input type="hidden" id="idPersona">
-                                            <input type="hidden" id="idCliente">
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Nombres</label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" class="form-control" id="txt_pnombre"
-                                                        placeholder="Primer nombre">
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="txt_snombre"
-                                                        placeholder="Segundo nombre">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Apellidos</label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" class="form-control" id="txt_papellido"
-                                                        placeholder="Primer apellido">
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="txt_papellido"
-                                                        placeholder="Segundo apellido">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Correo</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="txt_correo"
-                                                        placeholder="Correo electronico">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label
-                                                    class="col-sm-3 text-left control-label col-form-label">Contraseña</label>
-                                                <div class="col-sm-9">
-                                                    <input type="password" class="form-control" id="txt_Contraseña"
-                                                        placeholder="Ingrese su contraseña">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Verifique su
-                                                    contraseña</label>
-                                                <div class="col-sm-9">
-                                                    <input type="password" class="form-control" id="txt_Contraseña2"
-                                                        placeholder="Ingrese nuevamente la contraseña">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Direccion</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="txt_Contraseña2"
-                                                        placeholder="Ingrese su direccion">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body" style="text-align:center">
-                                            <button type="button" class="btn btn-success btn-lg">Siguiente</button>
-                                        </div>
-                                    </form>
-                                
+            <div class="container-fluid">
+                <div style="width:80%; margin: auto;">
+                    <div class="row el-element-overlay" style="padding-top:100px;">
+                        <!--Div Tabla de sucursales-->
+                        <div class="col-lg-5 col-md-5" style="background-color: rgba(255, 255, 255, 0.5); padding:20px; -webkit-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
+                    -moz-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
+                    box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55)">
+                                            <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title m-b-0">Lista de sucursales</h5>
                             </div>
-
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>
+                                                    <label class="customcheckbox m-b-20">
+                                                        <input type="checkbox" id="mainCheckbox" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Direccion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="customtable" id="lista">
+                                            <!--<tr>
+                                                <th>
+                                                    <label class="customcheckbox">
+                                                        <input type="checkbox" class="listCheckbox" value=1/>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </th>
+                                                <td>Win 95+</td>
+                                                <td>4</td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label class="customcheckbox">
+                                                        <input type="checkbox" class="listCheckbox" value=1/>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </th>
+                                                <td>Win 95+</td>
+                                                <td>5</td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label class="customcheckbox">
+                                                        <input type="checkbox" class="listCheckbox" value=1/>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </th>
+                                                <td>Win 95+</td>
+                                                <td>4</td>
+                                            </tr>-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                        </div>
+                        </div>
+                        <!--Fin Div Tabla de sucursales-->
+                        <!--DIV de en medio que separa-->
+                        <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0"></div>
+                        <!--Inicio Div para el ingreso de datos-->
+                        <div class="col-lg-5 col-md-5" style="background-color: rgba(255, 255, 255, 0.5); padding: 20px; -webkit-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
+                    -moz-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
+                    box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55)">
+                            <form class="form-horizontal">
+                                <h2 style="text-align:center;">Ingrese los datos</h2>
+                                <br>
+                                <div class="card-body" style="text-align:center;">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-left control-label col-form-label">Nombre</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="txt_Contraseña2"
+                                                placeholder="Ingrese el nombre">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-left control-label col-form-label">Direccion</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="txt_Contraseña2"
+                                                placeholder="Ingrese la direccion">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--FIN Div para el ingreso de datos-->
+                    </div>
+                    <br>
+                    <br>
+                    <!--Botones de accion (VER, AGREGAR, EDITAR, ELIMINAR)-->
+                    <div class="row el-element-overlay">
+                        <!-- Column -->
+                        <div class="col-md-6 col-lg-4 col-xlg-4">
+                            <div class="card card-hover">
+                                <button type="button" id="AGREGAR">
+                                    <div class="box bg-success text-center">
+                                        <h1 class="font-light text-white"><i class="mdi mdi-plus-box"></i></h1>
+                                        <h6 class="text-white">AGREGAR</h6>
+                                    </div>
+                                </button>
                             </div>
-
-                        </div> 
-                        
-                        <!-- ============================================================== -->
-                        <!-- Fin Formulario -->
-                        <!-- ============================================================== -->
-                    </div> 
+                        </div>
+                        <!-- Column -->
+                        <div class="col-md-6 col-lg-4 col-xlg-4">
+                            <div class="card card-hover">
+                                <button type="button" id="AGREGAR">
+                                    <div class="box bg-warning text-center">
+                                        <h1 class="font-light text-white"><i class="mdi mdi-tooltip-edit"></i></h1>
+                                        <h6 class="text-white">EDITAR</h6>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-md-6 col-lg-4 col-xlg-4">
+                            <div class="card card-hover">
+                                <button type="button" id="AGREGAR">
+                                    <div class="box bg-danger text-center">
+                                        <h1 class="font-light text-white"><i class="mdi mdi-playlist-remove"></i></h1>
+                                        <h6 class="text-white">ELIMINAR</h6>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-
-
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
@@ -326,23 +363,13 @@
     <!--Menu sidebar -->
     <script src="../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="../dist/js/custom.min.js"></script>    
+    <script src="../dist/js/custom.min.js"></script>
     <!--This page JavaScript -->
-    <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-    <!-- Charts js Files -->
-    <script src="../assets/libs/flot/excanvas.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.pie.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.time.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.stack.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
-    <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="../dist/js/pages/chart/chart-page-init.js"></script>
-
-    <!--Efecto transicion div_registro's-->
-    <script src="../dist/js/controlador.js"></script>
-    <!--dist\js\js_form\js_form_cliente_registro.js -->
-    <script src="../dist/js/js_form/js_form_cliente_registro.js"></script>
+    <!-- this page js -->
+    <script src="../assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
+    <script src="../assets/extra-libs/multicheck/jquery.multicheck.js"></script>
+    <script src="../assets/extra-libs/DataTables/datatables.min.js"></script>
+    <script src="../dist/js/js_form/js_form_gestion_sucursal.js"></script>
 
 </body>
 

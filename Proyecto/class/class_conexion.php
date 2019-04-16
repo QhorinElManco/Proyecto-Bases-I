@@ -5,7 +5,7 @@
 		private $usuario="root";
 		private $contrasena="";
 		private $host="localhost";
-		private $baseDatos="proyecto";
+		private $baseDatos="db_vr_vehiculos";
 		private $puerto="3306";
 		private $link;
 
@@ -31,6 +31,9 @@
 		}
 
 		public function obtenerFila($resultado){
+			return mysqli_fetch_array($resultado);
+		}
+		public function arregloAsociativo($resultado){
 			return mysqli_fetch_array($resultado);
 		}
 
