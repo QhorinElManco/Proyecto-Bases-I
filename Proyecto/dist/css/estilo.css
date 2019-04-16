@@ -1,0 +1,9 @@
+#div_registro1s{
+    box-shadow: 10px 10px 3px rgb(158, 157, 157);
+    transition: height .4s;
+}
+
+#div_registro2{
+    box-shadow: 10px 10px 3px rgb(158, 157, 157);
+    transition: height .4s;
+}
