@@ -9,8 +9,8 @@
 	echo '<table border="1px">';
 	while($fila = $conexion->obtenerFila($resultado)){
         echo "<tr>";
-        echo "<td>". $fila["idpersona"]. "</td>"; 
-        echo "<td>". $fila["nombre"]. "</td>";        
+		echo "<td>". $fila["idpersona"]. "</td>"; 
+        echo "<td>". $fila["nombre"]. "</td>";      
 		echo "</tr>";
 	}
     echo "</table>";

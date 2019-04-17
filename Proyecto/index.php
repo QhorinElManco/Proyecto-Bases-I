@@ -22,7 +22,6 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
     <?php 
-    
 ?>
 </head>
 
@@ -161,10 +160,10 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="lista_autos_renta.html" aria-expanded="false"><i
+                                href="lista_autos_venta.html" aria-expanded="false"><i
                                     class="mdi mdi-shopping"></i><span class="hide-menu">Compra</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="charts.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
+                                href="lista_autos_renta.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
                                     class="hide-menu">Renta</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
