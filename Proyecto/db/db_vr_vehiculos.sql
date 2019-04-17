@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-04-2019 a las 01:35:55
+-- Tiempo de generación: 17-04-2019 a las 23:35:54
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -17,8 +17,148 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `db_vr_vehiculos.sql`
+-- Base de datos: `db_vr_vehiculos`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_FACTURA_VENTA`(
+            IN      pnidFactura                 INT,
+            IN      pnidCliente                 INT,
+            IN      pnidEmpleado                INT,
+            IN      pnidFormaPago               INT,
+            IN      pnidDescuento               INT,
+            IN      pnidVentas                  INT,
+            IN      pnidVehiculo                INT,
+            OUT     pbOcurrioError 		        BOOLEAN,
+		    OUT     pcMensaje			        VARCHAR(2000)
+
+
+)
+SP:BEGIN
+        DECLARE vcConteo, vnFactura, vnSalida, vnTipoSalida, vnVentas, vnTotal INT;
+        DECLARE vcDescuento VARCHAR(5);
+        DECLARE tempMensaje VARCHAR(2000);
+        SET autocommit=0;
+		START TRANSACTION;
+		SET tempMensaje='';
+		SET pbOcurrioError=TRUE;
+
+        IF pnidFactura='' OR pnidFactura IS NULL THEN
+            SET tempMensaje=CONCAT(tempMensaje,' factura no puede ser nulo');
+        END IF;
+        
+        IF pnidCliente='' OR pnidCliente IS NULL THEN
+            SET tempMensaje=CONCAT(tempMensaje,'Cliente no puede ser nulo');
+        END IF;
+        
+        IF pnidEmpleado='' OR pnidEmpleado IS NULL THEN
+            SET tempMensaje=CONCAT(tempMensaje,' empleado no puede ser nulo');
+        END IF;
+        
+       IF pnidFormaPago='' OR pnidFormaPago IS NULL THEN
+            SET tempMensaje=CONCAT(tempMensaje,' forma de pago no puede ser nulo');
+        END IF;
+        IF pnidDescuento='' OR pnidDescuento IS NULL THEN
+            SET tempMensaje=CONCAT(tempMensaje,'Descuento por mantenimiento  no puede ser nulo');
+        END IF;
+        IF pnidImpuesto='' OR pnidImpuesto IS NULL THEN
+            SET tempMensaje=CONCAT(tempMensaje,'Codigo de impuesto por mantenimiento  no puede ser nulo');
+        END IF;
+        IF pnidVentas='' OR pnidVentas IS NULL THEN
+            SET tempMensaje=CONCAT(tempMensaje,'venta por mantenimiento  no puede ser nulo');
+        END IF;
+         IF tempMensaje<>'' THEN
+            SET pcMensaje=CONCAT('CAMPOS REQUERIDOS: ',tempMensaje);
+            LEAVE SP;
+        END IF;
+
+        
+            SELECT COUNT(*) INTO vcConteo FROM Impuesto WHERE idImpuesto = pnidImpuesto;
+			IF vcConteo=0  THEN
+				SET pcMensaje = 'El impuesto seleccionado no existe.';
+				LEAVE SP;
+			END IF;
+
+			SELECT COUNT(*) INTO vcConteo FROM FormaPago WHERE idFormaPago = pnidFormaPago;
+			IF vcConteo=0  THEN
+				SET pcMensaje = 'La forma de pago seleccionada no existe.';
+				LEAVE SP;
+			END IF;
+
+            SELECT COUNT(*) INTO vcConteo FROM Empleado e
+			WHERE e.idEmpleado=pnidEmpleado;
+			IF vcConteo=0 THEN
+				SET pcMensaje = 'El empleado seleccionado no existe.';
+				LEAVE SP;
+			END IF;
+
+            SELECT COUNT(*) INTO vcConteo FROM Cliente c
+			WHERE c.idCliente=pnidCliente;
+			IF vcConteo=0 THEN
+				SET pcMensaje = 'El Cliente seleccionado no existe.';
+				LEAVE SP;
+			END IF;
+
+            SELECT d.estado INTO vcDescuento FROM Descuento d WHERE d.idDescuento=pnidDescuento;
+			 
+
+            SELECT (MAX(f.idFactura)+1) INTO vnFactura FROM Factura f;
+            SELECT (MAX(v.idVentas)+1) INTO vnVentas FROM Ventas v;
+            SELECT (MAX(ts.idTipoSalida)+1) INTO vnTipoSalida FROM TipoSalida ts;
+            SELECT (MAX(s.idSalida)+1) INTO vnSalida FROM Salida s;
+
+            SELECT ( vh.precioVenta-((vh.precioVenta * d.porcentaje)/100) + ( ((vh.precioVenta-((vh.precioVenta * d.porcentaje)/100)) *15)/100 ))  INTO vnTotal FROM venta v
+            INNER JOIN vehiculo vh ON vh.idVehiculo=v.idVehiculo
+            INNER JOIN Factura f ON f.idFactura=v.idFactura
+            INNER JOIN DescuentoFactura df ON df.idFactura = f.idFactura
+			INNER JOIN Descuento d ON d.idDescuento = df.idDescuento
+			INNER JOIN Impuesto i  ON f.idImpuesto = i.idImpuesto
+            WHERE v.pnidVehiculo=pnidVehiculo;
+
+
+            SELECT COUNT(*) INTO vcConteo FROM  venta v
+            INNER JOIN vehiculo vh ON v.idVehiculo=vh.idVehiculo
+            INNER JOIN TipoSalida ts ON ts.idVentas=v.idVentas
+            WHERE vh.idVehiculo=pnidVehiculo AND  ts.descripcion='Venta';
+
+            IF vcConteo>=1 THEN
+                SET pcMensaje='El auto ya esta vendido';
+
+                ELSE 
+                    INSERT INTO Ventas(idVentas,idVehiculo )
+                    VALUES (vnVentas,pnidVehiculo);
+
+                    INSERT INTO Factura(idFactura, fechaEmision, Total, idCliente,idEmpleado,idImpuesto)
+                    VALUES (vnFactura, CURDATE(), vnTotal, pnidCliente,pnidEmpleado, pnidImpuesto);
+
+                    INSERT INTO FormaPago(idFormaPago, idFactura)
+                    VALUES (pnidFormaPago,vnFactura);
+
+                    INSERT INTO descuentofactura(idFactura,idDescuento,fecha)
+			        VALUES(vnFactura,vcDescuento, CURDATE());
+
+                    INSERT INTO TipoSalida(idTipoSalida,descripcion,idVentas)
+			        VALUES(vnTipoSalida,vcDescuento, CURDATE());
+
+                    INSERT INTO Salida(idSalida, descripcion, fechaSalida, idTipoSalida)
+                    VALUES (vnSalida,'',CURDATE(), vnTipoSalida);
+            END IF;
+
+
+
+
+
+
+
+
+
+
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -31,6 +171,7 @@ CREATE TABLE IF NOT EXISTS `agenda` (
   `fechaReserva` date NOT NULL,
   `fechaEntrega` datetime NOT NULL,
   `fechaDevolución` datetime NOT NULL,
+  `tiempoRenta` varchar(10) NOT NULL,
   PRIMARY KEY (`idAgenda`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
@@ -38,17 +179,17 @@ CREATE TABLE IF NOT EXISTS `agenda` (
 -- Volcado de datos para la tabla `agenda`
 --
 
-INSERT INTO `agenda` (`idAgenda`, `fechaReserva`, `fechaEntrega`, `fechaDevolución`) VALUES
-(1, '2018-09-08', '2018-09-12 03:20:15', '2018-10-22 00:00:00'),
-(2, '2018-12-10', '2018-12-10 00:00:00', '2019-01-15 00:00:00'),
-(3, '2019-01-15', '2019-01-18 05:30:00', '2019-02-18 04:10:00'),
-(4, '2018-06-16', '2018-06-17 00:00:00', '2018-08-22 00:00:00'),
-(5, '2018-02-20', '2018-02-20 00:00:00', '2018-02-23 10:00:00'),
-(6, '2019-02-03', '2019-02-03 00:00:00', '2019-03-03 13:00:00'),
-(7, '2019-01-01', '2019-01-01 00:00:00', '2019-02-01 14:00:00'),
-(8, '2019-03-22', '2019-03-22 00:00:00', '2019-03-23 10:00:00'),
-(9, '2019-03-05', '2019-03-06 00:00:00', '2019-03-10 15:30:00'),
-(10, '2019-03-07', '2019-03-08 00:00:00', '2019-03-10 14:00:00');
+INSERT INTO `agenda` (`idAgenda`, `fechaReserva`, `fechaEntrega`, `fechaDevolución`, `tiempoRenta`) VALUES
+(1, '2018-09-08', '2018-09-12 03:20:15', '2018-10-12 00:00:00', 'Mes'),
+(2, '2018-12-10', '2018-12-10 00:00:00', '2019-01-15 00:00:00', 'Dia'),
+(3, '2019-01-15', '2019-01-18 05:30:00', '2019-02-18 04:10:00', 'Mes'),
+(4, '2018-06-16', '2018-06-17 08:00:00', '2018-06-17 18:00:00', 'Hora'),
+(5, '2018-02-20', '2018-02-20 00:00:00', '2018-02-23 10:00:00', 'Dia'),
+(6, '2019-02-03', '2019-02-03 00:00:00', '2019-03-03 13:00:00', 'Mes'),
+(7, '2019-01-01', '2019-01-01 06:00:00', '2019-01-01 16:00:00', 'Hora'),
+(8, '2019-03-22', '2019-03-22 00:00:00', '2019-03-23 10:00:00', 'Dia'),
+(9, '2019-03-05', '2019-03-06 00:00:00', '2019-03-10 15:30:00', 'Dia'),
+(10, '2019-03-07', '2019-03-08 00:00:00', '2019-03-10 14:00:00', 'Dia');
 
 -- --------------------------------------------------------
 
