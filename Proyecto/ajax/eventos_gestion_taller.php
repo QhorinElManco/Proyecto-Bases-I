@@ -3,7 +3,8 @@
     switch($_GET["accion"]){
         case "1":
             $conexion = new Conexion();
-            $sql = "SELECT idSucursal, nombre, direccion FROM sucursal";
+            $sql = "SELECT t.idTaller, t.descripcion, s.nombre, s.direccion FROM taller t
+                    INNER JOIN sucursal s ON s.idSucursal=t.idSucursal;";
             $resultado = $conexion->ejecutarInstruccion($sql);	
             if(!$resultado){
                 echo "alert(`Hay una error en la sentencia sql:`.$sql)";
@@ -12,7 +13,8 @@
                 while($fila=$conexion->obtenerFila($resultado)){
                     
                        echo '<tr>
-                                <th scope="row">'.$fila["idSucursal"].'</th>
+                                <th scope="row">'.$fila["idTaller"].'</th>
+                                <td>'.$fila["descripcion"].'</td>
                                 <td>'.$fila["nombre"].'</td>
                                 <td>'.$fila["direccion"].'</td>
                                 <td><button class="btn btn-warning btn btn-success" type="button" data-toggle="modal"
@@ -26,24 +28,27 @@
         break;
 
         case "2":
-            if(isset($_POST["nombre"])){
-                $nombre = $_POST["nombre"];
+            if(isset($_POST["descripcion"])){
+                $descripcion = $_POST["descripcion"];
             }
-            if(isset($_POST["direccion"])){
-                $direccion = $_POST["direccion"];
+            if(isset($_POST["sucursal"])){
+                $sucursal = $_POST["sucursal"];
             }
-            if($nombre=="" || $nombre==NULL){
-                $respuesta="Ingrese el nombre";
+            if($descripcion=="" || $descripcion==NULL){
+                $respuesta="Ingrese el descripcion";
                 echo $respuesta;
             }
-            else if($direccion=="" || $direccion==NULL){
-                $respuesta="Ingrese la direccion";
+            else if($sucursal=="" || $sucursal==NULL){
+                $respuesta="Ingrese la sucursal";
                 echo $respuesta;
             }
             else{
                 $conexion = new Conexion();
                 $accion = "AGREGAR";
-                $sql = "CALL SP_GESTION_SUCURSAL('0', '$nombre','$direccion','$accion', @p4, @p5);";
+                $idSucursal = $conexion->ejecutarInstruccion("SELECT idSucursal FROM sucursal WHERE nombre='$sucursal';");
+                $idSucursal = $conexion->obtenerFila($idSucursal);
+                $idSucursal = $idSucursal["idSucursal"];
+                $sql = "CALL SP_GESTION_TALLER('0', '$idSucursal','$descripcion','$accion', @p4, @p5);";
                 $salida = "SELECT @p4 AS mensaje, @p5 AS codigo;";
                 $resultado = $conexion->ejecutarInstruccion($sql);
                 $respuesta = $conexion->ejecutarInstruccion($salida);
