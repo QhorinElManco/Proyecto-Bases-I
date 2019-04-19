@@ -86,7 +86,7 @@ SP:BEGIN
                 UPDATE taller SET descripcion=pcDescripcion, idSucursal=pnidSucursal
                 WHERE idTaller=pnidTaller;
                 COMMIT;
-                SET pcMensajeError='Se ha editado de forma correcta el taller';
+                SET pcMensajeError='Se ha editado de forma correcta la sucursal';
                 SET pbOcurreError=FALSE;
                 LEAVE SP;
             END IF;
@@ -106,25 +106,25 @@ SP:BEGIN
             SET pcMensajeError='Se requiere el ID de taller';
             LEAVE SP;
         END IF;
-        --Verificando que exista el taller
+        --Verificando que exista la sucursal
         SELECT COUNT(*) INTO vnConteo FROM taller
         WHERE idTaller=pnidTaller;
         IF vnConteo=0 THEN
             SET pcMensajeError='El taller que desea eliminar no existe';
             LEAVE SP;
         END IF;
-        --Verifica el taller esta registrado en algun mantenimiento
+        --Verifica si la sucursal tiene talleres
         SELECT COUNT(*) INTO vnConteo FROM mantenimiento
         WHERE idTaller=pnidTaller;
         IF vnConteo>0 THEN
-            SET pcMensajeError='El taller esta registrado en un mantenimiento y no puede ser eliminada';
+            SET pcMensajeError='La sucursal tiene mantenimientos registrados y no puede ser eliminada';
             LEAVE SP;
         END IF;
         --Eliminar la sucursal
         DELETE FROM taller
         WHERE idTaller=pnidTaller;
         COMMIT;
-        SET pcMensajeError='Se ha eliminado de forma exitosa el taller';
+        SET pcMensajeError='Se ha eliminado de forma exitosa la sucursal';
         SET pbOcurreError=FALSE;
         LEAVE SP;
     ELSE
