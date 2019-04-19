@@ -234,7 +234,6 @@
                                     <div class="row" style="margin: 0px 0px 30px 0px;">
                                         <div class="col-sm-6">
                                             <input type="text" id="txt_correo" class="form-control border border-dark" maxlength="50" placeholder="Ingrese su correo electronico">
-                                            <span id="emailOK"></span>
                                         </div>
                                         <div class="col-sm-6 " >
                                             <input type="text" class="form-control border border-dark" id="txt_telefono" maxlength="50" placeholder="Ingrese su numero de telefono">
@@ -320,12 +319,10 @@
                                     <div class="row" style="margin: 0px 0px 30px 0px;">
                                         <div class="col-sm-6">
                                             <input type="password" id="txt_contraseña" class="form-control border border-dark" maxlength="50" placeholder="Ingrese su contraseña">
-
                                         </div>
                                                                         
                                         <div class="col-sm-6">
                                             <input type="password" id="txt_contraseña2" class="form-control border border-dark" maxlength="50" placeholder="Reingrese su contraseña">
-                                            <span id="contraseña2ok"></span>
                                         </div>
                                     </div>                                    
                                 </div>

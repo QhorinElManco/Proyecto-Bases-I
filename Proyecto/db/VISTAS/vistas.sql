@@ -5,7 +5,7 @@ INNER JOIN persona p ON p.idPersona = c.idPersona
 INNER JOIN factura f ON f.idCliente = c.idCliente
 INNER JOIN formapago fp ON fp.idFormaPago = f.idFormaPago
 )
-SELECT * FROM VW_Clientes_Facturas
+SELECT * FROM VW_Clientes_Facturas 
 
 --Detalle de Vehiculos con la transmision automatica, id=1
 CREATE VIEW VW_VEHICULOS_AUTOMATICOS AS (
@@ -85,28 +85,4 @@ CREATE VIEW VW_Proveedores AS (
 SELECT * FROM solicitudrenta sr
 INNER JOIN empleado e ON e.idEmpleado = sr.idEmpleado
 INNER JOIN vehiculo v ON v.idVehiculo = sr.idVehiculo
-)
-
---Listado de todos los empleados de la empresa
-CREATE VIEW VW_EMPLEADOS AS(
-    SELECT e.idEmpleado,p.pnombre, p.papellido, p.noIdentidad, c.descripcion FROM Empleado e
-    INNER JOIN Persona p ON p.idPersona = e.idPersona
-    INNER JOIN Cargo c ON c.idCargo = e.idCargo
-    WHERE e.eliminado <> TRUE
-)
-
---listado de empleado
-CREATE VIEW VW_EMPLEADO_VER AS(
-    SELECT e.idEmpleado, p.pnombre, p.snombre, p.papellido, p.sapellido, 
-    p.correo,  c.descripcion cargo ,p.noIdentidad, p.direccion, e.fechaInicio
-    , e.fechaFin, u.nombreUsuario, u.contraseña contrasenia, u.rutaImagen, GROUP_CONCAT(t.telefono) telefonos 
-    FROM Empleado e
-    INNER JOIN Persona p ON p.idPersona = e.idPersona
-    INNER JOIN Cargo c ON c.idCargo = e.idCargo
-    INNER JOIN Usuario u ON u.idUsuario = e.idUsuario
-    INNER JOIN Telefonos t ON t.idPersona = p.idPersona
-    WHERE e.eliminado <> TRUE
-    GROUP BY e.idEmpleado, p.pnombre, p.snombre, p.papellido, p.sapellido, 
-    p.correo,  c.descripcion ,p.noIdentidad, p.direccion, e.fechaInicio
-    , e.fechaFin, u.nombreUsuario, u.contraseña, u.rutaImagen
 )
