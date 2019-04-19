@@ -266,7 +266,7 @@
                                                     <label
                                                         class="col-sm-3 text-left control-label col-form-label">Nombre</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" id="txt_nombre"
+                                                        <input type="text" class="required form-control" id="txt_nombre"
                                                             placeholder="Ingrese el nombre">
                                                     </div>
                                                 </div>
@@ -275,7 +275,7 @@
                                                     <label
                                                         class="col-sm-3 text-left control-label col-form-label">Direccion</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" id="txt_direccion"
+                                                        <input type="text" class="required form-control" id="txt_direccion"
                                                             placeholder="Ingrese la direccion">
                                                     </div>
                                                 </div>
@@ -312,7 +312,7 @@
                                                     <label
                                                         class="col-sm-3 text-left control-label col-form-label">ID</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" id="int_id_edit"
+                                                        <input type="text" class="required form-control" id="int_id_edit"
                                                             placeholder="Ingrese el ID">
                                                     </div>
                                                 </div>
@@ -321,7 +321,7 @@
                                                     <label
                                                         class="col-sm-3 text-left control-label col-form-label">Nombre</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" id="txt_nombre_edit"
+                                                        <input type="text" class="required form-control" id="txt_nombre_edit"
                                                             placeholder="Ingrese el nombre">
                                                     </div>
                                                 </div>
@@ -330,7 +330,7 @@
                                                     <label
                                                         class="col-sm-3 text-left control-label col-form-label">Direccion</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" id="txt_direccion_edit"
+                                                        <input type="text" class="required form-control" id="txt_direccion_edit"
                                                             placeholder="Ingrese la direccion">
                                                     </div>
                                                 </div>
@@ -365,7 +365,7 @@
                                                     <label
                                                         class="col-2 text-left control-label col-form-label">ID</label>
                                                     <div class="col-9">
-                                                        <input type="text" class="form-control" id="int_id_remove"
+                                                        <input type="text" class="required form-control" id="int_id_remove"
                                                             placeholder="Ingrese el ID">
                                                     </div>
                                                 </div>
