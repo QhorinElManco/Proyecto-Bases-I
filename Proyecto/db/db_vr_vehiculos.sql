@@ -1,445 +1,24 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
--- https://www.phpmyadmin.net/
+-- version 3.5.1
+-- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 19-04-2019 a las 00:01:57
--- Versión del servidor: 5.7.24
--- Versión de PHP: 7.2.14
+-- Servidor: localhost
+-- Tiempo de generación: 17-04-2019 a las 01:35:55
+-- Versión del servidor: 5.5.24-log
+-- Versión de PHP: 5.4.3
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `db_vr_vehiculos`
+-- Base de datos: `db_vr_vehiculos.sql`
 --
-
-DELIMITER $$
---
--- Procedimientos
---
-DROP PROCEDURE IF EXISTS `SP_GESTION_SUCURSAL`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_SUCURSAL` (IN `pnidSucursal` INT, IN `pcNombre` VARCHAR(50), IN `pcDireccion` VARCHAR(100), IN `pcAccion` VARCHAR(10), OUT `pcMensajeError` VARCHAR(1000), OUT `pbOcurreError` BOOLEAN)  SP:BEGIN
-    DECLARE vnConteo INT;
-    DECLARE vcTempMensajeError VARCHAR(1000);
-    SET vcTempMensajeError='';
-    SET pbOcurreError=TRUE;
-    SET autocommit=0;
-    START TRANSACTION;
-    IF pcAccion='' OR pcAccion IS NULL THEN
-        SET pcMensajeError='Se requiere el campo accion';
-        LEAVE SP;
-    END IF;
-    IF pcAccion='AGREGAR' THEN
-
-        IF pcNombre='' OR pcNombre IS NULL THEN
-            SET vcTempMensajeError='Nombre ';
-        END IF;
-        IF pcDireccion='' OR pcDireccion IS NULL THEN
-            SET vcTempMensajeError=CONCAT(vcTempMensajeError, 'Direccion');
-        END IF;
-        IF vcTempMensajeError<>'' THEN
-            SET pcMensajeError=CONCAT('Se necesita que ingrese los siguientes campos: ', vcTempMensajeError);
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM sucursal
-        WHERE nombre=pcNombre AND direccion=pcDireccion;
-        IF vnConteo>0 THEN
-            SET pcMensajeError='Ya existe una sucursal con los datos enviados';
-            LEAVE SP;
-        END IF;
-        SELECT (MAX(idSucursal)+1) INTO vnConteo FROM sucursal;
-
-        INSERT sucursal(idSucursal, nombre, direccion) VALUES (vnConteo, pcNombre, pcDireccion);
-
-        COMMIT;
-        SET pcMensajeError='Se ha agregado correctamente una nueva sucursal';
-        SET pbOcurreError=FALSE;
-        LEAVE SP;
-    END IF;
-    IF pcAccion='EDITAR' THEN
-
-        IF pnidSucursal='' OR pnidSucursal IS NULL THEN
-            SET vcTempMensajeError='ID de Sucursal ';
-        END IF;
-        IF pcNombre='' OR pcNombre IS NULL THEN
-            SET vcTempMensajeError=CONCAT(vcTempMensajeError,'Nombre ');
-        END IF;
-        IF pcDireccion='' OR pcDireccion IS NULL THEN
-            SET vcTempMensajeError=CONCAT(vcTempMensajeError, 'Direccion');
-        END IF;
-        IF vcTempMensajeError<>'' THEN
-            SET pcMensajeError=CONCAT('Se necesita que ingrese los siguientes campos: ', vcTempMensajeError);
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM sucursal
-        WHERE idSucursal=pnidSucursal;
-        IF vnConteo=0 THEN
-            SET pcMensajeError='La sucursal que desea editar no existe';
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM sucursal
-        WHERE nombre=pcNombre AND direccion=pcDireccion;
-        IF vnConteo>0 THEN
-            SET pcMensajeError='Ya existe una sucursal con el mismo nombre y misma direccion';
-            LEAVE SP;
-        END IF;
-
-        UPDATE sucursal SET nombre=pcNombre, direccion=pcDireccion
-        WHERE idSucursal=pnidSucursal;
-        COMMIT;
-        SET pcMensajeError='Se ha editado de forma correcta la sucursal';
-        SET pbOcurreError=FALSE;
-        LEAVE SP;
-    END IF;
-    IF pcAccion='ELIMINAR' THEN 
-
-        IF pnidSucursal='' OR pnidSucursal IS NULL THEN
-            SET pcMensajeError='Se requiere el ID de Sucursal';
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM sucursal
-        WHERE idSucursal=pnidSucursal;
-        IF vnConteo=0 THEN
-            SET pcMensajeError='La sucursal que desea eliminar no existe';
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM taller
-        WHERE idSucursal=pnidSucursal;
-        IF vnConteo>0 THEN
-            SET pcMensajeError='La sucursal tiene talleres y no puede ser eliminada';
-            LEAVE SP;
-        END IF;
-
-        DELETE FROM sucursal
-        WHERE idSucursal=pnidSucursal;
-        COMMIT;
-        SET pcMensajeError='Se ha eliminado de forma exitosa la sucursal';
-        SET pbOcurreError=FALSE;
-        LEAVE SP;
-    ELSE
-        SET pcMensajeError='La accion ingresada no es valida, por ingrese una accion valida. Acciones validas: AGREGAR, EDITAR, ELIMINAR';
-        LEAVE SP;
-    END IF;
-END$$
-
-DROP PROCEDURE IF EXISTS `SP_GESTION_TALLER`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_TALLER` (IN `pnidTaller` INT, IN `pnidSucursal` INT, IN `pcDescripcion` VARCHAR(50), IN `pcAccion` VARCHAR(10), OUT `pcMensajeError` VARCHAR(1000), OUT `pbOcurreError` BOOLEAN)  SP:BEGIN
-    DECLARE vnConteo, vnidSucursal INT;
-    DECLARE vcTempMensajeError VARCHAR(1000);
-    SET vcTempMensajeError='';
-    SET pbOcurreError=TRUE;
-    SET autocommit=0;
-    START TRANSACTION;
-    IF pcAccion='' OR pcAccion IS NULL THEN
-        SET pcMensajeError='Se requiere el campo accion';
-        LEAVE SP;
-    END IF;
-    IF pcAccion='AGREGAR' THEN
-
-        IF pnidSucursal='' OR pnidSucursal IS NULL THEN
-            SET vcTempMensajeError='ID de Sucursal ';
-        END IF;
-        IF pcDescripcion='' OR pcDescripcion IS NULL THEN
-            SET vcTempMensajeError='Descripcion ';
-        END IF;
-        IF vcTempMensajeError<>'' THEN
-            SET pcMensajeError=CONCAT('Se necesita que ingrese los siguientes campos: ', vcTempMensajeError);
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM sucursal
-        WHERE idSucursal=pnidSucursal;
-        IF vnConteo=0 THEN
-            SET pcMensajeError='No existe la sucursal ingresada';
-            LEAVE SP;
-        END IF;
-        SELECT (MAX(idTaller)+1) INTO vnConteo FROM taller;
-
-        INSERT taller(idTaller, descripcion, idSucursal) VALUES (vnConteo, pcDescripcion, pnidSucursal);
-
-        COMMIT;
-        SET pcMensajeError='Se ha agregado correctamente un nuevo taller';
-        SET pbOcurreError=FALSE;
-        LEAVE SP;
-    END IF;
-    IF pcAccion='EDITAR' THEN
-
-        IF pnidTaller='' OR pnidTaller IS NULL THEN
-            SET vcTempMensajeError='ID de taller ';
-        END IF;
-        IF pcDescripcion='' OR pcDescripcion IS NULL THEN
-            SET vcTempMensajeError=CONCAT(vcTempMensajeError,'Descripcion ');
-        END IF;
-        IF pnidSucursal='' OR pnidSucursal IS NULL THEN
-            SET vcTempMensajeError=CONCAT(vcTempMensajeError,'ID de Sucursal');
-        END IF;
-        IF vcTempMensajeError<>'' THEN
-            SET pcMensajeError=CONCAT('Se necesita que ingrese los siguientes campos: ', vcTempMensajeError);
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM taller
-        WHERE idTaller=pnidTaller;
-        IF vnConteo=0 THEN
-            SET pcMensajeError='El taller que desea editar no existe';
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnidSucursal FROM taller
-        WHERE idTaller=pnidTaller;
-
-        IF pnidSucursal<>vnidSucursal THEN
-
-            SELECT COUNT(*) INTO vnConteo FROM sucursal
-            WHERE idSucursal=pnidSucursal;
-            IF vnConteo=0 THEN
-                SET pcMensajeError='La sucursal que ha ingresado no existe';
-                LEAVE SP;
-            ELSE
-                UPDATE taller SET descripcion=pcDescripcion, idSucursal=pnidSucursal
-                WHERE idTaller=pnidTaller;
-                COMMIT;
-                SET pcMensajeError='Se ha editado de forma correcta el taller 1';
-                SET pbOcurreError=FALSE;
-                LEAVE SP;
-            END IF;
-        END IF;
-
-        UPDATE taller SET descripcion=pcDescripcion
-        WHERE idTaller=pnidTaller;
-        COMMIT;
-        SET pcMensajeError='Se ha editado de forma correcta el taller 2';
-        SET pbOcurreError=FALSE;
-        LEAVE SP;
-    END IF;
-    IF pcAccion='ELIMINAR' THEN 
-
-        IF pnidTaller='' OR pnidTaller IS NULL THEN
-            SET pcMensajeError='Se requiere el ID de taller';
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM taller
-        WHERE idTaller=pnidTaller;
-        IF vnConteo=0 THEN
-            SET pcMensajeError='El taller que desea eliminar no existe';
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM mantenimiento
-        WHERE idTaller=pnidTaller;
-        IF vnConteo>0 THEN
-            SET pcMensajeError='El taller esta registrado en un mantenimiento y no puede ser eliminada';
-            LEAVE SP;
-        END IF;
-
-        DELETE FROM taller
-        WHERE idTaller=pnidTaller;
-        COMMIT;
-        SET pcMensajeError='Se ha eliminado de forma exitosa el taller';
-        SET pbOcurreError=FALSE;
-        LEAVE SP;
-    ELSE
-        SET pcMensajeError='La accion ingresada no es valida, por ingrese una accion valida. Acciones validas: AGREGAR, EDITAR, ELIMINAR';
-        LEAVE SP;
-    END IF;
-END$$
-
-DROP PROCEDURE IF EXISTS `SP_SOLICITUD_MANTENIMIENTO`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_SOLICITUD_MANTENIMIENTO` (IN `pnidSolicitudMantenimiento` INT, IN `pnidVehiculo` INT, IN `pnidEmpleado` INT, IN `pnidTipoMantenimiento` INT, IN `pnidCliente` INT, IN `pdFechaFin` DATE, IN `pcAccion` VARCHAR(10), IN `pcEstado` VARCHAR(10), OUT `pbOcurreError` BOOLEAN, OUT `pcMensajeError` VARCHAR(1000))  SP:BEGIN
-    DECLARE vnConteo    INT;
-    DECLARE vcTempMensajeError, vcEstado VARCHAR(1000);
-    DECLARE vdFechaSolicitud, vdFechaFin DATE;
-    SET vcTempMensajeError='';
-    SET pbOcurreError=TRUE;
-    SET vdFechaSolicitud=CURDATE();
-    SET autocommit=0;
-    START TRANSACTION;
-    IF pcAccion='' OR pcAccion IS NULL THEN
-        SET pcMensajeError='Se requiere el campo accion';
-        LEAVE SP;
-    END IF;
-    IF pcAccion='AGREGAR' THEN
-
-        IF pnidVehiculo='' OR pnidVehiculo IS NULL THEN
-            SET vcTempMensajeError='Vehiculo ';
-        END IF;
-        IF pnidEmpleado='' OR pnidEmpleado IS NULL THEN
-            SET vcTempMensajeError=CONCAT(vcTempMensajeError, 'Empleado');
-        END IF;
-        IF pnidTipoMantenimiento='' OR pnidTipoMantenimiento IS NULL THEN
-            SET vcTempMensajeError=CONCAT(vcTempMensajeError, 'Tipo de mantenimiento');
-        END IF;        
-        IF vcTempMensajeError<>'' THEN
-            SET pcMensajeError=CONCAT('Se necesita que ingrese los siguientes campos: ', vcTempMensajeError);
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM vehiculo
-        WHERE idVehiculo=pnidVehiculo;
-
-        IF vnConteo=0 THEN
-            SET pcMensajeError="El vehiculo que ingreso no existe";
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM empleado
-        WHERE idEmpleado=pnidEmpleado;
-
-        IF vnConteo=0 THEN
-            SET pcMensajeError="El empleado que ingreso no existe";
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM tipomantenimiento
-        WHERE idTipoMantenimiento=pnidTipoMantenimiento;
-
-        IF vnConteo=0 THEN
-            SET pcMensajeError="El tipo de mantenimiento que ingreso no existe";
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM solicitudmantenimiento
-        WHERE idVehiculo=pnidVehiculo AND estado="PENDIENTE";
-
-        IF vnConteo>0 THEN
-            SET pcMensajeError="Ya tiene una solicitud pendiente";
-            LEAVE SP;
-        END IF;
-
-        IF pnidCliente=0 THEN
-            SET pnidCliente=NULL;
-        ELSE
-            SELECT COUNT(*) INTO vnConteo FROM cliente
-            WHERE idCliente=pnidCliente;
-
-            IF vnConteo=0 THEN
-                SET pcMensajeError="El id de cliente ingresado no existe";
-                LEAVE SP;
-            END IF;
-        END IF;
-
-        IF pdFechaFin>=vdFechaSolicitud THEN
-            SET vcEstado="aprobada";
-        ELSE
-            SET vcEstado="pendiente";
-            SET pdFechaFin=NULL;
-        END IF;
-        
-        SELECT (MAX(idSolicitudMantenimiento)+1) INTO vnConteo FROM solicitudmantenimiento;
-
-        INSERT solicitudmantenimiento(idSolicitudMantenimiento, idVehiculo, fechaSolicitud, fechaFin, estado, idEmpleado, idTipoMantenimiento, idCliente)
-        VALUES (vnConteo, pnidVehiculo, vdFechaSolicitud, pdFechaFin, vcEstado, pnidEmpleado,pnidTipoMantenimiento, pnidCliente);
-        COMMIT;
-        SET pcMensajeError='Solicitud enviada';
-        SET pbOcurreError=FALSE;
-        LEAVE SP;
-    END IF;
-    IF pcAccion='EDITAR' THEN
-
-        IF pnidSolicitudMantenimiento='' OR pnidSolicitudMantenimiento IS NULL THEN
-            SET vcTempMensajeError='ID de solicitud ';
-        END IF;
-        IF pnidEmpleado='' OR pnidEmpleado IS NULL THEN
-            SET vcTempMensajeError=CONCAT(vcTempMensajeError,'Empleado ');
-        END IF;
-        IF pnidTipoMantenimiento='' OR pnidTipoMantenimiento IS NULL THEN
-            SET vcTempMensajeError=CONCAT(vcTempMensajeError, 'Tipo de mantenimiento');
-        END IF;
-        IF pdFechaFin='' OR pdFechaFin IS NULL THEN
-            SET vcTempMensajeError=CONCAT(vcTempMensajeError, 'Fecha fin');
-        END IF;
-        IF pcEstado='' OR pcEstado IS NULL THEN
-            SET vcTempMensajeError=CONCAT(vcTempMensajeError, 'estado');
-        END IF;
-        IF vcTempMensajeError<>'' THEN
-            SET pcMensajeError=CONCAT('Se necesita que ingrese los siguientes campos: ', vcTempMensajeError);
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM solicitudmantenimiento
-        WHERE idSolicitudMantenimiento=pnidSolicitudMantenimiento;
-        IF vnConteo=0 THEN
-            SET pcMensajeError='La solicitud que desea editar no existe';
-            LEAVE SP;
-        END IF;
-        IF pcEstado="pendiente" THEN
-            SET pdFechaFin=NULL;
-        END IF;
-        IF  pcEstado="aprobada" OR pcEstado="rechazada" THEN
-            SET pdFechaFin=CURDATE();
-        ELSE
-            SET pcMensajeError="estado invalido";
-            LEAVE SP;
-        END IF;
-        IF pnidCliente=0 THEN
-            SET pnidCliente=NULL;
-        ELSE
-            SELECT COUNT(*) INTO vnConteo FROM cliente
-            WHERE idCliente=pnidCliente;
-
-            IF vnConteo=0 THEN
-                SET pcMensajeError="El cliente ingresado no existe";
-                LEAVE SP;
-            END IF;
-        END IF;
-
-        UPDATE solicitudmantenimiento SET idEmpleado=pnidEmpleado, idTipoMantenimiento=pnidTipoMantenimiento,
-                                        fechaFin=pdFechaFin, estado=pcEstado, fechaSolicitud=CURDATE(), idCliente=pnidCliente
-        WHERE idSolicitudMantenimiento=pnidSolicitudMantenimiento;
-        COMMIT;
-        SET pcMensajeError='Se ha editado de forma correcta la solicitud';
-        SET pbOcurreError=FALSE;
-        LEAVE SP;
-    END IF;
-    IF pcAccion='ELIMINAR' THEN 
-
-        IF pnidSolicitudMantenimiento='' OR pnidSolicitudMantenimiento IS NULL THEN
-            SET pcMensajeError='Se requiere el ID de la solocicitud';
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM solicitudmantenimiento
-        WHERE idSolicitudMantenimiento=pnidSolicitudMantenimiento;
-        IF vnConteo=0 THEN
-            SET pcMensajeError='La solicitud que desea eliminar no existe';
-            LEAVE SP;
-        END IF;
-
-        SELECT COUNT(*) INTO vnConteo FROM mantenimiento
-        WHERE idSolicitudMantenimiento=pnidSolicitudMantenimiento;
-        IF vnConteo>0 THEN
-            SET pcMensajeError='La solicitud seleccionada esta en la tabla mantenimiento y no puede ser eliminada';
-            LEAVE SP;
-        END IF;
-
-        DELETE FROM solicitudmantenimiento
-        WHERE idSolicitudMantenimiento=pnidSolicitudMantenimiento;
-        COMMIT;
-        SET pcMensajeError='Se ha eliminado de forma exitosa la solicitud';
-        SET pbOcurreError=FALSE;
-        LEAVE SP;
-    ELSE
-        SET pcMensajeError='La accion ingresada no es valida, por ingrese una accion valida. Acciones validas: AGREGAR, EDITAR, ELIMINAR';
-        LEAVE SP;
-    END IF;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -447,31 +26,29 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `agenda`
 --
 
-DROP TABLE IF EXISTS `agenda`;
 CREATE TABLE IF NOT EXISTS `agenda` (
   `idAgenda` int(11) NOT NULL AUTO_INCREMENT,
   `fechaReserva` date NOT NULL,
   `fechaEntrega` datetime NOT NULL,
   `fechaDevolución` datetime NOT NULL,
-  `tiempoRenta` varchar(10) NOT NULL,
   PRIMARY KEY (`idAgenda`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `agenda`
 --
 
-INSERT INTO `agenda` (`idAgenda`, `fechaReserva`, `fechaEntrega`, `fechaDevolución`, `tiempoRenta`) VALUES
-(1, '2018-09-08', '2018-09-12 03:20:15', '2018-10-12 00:00:00', 'Mes'),
-(2, '2018-12-10', '2018-12-10 00:00:00', '2019-01-15 00:00:00', 'Dia'),
-(3, '2019-01-15', '2019-01-18 05:30:00', '2019-02-18 04:10:00', 'Mes'),
-(4, '2018-06-16', '2018-06-17 08:00:00', '2018-06-17 18:00:00', 'Hora'),
-(5, '2018-02-20', '2018-02-20 00:00:00', '2018-02-23 10:00:00', 'Dia'),
-(6, '2019-02-03', '2019-02-03 00:00:00', '2019-03-03 13:00:00', 'Mes'),
-(7, '2019-01-01', '2019-01-01 06:00:00', '2019-01-01 16:00:00', 'Hora'),
-(8, '2019-03-22', '2019-03-22 00:00:00', '2019-03-23 10:00:00', 'Dia'),
-(9, '2019-03-05', '2019-03-06 00:00:00', '2019-03-10 15:30:00', 'Dia'),
-(10, '2019-03-07', '2019-03-08 00:00:00', '2019-03-10 14:00:00', 'Dia');
+INSERT INTO `agenda` (`idAgenda`, `fechaReserva`, `fechaEntrega`, `fechaDevolución`) VALUES
+(1, '2018-09-08', '2018-09-12 03:20:15', '2018-10-22 00:00:00'),
+(2, '2018-12-10', '2018-12-10 00:00:00', '2019-01-15 00:00:00'),
+(3, '2019-01-15', '2019-01-18 05:30:00', '2019-02-18 04:10:00'),
+(4, '2018-06-16', '2018-06-17 00:00:00', '2018-08-22 00:00:00'),
+(5, '2018-02-20', '2018-02-20 00:00:00', '2018-02-23 10:00:00'),
+(6, '2019-02-03', '2019-02-03 00:00:00', '2019-03-03 13:00:00'),
+(7, '2019-01-01', '2019-01-01 00:00:00', '2019-02-01 14:00:00'),
+(8, '2019-03-22', '2019-03-22 00:00:00', '2019-03-23 10:00:00'),
+(9, '2019-03-05', '2019-03-06 00:00:00', '2019-03-10 15:30:00'),
+(10, '2019-03-07', '2019-03-08 00:00:00', '2019-03-10 14:00:00');
 
 -- --------------------------------------------------------
 
@@ -479,12 +56,11 @@ INSERT INTO `agenda` (`idAgenda`, `fechaReserva`, `fechaEntrega`, `fechaDevoluci
 -- Estructura de tabla para la tabla `cargo`
 --
 
-DROP TABLE IF EXISTS `cargo`;
 CREATE TABLE IF NOT EXISTS `cargo` (
   `idCargo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idCargo`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `cargo`
@@ -508,12 +84,11 @@ INSERT INTO `cargo` (`idCargo`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `cilindraje`
 --
 
-DROP TABLE IF EXISTS `cilindraje`;
 CREATE TABLE IF NOT EXISTS `cilindraje` (
   `idCilindraje` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(10) NOT NULL,
   PRIMARY KEY (`idCilindraje`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Volcado de datos para la tabla `cilindraje`
@@ -534,15 +109,14 @@ INSERT INTO `cilindraje` (`idCilindraje`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `cliente`
 --
 
-DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE IF NOT EXISTS `cliente` (
   `idCliente` int(11) NOT NULL AUTO_INCREMENT,
   `idPersona` int(11) NOT NULL,
-  `idUsuario` int(11) DEFAULT NULL,
+  `idUsuario` int(11) NOT NULL,
   PRIMARY KEY (`idCliente`),
   KEY `fk_Cliente_Persona1` (`idPersona`),
   KEY `fk_Cliente_Usuario1` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -566,7 +140,6 @@ INSERT INTO `cliente` (`idCliente`, `idPersona`, `idUsuario`) VALUES
 -- Estructura de tabla para la tabla `control`
 --
 
-DROP TABLE IF EXISTS `control`;
 CREATE TABLE IF NOT EXISTS `control` (
   `idControl` int(11) NOT NULL AUTO_INCREMENT,
   `idInventario` int(11) NOT NULL,
@@ -578,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `control` (
   KEY `fk_Control_Salida1` (`idSalida`),
   KEY `fk_Control_Entrada1` (`idEntrada`),
   KEY `fk_Control_Empleado1` (`idEmpleado`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `control`
@@ -600,14 +173,13 @@ INSERT INTO `control` (`idControl`, `idInventario`, `idSalida`, `idEntrada`, `id
 -- Estructura de tabla para la tabla `descuento`
 --
 
-DROP TABLE IF EXISTS `descuento`;
 CREATE TABLE IF NOT EXISTS `descuento` (
   `idDescuento` int(11) NOT NULL AUTO_INCREMENT,
   `porcentaje` decimal(10,0) NOT NULL,
   `descripcion` varchar(45) NOT NULL,
   `estado` varchar(1) NOT NULL,
   PRIMARY KEY (`idDescuento`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `descuento`
@@ -629,7 +201,6 @@ INSERT INTO `descuento` (`idDescuento`, `porcentaje`, `descripcion`, `estado`) V
 -- Estructura de tabla para la tabla `descuentofactura`
 --
 
-DROP TABLE IF EXISTS `descuentofactura`;
 CREATE TABLE IF NOT EXISTS `descuentofactura` (
   `idFactura` int(11) NOT NULL,
   `idDescuento` int(11) NOT NULL,
@@ -644,19 +215,18 @@ CREATE TABLE IF NOT EXISTS `descuentofactura` (
 -- Estructura de tabla para la tabla `empleado`
 --
 
-DROP TABLE IF EXISTS `empleado`;
 CREATE TABLE IF NOT EXISTS `empleado` (
   `idEmpleado` int(11) NOT NULL AUTO_INCREMENT,
   `fechaInicio` date NOT NULL,
   `fechaFin` date DEFAULT NULL,
   `idPersona` int(11) NOT NULL,
   `idCargo` int(11) NOT NULL,
-  `idUsuario` int(11) DEFAULT NULL,
+  `idUsuario` int(11) NOT NULL,
   PRIMARY KEY (`idEmpleado`),
   KEY `fk_Empleado_Persona1` (`idPersona`),
   KEY `fk_Empleado_Cargo1` (`idCargo`),
   KEY `fk_Empleado_Usuario1` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `empleado`
@@ -680,7 +250,6 @@ INSERT INTO `empleado` (`idEmpleado`, `fechaInicio`, `fechaFin`, `idPersona`, `i
 -- Estructura de tabla para la tabla `entrada`
 --
 
-DROP TABLE IF EXISTS `entrada`;
 CREATE TABLE IF NOT EXISTS `entrada` (
   `idEntrada` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -688,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `entrada` (
   `idTipoEntrada` int(11) NOT NULL,
   PRIMARY KEY (`idEntrada`),
   KEY `fk_Entrada_TipoEntrada1` (`idTipoEntrada`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `entrada`
@@ -705,23 +274,20 @@ INSERT INTO `entrada` (`idEntrada`, `descripcion`, `fechaEntrada`, `idTipoEntrad
 -- Estructura de tabla para la tabla `factura`
 --
 
-DROP TABLE IF EXISTS `factura`;
 CREATE TABLE IF NOT EXISTS `factura` (
   `idFactura` int(11) NOT NULL AUTO_INCREMENT,
   `fechaEmision` date NOT NULL,
   `Total` decimal(10,0) NOT NULL,
   `idCliente` int(11) NOT NULL,
   `idEmpleado` int(11) DEFAULT NULL,
-  `idFormaPago` int(11) NOT NULL,
   `idImpuesto` int(11) NOT NULL,
   `idFacturaMantenimiento` int(11) DEFAULT NULL,
   PRIMARY KEY (`idFactura`),
   KEY `fk_Factura_Cliente1` (`idCliente`),
   KEY `fk_Factura_Empleado1` (`idEmpleado`),
-  KEY `fk_Factura_FormaPago1` (`idFormaPago`),
   KEY `fk_Factura_Impuesto1` (`idImpuesto`),
   KEY `fk_Factura_FacturaMantenimiento1` (`idFacturaMantenimiento`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Volcado de datos para la tabla `factura`
@@ -755,14 +321,13 @@ INSERT INTO `factura` (`idFactura`, `fechaEmision`, `Total`, `idCliente`, `idEmp
 -- Estructura de tabla para la tabla `facturapormantenimiento`
 --
 
-DROP TABLE IF EXISTS `facturapormantenimiento`;
 CREATE TABLE IF NOT EXISTS `facturapormantenimiento` (
   `idFacturaMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   `idMantenimiento` int(11) NOT NULL,
   PRIMARY KEY (`idFacturaMantenimiento`),
   KEY `fk_FacturaPorMantenimiento_Mantenimiento1` (`idMantenimiento`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `facturapormantenimiento`
@@ -782,7 +347,8 @@ INSERT INTO `facturapormantenimiento` (`idFacturaMantenimiento`, `descripcion`, 
 (11, 'Reparacion taller 2', 11),
 (12, 'Reparacion taller 2', 12),
 (13, 'Reparacion taller 2', 13),
-(14, 'Reparacion taller 2', 14);
+(14, 'Reparacion taller 2', 14),
+(15, 'Reparacion taller 2', 15);
 
 -- --------------------------------------------------------
 
@@ -790,12 +356,11 @@ INSERT INTO `facturapormantenimiento` (`idFacturaMantenimiento`, `descripcion`, 
 -- Estructura de tabla para la tabla `formapago`
 --
 
-DROP TABLE IF EXISTS `formapago`;
 CREATE TABLE IF NOT EXISTS `formapago` (
   `idFormaPago` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idFormaPago`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `formapago`
@@ -853,7 +418,6 @@ INSERT INTO `formapagofactura` (`idFormaPago`, `idFactura`) VALUES
 -- Estructura de tabla para la tabla `fotos`
 --
 
-DROP TABLE IF EXISTS `fotos`;
 CREATE TABLE IF NOT EXISTS `fotos` (
   `idFotos` int(11) NOT NULL AUTO_INCREMENT,
   `direccionEnDisco` varchar(45) NOT NULL,
@@ -861,7 +425,7 @@ CREATE TABLE IF NOT EXISTS `fotos` (
   PRIMARY KEY (`idFotos`),
   UNIQUE KEY `direccionEnDisco` (`direccionEnDisco`),
   KEY `fk_Fotos_Vehiculo1` (`idVehiculo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -869,13 +433,12 @@ CREATE TABLE IF NOT EXISTS `fotos` (
 -- Estructura de tabla para la tabla `impuesto`
 --
 
-DROP TABLE IF EXISTS `impuesto`;
 CREATE TABLE IF NOT EXISTS `impuesto` (
   `idImpuesto` int(11) NOT NULL AUTO_INCREMENT,
   `porcentaje` decimal(10,0) NOT NULL,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idImpuesto`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `impuesto`
@@ -890,7 +453,6 @@ INSERT INTO `impuesto` (`idImpuesto`, `porcentaje`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `inventario`
 --
 
-DROP TABLE IF EXISTS `inventario`;
 CREATE TABLE IF NOT EXISTS `inventario` (
   `idInventario` int(11) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -918,7 +480,6 @@ INSERT INTO `inventario` (`idInventario`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `mantenimiento`
 --
 
-DROP TABLE IF EXISTS `mantenimiento`;
 CREATE TABLE IF NOT EXISTS `mantenimiento` (
   `idMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idEmpleado` int(11) NOT NULL,
@@ -930,7 +491,7 @@ CREATE TABLE IF NOT EXISTS `mantenimiento` (
   KEY `fk_Mantenimiento_Empleado1` (`idEmpleado`),
   KEY `fk_Mantenimiento_Taller1` (`idTaller`),
   KEY `fk_Mantenimiento_SolicitudMantenimiento1` (`idSolicitudMantenimiento`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `mantenimiento`
@@ -950,7 +511,8 @@ INSERT INTO `mantenimiento` (`idMantenimiento`, `idEmpleado`, `idTaller`, `descr
 (11, 10, 10, 'Cambio de suspensión', '1500', 11),
 (12, 10, 15, 'Cambio de batería', '1500', 12),
 (13, 2, 13, 'Cambio de coolant', '1500', 13),
-(14, 1, 4, 'Cambio de soporte', '1500', 14);
+(14, 1, 4, 'Cambio de soporte', '1500', 14),
+(15, 4, 7, 'Polarizado', '1500', 15);
 
 -- --------------------------------------------------------
 
@@ -958,12 +520,11 @@ INSERT INTO `mantenimiento` (`idMantenimiento`, `idEmpleado`, `idTaller`, `descr
 -- Estructura de tabla para la tabla `marca`
 --
 
-DROP TABLE IF EXISTS `marca`;
 CREATE TABLE IF NOT EXISTS `marca` (
   `idMarca` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idMarca`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 --
 -- Volcado de datos para la tabla `marca`
@@ -1009,12 +570,11 @@ INSERT INTO `marca` (`idMarca`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `marcarepuesto`
 --
 
-DROP TABLE IF EXISTS `marcarepuesto`;
 CREATE TABLE IF NOT EXISTS `marcarepuesto` (
   `idMarcaRepuesto` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idMarcaRepuesto`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `marcarepuesto`
@@ -1043,14 +603,13 @@ INSERT INTO `marcarepuesto` (`idMarcaRepuesto`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `modelo`
 --
 
-DROP TABLE IF EXISTS `modelo`;
 CREATE TABLE IF NOT EXISTS `modelo` (
   `idModelo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   `idMarca` int(11) NOT NULL,
   PRIMARY KEY (`idModelo`),
   KEY `fk_Modelo_Marca1` (`idMarca`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Volcado de datos para la tabla `modelo`
@@ -1096,7 +655,6 @@ INSERT INTO `modelo` (`idModelo`, `descripcion`, `idMarca`) VALUES
 -- Estructura de tabla para la tabla `persona`
 --
 
-DROP TABLE IF EXISTS `persona`;
 CREATE TABLE IF NOT EXISTS `persona` (
   `idPersona` int(11) NOT NULL AUTO_INCREMENT,
   `pnombre` varchar(45) NOT NULL,
@@ -1108,7 +666,7 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `noIdentidad` varchar(45) NOT NULL,
   PRIMARY KEY (`idPersona`),
   UNIQUE KEY `correo` (`correo`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Volcado de datos para la tabla `persona`
@@ -1147,14 +705,13 @@ INSERT INTO `persona` (`idPersona`, `pnombre`, `snombre`, `papellido`, `sapellid
 -- Estructura de tabla para la tabla `proveedores`
 --
 
-DROP TABLE IF EXISTS `proveedores`;
 CREATE TABLE IF NOT EXISTS `proveedores` (
   `idProveedores` int(11) NOT NULL AUTO_INCREMENT,
   `idPersona` int(11) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idProveedores`),
   KEY `fk_Proveedores_Persona1` (`idPersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `proveedores`
@@ -1178,7 +735,6 @@ INSERT INTO `proveedores` (`idProveedores`, `idPersona`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `renta`
 --
 
-DROP TABLE IF EXISTS `renta`;
 CREATE TABLE IF NOT EXISTS `renta` (
   `idRenta` int(11) NOT NULL AUTO_INCREMENT,
   `idFactura` int(11) NOT NULL,
@@ -1190,7 +746,7 @@ CREATE TABLE IF NOT EXISTS `renta` (
   KEY `fk_Renta_Factura1` (`idFactura`),
   KEY `fk_Renta_Vehiculo1` (`idVehiculo`),
   KEY `fk_Renta_Agenda1` (`idAgenda`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Volcado de datos para la tabla `renta`
@@ -1216,7 +772,6 @@ INSERT INTO `renta` (`idRenta`, `idFactura`, `idVehiculo`, `idAgenda`, `mora`, `
 -- Estructura de tabla para la tabla `repuestos`
 --
 
-DROP TABLE IF EXISTS `repuestos`;
 CREATE TABLE IF NOT EXISTS `repuestos` (
   `idRepuestos` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
@@ -1226,7 +781,7 @@ CREATE TABLE IF NOT EXISTS `repuestos` (
   PRIMARY KEY (`idRepuestos`),
   KEY `fk_Repuestos_Inventario1` (`idInventario`),
   KEY `fk_Repuestos_MarcaRepuesto1` (`idMarcaRepuesto`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `repuestos`
@@ -1255,7 +810,6 @@ INSERT INTO `repuestos` (`idRepuestos`, `descripcion`, `precio`, `idInventario`,
 -- Estructura de tabla para la tabla `repuestosmantenimiento`
 --
 
-DROP TABLE IF EXISTS `repuestosmantenimiento`;
 CREATE TABLE IF NOT EXISTS `repuestosmantenimiento` (
   `idRepuestosMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idMantenimiento` int(11) NOT NULL,
@@ -1264,7 +818,7 @@ CREATE TABLE IF NOT EXISTS `repuestosmantenimiento` (
   PRIMARY KEY (`idRepuestosMantenimiento`),
   KEY `fk_Mantenimiento_has_Repuestos_Mantenimiento1` (`idMantenimiento`),
   KEY `fk_Mantenimiento_has_Repuestos_Repuestos1` (`idRepuestos`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `repuestosmantenimiento`
@@ -1275,7 +829,7 @@ INSERT INTO `repuestosmantenimiento` (`idRepuestosMantenimiento`, `idMantenimien
 (2, 5, 2, '1500'),
 (3, 1, 3, '1500'),
 (4, 2, 3, '1500'),
-(5, 7, 3, '1500'),
+(5, 15, 3, '1500'),
 (6, 3, 4, '1500'),
 (7, 5, 4, '1500'),
 (8, 10, 4, '1500'),
@@ -1288,12 +842,11 @@ INSERT INTO `repuestosmantenimiento` (`idRepuestosMantenimiento`, `idMantenimien
 -- Estructura de tabla para la tabla `requisitos`
 --
 
-DROP TABLE IF EXISTS `requisitos`;
 CREATE TABLE IF NOT EXISTS `requisitos` (
   `idRequisitos` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idRequisitos`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `requisitos`
@@ -1312,7 +865,6 @@ INSERT INTO `requisitos` (`idRequisitos`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `salida`
 --
 
-DROP TABLE IF EXISTS `salida`;
 CREATE TABLE IF NOT EXISTS `salida` (
   `idSalida` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -1320,7 +872,7 @@ CREATE TABLE IF NOT EXISTS `salida` (
   `idTipoSalida` varchar(45) NOT NULL,
   PRIMARY KEY (`idSalida`),
   KEY `fk_Salida_TipoSalida1` (`idTipoSalida`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `salida`
@@ -1339,43 +891,39 @@ INSERT INTO `salida` (`idSalida`, `descripcion`, `FechaSalida`, `idTipoSalida`) 
 -- Estructura de tabla para la tabla `solicitudmantenimiento`
 --
 
-DROP TABLE IF EXISTS `solicitudmantenimiento`;
 CREATE TABLE IF NOT EXISTS `solicitudmantenimiento` (
   `idSolicitudMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idVehiculo` int(11) NOT NULL,
   `fechaSolicitud` date NOT NULL,
-  `fechaFin` date DEFAULT NULL,
-  `estado` varchar(10) NOT NULL,
+  `estado` varchar(20) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
   `idTipoMantenimiento` int(11) NOT NULL,
-  `idCliente` int(11) DEFAULT NULL,
   PRIMARY KEY (`idSolicitudMantenimiento`),
   KEY `fk_Vehiculo_has_Mantenimiento_Vehiculo1` (`idVehiculo`),
   KEY `fk_SolicitudMantenimiento_Empleado1` (`idEmpleado`),
-  KEY `fk_SolicitudMantenimiento_TipoMantenimiento1` (`idTipoMantenimiento`),
-  KEY `FK_SOLICITUDMANTENIMIENTO_CLIENTE` (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+  KEY `fk_SolicitudMantenimiento_TipoMantenimiento1` (`idTipoMantenimiento`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `solicitudmantenimiento`
 --
 
-INSERT INTO `solicitudmantenimiento` (`idSolicitudMantenimiento`, `idVehiculo`, `fechaSolicitud`, `fechaFin`, `estado`, `idEmpleado`, `idTipoMantenimiento`, `idCliente`) VALUES
-(1, 1, '2019-11-25', '2019-11-25', 'aprobada', 1, 1, 1),
-(2, 2, '2017-10-18', '2017-10-18', 'aprobada', 2, 2, NULL),
-(3, 3, '2019-10-28', '2019-10-28', 'aprobada', 3, 3, 3),
-(4, 4, '2016-06-06', '2016-06-06', 'aprobada', 4, 2, NULL),
-(5, 6, '2019-04-11', '2019-04-12', 'aprobada', 5, 1, 5),
-(6, 5, '2020-01-26', NULL, 'pendiente', 6, 3, NULL),
-(7, 7, '2018-08-01', NULL, 'pendiente', 7, 1, 7),
-(8, 8, '2016-02-15', NULL, 'pendiente', 8, 3, NULL),
-(9, 9, '2019-01-22', NULL, 'pendiente', 9, 2, 9),
-(10, 10, '2017-07-12', NULL, 'pendiente', 10, 3, NULL),
-(11, 11, '2017-09-04', NULL, 'pendiente', 1, 1, 2),
-(12, 13, '2017-11-20', NULL, 'pendiente', 2, 2, NULL),
-(13, 14, '2017-05-11', NULL, 'pendiente', 3, 3, 6),
-(14, 16, '2015-11-10', NULL, 'pendiente', 4, 1, NULL),
-(15, 18, '2019-04-17', NULL, 'pendiente', 6, 2, NULL);
+INSERT INTO `solicitudmantenimiento` (`idSolicitudMantenimiento`, `idVehiculo`, `fechaSolicitud`, `estado`, `idEmpleado`, `idTipoMantenimiento`) VALUES
+(1, 1, '2019-11-25', 'Aprobada', 1, 1),
+(2, 2, '2017-10-18', 'Aprobada', 2, 2),
+(3, 3, '2019-10-28', 'Aprobada', 3, 3),
+(4, 4, '2016-06-06', 'Aprobada', 4, 4),
+(5, 6, '2019-04-11', 'Rechazada', 5, 5),
+(6, 5, '2020-01-26', 'Pendiente', 6, 6),
+(7, 7, '2018-08-01', 'Rechazada', 7, 7),
+(8, 8, '2016-02-15', 'Pendiente', 8, 8),
+(9, 9, '2019-01-22', 'Rechazada', 9, 9),
+(10, 10, '2017-07-12', 'Pendiente', 10, 10),
+(11, 11, '2017-09-04', 'Rechazada', 1, 11),
+(12, 13, '2017-11-20', 'Pendiente', 2, 12),
+(13, 14, '2017-05-11', 'Pendiente', 3, 13),
+(14, 16, '2015-11-10', 'Aprobada', 4, 14),
+(15, 18, '2015-10-14', 'Aprobada', 5, 15);
 
 -- --------------------------------------------------------
 
@@ -1383,7 +931,6 @@ INSERT INTO `solicitudmantenimiento` (`idSolicitudMantenimiento`, `idVehiculo`, 
 -- Estructura de tabla para la tabla `solicitudrenta`
 --
 
-DROP TABLE IF EXISTS `solicitudrenta`;
 CREATE TABLE IF NOT EXISTS `solicitudrenta` (
   `idSolicitudRenta` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -1397,7 +944,7 @@ CREATE TABLE IF NOT EXISTS `solicitudrenta` (
   KEY `fk_SolicitudRenta_Vehiculo1` (`idVehiculo`),
   KEY `fk_SolicitudRenta_Agenda1` (`idAgenda`),
   KEY `fk_SolicitudRenta_Empleado1` (`idEmpleado`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `solicitudrenta`
@@ -1453,10 +1000,10 @@ INSERT INTO `solicitudrentarequisitos` (`idSolicitudRenta`, `idRequisitos`, `est
 
 CREATE TABLE IF NOT EXISTS `sucursal` (
   `idSucursal` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `direccion` varchar(100) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `direccion` varchar(45) NOT NULL,
   PRIMARY KEY (`idSucursal`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `sucursal`
@@ -1467,16 +1014,17 @@ INSERT INTO `sucursal` (`idSucursal`, `nombre`, `direccion`) VALUES
 (2, 'Tegucigalpa 2', 'La Granja'),
 (3, 'Comayagua 1', 'Los Hidalgos'),
 (4, 'Comayagua 2', '21 de Febrero'),
-(5, 'San Pedro Sula 1', 'Brisas del Canada'),
+(5, 'San Pedro Sula 1', 'Brisas del Canadá'),
 (6, 'San Pedro Sula 2', 'El Carmen'),
 (7, 'Tela 1', 'Villa Franca'),
 (8, 'Tela 2', 'Divagna'),
 (9, 'Ceiba 1', 'Villa Union'),
-(10, 'Ceiba 2', 'La Union'),
+(10, 'Ceiba 2', 'La Uniòn'),
 (11, 'Trujillo 1', 'Villa Franca'),
 (12, 'Trujillo 2', 'La Merced'),
 (13, 'Cholute 1', 'Barrio Abajo'),
-(14, 'Choluteca 2', 'La Sabana');
+(14, 'Choluteca 2', 'La Sabana'),
+(15, 'Danlí', 'La Americana');
 
 -- --------------------------------------------------------
 
@@ -1484,14 +1032,13 @@ INSERT INTO `sucursal` (`idSucursal`, `nombre`, `direccion`) VALUES
 -- Estructura de tabla para la tabla `taller`
 --
 
-DROP TABLE IF EXISTS `taller`;
 CREATE TABLE IF NOT EXISTS `taller` (
   `idTaller` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   `idSucursal` int(11) NOT NULL,
   PRIMARY KEY (`idTaller`),
   KEY `fk_Taller_Sucursal1` (`idSucursal`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `taller`
@@ -1512,8 +1059,7 @@ INSERT INTO `taller` (`idTaller`, `descripcion`, `idSucursal`) VALUES
 (12, 'Taller 12', 12),
 (13, 'Taller 13', 13),
 (14, 'Taller 14', 14),
-(15, 'Taller de pintura', 11),
-(16, 'Taller Q', 14);
+(15, 'Taller 15', 15);
 
 -- --------------------------------------------------------
 
@@ -1521,14 +1067,13 @@ INSERT INTO `taller` (`idTaller`, `descripcion`, `idSucursal`) VALUES
 -- Estructura de tabla para la tabla `telefonos`
 --
 
-DROP TABLE IF EXISTS `telefonos`;
 CREATE TABLE IF NOT EXISTS `telefonos` (
   `idTelefonos` int(11) NOT NULL AUTO_INCREMENT,
   `telefono` varchar(45) NOT NULL,
   `idPersona` int(11) NOT NULL,
   PRIMARY KEY (`idTelefonos`),
   KEY `fk_Telefonos_Persona` (`idPersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
 
 --
 -- Volcado de datos para la tabla `telefonos`
@@ -1582,7 +1127,6 @@ INSERT INTO `telefonos` (`idTelefonos`, `telefono`, `idPersona`) VALUES
 -- Estructura de tabla para la tabla `tipoentrada`
 --
 
-DROP TABLE IF EXISTS `tipoentrada`;
 CREATE TABLE IF NOT EXISTS `tipoentrada` (
   `idTipoEntrada` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
@@ -1593,7 +1137,7 @@ CREATE TABLE IF NOT EXISTS `tipoentrada` (
   KEY `fk_TipoEntrada_Proveedores1` (`idProveedores`),
   KEY `fk_TipoEntrada_Ventas1` (`idVentas`),
   KEY `fk_TipoEntrada_Renta1` (`idRenta`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `tipoentrada`
@@ -1610,21 +1154,33 @@ INSERT INTO `tipoentrada` (`idTipoEntrada`, `descripcion`, `idProveedores`, `idV
 -- Estructura de tabla para la tabla `tipomantenimiento`
 --
 
-DROP TABLE IF EXISTS `tipomantenimiento`;
 CREATE TABLE IF NOT EXISTS `tipomantenimiento` (
   `idTipoMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idTipoMantenimiento`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Volcado de datos para la tabla `tipomantenimiento`
 --
 
 INSERT INTO `tipomantenimiento` (`idTipoMantenimiento`, `descripcion`) VALUES
-(1, 'Preventivo'),
-(2, 'Correctivo'),
-(3, 'Post-venta');
+(1, 'Cambio de aceite'),
+(2, 'Cambio de bujías'),
+(3, 'Cambio de llantas'),
+(4, 'Alineamiento'),
+(5, 'Cambio de fricciones'),
+(6, 'Cambio de bujes'),
+(7, 'Cambio de tijeras'),
+(8, 'Cambio de filtro de aire'),
+(9, 'Cambio de barras estabilizadoras'),
+(10, 'Cambio de rótulas'),
+(11, 'Cambio de suspensión'),
+(12, 'Cambio de batería'),
+(13, 'Cambio de coolant'),
+(14, 'Cambio de soporte'),
+(15, 'Polarizado'),
+(16, 'Preventivo');
 
 -- --------------------------------------------------------
 
@@ -1632,12 +1188,11 @@ INSERT INTO `tipomantenimiento` (`idTipoMantenimiento`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `tipomotor`
 --
 
-DROP TABLE IF EXISTS `tipomotor`;
 CREATE TABLE IF NOT EXISTS `tipomotor` (
   `idTipoGasolina` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(20) NOT NULL,
   PRIMARY KEY (`idTipoGasolina`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `tipomotor`
@@ -1656,7 +1211,6 @@ INSERT INTO `tipomotor` (`idTipoGasolina`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `tiposalida`
 --
 
-DROP TABLE IF EXISTS `tiposalida`;
 CREATE TABLE IF NOT EXISTS `tiposalida` (
   `idTipoSalida` varchar(45) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -1684,12 +1238,11 @@ INSERT INTO `tiposalida` (`idTipoSalida`, `descripcion`, `idVentas`, `idRenta`) 
 -- Estructura de tabla para la tabla `tipovehiculo`
 --
 
-DROP TABLE IF EXISTS `tipovehiculo`;
 CREATE TABLE IF NOT EXISTS `tipovehiculo` (
   `idTipoVehiculo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idTipoVehiculo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `tipovehiculo`
@@ -1708,12 +1261,11 @@ INSERT INTO `tipovehiculo` (`idTipoVehiculo`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `transmision`
 --
 
-DROP TABLE IF EXISTS `transmision`;
 CREATE TABLE IF NOT EXISTS `transmision` (
   `idTransmision` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(20) NOT NULL,
   PRIMARY KEY (`idTransmision`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `transmision`
@@ -1730,7 +1282,6 @@ INSERT INTO `transmision` (`idTransmision`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `nombreUsuario` varchar(45) NOT NULL,
@@ -1738,7 +1289,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `rutaImagen` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `nombreUsuario` (`nombreUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -1772,7 +1323,6 @@ INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `contraseña`, `rutaImagen`
 -- Estructura de tabla para la tabla `vehiculo`
 --
 
-DROP TABLE IF EXISTS `vehiculo`;
 CREATE TABLE IF NOT EXISTS `vehiculo` (
   `idVehiculo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
@@ -1795,7 +1345,7 @@ CREATE TABLE IF NOT EXISTS `vehiculo` (
   KEY `fk_Vehiculo_TipoMotor1` (`idTipoGasolina`),
   KEY `fk_Vehiculo_Transmision1` (`idTransmision`),
   KEY `fk_Vehiculo_Cilindraje1` (`idCilindraje`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Volcado de datos para la tabla `vehiculo`
@@ -1925,6 +1475,13 @@ ALTER TABLE `facturapormantenimiento`
   ADD CONSTRAINT `fk_FacturaPorMantenimiento_Mantenimiento1` FOREIGN KEY (`idMantenimiento`) REFERENCES `mantenimiento` (`idMantenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `formapagofactura`
+--
+ALTER TABLE `formapagofactura`
+  ADD CONSTRAINT `FK_Forma_Pago` FOREIGN KEY (`idFormaPago`) REFERENCES `formapago` (`idFormaPago`),
+  ADD CONSTRAINT `FK_Factura` FOREIGN KEY (`idFactura`) REFERENCES `factura` (`idFactura`);
+
+--
 -- Filtros para la tabla `fotos`
 --
 ALTER TABLE `fotos`
@@ -1982,7 +1539,6 @@ ALTER TABLE `salida`
 -- Filtros para la tabla `solicitudmantenimiento`
 --
 ALTER TABLE `solicitudmantenimiento`
-  ADD CONSTRAINT `FK_SOLICITUDMANTENIMIENTO_CLIENTE` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`),
   ADD CONSTRAINT `fk_SolicitudMantenimiento_Empleado1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_SolicitudMantenimiento_TipoMantenimiento1` FOREIGN KEY (`idTipoMantenimiento`) REFERENCES `tipomantenimiento` (`idTipoMantenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Vehiculo_has_Mantenimiento_Vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -2047,7 +1603,53 @@ ALTER TABLE `vehiculo`
 ALTER TABLE `ventas`
   ADD CONSTRAINT `fk_Factura_has_Vehiculo_Factura1` FOREIGN KEY (`idFactura`) REFERENCES `factura` (`idFactura`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Factura_has_Vehiculo_Vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
+
+
+UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/3.jpg' 
+WHERE idUsuario = 1;
+UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/5.jpg' 
+WHERE idUsuario = 2;
+UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/9.jpg' 
+WHERE idUsuario = 3;
+UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/10.jpg' 
+WHERE idUsuario = 4;
+UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/11.png' 
+WHERE idUsuario = 5;
+UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/13.jpg' 
+WHERE idUsuario = 6;
+UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/1.jpg' 
+WHERE idUsuario = 7;
+UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/2.png' 
+WHERE idUsuario = 8;
+UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/4.jpg' 
+WHERE idUsuario = 9;
+UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/15.jpg' 
+WHERE idUsuario = 10;
+
+ALTER TABLE Empleado ADD eliminado BOOLEAN not null;
+
+CREATE VIEW VW_EMPLEADOS AS(
+    SELECT e.idEmpleado,p.pnombre, p.papellido, p.noIdentidad, c.descripcion FROM Empleado e
+    INNER JOIN Persona p ON p.idPersona = e.idPersona
+    INNER JOIN Cargo c ON c.idCargo = e.idCargo
+    WHERE e.eliminado <> TRUE
+);
+
+
+CREATE VIEW VW_EMPLEADO_VER AS(
+    SELECT e.idEmpleado, p.pnombre, p.snombre, p.papellido, p.sapellido, 
+    p.correo,  c.descripcion cargo ,p.noIdentidad, p.direccion, e.fechaInicio
+    , e.fechaFin, u.nombreUsuario, u.contraseña contrasenia, u.rutaImagen, GROUP_CONCAT(t.telefono) telefonos 
+    FROM Empleado e
+    INNER JOIN Persona p ON p.idPersona = e.idPersona
+    INNER JOIN Cargo c ON c.idCargo = e.idCargo
+    INNER JOIN Usuario u ON u.idUsuario = e.idUsuario
+    INNER JOIN Telefonos t ON t.idPersona = p.idPersona
+    WHERE e.eliminado <> TRUE
+    GROUP BY e.idEmpleado, p.pnombre, p.snombre, p.papellido, p.sapellido, 
+    p.correo,  c.descripcion ,p.noIdentidad, p.direccion, e.fechaInicio
+    , e.fechaFin, u.nombreUsuario, u.contraseña, u.rutaImagen
+);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
