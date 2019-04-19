@@ -453,7 +453,6 @@ CREATE TABLE IF NOT EXISTS `agenda` (
   `fechaReserva` date NOT NULL,
   `fechaEntrega` datetime NOT NULL,
   `fechaDevolución` datetime NOT NULL,
-  `tiempoRenta` varchar(10) NOT NULL,
   PRIMARY KEY (`idAgenda`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
@@ -727,27 +726,27 @@ CREATE TABLE IF NOT EXISTS `factura` (
 -- Volcado de datos para la tabla `factura`
 --
 
-INSERT INTO `factura` (`idFactura`, `fechaEmision`, `Total`, `idCliente`, `idEmpleado`, `idImpuesto`, `idFacturaMantenimiento`) VALUES
-(1, '2017-01-20', '1500', 1, 1, 1, 9),
-(2, '2015-02-15', '1500', 2, 10, 1, NULL),
-(3, '2016-03-18', '1500', 3, 9, 1, NULL),
-(4, '2018-04-01', '1500', 4, 8, 1, NULL),
-(5, '2019-05-19', '1500', 5, 7, 1, NULL),
-(6, '2017-06-23', '1500', 6, 6, 1, NULL),
-(7, '2015-07-10', '1500', 7, 5, 1, 3),
-(8, '2016-08-13', '1500', 8, 4, 1, NULL),
-(9, '2018-09-09', '1500', 8, 3, 1, 14),
-(10, '2019-01-05', '1500', 9, 3, 1, 6),
-(11, '2017-02-04', '1500', 10, 2, 1, 13),
-(12, '2015-03-08', '1500', 1, 1, 1, 14),
-(13, '2016-04-04', '1500', 2, 10, 1, NULL),
-(14, '2018-05-11', '1500', 3, 8, 1, NULL),
-(15, '2019-06-17', '1500', 4, 7, 1, NULL),
-(16, '2017-07-06', '1500', 2, 9, 1, NULL),
-(17, '2015-08-07', '2500', 4, 8, 1, 5),
-(18, '2016-09-20', '3500', 5, 5, 1, 10),
-(19, '2018-01-29', '4500', 6, 4, 1, NULL),
-(20, '2019-02-27', '5500', 7, 2, 1, NULL);
+INSERT INTO `factura` (`idFactura`, `fechaEmision`, `Total`, `idCliente`, `idEmpleado`, `idFormaPago`, `idImpuesto`, `idFacturaMantenimiento`) VALUES
+(1, '2017-01-20', '1500', 1, 1, 1, 1, 9),
+(2, '2015-02-15', '1500', 2, 10, 5, 1, NULL),
+(3, '2016-03-18', '1500', 3, 9, 4, 1, NULL),
+(4, '2018-04-01', '1500', 4, 8, 3, 1, NULL),
+(5, '2019-05-19', '1500', 5, 7, 3, 1, NULL),
+(6, '2017-06-23', '1500', 6, 6, 2, 1, NULL),
+(7, '2015-07-10', '1500', 7, 5, 1, 1, 3),
+(8, '2016-08-13', '1500', 8, 4, 5, 1, NULL),
+(9, '2018-09-09', '1500', 8, 3, 4, 1, 14),
+(10, '2019-01-05', '1500', 9, 3, 3, 1, 6),
+(11, '2017-02-04', '1500', 10, 2, 2, 1, 13),
+(12, '2015-03-08', '1500', 1, 1, 3, 1, 14),
+(13, '2016-04-04', '1500', 2, 10, 5, 1, NULL),
+(14, '2018-05-11', '1500', 3, 8, 3, 1, NULL),
+(15, '2019-06-17', '1500', 4, 7, 5, 1, NULL),
+(16, '2017-07-06', '1500', 2, 9, 5, 1, NULL),
+(17, '2015-08-07', '2500', 4, 8, 4, 1, 5),
+(18, '2016-09-20', '3500', 5, 5, 3, 1, 10),
+(19, '2018-01-29', '4500', 6, 4, 2, 1, NULL),
+(20, '2019-02-27', '5500', 7, 2, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -807,45 +806,6 @@ INSERT INTO `formapago` (`idFormaPago`, `descripcion`) VALUES
 (3, 'Cheque'),
 (4, 'Financiamiento'),
 (5, 'Efectivo');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `formapagofactura`
---
-
-CREATE TABLE IF NOT EXISTS `formapagofactura` (
-  `idFormaPago` int(11) DEFAULT NULL,
-  `idFactura` int(11) DEFAULT NULL,
-  KEY `FK_Forma_Pago` (`idFormaPago`),
-  KEY `FK_Factura` (`idFactura`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `formapagofactura`
---
-
-INSERT INTO `formapagofactura` (`idFormaPago`, `idFactura`) VALUES
-(1, 1),
-(5, 2),
-(4, 3),
-(3, 4),
-(3, 5),
-(2, 6),
-(1, 7),
-(5, 8),
-(4, 9),
-(3, 10),
-(2, 11),
-(3, 12),
-(5, 13),
-(3, 14),
-(5, 15),
-(5, 16),
-(4, 17),
-(3, 18),
-(2, 19),
-(1, 20);
 
 -- --------------------------------------------------------
 
@@ -1426,6 +1386,7 @@ INSERT INTO `solicitudrenta` (`idSolicitudRenta`, `descripcion`, `estado`, `idCl
 -- Estructura de tabla para la tabla `solicitudrentarequisitos`
 --
 
+DROP TABLE IF EXISTS `solicitudrentarequisitos`;
 CREATE TABLE IF NOT EXISTS `solicitudrentarequisitos` (
   `idSolicitudRenta` int(11) NOT NULL,
   `idRequisitos` int(11) NOT NULL,
@@ -1451,6 +1412,7 @@ INSERT INTO `solicitudrentarequisitos` (`idSolicitudRenta`, `idRequisitos`, `est
 -- Estructura de tabla para la tabla `sucursal`
 --
 
+DROP TABLE IF EXISTS `sucursal`;
 CREATE TABLE IF NOT EXISTS `sucursal` (
   `idSucursal` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
@@ -1777,11 +1739,11 @@ CREATE TABLE IF NOT EXISTS `vehiculo` (
   `idVehiculo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   `color` varchar(45) NOT NULL,
-  `precioVenta` float NOT NULL,
-  `precioRentaHora` float NOT NULL,
-  `precioRentaDia` float NOT NULL,
+  `precioVenta` decimal(10,0) NOT NULL,
+  `precioRentaHora` varchar(45) NOT NULL,
+  `precioRentaDia` varchar(45) NOT NULL,
   `placa` varchar(8) DEFAULT NULL,
-  `Año` year(4) NOT NULL,
+  `Año` int(11) NOT NULL,
   `idModelo` int(11) NOT NULL,
   `idInventario` int(11) NOT NULL,
   `idTipoVehiculo` int(11) NOT NULL,
@@ -1802,38 +1764,38 @@ CREATE TABLE IF NOT EXISTS `vehiculo` (
 --
 
 INSERT INTO `vehiculo` (`idVehiculo`, `descripcion`, `color`, `precioVenta`, `precioRentaHora`, `precioRentaDia`, `placa`, `Año`, `idModelo`, `idInventario`, `idTipoVehiculo`, `idTipoGasolina`, `idTransmision`, `idCilindraje`) VALUES
-(1, '', 'rojo', 1000000, 100, 200, 'PCU28959', 2018, 1, 2, 1, 1, 2, 1),
-(2, '', 'Negro', 1400000, 100, 200, 'LMU3325', 2017, 2, 2, 1, 2, 1, 2),
-(3, '', 'Negro', 1200000, 100, 200, 'JKL90432', 2015, 3, 2, 1, 3, 3, 3),
-(4, '', 'Negro', 1200000, 100, 200, 'ANM89233', 2016, 4, 2, 1, 4, 1, 4),
-(5, '', 'Azul', 1300000, 100, 200, 'QUWJ2839', 2015, 5, 2, 1, 4, 1, 5),
-(6, '', 'Verde', 1700000, 100, 200, 'CKL87392', 2018, 6, 2, 1, 3, 2, 5),
-(7, '', 'Blanco', 1800000, 100, 200, 'PKS34940', 2017, 7, 2, 1, 2, 2, 6),
-(8, '', 'Negro', 1500000, 100, 200, 'PKJUE829', 2015, 8, 2, 1, 1, 3, 7),
-(9, '', 'Azul', 2000000, 100, 200, 'WERT3829', 2017, 9, 2, 1, 1, 1, 1),
-(10, '', 'Blanco', 2500000, 100, 200, 'IOP00292', 2018, 10, 2, 1, 2, 1, 2),
-(11, '', 'Azul', 1700000, 100, 200, 'UIE793J2', 2015, 11, 2, 1, 3, 1, 3),
-(12, '', 'Negro', 1500000, 100, 200, '2YWHJD88', 2016, 12, 2, 1, 4, 1, 4),
-(13, '', 'Negro', 1600000, 100, 200, 'LKI89772', 2016, 13, 2, 1, 4, 2, 5),
-(14, '', 'Negro', 1500000, 100, 200, 'KLIO0383', 2018, 14, 2, 1, 3, 2, 6),
-(15, '', 'Verde', 1400000, 100, 200, 'PCWHEE24', 2017, 15, 2, 1, 2, 3, 7),
-(16, '', 'Verde', 1300000, 50, 200, 'JKL90432', 2015, 16, 1, 2, 1, 3, 2),
-(17, '', 'Verde', 1200000, 50, 200, 'ANM89233', 2016, 17, 1, 2, 1, 2, 3),
-(18, '', 'Verde', 1500000, 50, 200, 'QUWJ2839', 2016, 18, 1, 2, 2, 2, 2),
-(19, '', 'Rojo', 1200000, 50, 200, 'CKL87392', 2017, 19, 1, 2, 3, 2, 2),
-(20, '', 'Rojo', 1300000, 50, 200, 'PKS34940', 2015, 20, 1, 2, 4, 1, 1),
-(21, '', 'Rojo', 80000, 50, 200, 'PKJUE829', 2018, 21, 7, 3, 4, 1, 2),
-(22, '', 'Azul', 350000, 50, 200, 'WERT3829', 2019, 22, 7, 3, 3, 1, 4),
-(23, '', 'Azul', 70000, 50, 200, 'PCWHEE24', 2016, 23, 7, 3, 2, 2, 5),
-(24, '', 'Azul', 60000, 50, 200, 'KLIO0383', 2015, 24, 7, 3, 1, 1, 2),
-(25, '', 'Amarillo', 500000, 500, 2000, '2YWHJD88', 2016, 25, 4, 5, 4, 1, 6),
-(26, '', 'amarillo', 500000, 500, 2000, 'UIE793J2', 2017, 26, 4, 5, 3, 2, 7),
-(27, '', 'Amarillo', 500000, 500, 2000, 'IOP00292', 2016, 27, 8, 5, 2, 2, 3),
-(28, '', 'Amarillo', 650000, 500, 2000, 'WERT3829', 2015, 28, 9, 5, 1, 3, 2),
-(29, '', 'Amarillo', 600000, 500, 2000, 'PKJUE829', 2018, 29, 8, 5, 4, 3, 2),
-(30, '', 'Blanco', 1300000, 1500, 20000, 'QUWJ2839', 2015, 30, 5, 4, 2, 3, 4),
-(31, '', 'Blanco', 1200000, 1200, 20000, 'KLIO0383', 2017, 30, 5, 4, 2, 3, 5),
-(32, '', 'Blanco', 15000000, 1000, 20000, 'UIE793J2', 2018, 30, 5, 4, 2, 2, 6);
+(1, '', 'rojo', '1000000', '100', '200', 'PCU28959', 2018, 1, 2, 1, 1, 2, 1),
+(2, '', 'Negro', '1400000', '100', '200', 'LMU3325', 2017, 2, 2, 1, 2, 1, 2),
+(3, '', 'Negro', '1200000', '100', '200', 'JKL90432', 2015, 3, 2, 1, 3, 3, 3),
+(4, '', 'Negro', '1200000', '100', '200', 'ANM89233', 2016, 4, 2, 1, 4, 1, 4),
+(5, '', 'Azul', '1300000', '100', '200', 'QUWJ2839', 2015, 5, 2, 1, 4, 1, 5),
+(6, '', 'Verde', '1700000', '100', '200', 'CKL87392', 2018, 6, 2, 1, 3, 2, 5),
+(7, '', 'Blanco', '1800000', '100', '200', 'PKS34940', 2017, 7, 2, 1, 2, 2, 6),
+(8, '', 'Negro', '1500000', '100', '200', 'PKJUE829', 2015, 8, 2, 1, 1, 3, 7),
+(9, '', 'Azul', '2000000', '100', '200', 'WERT3829', 2017, 9, 2, 1, 1, 1, 1),
+(10, '', 'Blanco', '2500000', '100', '200', 'IOP00292', 2018, 10, 2, 1, 2, 1, 2),
+(11, '', 'Azul', '1700000', '100', '200', 'UIE793J2', 2015, 11, 2, 1, 3, 1, 3),
+(12, '', 'Negro', '1500000', '100', '200', '2YWHJD88', 2016, 12, 2, 1, 4, 1, 4),
+(13, '', 'Negro', '1600000', '100', '200', 'LKI89772', 2016, 13, 2, 1, 4, 2, 5),
+(14, '', 'Negro', '1500000', '100', '200', 'KLIO0383', 2018, 14, 2, 1, 3, 2, 6),
+(15, '', 'Verde', '1400000', '100', '200', 'PCWHEE24', 2017, 15, 2, 1, 2, 3, 7),
+(16, '', 'Verde', '1300000', '50', '200', 'JKL90432', 2015, 16, 1, 2, 1, 3, 2),
+(17, '', 'Verde', '1200000', '50', '200', 'ANM89233', 2016, 17, 1, 2, 1, 2, 3),
+(18, '', 'Verde', '1500000', '50', '200', 'QUWJ2839', 2016, 18, 1, 2, 2, 2, 2),
+(19, '', 'Rojo', '1200000', '50', '200', 'CKL87392', 2017, 19, 1, 2, 3, 2, 2),
+(20, '', 'Rojo', '1300000', '50', '200', 'PKS34940', 2015, 20, 1, 2, 4, 1, 1),
+(21, '', 'Rojo', '80000', '50', '200', 'PKJUE829', 2018, 21, 7, 3, 4, 1, 2),
+(22, '', 'Azul', '350000', '50', '200', 'WERT3829', 2019, 22, 7, 3, 3, 1, 4),
+(23, '', 'Azul', '70000', '50', '200', 'PCWHEE24', 2016, 23, 7, 3, 2, 2, 5),
+(24, '', 'Azul', '60000', '50', '200', 'KLIO0383', 2015, 24, 7, 3, 1, 1, 2),
+(25, '', 'Amarillo', '500000', '500', '2000', '2YWHJD88', 2016, 25, 4, 5, 4, 1, 6),
+(26, '', 'amarillo', '500000', '500', '2000', 'UIE793J2', 2017, 26, 4, 5, 3, 2, 7),
+(27, '', 'Amarillo', '500000', '500', '2000', 'IOP00292', 2016, 27, 8, 5, 2, 2, 3),
+(28, '', 'Amarillo', '650000', '500', '2000', 'WERT3829', 2015, 28, 9, 5, 1, 3, 2),
+(29, '', 'Amarillo', '600000', '500', '2000', 'PKJUE829', 2018, 29, 8, 5, 4, 3, 2),
+(30, '', 'Blanco', '1300000', '1500', '20000', 'QUWJ2839', 2015, 30, 5, 4, 2, 3, 4),
+(31, '', 'Blanco', '1200000', '1200', '20000', 'KLIO0383', 2017, 30, 5, 4, 2, 3, 5),
+(32, '', 'Blanco', '15000000', '1000', '20000', 'UIE793J2', 2018, 30, 5, 4, 2, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -1841,6 +1803,7 @@ INSERT INTO `vehiculo` (`idVehiculo`, `descripcion`, `color`, `precioVenta`, `pr
 -- Estructura de tabla para la tabla `ventas`
 --
 
+DROP TABLE IF EXISTS `ventas`;
 CREATE TABLE IF NOT EXISTS `ventas` (
   `idVentas` varchar(45) NOT NULL,
   `idFactura` int(11) NOT NULL,
@@ -1916,6 +1879,7 @@ ALTER TABLE `factura`
   ADD CONSTRAINT `fk_Factura_Cliente1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Factura_Empleado1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Factura_FacturaMantenimiento1` FOREIGN KEY (`idFacturaMantenimiento`) REFERENCES `facturapormantenimiento` (`idFacturaMantenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Factura_FormaPago1` FOREIGN KEY (`idFormaPago`) REFERENCES `formapago` (`idFormaPago`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Factura_Impuesto1` FOREIGN KEY (`idImpuesto`) REFERENCES `impuesto` (`idImpuesto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --

@@ -224,7 +224,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 text-left control-label col-form-label">Fecha</label>
                                                         <div class="col-sm-9">
-                                                            <input type="Date" class="form-control" id="txt_fecha" >
+                                                        <input type="text" class="form-control" id="datepicker-autoclose"
+                                        placeholder="mm/dd/yyyy">
                                                         </div>
                                                     </div>
                                                  <div class="form-group row">
@@ -359,8 +360,6 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Matrix-admin. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -399,6 +398,7 @@
     <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="dist/js/pages/chart/chart-page-init.js"></script>
+    <script src="assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
 </body>
 

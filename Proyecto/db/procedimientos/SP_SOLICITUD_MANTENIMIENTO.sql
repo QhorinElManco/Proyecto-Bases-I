@@ -26,10 +26,6 @@ SP:BEGIN
         LEAVE SP;
     END IF;
     IF pcAccion='AGREGAR' THEN
-
-        IF pnidVehiculo='' OR pnidVehiculo IS NULL THEN
-            SET vcTempMensajeError='Vehiculo ';
-        END IF;
         IF pnidEmpleado='' OR pnidEmpleado IS NULL THEN
             SET vcTempMensajeError=CONCAT(vcTempMensajeError, 'Empleado');
         END IF;
@@ -85,7 +81,7 @@ SP:BEGIN
             END IF;
         END IF;
         --OJO ACA CARLOS
-        IF pdFechaFin>=vdFechaSolicitud THEN
+        IF pdFechaFin=vdFechaSolicitud THEN
             SET vcEstado="aprobada";
         ELSE
             SET vcEstado="pendiente";
