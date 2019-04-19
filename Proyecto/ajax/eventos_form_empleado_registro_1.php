@@ -52,8 +52,7 @@
             
         case '3'://guardar
             $conexion = new Conexion();
-            //echo $_POST['slc_cargo'] ;
-            
+
             $txt_pnombre = $_POST['txt_pnombre'];
             $txt_snombre= $_POST['txt_snombre'];
             $txt_papellido= $_POST['txt_papellido'];
@@ -70,8 +69,26 @@
             $ruta=$_SESSION["ruta"] ;
 
             $accion = "AGREGAR";
-            $sql = "CALL SP_GESTION_EMPLEADO('$txt_pnombre','$txt_snombre','$txt_papellido','$txt_sapellido','$txt_correo','$txt_direccion','$txt_noIdentidad','$txt_telefono','$date_fechaInicio','$date_fechaFin','$slc_cargo','$txt_usuario','$txt_contraseña ','../$ruta','NULL','$accion',@p17,@p18);";
-            $salida = "SELECT @p17 AS OcurreError, @p18 AS mensaje;";
+            $sql = "CALL SP_GESTION_EMPLEADO(
+                             '$txt_pnombre'
+                            ,'$txt_snombre'
+                            ,'$txt_papellido'
+                            ,'$txt_sapellido'
+                            ,'$txt_correo'
+                            ,'$txt_direccion'
+                            ,'$txt_noIdentidad'
+                            ,'$txt_telefono'
+                            ,'$date_fechaInicio'
+                            ,'$date_fechaFin'
+                            ,'$txt_usuario'
+                            ,'$txt_contraseña '
+                            ,'$slc_cargo'
+                            ,'$ruta'
+                            ,''
+                            ,'$accion'
+                            ,@p16,
+                            ,@p17);";
+            $salida = "SELECT @p16 AS OcurreError, @p17 AS mensaje;";
             $resultado = $conexion->ejecutarInstruccion($sql);
             $respuesta = $conexion->ejecutarInstruccion($salida);
             
