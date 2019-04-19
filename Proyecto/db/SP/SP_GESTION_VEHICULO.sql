@@ -90,7 +90,7 @@ SP:BEGIN
             SET pcMensajeError = 'El idTipoVehiculo no existe';
             LEAVE SP; 
         END IF;
-        SELECT COUNT(*) INTO vnConteo FROM TipoGasolina
+        SELECT COUNT(*) INTO vnConteo FROM TipoMotor
         WHERE idTipoGasolina = pnIdTipoGasolina;
         IF vnConteo = 0 THEN 
             SET pcMensajeError = 'El idTipoGasolina no existe';
@@ -109,12 +109,7 @@ SP:BEGIN
             LEAVE SP; 
         END IF;
 
-        SELECT COUNT(*) INTO vnConteo FROM Vehiculo
-        WHERE placa = pcPlaca;
-        IF vnConteo >0 THEN 
-            SET pcMensajeError = 'Ya existe un vehiculo con ese numero de placa';
-            LEAVE SP; 
-        END IF;   
+          
     END IF;
 
     IF pcAccion = 'EDITAR' OR pcAccion = 'ELIMINAR' THEN
@@ -134,6 +129,14 @@ SP:BEGIN
     END IF;
 
     IF pcAccion = 'AGREGAR' THEN
+    
+        SELECT COUNT(*) INTO vnConteo FROM Vehiculo
+        WHERE placa = pcPlaca;
+        IF vnConteo >0 THEN 
+            SET pcMensajeError = 'Ya existe un vehiculo con ese numero de placa';
+            LEAVE SP; 
+        END IF; 
+
         INSERT INTO vehiculo
         (idVehiculo
         , descripcion

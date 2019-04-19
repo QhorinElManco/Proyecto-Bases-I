@@ -21,6 +21,10 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../dist/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../dist/js/fileinput.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -183,85 +187,17 @@
                 <!-- Inicio Formulario -->
                 <!-- ============================================================== -->
                 <IMG SRC="../logo/logo_automotor.png"  style="margin: 0px 0px 30px 0px;"> 
-                <h3 style="margin: 0px 0px 30px 0px;">Bienvenido a AutoMotor</h3>
-                <div class="row">
-                    <div class="col-sm-2">                            
-                        <label for="txt_telefono"><b>Telefono:</b></label>
-                    </div>
+                <h3 style="margin: 0px 0px 30px 0px;">Añadir fotos del empleado</h3>
+                <div class="container">
+                    <form enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input id="file-1" type="file" class="file" multiple=true data-preview-file-type="any">
+                        </div>
+                    </form>
                 </div>
-                <div class="row " style="margin: 0px 0px 30px 0px;" >
-                    <div class="col-sm-3 " >
-                        <input type="text" class="form-control border border-secondary" id="txt_telefono" maxlength="50" placeholder="Ingrese su numero de telefono">
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-3">
-                        <label for="txt_fechaNacimiento"><b>Fecha de Nacimiento:</b></label>
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 0px 30px 0px;">
-                    <div class="col-sm-4">
-                        <input type="date" id="date_fechaNacimiento" class="form-control border border-secondary">
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-3">
-                        <label for="txt_Genero"><b>Genero:</b></label>
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 0px 30px 0px;">
-                    <div class="col-sm-4">
-                        <select id="slc_genero" class="form-control border border-secondary" placeholder="Ingrese su genero">
-                            <option value="">Hombre</option>
-                            <option value="">Mujer</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-3">
-                        <label for="date_fechaInicio"><b>Fecha de inicio:</b></label>
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 0px 30px 0px;">
-                    <div class="col-sm-4">
-                        <input type="date" id="date_fechaInicio" class="form-control border border-secondary">
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-3">
-                        <label for="date_fechaFin"><b>Fecha fin:</b></label>
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 0px 30px 0px;">
-                    <div class="col-sm-4">
-                        <input type="date" id="date_fechaFin" class="form-control border border-secondary">
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-3">
-                        <label for="slc_cargo"><b>Cargo:</b></label>
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 0px 30px 0px;">
-                    <div class="col-sm-4">
-                        <select id="slc_cargo" class="form-control border border-secondary" placeholder="Ingrese su genero">
-                            <option value="">Vendedor</option>
-                            <option value="">Mantenimiento</option>
-                            <option value="">Ingeniero </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-3">
-                        
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 0px 30px 0px;">
-                    <div class="col-sm-4">
-                        
-                    </div>
-                </div>
-                <button type="button" class="btn btn-success">Siguiente</button>
+                
+                <button type="button" class="btn btn-primary">Añadir Empleado</button>
+                <button type="button" class="btn btn-danger">Cancelar</button>
                 <!-- ============================================================== -->
                 <!-- Fin Formulario -->
                 <!-- ============================================================== -->
@@ -315,7 +251,13 @@
     <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="../dist/js/pages/chart/chart-page-init.js"></script>
-
+    <script>
+	$("#file-1").fileinput({
+		showCaption: false,
+		browseClass: "btn btn-primary btn-lg",
+		fileType: "any"
+	});
+    </script>
 </body>
 
 </html>

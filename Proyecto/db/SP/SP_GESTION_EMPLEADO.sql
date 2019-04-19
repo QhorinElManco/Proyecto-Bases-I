@@ -21,9 +21,9 @@ CREATE PROCEDURE SP_GESTION_EMPLEADO(
     OUT pcMensajeError VARCHAR(1000)
 )
 SP:BEGIN
-    DECLARE vnConteo, vnIdPersona, vnIdEmpleado, vnIdTelefonos, vnIdUsuario INT;
+    DECLARE vnConteo, vnIdPersona, vnIdEmpleado, vnIdTelefonos, vnIdUsuario, vnIdPersona2,vnConteo2 INT;
     DECLARE vcMensajeTemp VARCHAR(1000);
-    SET pcMensajeError = TRUE;
+    SET pbOcurreError = TRUE;
     SET vcMensajeTemp = '';
 
     SET AUTOCOMMIT=0;
@@ -80,22 +80,11 @@ SP:BEGIN
         SELECT COUNT(*) INTO vnConteo FROM Cargo
         WHERE idCargo = pnIdCargo;
         IF vnConteo = 0 THEN
+            SET pbOcurreError = TRUE;
             SET pcMensajeError = 'No existe el idCargo';
             LEAVE SP;
         END IF;
         
-        SELECT COUNT(*) INTO vnConteo FROM persona
-        WHERE noIdentidad = pcNoIdentidad;
-        IF vnConteo > 0 THEN
-            SET pcMensajeError= CONCAT('La persona con el noIdentidad', pcNoIdentidad ,' ya existe en el SI');
-            LEAVE SP;
-        END IF;
-        SELECT COUNT(*) INTO vnConteo FROM Usuario 
-        WHERE nombreUsuario = pcNombreUsuario;
-        IF vnConteo > 0 THEN
-            SET pcMensajeError= CONCAT('El usuario', pcNombreUsuario,' ya existe en el SI');
-            LEAVE SP; 
-        END IF;
     END IF;
     IF pcAccion = 'ELIMINAR' OR pcAccion = 'EDITAR' THEN
 
@@ -109,6 +98,7 @@ SP:BEGIN
         SELECT COUNT(*) INTO vnConteo FROM Empleado
         WHERE idEmpleado = pnIdEmpleado;
         IF vnConteo = 0 THEN
+            SET pbOcurreError = TRUE;
             SET pcMensajeError = 'idEmpleado no existe';
             LEAVE SP;
         END if;
@@ -117,6 +107,7 @@ SP:BEGIN
         INNER JOIN Usuario u ON u.idUsuario = e.idUsuario
         WHERE e.idEmpleado = pnIdEmpleado;
         IF vnConteo = 0 THEN
+            SET pbOcurreError = TRUE;
             SET pcMensajeError = 'El empleado no tiene usuario';
             LEAVE SP;
         END IF;
@@ -125,6 +116,7 @@ SP:BEGIN
         INNER JOIN telefonos t ON t.idPersona = p.idPersona
         WHERE e.idEmpleado = pnIdEmpleado;
         IF vnConteo = 0 THEN
+            SET pbOcurreError = TRUE;
             SET pcMensajeError = 'El empleado no tiene telefonos';
             LEAVE SP;
         END IF;
@@ -133,61 +125,141 @@ SP:BEGIN
 
     IF pcAccion = 'AGREGAR' THEN
 
-        INSERT INTO persona
-                (idPersona, 
-                pnombre, 
-                snombre, 
-                papellido, 
-                sapellido, 
-                correo, 
-                direccion, 
-                noIdentidad) 
-        VALUES (NULL,
-                pcpNombre,
-                pcsNombre,
-                pcpApellido,
-                pcsApellido,
-                pcCorreo,
-                pcDireccion,
-                pcNoIdentidad);
+        SELECT COUNT(*) INTO vnConteo FROM Usuario 
+        WHERE nombreUsuario = pcNombreUsuario;
+        IF vnConteo > 0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError= CONCAT('El usuario', pcNombreUsuario,' ya existe en el SI');
+            LEAVE SP; 
+        END IF;
+        SELECT COUNT(*) INTO vnConteo FROM Persona
+        WHERE correo = pcCorreo;
+        IF vnConteo > 0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError= CONCAT('El correo', pcCorreo,' ya existe en el SI');
+            LEAVE SP; 
+        END IF;
 
-        SELECT MAX(idPersona) INTO vnIdPersona FROM Persona;
+        SELECT idPersona, COUNT(*) INTO  vnIdPersona2, vnConteo2 FROM persona
+        WHERE noIdentidad = pcNoIdentidad;
+        IF vnConteo2 = 0 THEN
+            INSERT INTO persona
+                    (idPersona, 
+                    pnombre, 
+                    snombre, 
+                    papellido, 
+                    sapellido, 
+                    correo, 
+                    direccion, 
+                    noIdentidad) 
+            VALUES (NULL,
+                    pcpNombre,
+                    pcsNombre,
+                    pcpApellido,
+                    pcsApellido,
+                    pcCorreo,
+                    pcDireccion,
+                    pcNoIdentidad);
+            
 
-        INSERT INTO telefonos
-                    (idTelefonos
-                    , telefono
-                    , idPersona) 
-        VALUES (NULL
-                ,pcTelefono
-                ,vnIdPersona);
+            SELECT MAX(idPersona) INTO vnIdPersona FROM Persona;
+
+            INSERT INTO telefonos
+                        (idTelefonos
+                        , telefono
+                        , idPersona) 
+            VALUES (NULL
+                    ,pcTelefono
+                    ,vnIdPersona);
+            
+            INSERT INTO usuario
+                    (idUsuario
+                    , nombreUsuario
+                    , contraseña
+                    , rutaImagen) 
+            VALUES (NULL
+                    ,pcNombreUsuario
+                    ,pcContrasenia
+                    ,pcRutaImagen);
+            
+            SELECT MAX(idUsuario) INTO vnIdUsuario FROM usuario;
+
+            INSERT INTO empleado
+                        (idEmpleado
+                        , fechaInicio
+                        , fechaFin
+                        , idPersona
+                        , idCargo
+                        , idUsuario) 
+            VALUES (NULL
+                    ,pdFechaInicio
+                    ,pdFechaFin
+                    ,vnIdPersona
+                    ,pnIdCargo
+                    ,vnIdUsuario);
+        END IF;
+
+
+        SELECT COUNT(*) INTO vnConteo FROM Persona p
+        INNER JOIN Cliente c ON c.idPersona = vnIdPersona2;
+        IF vnConteo = 0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError= CONCAT('La persona con el noIdentidad', pcNoIdentidad ,' ya existe en el SI');
+            LEAVE SP;
+        END IF;
+        IF vnConteo > 0 THEN
+            INSERT INTO usuario
+                    (idUsuario
+                    , nombreUsuario
+                    , contraseña
+                    , rutaImagen) 
+            VALUES (NULL
+                    ,pcNombreUsuario
+                    ,pcContrasenia
+                    ,pcRutaImagen);
+            
+            SELECT MAX(idUsuario) INTO vnIdUsuario FROM usuario;
+
+            INSERT INTO empleado
+                        (idEmpleado
+                        , fechaInicio
+                        , fechaFin
+                        , idPersona
+                        , idCargo
+                        , idUsuario)
+            VALUES (NULL
+                    ,pdFechaInicio
+                    ,pdFechaFin
+                    ,vnIdPersona2
+                    ,pnIdCargo
+                    ,vnIdUsuario);
+        END IF;
         
-        INSERT INTO usuario
-                (idUsuario
-                , nombreUsuario
-                , contraseña
-                , rutaImagen) 
-        VALUES (NULL
-                ,pcNombreUsuario
-                ,pcContrasenia
-                ,pcRutaImagen);
-        
-        SELECT MAX(idUsuario) INTO vnIdUsuario FROM usuario;
-
-        INSERT INTO empleado
-                    (idEmpleado
-                    , fechaInicio
-                    , fechaFin
-                    , idPersona
-                    , idCargo
-                    , idUsuario) 
-        VALUES (NULL
-                ,pdFechaInicio
-                ,pdFechaFin
-                ,vnIdPersona
-                ,pnIdCargo
-                ,vnIdUsuario);
     END IF;
     IF pcAccion = 'EDITAR' THEN
+        SELECT COUNT(*)-1 INTO vnConteo FROM Usuario 
+        WHERE nombreUsuario = pcNombreUsuario;
+        IF vnConteo > 0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError= CONCAT('El usuario', pcNombreUsuario,' ya existe en el SI');
+            LEAVE SP; 
+        END IF;
+        SELECT COUNT(*)-1 INTO vnConteo FROM Persona
+        WHERE correo = pcCorreo;
+        IF vnConteo > 0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError= CONCAT('El correo', pcCorreo,' ya existe en el SI');
+            LEAVE SP; 
+        END IF;
+
+        SELECT COUNT(*)-1 INTO vnConteo FROM Persona
+        WHERE noIdentidad = pcNoIdentidad;
+        IF vnConteo >0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError= CONCAT('La persona con el noIdentidad', pcNoIdentidad ,' ya existe en el SI');
+            LEAVE SP;
+        END IF;
+
         SELECT p.idPersona INTO vnIdPersona FROM Persona p
         INNER JOIN Empleado e ON e.idPersona = p.idPersona
         WHERE e.idEmpleado = pnIdEmpleado;
