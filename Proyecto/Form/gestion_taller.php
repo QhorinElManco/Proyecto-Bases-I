@@ -190,95 +190,190 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid" style="" >
-                    <div style="width:100%; height:100%">
-                        <!-- ============================================================== -->
-                        <!-- Inicio Formulario -->
-                        <!-- ============================================================== -->
-                    
-                        <div class="row" style="" >
-                        
-                        
-                            <!--Margen de 3 columnas a la izquierda-->
-                            <div class="col-md-6 auth-box  border-top border-secondary float-left mx-auto" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
-                            
-                                    <form class="form-horizontal">
-                                        <div class="card-body" style="text-align:center;">
-                                            <div class="text-center p-t-20 p-b-20">
-                                                <IMG SRC="../assets/images/logo2.png">
-                                            </div>
-                                            <h3 style="margin: 20px 0px 30px 0px; color: rgba(255, 255, 255, 1)">¡BIENVENIDO!</h3>
-                                            <h3 style="margin: 20px 0px 30px 0px; color: rgba(255, 255, 255, 1)">Cree su cuenta
-                                                en AutoMotor</h3>
-                                            <input type="hidden" id="idPersona">
-                                            <input type="hidden" id="idCliente">
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Nombres</label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" class="form-control" id="txt_pnombre"
-                                                        placeholder="Primer nombre">
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="txt_snombre"
-                                                        placeholder="Segundo nombre">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Apellidos</label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" class="form-control" id="txt_papellido"
-                                                        placeholder="Primer apellido">
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="txt_papellido"
-                                                        placeholder="Segundo apellido">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Correo</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="txt_correo"
-                                                        placeholder="Correo electronico">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label
-                                                    class="col-sm-3 text-left control-label col-form-label">Contraseña</label>
-                                                <div class="col-sm-9">
-                                                    <input type="password" class="form-control" id="txt_Contraseña"
-                                                        placeholder="Ingrese su contraseña">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Verifique su
-                                                    contraseña</label>
-                                                <div class="col-sm-9">
-                                                    <input type="password" class="form-control" id="txt_Contraseña2"
-                                                        placeholder="Ingrese nuevamente la contraseña">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Direccion</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="txt_Contraseña2"
-                                                        placeholder="Ingrese su direccion">
-                                                </div>
-                                            </div>
+                <div style="width:80%; margin: auto;">
+                    <div class="row el-element-overlay" style="padding-top:100px;">
+                        <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
+                        </div>
+                        <!--Div Tabla de sucursales-->
+                        <div class="col-lg-8 col-md-8" style="background-color: rgba(255, 255, 255, 0.5); padding:20px; -webkit-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
+                        -moz-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
+                         box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title m-b-0">Lista de sucursales</h5>
+                                </div>
+                                <div class="card card-hover">
+                                    <button type="button" class="btn btn-success" data-toggle="modal"
+                                        data-target="#Modal1" style="height:100%; width:100%">
+                                        <div class="box bg-success text-center">
+                                            <h1 class="font-light text-white"><i class="mdi mdi-plus-box"></i></h1>
+                                            <h6 class="text-white">AGREGAR</h6>
                                         </div>
-                                        <div class="card-body" style="text-align:center">
-                                            <button type="button" class="btn btn-success btn-lg">Siguiente</button>
-                                        </div>
-                                    </form>
-                                
+                                    </button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Taller</th>
+                                                <th scope="col">Sucursal</th>
+                                                <th scope="col">Direccion</th>
+                                                <th scope="col">Editar</th>
+                                                <th scope="col">Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="lista">
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-
+                        </div>
+                        <!--Fin Div Tabla de sucursales-->
+                        <!--DIV de en medio que separa-->
+                        <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
+                        </div>
+                        <!--INICIO MODAL PARA AGREGAR-->
+                        <div class="modal fade" id="Modal1" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Agregar sucursal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal">
+                                            <h2 style="text-align:center;">Ingrese los datos</h2>
+                                            <br>
+                                            <div class="card-body" style="text-align:center;">
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-sm-3 text-left control-label col-form-label">Nombre de taller</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="txt_descripcion"
+                                                            placeholder="Nombre de taller">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-sm-3 text-left control-label col-form-label">Nombre de sucursal</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="txt_nombreSucursal"
+                                                            placeholder="Nombre sucursal">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary" id="AGREGAR"
+                                            data-dismiss="modal">Agregar</button>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <!--FIN MODAL PARA AGREGAR-->
+                        <!--INICIO MODAL PARA EDITAR-->
+                        <div class="modal fade" id="Modal2" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Editar sucursal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal">
+                                            <h2 style="text-align:center;">Ingrese los datos</h2>
+                                            <br>
+                                            <div class="card-body" style="text-align:center;">
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-sm-3 text-left control-label col-form-label">ID</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="int_id_edit"
+                                                            placeholder="Ingrese el ID">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-sm-3 text-left control-label col-form-label">Nombre</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="nombre_edit"
+                                                            placeholder="Ingrese el nombre del taller">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-sm-3 text-left control-label col-form-label">Sucursal</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="direccion_edit"
+                                                            placeholder="Ingrese la sucursal">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-warning" id="EDITAR"
+                                            data-dismiss="modal">Editar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--FIN MODAL PARA EDITAR-->
+                        <!--INICIO MODAL PARA ELIMINAR-->
+                        <div class="modal fade" id="Modal3" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="text-align:center">
+                                        <h5 class="modal-title">Eliminar sucursal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body modal-sm">
+                                        <form class="form-horizontal">
+                                            <div class="card-body" style="text-align:center;">
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-2 text-left control-label col-form-label">ID</label>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" id="id_remove"
+                                                            placeholder="Ingrese el ID">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-danger" id="ELIMINAR"
+                                            data-dismiss="modal">Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--FIN MODAL ELIMINAR-->
+                    </div>
+                    <br>
+                    <br>
+                </div>
 
-                        </div> 
-                        
-                        <!-- ============================================================== -->
-                        <!-- Fin Formulario -->
-                        <!-- ============================================================== -->
-                    </div> 
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -287,8 +382,6 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Matrix-admin. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -317,16 +410,13 @@
     <!--Custom JavaScript -->
     <script src="../dist/js/custom.min.js"></script>    
     <!--This page JavaScript -->
-    <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-    <!-- Charts js Files -->
-    <script src="../assets/libs/flot/excanvas.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.pie.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.time.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.stack.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
-    <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="../dist/js/pages/chart/chart-page-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="../dist/js/js_form/js_form_gestion_taller.js"></script>
 </body>
 
 </html>

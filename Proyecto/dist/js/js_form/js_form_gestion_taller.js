@@ -1,17 +1,17 @@
 $(document).ready(function () {
-    verSucursales();
+    verTalleres();
     //Funcion de agregar sucursal al precionar boton agregar
     $("#AGREGAR").click(function () {
             $.ajax({
-                url: "../ajax/eventos_gestion_sucursal.php?accion=2",
+                url: "../ajax/eventos_gestion_taller.php?accion=2",
                 method: "POST",
                 dataType: "html",
-                data: "nombre="+$("#txt_nombre").val()+"&"
-                       +"direccion="+$("#txt_direccion").val(),
+                data: "descripcion="+$("#txt_descripcion").val()+"&"
+                       +"sucursal="+$("#txt_nombreSucursal").val(),
                 success: function (respuesta) {
-                    alert(respuesta);
                     $("#lista").empty();
-                    verSucursales();
+                    verTalleres();
+                    alert(respuesta);
                 },
                 error: function(error){
                     console.log(error);
@@ -21,15 +21,15 @@ $(document).ready(function () {
     //Funcion para editar
     $("#EDITAR").click(function () {
             $.ajax({
-                url: "../ajax/eventos_gestion_sucursal.php?accion=3",
+                url: "../ajax/eventos_gestion_taller.php?accion=3",
                 method: "POST",
                 dataType: "html",
-                data: "id="+$("#int_id_edit").val()+"&"+"nombre="+$("#txt_nombre_edit").val()+"&"
-                       +"direccion="+$("#txt_direccion_edit").val(),
+                data: "id="+$("#int_id_edit").val()+"&"+"taller="+$("#nombre_edit").val()+"&"
+                       +"sucursal="+$("#direccion_edit").val(),
                 success: function (respuesta) {
-                    alert(respuesta);
                     $("#lista").empty();
-                    verSucursales();
+                    verTalleres();
+                    alert(respuesta);
                 },
                 error: function(error){
                     console.log(error);
@@ -38,15 +38,17 @@ $(document).ready(function () {
     });
     //Funcion para eliminar
     $("#ELIMINAR").click(function () {
+        console.log("Llama eliminar");
         $.ajax({
-            url: "../ajax/eventos_gestion_sucursal.php?accion=4",
+            url: "../ajax/eventos_gestion_taller.php?accion=4",
             method: "POST",
             dataType: "html",
-            data: "id="+$("#int_id_remove").val(),
+            data: "id="+$("#id_remove").val(),
             success: function (respuesta) {
-                alert(respuesta);
+                console.log("despues de la respuesta");
                 $("#lista").empty();
-                verSucursales();
+                verTalleres();
+                alert(respuesta);
             },
             error: function(error){
                 console.log(error);
@@ -56,9 +58,9 @@ $(document).ready(function () {
 })
 
 //Funcion que carga todas las surcusales
-function verSucursales() {
+function verTalleres() {
     $.ajax({
-        url: "../ajax/eventos_gestion_sucursal.php?accion=1",
+        url: "../ajax/eventos_gestion_taller.php?accion=1",
         method: "POST",
         dataType: "html",
         success: function (respuesta) {
