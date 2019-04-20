@@ -2,7 +2,7 @@
     session_start();
     include_once("../class/class_conexion.php");
     switch ($_GET["accion"]) {
-        case '1'://llenar select de modelo
+        case '1'://llenar select cargo
             $conexion = new Conexion();
             $sql = sprintf("SELECT idCargo, descripcion FROM  Cargo");
             $resultado = $conexion->ejecutarInstruccion($sql);

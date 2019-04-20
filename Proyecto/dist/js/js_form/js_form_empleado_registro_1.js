@@ -84,15 +84,15 @@ $(document).ready(function(){
 		document.getElementById('txt_contraseña2').addEventListener('input', function() {
 			campo = event.target;
 			valido = document.getElementById('contraseña2ok');
-				 
+				
 			if ($("#txt_contraseña").val() == $("#txt_contraseña2").val()) {
-			  valido.innerText = "válido";
-			  error = "contraseña correcta";
-			  return error; 
+			valido.innerText = "válido";
+			error = "contraseña correcta";
+			return error; 
 			} else {
-			  valido.innerText = "incorrecto";
-			  error = "contraseña no concuerda";
-			  return error; 
+			valido.innerText = "incorrecto";
+			error = "contraseña no concuerda";
+			return error; 
 			}
 		});
 	}
