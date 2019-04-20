@@ -15,14 +15,12 @@ SP:BEGIN
     SET pbOcurreError=TRUE;
     SET autocommit=0;
     START TRANSACTION;
-    --Validando que la accion no sea nula
     IF pcAccion='' OR pcAccion IS NULL THEN
         SET pcMensajeError='Se requiere el campo accion';
         LEAVE SP;
     END IF;
-    --Accion AGREGAR
     IF pcAccion='AGREGAR' THEN
-        --Validar que los parametros de entrada no sean nulos
+
         IF pnidSucursal='' OR pnidSucursal IS NULL THEN
             SET vcTempMensajeError='ID de Sucursal ';
         END IF;
@@ -33,7 +31,7 @@ SP:BEGIN
             SET pcMensajeError=CONCAT('Se necesita que ingrese los siguientes campos: ', vcTempMensajeError);
             LEAVE SP;
         END IF;
-        --Verificando que exista la sucursal
+
         SELECT COUNT(*) INTO vnConteo FROM sucursal
         WHERE idSucursal=pnidSucursal;
         IF vnConteo=0 THEN
@@ -41,17 +39,16 @@ SP:BEGIN
             LEAVE SP;
         END IF;
         SELECT (MAX(idTaller)+1) INTO vnConteo FROM taller;
-        --Respectivo insert
+
         INSERT taller(idTaller, descripcion, idSucursal) VALUES (vnConteo, pcDescripcion, pnidSucursal);
-        --Obteniendo el 
+
         COMMIT;
         SET pcMensajeError='Se ha agregado correctamente un nuevo taller';
         SET pbOcurreError=FALSE;
         LEAVE SP;
     END IF;
-    --Accion EDITAR
     IF pcAccion='EDITAR' THEN
-        --Validar que los parametros de entrada no sean nulos
+
         IF pnidTaller='' OR pnidTaller IS NULL THEN
             SET vcTempMensajeError='ID de taller ';
         END IF;
@@ -65,14 +62,14 @@ SP:BEGIN
             SET pcMensajeError=CONCAT('Se necesita que ingrese los siguientes campos: ', vcTempMensajeError);
             LEAVE SP;
         END IF;
-        --Verificando que exista el taller
+
         SELECT COUNT(*) INTO vnConteo FROM taller
         WHERE idTaller=pnidTaller;
         IF vnConteo=0 THEN
             SET pcMensajeError='El taller que desea editar no existe';
             LEAVE SP;
         END IF;
-        --Verificar si actualizara el id Sucursal
+
         SELECT COUNT(*) INTO vnidSucursal FROM taller
         WHERE idTaller=pnidTaller;
 
@@ -91,7 +88,7 @@ SP:BEGIN
                 LEAVE SP;
             END IF;
         END IF;
-        --Actualizando el registro
+
         UPDATE taller SET descripcion=pcDescripcion
         WHERE idTaller=pnidTaller;
         COMMIT;
@@ -99,28 +96,27 @@ SP:BEGIN
         SET pbOcurreError=FALSE;
         LEAVE SP;
     END IF;
-    --Accion ELIMINAR
     IF pcAccion='ELIMINAR' THEN 
-        --Validar que los parametros de entrada no sean nulos
+
         IF pnidTaller='' OR pnidTaller IS NULL THEN
             SET pcMensajeError='Se requiere el ID de taller';
             LEAVE SP;
         END IF;
-        --Verificando que exista la sucursal
+
         SELECT COUNT(*) INTO vnConteo FROM taller
         WHERE idTaller=pnidTaller;
         IF vnConteo=0 THEN
             SET pcMensajeError='El taller que desea eliminar no existe';
             LEAVE SP;
         END IF;
-        --Verifica si la sucursal tiene talleres
+
         SELECT COUNT(*) INTO vnConteo FROM mantenimiento
         WHERE idTaller=pnidTaller;
         IF vnConteo>0 THEN
             SET pcMensajeError='La sucursal tiene mantenimientos registrados y no puede ser eliminada';
             LEAVE SP;
         END IF;
-        --Eliminar la sucursal
+
         DELETE FROM taller
         WHERE idTaller=pnidTaller;
         COMMIT;

@@ -144,7 +144,7 @@
                                 href="gestion_sucursal.php" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
                                     class="hide-menu">Gestion Sucursal</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="gestion_taller.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
+                                href="gestion_taller.php" aria-expanded="false"><i class="mdi mdi-cash"></i><span
                                     class="hide-menu">Gestion de talleres</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="../widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
@@ -204,133 +204,182 @@
             <div class="container-fluid">
                 <div style="width:80%; margin: auto;">
                     <div class="row el-element-overlay" style="padding-top:100px;">
+                            <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
+                                </div>
                         <!--Div Tabla de sucursales-->
-                        <div class="col-lg-5 col-md-5" style="background-color: rgba(255, 255, 255, 0.5); padding:20px; -webkit-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
+                        <div class="col-lg-8 col-md-8" style="background-color: rgba(255, 255, 255, 0.5); padding:20px; -webkit-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
                     -moz-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
                     box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55)">
-                                            <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title m-b-0">Lista de sucursales</h5>
-                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title m-b-0">Lista de sucursales</h5>
+                                </div>
+                                <div class="card card-hover">
+                                    <button class="btn btn-success " type="button" data-toggle="modal"
+                                        data-target="#Modal1" style="height:100%; width:100%">
+                                        <div class="box bg-success text-center">
+                                            <h1 class="font-light text-white"><i class="mdi mdi-plus-box"></i></h1>
+                                            <h6 class="text-white">Agregar</h6>
+                                        </div>
+                                    </button>
+                                </div>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>
-                                                    <label class="customcheckbox m-b-20">
-                                                        <input type="checkbox" id="mainCheckbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
+                                                <th scope="col">ID</th>
                                                 <th scope="col">Nombre</th>
                                                 <th scope="col">Direccion</th>
+                                                <th scope="col">Editar</th>
+                                                <th scope="col">Eliminar</th>
                                             </tr>
                                         </thead>
                                         <tbody class="customtable" id="lista">
-                                            <!--<tr>
-                                                <th>
-                                                    <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" value=1/>
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <td>Win 95+</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" value=1/>
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <td>Win 95+</td>
-                                                <td>5</td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" value=1/>
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <td>Win 95+</td>
-                                                <td>4</td>
-                                            </tr>-->
+
                                         </tbody>
                                     </table>
                                 </div>
-                        </div>
+                            </div>
                         </div>
                         <!--Fin Div Tabla de sucursales-->
-                        <!--DIV de en medio que separa-->
                         <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0"></div>
-                        <!--Inicio Div para el ingreso de datos-->
-                        <div class="col-lg-5 col-md-5" style="background-color: rgba(255, 255, 255, 0.5); padding: 20px; -webkit-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
-                    -moz-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
-                    box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55)">
-                            <form class="form-horizontal">
-                                <h2 style="text-align:center;">Ingrese los datos</h2>
-                                <br>
-                                <div class="card-body" style="text-align:center;">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 text-left control-label col-form-label">Nombre</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="txt_Contraseña2"
-                                                placeholder="Ingrese el nombre">
-                                        </div>
+                    </div>
+                        <!--INICIO MODAL PARA AGREGAR-->
+                        <div class="modal fade" id="Modal1" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Agregar sucursal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                    <br>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 text-left control-label col-form-label">Direccion</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="txt_Contraseña2"
-                                                placeholder="Ingrese la direccion">
-                                        </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal">
+                                            <h2 style="text-align:center;">Ingrese los datos</h2>
+                                            <br>
+                                            <div class="card-body" style="text-align:center;">
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-sm-3 text-left control-label col-form-label">Nombre de sucursal</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="txt_nombre"
+                                                            placeholder="Ingrese el nuevo nombre">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-sm-3 text-left control-label col-form-label">Direccion de la sucursal</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="txt_direccion"
+                                                            placeholder="Ingrese la nueva direccion">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary" id="AGREGAR"
+                                            data-dismiss="modal">Agregar</button>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                        <!--FIN Div para el ingreso de datos-->
-                    </div>
-                    <br>
-                    <br>
-                    <!--Botones de accion (VER, AGREGAR, EDITAR, ELIMINAR)-->
-                    <div class="row el-element-overlay">
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-4 col-xlg-4">
-                            <div class="card card-hover">
-                                <button type="button" id="AGREGAR">
-                                    <div class="box bg-success text-center">
-                                        <h1 class="font-light text-white"><i class="mdi mdi-plus-box"></i></h1>
-                                        <h6 class="text-white">AGREGAR</h6>
-                                    </div>
-                                </button>
                             </div>
                         </div>
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-4 col-xlg-4">
-                            <div class="card card-hover">
-                                <button type="button" id="AGREGAR">
-                                    <div class="box bg-warning text-center">
-                                        <h1 class="font-light text-white"><i class="mdi mdi-tooltip-edit"></i></h1>
-                                        <h6 class="text-white">EDITAR</h6>
+                        <!--FIN MODAL PARA AGREGAR-->
+                        <!--INICIO MODAL PARA EDITAR-->
+                        <div class="modal fade" id="Modal2" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Editar sucursal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                </button>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal">
+                                            <h2 style="text-align:center;">Ingrese los datos</h2>
+                                            <br>
+                                            <div class="card-body" style="text-align:center;">
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-sm-3 text-left control-label col-form-label">ID</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="int_id_edit"
+                                                            placeholder="Confirme con el ID">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-sm-3 text-left control-label col-form-label">Nombre</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="txt_nombre_edit"
+                                                            placeholder="Ingrese el nuevo nombre">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-sm-3 text-left control-label col-form-label">Sucursal</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="txt_direccion_edit"
+                                                            placeholder="Ingrese la nueva direccion">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-warning" id="EDITAR"
+                                            data-dismiss="modal">Editar</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-4 col-xlg-4">
-                            <div class="card card-hover">
-                                <button type="button" id="AGREGAR">
-                                    <div class="box bg-danger text-center">
-                                        <h1 class="font-light text-white"><i class="mdi mdi-playlist-remove"></i></h1>
-                                        <h6 class="text-white">ELIMINAR</h6>
+                        <!--FIN MODAL PARA EDITAR-->
+                        <!--INICIO MODAL PARA ELIMINAR-->
+                        <div class="modal fade" id="Modal3" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="text-align:center">
+                                        <h5 class="modal-title">Eliminar sucursal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                </button>
+                                    <div class="modal-body modal-sm">
+                                        <form class="form-horizontal">
+                                            <div class="card-body" style="text-align:center;">
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-2 text-left control-label col-form-label">ID</label>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" id="int_id_remove"
+                                                            placeholder="Ingrese el ID">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-danger" id="ELIMINAR"
+                                            data-dismiss="modal">Eliminar</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <!--FIN MODAL ELIMINAR-->
                 </div>
             </div>
             <!-- ============================================================== -->
