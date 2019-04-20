@@ -12,8 +12,8 @@
             ?>
             <tr>
                 <td><?php echo $i; ?></td>
-                <td><?php echo $fila["pnombre"], ' ' ,$fila["papellido"]; ?></td>
                 <td><?php echo $fila["noIdentidad"] ;?></td>
+                <td><?php echo $fila["pnombre"], ' ' ,$fila["papellido"]; ?></td>
                 <td><?php echo $fila["descripcion"] ;?></td>
                 <td><a href="form_empleado.php?idEmpleado= <?php echo $fila["idEmpleado"];?>">ver</a></td>
             </tr>

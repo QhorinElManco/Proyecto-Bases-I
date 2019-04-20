@@ -97,7 +97,7 @@ CREATE VIEW VW_EMPLEADOS AS(
 
 --listado de empleado
 CREATE VIEW VW_EMPLEADO_VER AS(
-    SELECT e.idEmpleado, p.pnombre, p.snombre, p.papellido, p.sapellido, 
+    SELECT e.idEmpleado, p.pnombre, p.snombre, p.papellido, p.sapellido, c.idCargo,
     p.correo,  c.descripcion cargo ,p.noIdentidad, p.direccion, e.fechaInicio
     , e.fechaFin, u.nombreUsuario, u.contraseña contrasenia, u.rutaImagen, GROUP_CONCAT(t.telefono) telefonos 
     FROM Empleado e
