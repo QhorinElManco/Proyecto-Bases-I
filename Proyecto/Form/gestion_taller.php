@@ -131,10 +131,10 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="gestion_sucursal.html" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
+                                href="gestion_sucursal.php" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
                                     class="hide-menu">Gestion Sucursal</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="gestion_taller.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
+                                href="gestion_taller.php" aria-expanded="false"><i class="mdi mdi-cash"></i><span
                                     class="hide-menu">Gestion de talleres</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="../widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
@@ -200,7 +200,7 @@
                          box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55)">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title m-b-0">Lista de sucursales</h5>
+                                    <h5 class="card-title m-b-0">Lista de talleres</h5>
                                 </div>
                                 <div class="card card-hover">
                                     <button type="button" class="btn btn-success" data-toggle="modal"
@@ -213,7 +213,7 @@
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-hover">
-                                        <thead>
+                                        <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">ID</th>
                                                 <th scope="col">Taller</th>
@@ -239,7 +239,7 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Agregar sucursal</h5>
+                                        <h5 class="modal-title">Agregar taller</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -370,8 +370,7 @@
                         </div>
                         <!--FIN MODAL ELIMINAR-->
                     </div>
-                    <br>
-                    <br>
+
                 </div>
 
             </div>
