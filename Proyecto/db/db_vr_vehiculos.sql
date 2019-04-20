@@ -1,23 +1,25 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.4
+-- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 17-04-2019 a las 01:35:55
--- Versión del servidor: 5.5.24-log
--- Versión de PHP: 5.4.3
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 20-04-2019 a las 00:00:08
+-- Versión del servidor: 5.7.24
+-- Versión de PHP: 7.2.14
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db_vr_vehiculos.sql`
+-- Base de datos: `db_vr_vehiculos_2.0`
 --
 
 -- --------------------------------------------------------
@@ -26,29 +28,31 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `agenda`
 --
 
+DROP TABLE IF EXISTS `agenda`;
 CREATE TABLE IF NOT EXISTS `agenda` (
   `idAgenda` int(11) NOT NULL AUTO_INCREMENT,
   `fechaReserva` date NOT NULL,
   `fechaEntrega` datetime NOT NULL,
   `fechaDevolución` datetime NOT NULL,
+  `TiempoRenta` varchar(45) NOT NULL,
   PRIMARY KEY (`idAgenda`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `agenda`
 --
 
-INSERT INTO `agenda` (`idAgenda`, `fechaReserva`, `fechaEntrega`, `fechaDevolución`) VALUES
-(1, '2018-09-08', '2018-09-12 03:20:15', '2018-10-22 00:00:00'),
-(2, '2018-12-10', '2018-12-10 00:00:00', '2019-01-15 00:00:00'),
-(3, '2019-01-15', '2019-01-18 05:30:00', '2019-02-18 04:10:00'),
-(4, '2018-06-16', '2018-06-17 00:00:00', '2018-08-22 00:00:00'),
-(5, '2018-02-20', '2018-02-20 00:00:00', '2018-02-23 10:00:00'),
-(6, '2019-02-03', '2019-02-03 00:00:00', '2019-03-03 13:00:00'),
-(7, '2019-01-01', '2019-01-01 00:00:00', '2019-02-01 14:00:00'),
-(8, '2019-03-22', '2019-03-22 00:00:00', '2019-03-23 10:00:00'),
-(9, '2019-03-05', '2019-03-06 00:00:00', '2019-03-10 15:30:00'),
-(10, '2019-03-07', '2019-03-08 00:00:00', '2019-03-10 14:00:00');
+INSERT INTO `agenda` (`idAgenda`, `fechaReserva`, `fechaEntrega`, `fechaDevolución`, `TiempoRenta`) VALUES
+(1, '2018-09-08', '2018-09-12 03:20:15', '2018-10-22 00:00:00', 'dia'),
+(2, '2018-12-10', '2018-12-10 00:00:00', '2019-01-15 00:00:00', 'hora'),
+(3, '2019-01-15', '2019-01-18 05:30:00', '2019-02-18 04:10:00', 'dia'),
+(4, '2018-06-16', '2018-06-17 00:00:00', '2018-08-22 00:00:00', 'hora'),
+(5, '2018-02-20', '2018-02-20 00:00:00', '2018-02-23 10:00:00', 'dia'),
+(6, '2019-02-03', '2019-02-03 00:00:00', '2019-03-03 13:00:00', 'hora'),
+(7, '2019-01-01', '2019-01-01 00:00:00', '2019-02-01 14:00:00', 'dia'),
+(8, '2019-03-22', '2019-03-22 00:00:00', '2019-03-23 10:00:00', 'hora'),
+(9, '2019-03-05', '2019-03-06 00:00:00', '2019-03-10 15:30:00', 'dia'),
+(10, '2019-03-07', '2019-03-08 00:00:00', '2019-03-10 14:00:00', 'hora');
 
 -- --------------------------------------------------------
 
@@ -56,11 +60,12 @@ INSERT INTO `agenda` (`idAgenda`, `fechaReserva`, `fechaEntrega`, `fechaDevoluci
 -- Estructura de tabla para la tabla `cargo`
 --
 
+DROP TABLE IF EXISTS `cargo`;
 CREATE TABLE IF NOT EXISTS `cargo` (
   `idCargo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idCargo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cargo`
@@ -84,11 +89,12 @@ INSERT INTO `cargo` (`idCargo`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `cilindraje`
 --
 
+DROP TABLE IF EXISTS `cilindraje`;
 CREATE TABLE IF NOT EXISTS `cilindraje` (
   `idCilindraje` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(10) NOT NULL,
   PRIMARY KEY (`idCilindraje`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cilindraje`
@@ -109,6 +115,7 @@ INSERT INTO `cilindraje` (`idCilindraje`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `cliente`
 --
 
+DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE IF NOT EXISTS `cliente` (
   `idCliente` int(11) NOT NULL AUTO_INCREMENT,
   `idPersona` int(11) NOT NULL,
@@ -116,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   PRIMARY KEY (`idCliente`),
   KEY `fk_Cliente_Persona1` (`idPersona`),
   KEY `fk_Cliente_Usuario1` (`idUsuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -140,6 +147,7 @@ INSERT INTO `cliente` (`idCliente`, `idPersona`, `idUsuario`) VALUES
 -- Estructura de tabla para la tabla `control`
 --
 
+DROP TABLE IF EXISTS `control`;
 CREATE TABLE IF NOT EXISTS `control` (
   `idControl` int(11) NOT NULL AUTO_INCREMENT,
   `idInventario` int(11) NOT NULL,
@@ -151,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `control` (
   KEY `fk_Control_Salida1` (`idSalida`),
   KEY `fk_Control_Entrada1` (`idEntrada`),
   KEY `fk_Control_Empleado1` (`idEmpleado`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `control`
@@ -173,13 +181,14 @@ INSERT INTO `control` (`idControl`, `idInventario`, `idSalida`, `idEntrada`, `id
 -- Estructura de tabla para la tabla `descuento`
 --
 
+DROP TABLE IF EXISTS `descuento`;
 CREATE TABLE IF NOT EXISTS `descuento` (
   `idDescuento` int(11) NOT NULL AUTO_INCREMENT,
   `porcentaje` decimal(10,0) NOT NULL,
   `descripcion` varchar(45) NOT NULL,
   `estado` varchar(1) NOT NULL,
   PRIMARY KEY (`idDescuento`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `descuento`
@@ -201,13 +210,14 @@ INSERT INTO `descuento` (`idDescuento`, `porcentaje`, `descripcion`, `estado`) V
 -- Estructura de tabla para la tabla `descuentofactura`
 --
 
+DROP TABLE IF EXISTS `descuentofactura`;
 CREATE TABLE IF NOT EXISTS `descuentofactura` (
   `idFactura` int(11) NOT NULL,
   `idDescuento` int(11) NOT NULL,
   `fecha` date NOT NULL,
   PRIMARY KEY (`idFactura`,`idDescuento`),
   KEY `fk_Factura_has_Descuento_Descuento1` (`idDescuento`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -215,6 +225,7 @@ CREATE TABLE IF NOT EXISTS `descuentofactura` (
 -- Estructura de tabla para la tabla `empleado`
 --
 
+DROP TABLE IF EXISTS `empleado`;
 CREATE TABLE IF NOT EXISTS `empleado` (
   `idEmpleado` int(11) NOT NULL AUTO_INCREMENT,
   `fechaInicio` date NOT NULL,
@@ -222,27 +233,28 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `idPersona` int(11) NOT NULL,
   `idCargo` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
+  `eliminado` tinyint(1) NOT NULL,
   PRIMARY KEY (`idEmpleado`),
   KEY `fk_Empleado_Persona1` (`idPersona`),
   KEY `fk_Empleado_Cargo1` (`idCargo`),
   KEY `fk_Empleado_Usuario1` (`idUsuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `empleado`
 --
 
-INSERT INTO `empleado` (`idEmpleado`, `fechaInicio`, `fechaFin`, `idPersona`, `idCargo`, `idUsuario`) VALUES
-(1, '2018-10-01', NULL, 2, 3, 1),
-(2, '2019-02-15', NULL, 4, 3, 2),
-(3, '2016-12-25', NULL, 6, 4, 3),
-(4, '2017-10-05', NULL, 10, 6, 4),
-(5, '2016-05-15', NULL, 12, 5, 5),
-(6, '2019-01-20', NULL, 14, 2, 6),
-(7, '2017-05-30', NULL, 16, 1, 7),
-(8, '2018-06-10', NULL, 18, 6, 8),
-(9, '2015-09-19', NULL, 20, 6, 9),
-(10, '2015-10-05', '2018-05-30', 8, 2, 10);
+INSERT INTO `empleado` (`idEmpleado`, `fechaInicio`, `fechaFin`, `idPersona`, `idCargo`, `idUsuario`, `eliminado`) VALUES
+(1, '2018-10-01', NULL, 2, 3, 1, 0),
+(2, '2019-02-15', NULL, 4, 3, 2, 0),
+(3, '2016-12-25', NULL, 6, 4, 3, 0),
+(4, '2017-10-05', NULL, 10, 6, 4, 1),
+(5, '2016-05-15', NULL, 12, 5, 5, 0),
+(6, '2019-01-20', NULL, 14, 2, 6, 1),
+(7, '2017-05-30', NULL, 16, 1, 7, 0),
+(8, '2018-06-10', NULL, 18, 6, 8, 1),
+(9, '2015-09-19', NULL, 20, 6, 9, 0),
+(10, '2015-10-05', '2018-05-30', 8, 2, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -250,6 +262,7 @@ INSERT INTO `empleado` (`idEmpleado`, `fechaInicio`, `fechaFin`, `idPersona`, `i
 -- Estructura de tabla para la tabla `entrada`
 --
 
+DROP TABLE IF EXISTS `entrada`;
 CREATE TABLE IF NOT EXISTS `entrada` (
   `idEntrada` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -257,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `entrada` (
   `idTipoEntrada` int(11) NOT NULL,
   PRIMARY KEY (`idEntrada`),
   KEY `fk_Entrada_TipoEntrada1` (`idTipoEntrada`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `entrada`
@@ -274,10 +287,11 @@ INSERT INTO `entrada` (`idEntrada`, `descripcion`, `fechaEntrada`, `idTipoEntrad
 -- Estructura de tabla para la tabla `factura`
 --
 
+DROP TABLE IF EXISTS `factura`;
 CREATE TABLE IF NOT EXISTS `factura` (
   `idFactura` int(11) NOT NULL AUTO_INCREMENT,
   `fechaEmision` date NOT NULL,
-  `Total` decimal(10,0) NOT NULL,
+  `Total` float NOT NULL,
   `idCliente` int(11) NOT NULL,
   `idEmpleado` int(11) DEFAULT NULL,
   `idImpuesto` int(11) NOT NULL,
@@ -287,33 +301,33 @@ CREATE TABLE IF NOT EXISTS `factura` (
   KEY `fk_Factura_Empleado1` (`idEmpleado`),
   KEY `fk_Factura_Impuesto1` (`idImpuesto`),
   KEY `fk_Factura_FacturaMantenimiento1` (`idFacturaMantenimiento`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `factura`
 --
 
-INSERT INTO `factura` (`idFactura`, `fechaEmision`, `Total`, `idCliente`, `idEmpleado`, `idFormaPago`, `idImpuesto`, `idFacturaMantenimiento`) VALUES
-(1, '2017-01-20', '1500', 1, 1, 1, 1, 9),
-(2, '2015-02-15', '1500', 2, 10, 5, 1, NULL),
-(3, '2016-03-18', '1500', 3, 9, 4, 1, NULL),
-(4, '2018-04-01', '1500', 4, 8, 3, 1, NULL),
-(5, '2019-05-19', '1500', 5, 7, 3, 1, NULL),
-(6, '2017-06-23', '1500', 6, 6, 2, 1, NULL),
-(7, '2015-07-10', '1500', 7, 5, 1, 1, 3),
-(8, '2016-08-13', '1500', 8, 4, 5, 1, NULL),
-(9, '2018-09-09', '1500', 8, 3, 4, 1, 14),
-(10, '2019-01-05', '1500', 9, 3, 3, 1, 6),
-(11, '2017-02-04', '1500', 10, 2, 2, 1, 13),
-(12, '2015-03-08', '1500', 1, 1, 3, 1, 14),
-(13, '2016-04-04', '1500', 2, 10, 5, 1, NULL),
-(14, '2018-05-11', '1500', 3, 8, 3, 1, NULL),
-(15, '2019-06-17', '1500', 4, 7, 5, 1, NULL),
-(16, '2017-07-06', '1500', 2, 9, 5, 1, NULL),
-(17, '2015-08-07', '2500', 4, 8, 4, 1, 5),
-(18, '2016-09-20', '3500', 5, 5, 3, 1, 10),
-(19, '2018-01-29', '4500', 6, 4, 2, 1, NULL),
-(20, '2019-02-27', '5500', 7, 2, 1, 1, NULL);
+INSERT INTO `factura` (`idFactura`, `fechaEmision`, `Total`, `idCliente`, `idEmpleado`, `idImpuesto`, `idFacturaMantenimiento`) VALUES
+(1, '2017-01-20', 1500, 1, 1, 1, 9),
+(2, '2015-02-15', 1500, 2, 10, 1, NULL),
+(3, '2016-03-18', 1500, 3, 9, 1, NULL),
+(4, '2018-04-01', 1500, 4, 8, 1, NULL),
+(5, '2019-05-19', 1500, 5, 7, 1, NULL),
+(6, '2017-06-23', 1500, 6, 6, 1, NULL),
+(7, '2015-07-10', 1500, 7, 5, 1, 3),
+(8, '2016-08-13', 1500, 8, 4, 1, NULL),
+(9, '2018-09-09', 1500, 8, 3, 1, 14),
+(10, '2019-01-05', 1500, 9, 3, 1, 6),
+(11, '2017-02-04', 1500, 10, 2, 1, 13),
+(12, '2015-03-08', 1500, 1, 1, 1, 14),
+(13, '2016-04-04', 1500, 2, 10, 1, NULL),
+(14, '2018-05-11', 1500, 3, 8, 1, NULL),
+(15, '2019-06-17', 1500, 4, 7, 1, NULL),
+(16, '2017-07-06', 1500, 2, 9, 1, NULL),
+(17, '2015-08-07', 2500, 4, 8, 1, 5),
+(18, '2016-09-20', 3500, 5, 5, 1, 10),
+(19, '2018-01-29', 4500, 6, 4, 1, NULL),
+(20, '2019-02-27', 5500, 7, 2, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -321,13 +335,14 @@ INSERT INTO `factura` (`idFactura`, `fechaEmision`, `Total`, `idCliente`, `idEmp
 -- Estructura de tabla para la tabla `facturapormantenimiento`
 --
 
+DROP TABLE IF EXISTS `facturapormantenimiento`;
 CREATE TABLE IF NOT EXISTS `facturapormantenimiento` (
   `idFacturaMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   `idMantenimiento` int(11) NOT NULL,
   PRIMARY KEY (`idFacturaMantenimiento`),
   KEY `fk_FacturaPorMantenimiento_Mantenimiento1` (`idMantenimiento`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `facturapormantenimiento`
@@ -356,11 +371,12 @@ INSERT INTO `facturapormantenimiento` (`idFacturaMantenimiento`, `descripcion`, 
 -- Estructura de tabla para la tabla `formapago`
 --
 
+DROP TABLE IF EXISTS `formapago`;
 CREATE TABLE IF NOT EXISTS `formapago` (
   `idFormaPago` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idFormaPago`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `formapago`
@@ -376,9 +392,24 @@ INSERT INTO `formapago` (`idFormaPago`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `formapagofactura`
+--
+
+DROP TABLE IF EXISTS `formapagofactura`;
+CREATE TABLE IF NOT EXISTS `formapagofactura` (
+  `FormaPago_idFormaPago` int(11) NOT NULL,
+  `Factura_idFactura` int(11) NOT NULL,
+  PRIMARY KEY (`FormaPago_idFormaPago`,`Factura_idFactura`),
+  KEY `fk_FormaPago_has_Factura_Factura1` (`Factura_idFactura`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `fotos`
 --
 
+DROP TABLE IF EXISTS `fotos`;
 CREATE TABLE IF NOT EXISTS `fotos` (
   `idFotos` int(11) NOT NULL AUTO_INCREMENT,
   `direccionEnDisco` varchar(45) NOT NULL,
@@ -386,7 +417,7 @@ CREATE TABLE IF NOT EXISTS `fotos` (
   PRIMARY KEY (`idFotos`),
   UNIQUE KEY `direccionEnDisco` (`direccionEnDisco`),
   KEY `fk_Fotos_Vehiculo1` (`idVehiculo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -394,12 +425,13 @@ CREATE TABLE IF NOT EXISTS `fotos` (
 -- Estructura de tabla para la tabla `impuesto`
 --
 
+DROP TABLE IF EXISTS `impuesto`;
 CREATE TABLE IF NOT EXISTS `impuesto` (
   `idImpuesto` int(11) NOT NULL AUTO_INCREMENT,
   `porcentaje` decimal(10,0) NOT NULL,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idImpuesto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `impuesto`
@@ -414,11 +446,12 @@ INSERT INTO `impuesto` (`idImpuesto`, `porcentaje`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `inventario`
 --
 
+DROP TABLE IF EXISTS `inventario`;
 CREATE TABLE IF NOT EXISTS `inventario` (
   `idInventario` int(11) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idInventario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `inventario`
@@ -441,39 +474,40 @@ INSERT INTO `inventario` (`idInventario`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `mantenimiento`
 --
 
+DROP TABLE IF EXISTS `mantenimiento`;
 CREATE TABLE IF NOT EXISTS `mantenimiento` (
   `idMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idEmpleado` int(11) NOT NULL,
   `idTaller` int(11) NOT NULL,
   `descripcionReparaciones` varchar(45) NOT NULL,
-  `costo` decimal(10,0) NOT NULL,
+  `costo` float NOT NULL,
   `idSolicitudMantenimiento` int(11) NOT NULL,
   PRIMARY KEY (`idMantenimiento`),
   KEY `fk_Mantenimiento_Empleado1` (`idEmpleado`),
   KEY `fk_Mantenimiento_Taller1` (`idTaller`),
   KEY `fk_Mantenimiento_SolicitudMantenimiento1` (`idSolicitudMantenimiento`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `mantenimiento`
 --
 
 INSERT INTO `mantenimiento` (`idMantenimiento`, `idEmpleado`, `idTaller`, `descripcionReparaciones`, `costo`, `idSolicitudMantenimiento`) VALUES
-(1, 1, 2, 'Cambio de aceite', '1500', 1),
-(2, 3, 4, 'Llantas', '1500', 2),
-(3, 3, 4, 'Cambio de bujías', '1500', 3),
-(4, 10, 14, 'Alineamiento', '1500', 4),
-(5, 2, 8, 'Cambio de fricciones', '1500', 5),
-(6, 8, 11, 'Cambio de bujes', '1500', 6),
-(7, 1, 7, 'Cambio de tijeras', '1500', 7),
-(8, 8, 9, 'Cambio de filtro de aire', '1500', 8),
-(9, 4, 5, 'Cambio de barras estabilizadoras', '1500', 9),
-(10, 8, 2, 'Cambio de rótulas', '1500', 10),
-(11, 10, 10, 'Cambio de suspensión', '1500', 11),
-(12, 10, 15, 'Cambio de batería', '1500', 12),
-(13, 2, 13, 'Cambio de coolant', '1500', 13),
-(14, 1, 4, 'Cambio de soporte', '1500', 14),
-(15, 4, 7, 'Polarizado', '1500', 15);
+(1, 1, 2, 'Cambio de aceite', 1500, 1),
+(2, 3, 4, 'Llantas', 1500, 2),
+(3, 3, 4, 'Cambio de bujías', 1500, 3),
+(4, 10, 14, 'Alineamiento', 1500, 4),
+(5, 2, 8, 'Cambio de fricciones', 1500, 5),
+(6, 8, 11, 'Cambio de bujes', 1500, 6),
+(7, 1, 7, 'Cambio de tijeras', 1500, 7),
+(8, 8, 9, 'Cambio de filtro de aire', 1500, 8),
+(9, 4, 5, 'Cambio de barras estabilizadoras', 1500, 9),
+(10, 8, 2, 'Cambio de rótulas', 1500, 10),
+(11, 10, 10, 'Cambio de suspensión', 1500, 11),
+(12, 10, 15, 'Cambio de batería', 1500, 12),
+(13, 2, 13, 'Cambio de coolant', 1500, 13),
+(14, 1, 4, 'Cambio de soporte', 1500, 14),
+(15, 4, 7, 'Polarizado', 1500, 15);
 
 -- --------------------------------------------------------
 
@@ -481,49 +515,12 @@ INSERT INTO `mantenimiento` (`idMantenimiento`, `idEmpleado`, `idTaller`, `descr
 -- Estructura de tabla para la tabla `marca`
 --
 
+DROP TABLE IF EXISTS `marca`;
 CREATE TABLE IF NOT EXISTS `marca` (
   `idMarca` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idMarca`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
-
---
--- Volcado de datos para la tabla `marca`
---
-
-INSERT INTO `marca` (`idMarca`, `descripcion`) VALUES
-(1, 'Isuzu'),
-(2, 'Mazda'),
-(3, 'Porsche'),
-(4, 'BMW'),
-(5, 'Honda'),
-(6, 'Nissan'),
-(7, 'Ferrari'),
-(8, 'Jaguar'),
-(9, 'Hummer'),
-(10, 'Lamborghini'),
-(11, 'Mercedes-Benz'),
-(12, 'Toyota'),
-(13, 'Cadillac'),
-(14, 'Hyundai'),
-(15, 'Jeep'),
-(16, 'Maserati'),
-(17, 'Volkswagen'),
-(18, 'Ford'),
-(19, 'KIA'),
-(20, 'Mitsubishi'),
-(21, 'CATERPILLAR'),
-(22, 'HITACHI'),
-(23, 'JOHN DEERE'),
-(24, 'KOMATSU'),
-(25, 'VOLVO'),
-(26, 'DINA'),
-(27, 'YAMAHA'),
-(28, 'Ducati'),
-(30, 'FERRETI YATCHS'),
-(31, 'Bavaria Yatchs'),
-(32, 'Azimut'),
-(33, 'Suzuki');
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -531,32 +528,12 @@ INSERT INTO `marca` (`idMarca`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `marcarepuesto`
 --
 
+DROP TABLE IF EXISTS `marcarepuesto`;
 CREATE TABLE IF NOT EXISTS `marcarepuesto` (
   `idMarcaRepuesto` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idMarcaRepuesto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
-
---
--- Volcado de datos para la tabla `marcarepuesto`
---
-
-INSERT INTO `marcarepuesto` (`idMarcaRepuesto`, `descripcion`) VALUES
-(1, 'YKS'),
-(2, '777 Five'),
-(3, 'OEM'),
-(4, 'Falcon'),
-(5, 'Dunlop'),
-(6, 'Castrol'),
-(7, 'Chevron'),
-(8, 'NGK'),
-(9, 'YKS taiwanesa'),
-(10, 'OM Brand'),
-(11, 'Mobil'),
-(12, 'original yukita'),
-(13, 'Tokito'),
-(14, 'Monroe'),
-(15, 'KYB');
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -564,13 +541,14 @@ INSERT INTO `marcarepuesto` (`idMarcaRepuesto`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `modelo`
 --
 
+DROP TABLE IF EXISTS `modelo`;
 CREATE TABLE IF NOT EXISTS `modelo` (
   `idModelo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   `idMarca` int(11) NOT NULL,
   PRIMARY KEY (`idModelo`),
   KEY `fk_Modelo_Marca1` (`idMarca`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `modelo`
@@ -616,6 +594,7 @@ INSERT INTO `modelo` (`idModelo`, `descripcion`, `idMarca`) VALUES
 -- Estructura de tabla para la tabla `persona`
 --
 
+DROP TABLE IF EXISTS `persona`;
 CREATE TABLE IF NOT EXISTS `persona` (
   `idPersona` int(11) NOT NULL AUTO_INCREMENT,
   `pnombre` varchar(45) NOT NULL,
@@ -627,7 +606,7 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `noIdentidad` varchar(45) NOT NULL,
   PRIMARY KEY (`idPersona`),
   UNIQUE KEY `correo` (`correo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `persona`
@@ -666,13 +645,14 @@ INSERT INTO `persona` (`idPersona`, `pnombre`, `snombre`, `papellido`, `sapellid
 -- Estructura de tabla para la tabla `proveedores`
 --
 
+DROP TABLE IF EXISTS `proveedores`;
 CREATE TABLE IF NOT EXISTS `proveedores` (
   `idProveedores` int(11) NOT NULL AUTO_INCREMENT,
   `idPersona` int(11) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idProveedores`),
   KEY `fk_Proveedores_Persona1` (`idPersona`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `proveedores`
@@ -696,36 +676,37 @@ INSERT INTO `proveedores` (`idProveedores`, `idPersona`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `renta`
 --
 
+DROP TABLE IF EXISTS `renta`;
 CREATE TABLE IF NOT EXISTS `renta` (
   `idRenta` int(11) NOT NULL AUTO_INCREMENT,
   `idFactura` int(11) NOT NULL,
   `idVehiculo` int(11) NOT NULL,
   `idAgenda` int(11) NOT NULL,
-  `mora` decimal(10,0) DEFAULT NULL,
+  `mora` float NOT NULL,
   `estado` varchar(45) NOT NULL,
   PRIMARY KEY (`idRenta`),
   KEY `fk_Renta_Factura1` (`idFactura`),
   KEY `fk_Renta_Vehiculo1` (`idVehiculo`),
   KEY `fk_Renta_Agenda1` (`idAgenda`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `renta`
 --
 
 INSERT INTO `renta` (`idRenta`, `idFactura`, `idVehiculo`, `idAgenda`, `mora`, `estado`) VALUES
-(1, 13, 3, 1, '0', 'D'),
-(2, 14, 5, 2, '500', 'D'),
-(3, 15, 7, 3, '200', 'D'),
-(4, 16, 9, 4, '0', 'D'),
-(5, 19, 11, 5, '0', 'D'),
-(6, 20, 13, 6, '100', 'D'),
-(7, 14, 15, 7, '0', 'D'),
-(8, 13, 19, 8, '0', 'ND'),
-(9, 16, 21, 9, '0', 'ND'),
-(10, 20, 23, 10, '100', 'D'),
-(11, 13, 25, 1, '0', 'D'),
-(12, 19, 27, 2, '0', 'D');
+(1, 13, 3, 1, 0, 'D'),
+(2, 14, 5, 2, 500, 'D'),
+(3, 15, 7, 3, 200, 'D'),
+(4, 16, 9, 4, 0, 'D'),
+(5, 19, 11, 5, 0, 'D'),
+(6, 20, 13, 6, 100, 'D'),
+(7, 14, 15, 7, 0, 'D'),
+(8, 13, 19, 8, 0, 'ND'),
+(9, 16, 21, 9, 0, 'ND'),
+(10, 20, 23, 10, 100, 'D'),
+(11, 13, 25, 1, 0, 'D'),
+(12, 19, 27, 2, 0, 'D');
 
 -- --------------------------------------------------------
 
@@ -733,37 +714,38 @@ INSERT INTO `renta` (`idRenta`, `idFactura`, `idVehiculo`, `idAgenda`, `mora`, `
 -- Estructura de tabla para la tabla `repuestos`
 --
 
+DROP TABLE IF EXISTS `repuestos`;
 CREATE TABLE IF NOT EXISTS `repuestos` (
   `idRepuestos` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
-  `precio` decimal(10,0) NOT NULL,
+  `precio` float NOT NULL,
   `idInventario` int(11) NOT NULL,
   `idMarcaRepuesto` int(11) NOT NULL,
   PRIMARY KEY (`idRepuestos`),
   KEY `fk_Repuestos_Inventario1` (`idInventario`),
   KEY `fk_Repuestos_MarcaRepuesto1` (`idMarcaRepuesto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `repuestos`
 --
 
 INSERT INTO `repuestos` (`idRepuestos`, `descripcion`, `precio`, `idInventario`, `idMarcaRepuesto`) VALUES
-(1, 'Filtro de aceite', '150', 6, 1),
-(2, 'Filtro de aire', '100', 6, 2),
-(3, 'Bujías', '100', 6, 3),
-(4, 'Bujes', '80', 6, 4),
-(5, 'Llantas', '700', 6, 5),
-(6, 'Aceite de motor', '150', 6, 6),
-(7, 'Aceite de caja', '150', 6, 7),
-(8, 'Liquido de frenos', '100', 6, 8),
-(9, 'Liquido hidráulico', '150', 6, 9),
-(10, 'Fricciones', '1500', 6, 10),
-(11, 'Tijeras', '150', 6, 11),
-(12, 'Soportes de motor', '150', 6, 12),
-(13, 'Cadena de tiempo', '150', 6, 13),
-(14, 'Soporte de amortiguación', '150', 6, 14),
-(15, 'Dirección completa', '1500', 6, 15);
+(1, 'Filtro de aceite', 150, 6, 1),
+(2, 'Filtro de aire', 100, 6, 2),
+(3, 'Bujías', 100, 6, 3),
+(4, 'Bujes', 80, 6, 4),
+(5, 'Llantas', 700, 6, 5),
+(6, 'Aceite de motor', 150, 6, 6),
+(7, 'Aceite de caja', 150, 6, 7),
+(8, 'Liquido de frenos', 100, 6, 8),
+(9, 'Liquido hidráulico', 150, 6, 9),
+(10, 'Fricciones', 1500, 6, 10),
+(11, 'Tijeras', 150, 6, 11),
+(12, 'Soportes de motor', 150, 6, 12),
+(13, 'Cadena de tiempo', 150, 6, 13),
+(14, 'Soporte de amortiguación', 150, 6, 14),
+(15, 'Dirección completa', 1500, 6, 15);
 
 -- --------------------------------------------------------
 
@@ -771,31 +753,16 @@ INSERT INTO `repuestos` (`idRepuestos`, `descripcion`, `precio`, `idInventario`,
 -- Estructura de tabla para la tabla `repuestosmantenimiento`
 --
 
+DROP TABLE IF EXISTS `repuestosmantenimiento`;
 CREATE TABLE IF NOT EXISTS `repuestosmantenimiento` (
   `idRepuestosMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idMantenimiento` int(11) NOT NULL,
   `idRepuestos` int(11) NOT NULL,
-  `totalRepuestos` decimal(10,0) NOT NULL,
+  `totalRespuestos` float NOT NULL,
   PRIMARY KEY (`idRepuestosMantenimiento`),
   KEY `fk_Mantenimiento_has_Repuestos_Mantenimiento1` (`idMantenimiento`),
   KEY `fk_Mantenimiento_has_Repuestos_Repuestos1` (`idRepuestos`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
-
---
--- Volcado de datos para la tabla `repuestosmantenimiento`
---
-
-INSERT INTO `repuestosmantenimiento` (`idRepuestosMantenimiento`, `idMantenimiento`, `idRepuestos`, `totalRepuestos`) VALUES
-(1, 1, 2, '1500'),
-(2, 5, 2, '1500'),
-(3, 1, 3, '1500'),
-(4, 2, 3, '1500'),
-(5, 15, 3, '1500'),
-(6, 3, 4, '1500'),
-(7, 5, 4, '1500'),
-(8, 10, 4, '1500'),
-(9, 4, 5, '1500'),
-(10, 6, 7, '1500');
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -803,11 +770,12 @@ INSERT INTO `repuestosmantenimiento` (`idRepuestosMantenimiento`, `idMantenimien
 -- Estructura de tabla para la tabla `requisitos`
 --
 
+DROP TABLE IF EXISTS `requisitos`;
 CREATE TABLE IF NOT EXISTS `requisitos` (
   `idRequisitos` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idRequisitos`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `requisitos`
@@ -826,6 +794,7 @@ INSERT INTO `requisitos` (`idRequisitos`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `salida`
 --
 
+DROP TABLE IF EXISTS `salida`;
 CREATE TABLE IF NOT EXISTS `salida` (
   `idSalida` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -833,7 +802,7 @@ CREATE TABLE IF NOT EXISTS `salida` (
   `idTipoSalida` varchar(45) NOT NULL,
   PRIMARY KEY (`idSalida`),
   KEY `fk_Salida_TipoSalida1` (`idTipoSalida`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `salida`
@@ -852,39 +821,33 @@ INSERT INTO `salida` (`idSalida`, `descripcion`, `FechaSalida`, `idTipoSalida`) 
 -- Estructura de tabla para la tabla `solicitudmantenimiento`
 --
 
+DROP TABLE IF EXISTS `solicitudmantenimiento`;
 CREATE TABLE IF NOT EXISTS `solicitudmantenimiento` (
   `idSolicitudMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idVehiculo` int(11) NOT NULL,
   `fechaSolicitud` date NOT NULL,
+  `fechaFin` date NOT NULL,
   `estado` varchar(20) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
   `idTipoMantenimiento` int(11) NOT NULL,
+  `idCliente` int(11) DEFAULT NULL,
   PRIMARY KEY (`idSolicitudMantenimiento`),
   KEY `fk_Vehiculo_has_Mantenimiento_Vehiculo1` (`idVehiculo`),
   KEY `fk_SolicitudMantenimiento_Empleado1` (`idEmpleado`),
-  KEY `fk_SolicitudMantenimiento_TipoMantenimiento1` (`idTipoMantenimiento`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+  KEY `fk_SolicitudMantenimiento_TipoMantenimiento1` (`idTipoMantenimiento`),
+  KEY `fk_SolicitudMantenimiento_Cliente1` (`idCliente`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `solicitudmantenimiento`
 --
 
-INSERT INTO `solicitudmantenimiento` (`idSolicitudMantenimiento`, `idVehiculo`, `fechaSolicitud`, `estado`, `idEmpleado`, `idTipoMantenimiento`) VALUES
-(1, 1, '2019-11-25', 'Aprobada', 1, 1),
-(2, 2, '2017-10-18', 'Aprobada', 2, 2),
-(3, 3, '2019-10-28', 'Aprobada', 3, 3),
-(4, 4, '2016-06-06', 'Aprobada', 4, 4),
-(5, 6, '2019-04-11', 'Rechazada', 5, 5),
-(6, 5, '2020-01-26', 'Pendiente', 6, 6),
-(7, 7, '2018-08-01', 'Rechazada', 7, 7),
-(8, 8, '2016-02-15', 'Pendiente', 8, 8),
-(9, 9, '2019-01-22', 'Rechazada', 9, 9),
-(10, 10, '2017-07-12', 'Pendiente', 10, 10),
-(11, 11, '2017-09-04', 'Rechazada', 1, 11),
-(12, 13, '2017-11-20', 'Pendiente', 2, 12),
-(13, 14, '2017-05-11', 'Pendiente', 3, 13),
-(14, 16, '2015-11-10', 'Aprobada', 4, 14),
-(15, 18, '2015-10-14', 'Aprobada', 5, 15);
+INSERT INTO `solicitudmantenimiento` (`idSolicitudMantenimiento`, `idVehiculo`, `fechaSolicitud`, `fechaFin`, `estado`, `idEmpleado`, `idTipoMantenimiento`, `idCliente`) VALUES
+(1, 1, '2019-11-25', '2019-11-25', 'Aprobada', 1, 1, NULL),
+(2, 2, '2017-10-18', '2017-10-18', 'Aprobada', 2, 2, NULL),
+(3, 3, '2019-10-28', '2019-10-28', 'Aprobada', 3, 3, NULL),
+(4, 4, '2016-06-06', '2016-06-06', 'Aprobada', 4, 4, NULL),
+(5, 6, '2019-04-11', '2019-04-11', 'Rechazada', 5, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -892,6 +855,7 @@ INSERT INTO `solicitudmantenimiento` (`idSolicitudMantenimiento`, `idVehiculo`, 
 -- Estructura de tabla para la tabla `solicitudrenta`
 --
 
+DROP TABLE IF EXISTS `solicitudrenta`;
 CREATE TABLE IF NOT EXISTS `solicitudrenta` (
   `idSolicitudRenta` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -905,7 +869,7 @@ CREATE TABLE IF NOT EXISTS `solicitudrenta` (
   KEY `fk_SolicitudRenta_Vehiculo1` (`idVehiculo`),
   KEY `fk_SolicitudRenta_Agenda1` (`idAgenda`),
   KEY `fk_SolicitudRenta_Empleado1` (`idEmpleado`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `solicitudrenta`
@@ -941,7 +905,7 @@ CREATE TABLE IF NOT EXISTS `solicitudrentarequisitos` (
   `estado` varchar(45) NOT NULL,
   PRIMARY KEY (`idSolicitudRenta`,`idRequisitos`),
   KEY `fk_SolicitudRenta_has_Requisitos_Requisitos1` (`idRequisitos`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `solicitudrentarequisitos`
@@ -966,7 +930,7 @@ CREATE TABLE IF NOT EXISTS `sucursal` (
   `nombre` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
   PRIMARY KEY (`idSucursal`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `sucursal`
@@ -995,13 +959,14 @@ INSERT INTO `sucursal` (`idSucursal`, `nombre`, `direccion`) VALUES
 -- Estructura de tabla para la tabla `taller`
 --
 
+DROP TABLE IF EXISTS `taller`;
 CREATE TABLE IF NOT EXISTS `taller` (
   `idTaller` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   `idSucursal` int(11) NOT NULL,
   PRIMARY KEY (`idTaller`),
   KEY `fk_Taller_Sucursal1` (`idSucursal`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `taller`
@@ -1030,13 +995,14 @@ INSERT INTO `taller` (`idTaller`, `descripcion`, `idSucursal`) VALUES
 -- Estructura de tabla para la tabla `telefonos`
 --
 
+DROP TABLE IF EXISTS `telefonos`;
 CREATE TABLE IF NOT EXISTS `telefonos` (
   `idTelefonos` int(11) NOT NULL AUTO_INCREMENT,
   `telefono` varchar(45) NOT NULL,
   `idPersona` int(11) NOT NULL,
   PRIMARY KEY (`idTelefonos`),
   KEY `fk_Telefonos_Persona` (`idPersona`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `telefonos`
@@ -1090,6 +1056,7 @@ INSERT INTO `telefonos` (`idTelefonos`, `telefono`, `idPersona`) VALUES
 -- Estructura de tabla para la tabla `tipoentrada`
 --
 
+DROP TABLE IF EXISTS `tipoentrada`;
 CREATE TABLE IF NOT EXISTS `tipoentrada` (
   `idTipoEntrada` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
@@ -1100,7 +1067,7 @@ CREATE TABLE IF NOT EXISTS `tipoentrada` (
   KEY `fk_TipoEntrada_Proveedores1` (`idProveedores`),
   KEY `fk_TipoEntrada_Ventas1` (`idVentas`),
   KEY `fk_TipoEntrada_Renta1` (`idRenta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipoentrada`
@@ -1117,33 +1084,22 @@ INSERT INTO `tipoentrada` (`idTipoEntrada`, `descripcion`, `idProveedores`, `idV
 -- Estructura de tabla para la tabla `tipomantenimiento`
 --
 
+DROP TABLE IF EXISTS `tipomantenimiento`;
 CREATE TABLE IF NOT EXISTS `tipomantenimiento` (
   `idTipoMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idTipoMantenimiento`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipomantenimiento`
 --
 
 INSERT INTO `tipomantenimiento` (`idTipoMantenimiento`, `descripcion`) VALUES
-(1, 'Cambio de aceite'),
-(2, 'Cambio de bujías'),
-(3, 'Cambio de llantas'),
-(4, 'Alineamiento'),
-(5, 'Cambio de fricciones'),
-(6, 'Cambio de bujes'),
-(7, 'Cambio de tijeras'),
-(8, 'Cambio de filtro de aire'),
-(9, 'Cambio de barras estabilizadoras'),
-(10, 'Cambio de rótulas'),
-(11, 'Cambio de suspensión'),
-(12, 'Cambio de batería'),
-(13, 'Cambio de coolant'),
-(14, 'Cambio de soporte'),
-(15, 'Polarizado'),
-(16, 'Preventivo');
+(1, 'Preventivo'),
+(2, 'Correctivo'),
+(3, 'Servicio'),
+(4, 'Post-venta');
 
 -- --------------------------------------------------------
 
@@ -1151,11 +1107,12 @@ INSERT INTO `tipomantenimiento` (`idTipoMantenimiento`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `tipomotor`
 --
 
+DROP TABLE IF EXISTS `tipomotor`;
 CREATE TABLE IF NOT EXISTS `tipomotor` (
   `idTipoGasolina` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(20) NOT NULL,
   PRIMARY KEY (`idTipoGasolina`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipomotor`
@@ -1174,6 +1131,7 @@ INSERT INTO `tipomotor` (`idTipoGasolina`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `tiposalida`
 --
 
+DROP TABLE IF EXISTS `tiposalida`;
 CREATE TABLE IF NOT EXISTS `tiposalida` (
   `idTipoSalida` varchar(45) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -1182,7 +1140,7 @@ CREATE TABLE IF NOT EXISTS `tiposalida` (
   PRIMARY KEY (`idTipoSalida`),
   KEY `fk_Salida_has_Ventas_Ventas1` (`idVentas`),
   KEY `fk_Salida_has_Ventas_Renta1` (`idRenta`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tiposalida`
@@ -1201,11 +1159,12 @@ INSERT INTO `tiposalida` (`idTipoSalida`, `descripcion`, `idVentas`, `idRenta`) 
 -- Estructura de tabla para la tabla `tipovehiculo`
 --
 
+DROP TABLE IF EXISTS `tipovehiculo`;
 CREATE TABLE IF NOT EXISTS `tipovehiculo` (
   `idTipoVehiculo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idTipoVehiculo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipovehiculo`
@@ -1224,11 +1183,12 @@ INSERT INTO `tipovehiculo` (`idTipoVehiculo`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `transmision`
 --
 
+DROP TABLE IF EXISTS `transmision`;
 CREATE TABLE IF NOT EXISTS `transmision` (
   `idTransmision` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(20) NOT NULL,
   PRIMARY KEY (`idTransmision`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `transmision`
@@ -1245,6 +1205,7 @@ INSERT INTO `transmision` (`idTransmision`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `nombreUsuario` varchar(45) NOT NULL,
@@ -1252,23 +1213,23 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `rutaImagen` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `nombreUsuario` (`nombreUsuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `contraseña`, `rutaImagen`) VALUES
-(1, 'user1', '123456', NULL),
-(2, 'user2', '123456', NULL),
-(3, 'user3', '123456', NULL),
-(4, 'user4', '123456', NULL),
-(5, 'user5', '123456', NULL),
-(6, 'user6', '123456', NULL),
-(7, 'user7', '123456', NULL),
-(8, 'user8', '123456', NULL),
-(9, 'user9', '123456', NULL),
-(10, 'user10', '123456', NULL),
+(1, 'user1', '123456', '../assets/images/fotos/empleados/3.jpg'),
+(2, 'user2', '123456', '../assets/images/fotos/empleados/5.jpg'),
+(3, 'user3', '123456', '../assets/images/fotos/empleados/9.jpg'),
+(4, 'user4', '123456', '../assets/images/fotos/empleados/10.jpg'),
+(5, 'user5', '123456', '../assets/images/fotos/empleados/11.png'),
+(6, 'user6', '123456', '../assets/images/fotos/empleados/13.jpg'),
+(7, 'user7', '123456', '../assets/images/fotos/empleados/1.jpg'),
+(8, 'user8', '123456', '../assets/images/fotos/empleados/2.png'),
+(9, 'user9', '123456', '../assets/images/fotos/empleados/4.jpg'),
+(10, 'user10', '123456', '../assets/images/fotos/empleados/15.jpg'),
 (11, 'user11', '123456', NULL),
 (12, 'user12', '123456', NULL),
 (13, 'user13', '123456', NULL),
@@ -1286,13 +1247,14 @@ INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `contraseña`, `rutaImagen`
 -- Estructura de tabla para la tabla `vehiculo`
 --
 
+DROP TABLE IF EXISTS `vehiculo`;
 CREATE TABLE IF NOT EXISTS `vehiculo` (
   `idVehiculo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   `color` varchar(45) NOT NULL,
-  `precioVenta` decimal(10,0) NOT NULL,
-  `precioRentaHora` varchar(45) NOT NULL,
-  `precioRentaDia` varchar(45) NOT NULL,
+  `precioVenta` float NOT NULL,
+  `precioRentaHora` float NOT NULL,
+  `precioRentaDia` float NOT NULL,
   `placa` varchar(8) DEFAULT NULL,
   `Año` int(11) NOT NULL,
   `idModelo` int(11) NOT NULL,
@@ -1308,45 +1270,45 @@ CREATE TABLE IF NOT EXISTS `vehiculo` (
   KEY `fk_Vehiculo_TipoMotor1` (`idTipoGasolina`),
   KEY `fk_Vehiculo_Transmision1` (`idTransmision`),
   KEY `fk_Vehiculo_Cilindraje1` (`idCilindraje`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `vehiculo`
 --
 
 INSERT INTO `vehiculo` (`idVehiculo`, `descripcion`, `color`, `precioVenta`, `precioRentaHora`, `precioRentaDia`, `placa`, `Año`, `idModelo`, `idInventario`, `idTipoVehiculo`, `idTipoGasolina`, `idTransmision`, `idCilindraje`) VALUES
-(1, '', 'rojo', '1000000', '100', '200', 'PCU28959', 2018, 1, 2, 1, 1, 2, 1),
-(2, '', 'Negro', '1400000', '100', '200', 'LMU3325', 2017, 2, 2, 1, 2, 1, 2),
-(3, '', 'Negro', '1200000', '100', '200', 'JKL90432', 2015, 3, 2, 1, 3, 3, 3),
-(4, '', 'Negro', '1200000', '100', '200', 'ANM89233', 2016, 4, 2, 1, 4, 1, 4),
-(5, '', 'Azul', '1300000', '100', '200', 'QUWJ2839', 2015, 5, 2, 1, 4, 1, 5),
-(6, '', 'Verde', '1700000', '100', '200', 'CKL87392', 2018, 6, 2, 1, 3, 2, 5),
-(7, '', 'Blanco', '1800000', '100', '200', 'PKS34940', 2017, 7, 2, 1, 2, 2, 6),
-(8, '', 'Negro', '1500000', '100', '200', 'PKJUE829', 2015, 8, 2, 1, 1, 3, 7),
-(9, '', 'Azul', '2000000', '100', '200', 'WERT3829', 2017, 9, 2, 1, 1, 1, 1),
-(10, '', 'Blanco', '2500000', '100', '200', 'IOP00292', 2018, 10, 2, 1, 2, 1, 2),
-(11, '', 'Azul', '1700000', '100', '200', 'UIE793J2', 2015, 11, 2, 1, 3, 1, 3),
-(12, '', 'Negro', '1500000', '100', '200', '2YWHJD88', 2016, 12, 2, 1, 4, 1, 4),
-(13, '', 'Negro', '1600000', '100', '200', 'LKI89772', 2016, 13, 2, 1, 4, 2, 5),
-(14, '', 'Negro', '1500000', '100', '200', 'KLIO0383', 2018, 14, 2, 1, 3, 2, 6),
-(15, '', 'Verde', '1400000', '100', '200', 'PCWHEE24', 2017, 15, 2, 1, 2, 3, 7),
-(16, '', 'Verde', '1300000', '50', '200', 'JKL90432', 2015, 16, 1, 2, 1, 3, 2),
-(17, '', 'Verde', '1200000', '50', '200', 'ANM89233', 2016, 17, 1, 2, 1, 2, 3),
-(18, '', 'Verde', '1500000', '50', '200', 'QUWJ2839', 2016, 18, 1, 2, 2, 2, 2),
-(19, '', 'Rojo', '1200000', '50', '200', 'CKL87392', 2017, 19, 1, 2, 3, 2, 2),
-(20, '', 'Rojo', '1300000', '50', '200', 'PKS34940', 2015, 20, 1, 2, 4, 1, 1),
-(21, '', 'Rojo', '80000', '50', '200', 'PKJUE829', 2018, 21, 7, 3, 4, 1, 2),
-(22, '', 'Azul', '350000', '50', '200', 'WERT3829', 2019, 22, 7, 3, 3, 1, 4),
-(23, '', 'Azul', '70000', '50', '200', 'PCWHEE24', 2016, 23, 7, 3, 2, 2, 5),
-(24, '', 'Azul', '60000', '50', '200', 'KLIO0383', 2015, 24, 7, 3, 1, 1, 2),
-(25, '', 'Amarillo', '500000', '500', '2000', '2YWHJD88', 2016, 25, 4, 5, 4, 1, 6),
-(26, '', 'amarillo', '500000', '500', '2000', 'UIE793J2', 2017, 26, 4, 5, 3, 2, 7),
-(27, '', 'Amarillo', '500000', '500', '2000', 'IOP00292', 2016, 27, 8, 5, 2, 2, 3),
-(28, '', 'Amarillo', '650000', '500', '2000', 'WERT3829', 2015, 28, 9, 5, 1, 3, 2),
-(29, '', 'Amarillo', '600000', '500', '2000', 'PKJUE829', 2018, 29, 8, 5, 4, 3, 2),
-(30, '', 'Blanco', '1300000', '1500', '20000', 'QUWJ2839', 2015, 30, 5, 4, 2, 3, 4),
-(31, '', 'Blanco', '1200000', '1200', '20000', 'KLIO0383', 2017, 30, 5, 4, 2, 3, 5),
-(32, '', 'Blanco', '15000000', '1000', '20000', 'UIE793J2', 2018, 30, 5, 4, 2, 2, 6);
+(1, '', 'rojo', 1000000, 100, 200, 'PCU28959', 2018, 1, 2, 1, 1, 2, 1),
+(2, '', 'Negro', 1400000, 100, 200, 'LMU3325', 2017, 2, 2, 1, 2, 1, 2),
+(3, '', 'Negro', 1200000, 100, 200, 'JKL90432', 2015, 3, 2, 1, 3, 3, 3),
+(4, '', 'Negro', 1200000, 100, 200, 'ANM89233', 2016, 4, 2, 1, 4, 1, 4),
+(5, '', 'Azul', 1300000, 100, 200, 'QUWJ2839', 2015, 5, 2, 1, 4, 1, 5),
+(6, '', 'Verde', 1700000, 100, 200, 'CKL87392', 2018, 6, 2, 1, 3, 2, 5),
+(7, '', 'Blanco', 1800000, 100, 200, 'PKS34940', 2017, 7, 2, 1, 2, 2, 6),
+(8, '', 'Negro', 1500000, 100, 200, 'PKJUE829', 2015, 8, 2, 1, 1, 3, 7),
+(9, '', 'Azul', 2000000, 100, 200, 'WERT3829', 2017, 9, 2, 1, 1, 1, 1),
+(10, '', 'Blanco', 2500000, 100, 200, 'IOP00292', 2018, 10, 2, 1, 2, 1, 2),
+(11, '', 'Azul', 1700000, 100, 200, 'UIE793J2', 2015, 11, 2, 1, 3, 1, 3),
+(12, '', 'Negro', 1500000, 100, 200, '2YWHJD88', 2016, 12, 2, 1, 4, 1, 4),
+(13, '', 'Negro', 1600000, 100, 200, 'LKI89772', 2016, 13, 2, 1, 4, 2, 5),
+(14, '', 'Negro', 1500000, 100, 200, 'KLIO0383', 2018, 14, 2, 1, 3, 2, 6),
+(15, '', 'Verde', 1400000, 100, 200, 'PCWHEE24', 2017, 15, 2, 1, 2, 3, 7),
+(16, '', 'Verde', 1300000, 50, 200, 'JKL90432', 2015, 16, 1, 2, 1, 3, 2),
+(17, '', 'Verde', 1200000, 50, 200, 'ANM89233', 2016, 17, 1, 2, 1, 2, 3),
+(18, '', 'Verde', 1500000, 50, 200, 'QUWJ2839', 2016, 18, 1, 2, 2, 2, 2),
+(19, '', 'Rojo', 1200000, 50, 200, 'CKL87392', 2017, 19, 1, 2, 3, 2, 2),
+(20, '', 'Rojo', 1300000, 50, 200, 'PKS34940', 2015, 20, 1, 2, 4, 1, 1),
+(21, '', 'Rojo', 80000, 50, 200, 'PKJUE829', 2018, 21, 7, 3, 4, 1, 2),
+(22, '', 'Azul', 350000, 50, 200, 'WERT3829', 2019, 22, 7, 3, 3, 1, 4),
+(23, '', 'Azul', 70000, 50, 200, 'PCWHEE24', 2016, 23, 7, 3, 2, 2, 5),
+(24, '', 'Azul', 60000, 50, 200, 'KLIO0383', 2015, 24, 7, 3, 1, 1, 2),
+(25, '', 'Amarillo', 500000, 500, 2000, '2YWHJD88', 2016, 25, 4, 5, 4, 1, 6),
+(26, '', 'amarillo', 500000, 500, 2000, 'UIE793J2', 2017, 26, 4, 5, 3, 2, 7),
+(27, '', 'Amarillo', 500000, 500, 2000, 'IOP00292', 2016, 27, 8, 5, 2, 2, 3),
+(28, '', 'Amarillo', 650000, 500, 2000, 'WERT3829', 2015, 28, 9, 5, 1, 3, 2),
+(29, '', 'Amarillo', 600000, 500, 2000, 'PKJUE829', 2018, 29, 8, 5, 4, 3, 2),
+(30, '', 'Blanco', 1300000, 1500, 20000, 'QUWJ2839', 2015, 30, 5, 4, 2, 3, 4),
+(31, '', 'Blanco', 1200000, 1200, 20000, 'KLIO0383', 2017, 30, 5, 4, 2, 3, 5),
+(32, '', 'Blanco', 15000000, 1000, 20000, 'UIE793J2', 2018, 30, 5, 4, 2, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -1362,7 +1324,7 @@ CREATE TABLE IF NOT EXISTS `ventas` (
   PRIMARY KEY (`idVentas`),
   KEY `fk_Factura_has_Vehiculo_Factura1` (`idFactura`),
   KEY `fk_Factura_has_Vehiculo_Vehiculo1` (`idVehiculo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ventas`
@@ -1382,239 +1344,64 @@ INSERT INTO `ventas` (`idVentas`, `idFactura`, `idVehiculo`) VALUES
 ('8', 4, 16),
 ('9', 5, 18);
 
---
--- Restricciones para tablas volcadas
---
+-- --------------------------------------------------------
 
 --
--- Filtros para la tabla `cliente`
+-- Estructura Stand-in para la vista `vw_empleados`
+-- (Véase abajo para la vista actual)
 --
-ALTER TABLE `cliente`
-  ADD CONSTRAINT `fk_Cliente_Persona1` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Cliente_Usuario1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `control`
---
-ALTER TABLE `control`
-  ADD CONSTRAINT `fk_Control_Empleado1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Control_Entrada1` FOREIGN KEY (`idEntrada`) REFERENCES `entrada` (`idEntrada`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Control_Inventario1` FOREIGN KEY (`idInventario`) REFERENCES `inventario` (`idInventario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Control_Salida1` FOREIGN KEY (`idSalida`) REFERENCES `salida` (`idSalida`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `descuentofactura`
---
-ALTER TABLE `descuentofactura`
-  ADD CONSTRAINT `fk_Factura_has_Descuento_Descuento1` FOREIGN KEY (`idDescuento`) REFERENCES `descuento` (`idDescuento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Factura_has_Descuento_Factura1` FOREIGN KEY (`idFactura`) REFERENCES `factura` (`idFactura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `empleado`
---
-ALTER TABLE `empleado`
-  ADD CONSTRAINT `fk_Empleado_Cargo1` FOREIGN KEY (`idCargo`) REFERENCES `cargo` (`idCargo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Empleado_Persona1` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Empleado_Usuario1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `entrada`
---
-ALTER TABLE `entrada`
-  ADD CONSTRAINT `fk_Entrada_TipoEntrada1` FOREIGN KEY (`idTipoEntrada`) REFERENCES `tipoentrada` (`idTipoEntrada`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `factura`
---
-ALTER TABLE `factura`
-  ADD CONSTRAINT `fk_Factura_Cliente1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Factura_Empleado1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Factura_FacturaMantenimiento1` FOREIGN KEY (`idFacturaMantenimiento`) REFERENCES `facturapormantenimiento` (`idFacturaMantenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Factura_FormaPago1` FOREIGN KEY (`idFormaPago`) REFERENCES `formapago` (`idFormaPago`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Factura_Impuesto1` FOREIGN KEY (`idImpuesto`) REFERENCES `impuesto` (`idImpuesto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `facturapormantenimiento`
---
-ALTER TABLE `facturapormantenimiento`
-  ADD CONSTRAINT `fk_FacturaPorMantenimiento_Mantenimiento1` FOREIGN KEY (`idMantenimiento`) REFERENCES `mantenimiento` (`idMantenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `formapagofactura`
---
-ALTER TABLE `formapagofactura`
-  ADD CONSTRAINT `FK_Forma_Pago` FOREIGN KEY (`idFormaPago`) REFERENCES `formapago` (`idFormaPago`),
-  ADD CONSTRAINT `FK_Factura` FOREIGN KEY (`idFactura`) REFERENCES `factura` (`idFactura`);
-
---
--- Filtros para la tabla `fotos`
---
-ALTER TABLE `fotos`
-  ADD CONSTRAINT `fk_Fotos_Vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `mantenimiento`
---
-ALTER TABLE `mantenimiento`
-  ADD CONSTRAINT `fk_Mantenimiento_Empleado1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Mantenimiento_SolicitudMantenimiento1` FOREIGN KEY (`idSolicitudMantenimiento`) REFERENCES `solicitudmantenimiento` (`idSolicitudMantenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Mantenimiento_Taller1` FOREIGN KEY (`idTaller`) REFERENCES `taller` (`idTaller`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `modelo`
---
-ALTER TABLE `modelo`
-  ADD CONSTRAINT `fk_Modelo_Marca1` FOREIGN KEY (`idMarca`) REFERENCES `marca` (`idMarca`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `proveedores`
---
-ALTER TABLE `proveedores`
-  ADD CONSTRAINT `fk_Proveedores_Persona1` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `renta`
---
-ALTER TABLE `renta`
-  ADD CONSTRAINT `fk_Renta_Agenda1` FOREIGN KEY (`idAgenda`) REFERENCES `agenda` (`idAgenda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Renta_Factura1` FOREIGN KEY (`idFactura`) REFERENCES `factura` (`idFactura`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Renta_Vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `repuestos`
---
-ALTER TABLE `repuestos`
-  ADD CONSTRAINT `fk_Repuestos_Inventario1` FOREIGN KEY (`idInventario`) REFERENCES `inventario` (`idInventario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Repuestos_MarcaRepuesto1` FOREIGN KEY (`idMarcaRepuesto`) REFERENCES `marcarepuesto` (`idMarcaRepuesto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `repuestosmantenimiento`
---
-ALTER TABLE `repuestosmantenimiento`
-  ADD CONSTRAINT `fk_Mantenimiento_has_Repuestos_Mantenimiento1` FOREIGN KEY (`idMantenimiento`) REFERENCES `mantenimiento` (`idMantenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Mantenimiento_has_Repuestos_Repuestos1` FOREIGN KEY (`idRepuestos`) REFERENCES `repuestos` (`idRepuestos`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `salida`
---
-ALTER TABLE `salida`
-  ADD CONSTRAINT `fk_Salida_TipoSalida1` FOREIGN KEY (`idTipoSalida`) REFERENCES `tiposalida` (`idTipoSalida`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `solicitudmantenimiento`
---
-ALTER TABLE `solicitudmantenimiento`
-  ADD CONSTRAINT `fk_SolicitudMantenimiento_Empleado1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_SolicitudMantenimiento_TipoMantenimiento1` FOREIGN KEY (`idTipoMantenimiento`) REFERENCES `tipomantenimiento` (`idTipoMantenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Vehiculo_has_Mantenimiento_Vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `solicitudrenta`
---
-ALTER TABLE `solicitudrenta`
-  ADD CONSTRAINT `fk_SolicitudRenta_Agenda1` FOREIGN KEY (`idAgenda`) REFERENCES `agenda` (`idAgenda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_SolicitudRenta_Cliente1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_SolicitudRenta_Empleado1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_SolicitudRenta_Vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `solicitudrentarequisitos`
---
-ALTER TABLE `solicitudrentarequisitos`
-  ADD CONSTRAINT `fk_SolicitudRenta_has_Requisitos_Requisitos1` FOREIGN KEY (`idRequisitos`) REFERENCES `requisitos` (`idRequisitos`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_SolicitudRenta_has_Requisitos_SolicitudRenta1` FOREIGN KEY (`idSolicitudRenta`) REFERENCES `solicitudrenta` (`idSolicitudRenta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `taller`
---
-ALTER TABLE `taller`
-  ADD CONSTRAINT `fk_Taller_Sucursal1` FOREIGN KEY (`idSucursal`) REFERENCES `sucursal` (`idSucursal`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `telefonos`
---
-ALTER TABLE `telefonos`
-  ADD CONSTRAINT `fk_Telefonos_Persona` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `tipoentrada`
---
-ALTER TABLE `tipoentrada`
-  ADD CONSTRAINT `fk_TipoEntrada_Proveedores1` FOREIGN KEY (`idProveedores`) REFERENCES `proveedores` (`idProveedores`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_TipoEntrada_Renta1` FOREIGN KEY (`idRenta`) REFERENCES `renta` (`idRenta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_TipoEntrada_Ventas1` FOREIGN KEY (`idVentas`) REFERENCES `ventas` (`idVentas`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `tiposalida`
---
-ALTER TABLE `tiposalida`
-  ADD CONSTRAINT `fk_Salida_has_Ventas_Renta1` FOREIGN KEY (`idRenta`) REFERENCES `renta` (`idRenta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Salida_has_Ventas_Ventas1` FOREIGN KEY (`idVentas`) REFERENCES `ventas` (`idVentas`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `vehiculo`
---
-ALTER TABLE `vehiculo`
-  ADD CONSTRAINT `fk_Vehiculo_Cilindraje1` FOREIGN KEY (`idCilindraje`) REFERENCES `cilindraje` (`idCilindraje`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Vehiculo_Modelo1` FOREIGN KEY (`idModelo`) REFERENCES `modelo` (`idModelo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Vehiculo_Productos1` FOREIGN KEY (`idInventario`) REFERENCES `inventario` (`idInventario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Vehiculo_TipoMotor1` FOREIGN KEY (`idTipoGasolina`) REFERENCES `tipomotor` (`idTipoGasolina`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Vehiculo_TipoVehiculo1` FOREIGN KEY (`idTipoVehiculo`) REFERENCES `tipovehiculo` (`idTipoVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Vehiculo_Transmision1` FOREIGN KEY (`idTransmision`) REFERENCES `transmision` (`idTransmision`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `ventas`
---
-ALTER TABLE `ventas`
-  ADD CONSTRAINT `fk_Factura_has_Vehiculo_Factura1` FOREIGN KEY (`idFactura`) REFERENCES `factura` (`idFactura`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Factura_has_Vehiculo_Vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-
-UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/3.jpg' 
-WHERE idUsuario = 1;
-UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/5.jpg' 
-WHERE idUsuario = 2;
-UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/9.jpg' 
-WHERE idUsuario = 3;
-UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/10.jpg' 
-WHERE idUsuario = 4;
-UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/11.png' 
-WHERE idUsuario = 5;
-UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/13.jpg' 
-WHERE idUsuario = 6;
-UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/1.jpg' 
-WHERE idUsuario = 7;
-UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/2.png' 
-WHERE idUsuario = 8;
-UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/4.jpg' 
-WHERE idUsuario = 9;
-UPDATE usuario SET rutaImagen= '../assets/images/fotos/empleados/15.jpg' 
-WHERE idUsuario = 10;
-
-ALTER TABLE Empleado ADD eliminado BOOLEAN not null;
-
-CREATE VIEW VW_EMPLEADOS AS(
-    SELECT e.idEmpleado,p.pnombre, p.papellido, p.noIdentidad, c.descripcion FROM Empleado e
-    INNER JOIN Persona p ON p.idPersona = e.idPersona
-    INNER JOIN Cargo c ON c.idCargo = e.idCargo
-    WHERE e.eliminado <> TRUE
+DROP VIEW IF EXISTS `vw_empleados`;
+CREATE TABLE IF NOT EXISTS `vw_empleados` (
+`idEmpleado` int(11)
+,`pnombre` varchar(45)
+,`papellido` varchar(45)
+,`noIdentidad` varchar(45)
+,`descripcion` varchar(45)
 );
 
+-- --------------------------------------------------------
 
-CREATE VIEW VW_EMPLEADO_VER AS(
-    SELECT e.idEmpleado, p.pnombre, p.snombre, p.papellido, p.sapellido, 
-    p.correo,  c.descripcion cargo ,p.noIdentidad, p.direccion, e.fechaInicio
-    , e.fechaFin, u.nombreUsuario, u.contraseña contrasenia, u.rutaImagen, GROUP_CONCAT(t.telefono) telefonos 
-    FROM Empleado e
-    INNER JOIN Persona p ON p.idPersona = e.idPersona
-    INNER JOIN Cargo c ON c.idCargo = e.idCargo
-    INNER JOIN Usuario u ON u.idUsuario = e.idUsuario
-    INNER JOIN Telefonos t ON t.idPersona = p.idPersona
-    WHERE e.eliminado <> TRUE
-    GROUP BY e.idEmpleado, p.pnombre, p.snombre, p.papellido, p.sapellido, 
-    p.correo,  c.descripcion ,p.noIdentidad, p.direccion, e.fechaInicio
-    , e.fechaFin, u.nombreUsuario, u.contraseña, u.rutaImagen
+--
+-- Estructura Stand-in para la vista `vw_empleado_ver`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `vw_empleado_ver`;
+CREATE TABLE IF NOT EXISTS `vw_empleado_ver` (
+`idEmpleado` int(11)
+,`pnombre` varchar(45)
+,`snombre` varchar(45)
+,`papellido` varchar(45)
+,`sapellido` varchar(45)
+,`correo` varchar(45)
+,`cargo` varchar(45)
+,`noIdentidad` varchar(45)
+,`direccion` varchar(60)
+,`fechaInicio` date
+,`fechaFin` date
+,`nombreUsuario` varchar(45)
+,`contrasenia` varchar(45)
+,`rutaImagen` varchar(1000)
+,`telefonos` text
 );
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vw_empleados`
+--
+DROP TABLE IF EXISTS `vw_empleados`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleados`  AS  (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`papellido` AS `papellido`,`p`.`noIdentidad` AS `noIdentidad`,`c`.`descripcion` AS `descripcion` from ((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) where (`e`.`eliminado` <> TRUE)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vw_empleado_ver`
+--
+DROP TABLE IF EXISTS `vw_empleado_ver`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleado_ver`  AS  (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`snombre` AS `snombre`,`p`.`papellido` AS `papellido`,`p`.`sapellido` AS `sapellido`,`p`.`correo` AS `correo`,`c`.`descripcion` AS `cargo`,`p`.`noIdentidad` AS `noIdentidad`,`p`.`direccion` AS `direccion`,`e`.`fechaInicio` AS `fechaInicio`,`e`.`fechaFin` AS `fechaFin`,`u`.`nombreUsuario` AS `nombreUsuario`,`u`.`contraseña` AS `contrasenia`,`u`.`rutaImagen` AS `rutaImagen`,group_concat(`t`.`telefono` separator ',') AS `telefonos` from ((((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) join `usuario` `u` on((`u`.`idUsuario` = `e`.`idUsuario`))) join `telefonos` `t` on((`t`.`idPersona` = `p`.`idPersona`))) where (`e`.`eliminado` <> TRUE) group by `e`.`idEmpleado`,`p`.`pnombre`,`p`.`snombre`,`p`.`papellido`,`p`.`sapellido`,`p`.`correo`,`c`.`descripcion`,`p`.`noIdentidad`,`p`.`direccion`,`e`.`fechaInicio`,`e`.`fechaFin`,`u`.`nombreUsuario`,`u`.`contraseña`,`u`.`rutaImagen`) ;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
