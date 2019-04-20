@@ -4,10 +4,8 @@
         case "1":
             $conexion = new Conexion();
             $sql = "SELECT idSucursal, nombre, direccion FROM sucursal";
-            $sql = "SELECT * FROM sucursal";
             $resultado = $conexion->ejecutarInstruccion($sql);	
             if(!$resultado){
-                echo "alert(`Hay una error en la sentencia sql:`.$sql)";
                 echo "Hay una error en la sentencia sql: ".$sql;
             }
             else{

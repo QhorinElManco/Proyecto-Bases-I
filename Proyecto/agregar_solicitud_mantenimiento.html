@@ -148,10 +148,10 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                                href="Form/gestion_sucursal.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                     class="hide-menu">Gestion Sucursal</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
+                                href="Form/gestion_taller.php" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
                                     class="hide-menu">Gestion Talleres</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
@@ -206,7 +206,10 @@
                                             <span style="color:white;">Vehiculo</span>
                                         </div>
                                         <div class="col-lg-8 col-md-12">
-                                            <select class="form-control " style="width: 100%; height:36px;"></select>
+                                            <select class="form-control " style="width: 100%; height:36px;"
+                                                id="vehiculo">
+                                                <option value="0">Seleccione el vehiculo</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
@@ -214,7 +217,10 @@
                                             <span style="color:white;">Empleado</span>
                                         </div>
                                         <div class="col-lg-8 col-md-12">
-                                            <select class="form-control " style="width: 100%; height:36px;"></select>
+                                            <select class="form-control " style="width: 100%; height:36px;"
+                                                id="empleado">
+                                                <option value="0">Seleccione el empleado</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
@@ -222,7 +228,9 @@
                                             <span style="color:white;">Tipo de mantenimiento</span>
                                         </div>
                                         <div class="col-lg-8 col-md-12">
-                                            <select class="form-control " style="width: 100%; height:36px;"></select>
+                                            <select class="form-control " style="width: 100%; height:36px;" id="tipoMantenimiento">
+                                                <option value="0">Seleccione tipo de mantenimiento</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
@@ -230,7 +238,9 @@
                                             <span style="color:white;">Cliente</span>
                                         </div>
                                         <div class="col-lg-8 col-md-12">
-                                            <select class="form-control " style="width: 100%; height:36px;"></select>
+                                            <select class="form-control " style="width: 100%; height:36px;" id="cliente">
+                                                <option value="0">Seleccione el cliente</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
@@ -240,7 +250,7 @@
                                         <div class="col-lg-8 col-md-12 input-group">
                                             <input type="text" class="form-control" id="datepicker-autoclose"
                                                 placeholder="mm/dd/yyyy" data-toggle="tooltip"
-                                                title="Si sera aprobada seleccione la fecha actual">
+                                                title="Si sera aprobada seleccione la fecha actual" id="fechaFin">
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                             </div>
@@ -358,7 +368,7 @@
             });
 
         </script>
-        <script src="dist/js/js_form/js_form_agregar_solicitud_mantenimiento.js"> </script>
+        <script src="dist/js/js_form/js_solicitud_mantenimiento.js"> </script>
 </body>
 
 </html>
