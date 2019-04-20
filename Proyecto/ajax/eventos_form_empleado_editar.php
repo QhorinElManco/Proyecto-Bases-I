@@ -1,10 +1,11 @@
 <?php 
-	include_once("../class/class_conexion.php");
+    include_once("../class/class_conexion.php");
+    session_start();
+    
 	switch ($_GET["accion"]) {
-		case '1'://Llenar informacion
+		case '1'://Llenar informacion del formulario
         $conexion = new Conexion();
         $idEmpleado = $_POST['idEmpleado'];
-
         $accion = "EDITAR";
         $sql = "SELECT idEmpleado, pnombre, snombre, papellido, sapellido, correo, cargo , noIdentidad, direccion, fechaInicio, fechaFin, nombreUsuario, contrasenia, rutaImagen, telefonos, idCargo 
                 FROM VW_EMPLEADO_VER 
@@ -34,30 +35,8 @@
         
         $conexion->cerrarConexion();
         break;
-        case '2':
-            $conexion = new Conexion();
-            $idEmpleado = $_POST['idEmpleado'];
-            if (isset) {
-                # code...
-            }
-
-            $accion = "EDITAR";
-            $sql = "CALL SP_GESTION_EMPLEADO('','','','','','','','','','','','',' ','','$idEmpleado','$accion',@p17,@p18);";
-            $salida = "SELECT @p17 AS OcurreError, @p18 AS mensaje;";
-            $resultado = $conexion->ejecutarInstruccion($sql);
-            $respuesta = $conexion->ejecutarInstruccion($salida);
-            
-            if (!$respuesta) {
-                echo 'No hay respuesta del procedimiento';
-            }
-            else {
-                $fila = $conexion->obtenerFila($respuesta);
-                echo 'Ocurre error: '.$fila["OcurreError"].'<br>mensaje: '. $fila["mensaje"];
-            }
-            
-            $conexion->cerrarConexion();
-        break;
-        case '3':
+        
+        case '2'://llenar cargo
             $conexion = new Conexion();
             $sql = sprintf("SELECT idCargo, descripcion FROM  Cargo");
             $resultado = $conexion->ejecutarInstruccion($sql);
@@ -67,8 +46,7 @@
             }
             $conexion->cerrarConexion();
         break;
-        case '4':
-
+        case '3'://guardar imagen
             if(isset($_FILES["file_foto"])){
                 $file = $_FILES["file_foto"];
                 $nombre = $file["name"];
@@ -105,9 +83,68 @@
             }
     
         break;
-         
+        case '4'://editar empleado
+             $idEmpleado = $_POST['idEmpleado'];
+             $txt_pnombre = $_POST['txt_pnombre'];
+             $txt_snombre= $_POST['txt_snombre'];
+             $txt_papellido= $_POST['txt_papellido'];
+             $txt_sapellido= $_POST['txt_sapellido'];
+             $txt_correo= $_POST['txt_correo'];
+             $txt_direccion= $_POST['txt_direccion'];
+             $txt_noIdentidad= $_POST['txt_noIdentidad'];
+             $txt_telefono=$_POST['txt_telefono'];
+             $date_fechaInicio=$_POST['date_fechaInicio'];
+             $date_fechaFin=$_POST['date_fechaFin'];
+             $txt_usuario=$_POST['txt_usuario'] ;
+             $txt_contraseña=$_POST['txt_contraseña'] ;
+             $slc_cargo=$_POST['slc_cargo'] ;
+            
+            $conexion = new Conexion();
+            $accion = "EDITAR";
+            /*SET @p0 =  'Jheral';
+            SET @p1 =  'Edix';
+            SET @p2 =  'Blanco';
+            SET @p3 =  'Romero';
+            SET @p4 =  'jheral.blanco';
+            SET @p5 =  'Col. Pedregal';
+            SET @p6 =  '0614-1997-00039';
+            SET @p7 =  '+504 31724174';
+            SET @p8 =  '2019-04-01';
+            SET @p9 =  '2019-04-30';
+            SET @p10 =  '1';
+            SET @p11 =  'jblanco';
+            SET @p12 =  '12345';
+            SET @p13 =  '../assets/images/fotos/empleados/4.jpg';
+            SET @p14 =  '9';
+            SET @p15 =  'EDITAR';
+            CALL `SP_GESTION_EMPLEADO` (
+            @p0 , @p1 , @p2 , @p3 , @p4 , @p5 , @p6 , @p7 , @p8 , @p9 , @p10 , @p11 , @p12 , @p13 , @p14 , @p15 , @p16 , @p17
+            );
+            SELECT @p16 AS  `pbOcurreError` , @p17 AS  `pcMensajeError` ;*/
 
+            if (isset($_POST["img"])) {
+                $ruta2 = $_POST["img"];
+                $sql = "CALL SP_GESTION_EMPLEADO('$txt_pnombre','$txt_snombre','$txt_papellido','$txt_sapellido','$txt_correo','$txt_direccion','$txt_noIdentidad','$txt_telefono','$date_fechaInicio','$date_fechaFin','$slc_cargo','$txt_usuario','$txt_contraseña ','$ruta2','$idEmpleado','$accion',@p17,@p18);";
+            }
+            else{
+                $ruta=$_SESSION["ruta"];
+                $sql = "CALL SP_GESTION_EMPLEADO('$txt_pnombre','$txt_snombre','$txt_papellido','$txt_sapellido','$txt_correo','$txt_direccion','$txt_noIdentidad','$txt_telefono','$date_fechaInicio','$date_fechaFin','$slc_cargo','$txt_usuario','$txt_contraseña ','../$ruta','$idEmpleado','$accion',@p17,@p18);";
+            }
+            $salida = "SELECT @p17 AS OcurreError, @p18 AS mensaje;";
+            $resultado = $conexion->ejecutarInstruccion($sql);
+            $respuesta = $conexion->ejecutarInstruccion($salida);
+            
+            if (!$respuesta) {
+                echo 'No hay respuesta del procedimiento';
+            }
+            else {
+                $fila = $conexion->obtenerFila($respuesta);
+                echo 'Ocurre error: '.$fila["OcurreError"].'<br>mensaje: '. $fila["mensaje"];
+            }
+            
+            $conexion->cerrarConexion();
         break;
+        
         default:
         # code...
         break;

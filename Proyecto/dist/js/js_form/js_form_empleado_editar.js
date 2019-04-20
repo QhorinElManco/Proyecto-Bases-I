@@ -2,7 +2,7 @@ $(document).ready(function(){
     var parametros = "idEmpleado= "+document.getElementById("txt_idEmpleado").value;
     
     traerInfo = function(){
-    
+        
         $.ajax({ 
             url:"../ajax/eventos_form_empleado_editar.php?accion=1",
             method: "POST",
@@ -37,41 +37,45 @@ $(document).ready(function(){
     
     llenarCargo = function(){
         $.ajax({ 
-            url:"../ajax/eventos_form_empleado_editar.php?accion=3",
+            url:"../ajax/eventos_form_empleado_editar.php?accion=2",
             success:function(resultado){
                 $("#slc_cargo").html(resultado);
             }
         });//ajax
     }//llenarCargo
     llenarCargo();
-    var subirFoto = "N";
+    //subirFotoFunc(false);
+    var activacionFile = "N";
     //subir imagen
     $("input[name='file_foto']").on("change", function(){
-        subirFoto = "S";
-        '<%Session["subirFoto"] = "' + subirFoto + '"; %>';
 		var formData = new FormData($("#form_img")[0]);
 		image = formData;
 		$.ajax({
-				url: "../ajax/eventos_form_empleado_editar.php?accion=4",
+				url: "../ajax/eventos_form_empleado_editar.php?accion=3",
 				type: "POST",
 				data: formData,
 				contentType: false,
 				processData: false,
 				success: function(datos){
-						$("#div_resultado").html(datos);
+					$("#div_resultado").html(datos);
 				}
-		});//ajax
+        });//ajax
+        activacionFile = "S";
+        //subirFotoFunc(true);
 	});//subir imagen
-    
+    /*subirFotoFunc = function(){
+        var subir = 1;
+        return subir;
+    }*/
     $("#btn_editar").click(function(){
 		var errors = validarDatos();
 		if(!errors == ""){
 			alert(errors);
 			return;
 	    }
-        var validarSubirImg = '<%= Session["subirFoto"] %>';
-        if (validarSubirImg=== "S") {
-            var parametros= "txt_pnombre=" + $("#txt_pnombre").val()+
+
+        if (activacionFile === "S") {
+            var parametros2= "txt_pnombre=" + $("#txt_pnombre").val()+
 						"&txt_snombre=" + $("#txt_snombre").val()+
 						"&txt_papellido=" + $("#txt_papellido").val()+
 						"&txt_sapellido=" + $("#txt_sapellido").val()+
@@ -83,12 +87,13 @@ $(document).ready(function(){
 						"&date_fechaFin=" + $("#date_fechaFin").val()+
 						"&slc_cargo=" + $("#slc_cargo").val()+
 						"&txt_usuario=" + $("#txt_usuario").val()+
-                        "&txt_contraseña=" + $("#txt_contraseña").val();
+                        "&txt_contraseña=" + $("#txt_contraseña").val()+
+                        "&idEmpleado= "+$("#txt_idEmpleado").val()+
                         "&img=";
         }
         else{
             var urlImg = document.getElementById('img').src;
-            var parametros= "txt_pnombre=" + $("#txt_pnombre").val()+
+            var parametros2= "txt_pnombre=" + $("#txt_pnombre").val()+
 						"&txt_snombre=" + $("#txt_snombre").val()+
 						"&txt_papellido=" + $("#txt_papellido").val()+
 						"&txt_sapellido=" + $("#txt_sapellido").val()+
@@ -100,15 +105,14 @@ $(document).ready(function(){
 						"&date_fechaFin=" + $("#date_fechaFin").val()+
 						"&slc_cargo=" + $("#slc_cargo").val()+
 						"&txt_usuario=" + $("#txt_usuario").val()+
-                        "&txt_contraseña=" + $("#txt_contraseña").val()
+                        "&txt_contraseña=" + $("#txt_contraseña").val()+
+                        "&idEmpleado= "+$("#txt_idEmpleado").val()+
                         "&img="+urlImg;
         }
-
-		
 		$.ajax({
-			url:"../ajax/eventos_form_empleado_editar.php?accion=2",
+			url:"../ajax/eventos_form_empleado_editar.php?accion=4",
 			method: "POST",
-			data: parametros,
+			data: parametros2,
 		success:function(resultado){
 			$("#div_resultado2").html(resultado);
 			$("#btn_editar").attr("disabled", true);
