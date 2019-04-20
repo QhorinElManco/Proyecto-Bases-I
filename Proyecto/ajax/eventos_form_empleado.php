@@ -20,7 +20,7 @@
             
             <div class="row">
                 <div class="col-sm-6">Nombre:</div>
-                <div clas="col-sm-6"><?php echo $fila["pnombre"] .' '. $fila["snombre"].' '. $fila["papellido"] .''. $fila["sapellido"];?></div>
+                <div clas="col-sm-6"><?php echo $fila["pnombre"] .' '. $fila["snombre"].' '. $fila["papellido"] .' '. $fila["sapellido"];?></div>
             </div>
             <div class="row">
                 <div class="col-sm-6">Correo: </div>
@@ -56,11 +56,11 @@
             </div>
             <div class="row p-4">
                 <div class="col">
-                    <button id="btn_editar" type="button" class="btn btn-dark">Editar</button>
+                    <button id="btn_editar" type="button" class="btn btn-dark" onclick="location.href='form_empleado_editar.php?idEmpleado=<?php echo $idEmpleado;?>'">Editar</button>
                     <button id="btn_eliminar" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Eliminar</button>
                 </div>
             </div>
-        <?php   
+        <?php
         }
         $conexion->cerrarConexion();
         break;

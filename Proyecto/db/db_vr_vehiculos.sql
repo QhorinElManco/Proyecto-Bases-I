@@ -1382,6 +1382,7 @@ CREATE TABLE IF NOT EXISTS `vw_empleado_ver` (
 ,`contrasenia` varchar(45)
 ,`rutaImagen` varchar(1000)
 ,`telefonos` text
+,`idCargo` INT(11)
 );
 
 -- --------------------------------------------------------
@@ -1400,7 +1401,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_empleado_ver`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleado_ver`  AS  (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`snombre` AS `snombre`,`p`.`papellido` AS `papellido`,`p`.`sapellido` AS `sapellido`,`p`.`correo` AS `correo`,`c`.`descripcion` AS `cargo`,`p`.`noIdentidad` AS `noIdentidad`,`p`.`direccion` AS `direccion`,`e`.`fechaInicio` AS `fechaInicio`,`e`.`fechaFin` AS `fechaFin`,`u`.`nombreUsuario` AS `nombreUsuario`,`u`.`contraseña` AS `contrasenia`,`u`.`rutaImagen` AS `rutaImagen`,group_concat(`t`.`telefono` separator ',') AS `telefonos` from ((((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) join `usuario` `u` on((`u`.`idUsuario` = `e`.`idUsuario`))) join `telefonos` `t` on((`t`.`idPersona` = `p`.`idPersona`))) where (`e`.`eliminado` <> TRUE) group by `e`.`idEmpleado`,`p`.`pnombre`,`p`.`snombre`,`p`.`papellido`,`p`.`sapellido`,`p`.`correo`,`c`.`descripcion`,`p`.`noIdentidad`,`p`.`direccion`,`e`.`fechaInicio`,`e`.`fechaFin`,`u`.`nombreUsuario`,`u`.`contraseña`,`u`.`rutaImagen`) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleado_ver`  AS  (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`snombre` AS `snombre`,`p`.`papellido` AS `papellido`,`p`.`sapellido` AS `sapellido`,`p`.`correo` AS `correo`,`c`.`descripcion` AS `cargo`,`p`.`noIdentidad` AS `noIdentidad`,`p`.`direccion` AS `direccion`,`e`.`fechaInicio` AS `fechaInicio`,`e`.`fechaFin` AS `fechaFin`,`u`.`nombreUsuario` AS `nombreUsuario`,`u`.`contraseña` AS `contrasenia`,`u`.`rutaImagen` AS `rutaImagen`,group_concat(`t`.`telefono` separator ',') AS `telefonos`, `c`.`idCargo` AS `idCargo`  from ((((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) join `usuario` `u` on((`u`.`idUsuario` = `e`.`idUsuario`))) join `telefonos` `t` on((`t`.`idPersona` = `p`.`idPersona`))) where (`e`.`eliminado` <> TRUE) group by `e`.`idEmpleado`,`p`.`pnombre`,`p`.`snombre`,`p`.`papellido`,`p`.`sapellido`,`p`.`correo`,`c`.`descripcion`,`p`.`noIdentidad`,`p`.`direccion`,`e`.`fechaInicio`,`e`.`fechaFin`,`u`.`nombreUsuario`,`u`.`contraseña`,`u`.`rutaImagen`, `c`.`idCargo`) ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
