@@ -268,8 +268,14 @@ CREATE TABLE IF NOT EXISTS `entrada` (
   `idEntrada` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   `fechaEntrada` varchar(45) NOT NULL,
-  `idTipoEntrada` int(11) NOT NULL,
+  `idTipoEntrada` int(11) NOT NULL,  
+  `idProveedores` int(11),
+  `idVentas` varchar(45),
+  `idRenta` int(11),
   PRIMARY KEY (`idEntrada`),
+  KEY `fk_TipoEntrada_Proveedores1` (`idProveedores`),
+  KEY `fk_TipoEntrada_Ventas1` (`idVentas`),
+  KEY `fk_TipoEntrada_Renta1` (`idRenta`),
   KEY `fk_Entrada_TipoEntrada1` (`idTipoEntrada`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -277,10 +283,10 @@ CREATE TABLE IF NOT EXISTS `entrada` (
 -- Volcado de datos para la tabla `entrada`
 --
 
-INSERT INTO `entrada` (`idEntrada`, `descripcion`, `fechaEntrada`, `idTipoEntrada`) VALUES
-(1, NULL, '2015-12-12', 1),
-(2, NULL, '2018-12-05', 2),
-(3, NULL, '2018-12-05', 3);
+INSERT INTO `entrada` (`idEntrada`, `descripcion`, `fechaEntrada`, `idTipoEntrada`, `idProveedores`, `idVentas`,`idRenta`) VALUES
+(1, NULL, '2015-12-12', 1,NULL, NULL, NULL),
+(2, NULL, '2018-12-05', 2, NULL, NULL, NULL),
+(3, NULL, '2018-12-05', 3, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -783,20 +789,23 @@ CREATE TABLE IF NOT EXISTS `salida` (
   `descripcion` varchar(45) DEFAULT NULL,
   `FechaSalida` DATE NOT NULL,
   `idTipoSalida` varchar(45) NOT NULL,
+  `idVentas` varchar(45) ,
+  `idRenta` int(11),
   PRIMARY KEY (`idSalida`),
-  KEY `fk_Salida_TipoSalida1` (`idTipoSalida`)
+  KEY `fk_Salida_has_Ventas_Ventas1` (`idVentas`),
+  KEY `fk_Salida_has_Ventas_Renta1` (`idRenta`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `salida`
 --
 
-INSERT INTO `salida` (`idSalida`, `descripcion`, `FechaSalida`, `idTipoSalida`) VALUES
-(1, NULL, '2019-02-01', '1'),
-(2, NULL, '2018-05-12', '2'),
-(3, NULL, '2019-12-20', '3'),
-(4, NULL, '2018-07-30', '4'),
-(5, NULL, '2018-11-27', '5');
+INSERT INTO `salida` (`idSalida`, `descripcion`, `FechaSalida`, `idTipoSalida`, `idVentas`,`idRenta`) VALUES
+(1, NULL, '2019-02-01', '1', NULL, NULL),
+(2, NULL, '2018-05-12', '2', NULL, NULL),
+(3, NULL, '2019-12-20', '3', NULL, NULL),
+(4, NULL, '2018-07-30', '4', NULL, NULL),
+(5, NULL, '2018-11-27', '5', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1036,23 +1045,17 @@ INSERT INTO `telefonos` (`idTelefonos`, `telefono`, `idPersona`) VALUES
 CREATE TABLE IF NOT EXISTS `tipoentrada` (
   `idTipoEntrada` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
-  `idProveedores` int(11) DEFAULT NULL,
-  `idVentas` varchar(45) DEFAULT NULL,
-  `idRenta` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idTipoEntrada`),
-  KEY `fk_TipoEntrada_Proveedores1` (`idProveedores`),
-  KEY `fk_TipoEntrada_Ventas1` (`idVentas`),
-  KEY `fk_TipoEntrada_Renta1` (`idRenta`)
+  PRIMARY KEY (`idTipoEntrada`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `tipoentrada`
 --
 
-INSERT INTO `tipoentrada` (`idTipoEntrada`, `descripcion`, `idProveedores`, `idVentas`, `idRenta`) VALUES
-(1, 'Devolución de Venta', NULL, '4', NULL),
-(2, 'Entrada de Sucursal', NULL, NULL, NULL),
-(3, 'Compra', 3, NULL, NULL);
+INSERT INTO `tipoentrada` (`idTipoEntrada`, `descripcion`) VALUES
+(1, 'Devolución de Venta'),
+(2, 'Entrada de Sucursal'),
+(3, 'Compra');
 
 -- --------------------------------------------------------
 
@@ -1108,23 +1111,19 @@ INSERT INTO `tipomotor` (`idTipoGasolina`, `descripcion`) VALUES
 CREATE TABLE IF NOT EXISTS `tiposalida` (
   `idTipoSalida` varchar(45) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
-  `idVentas` varchar(45) DEFAULT NULL,
-  `idRenta` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idTipoSalida`),
-  KEY `fk_Salida_has_Ventas_Ventas1` (`idVentas`),
-  KEY `fk_Salida_has_Ventas_Renta1` (`idRenta`)
+  PRIMARY KEY (`idTipoSalida`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tiposalida`
 --
 
-INSERT INTO `tiposalida` (`idTipoSalida`, `descripcion`, `idVentas`, `idRenta`) VALUES
-('1', 'Venta', '1', NULL),
-('2', 'Devolcuion de compra', NULL, NULL),
-('3', 'Salida  a Sucursal', NULL, NULL),
-('4', 'Salida a Taller', NULL, NULL),
-('5', 'Renta', NULL, 10);
+INSERT INTO `tiposalida` (`idTipoSalida`, `descripcion`) VALUES
+('1', 'Venta'),
+('2', 'Devolcuion de compra'),
+('3', 'Salida  a Sucursal'),
+('4', 'Salida a Taller'),
+('5', 'Renta');
 
 -- --------------------------------------------------------
 
