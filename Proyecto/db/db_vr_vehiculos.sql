@@ -176,7 +176,7 @@ INSERT INTO `control` (`idControl`, `idInventario`, `idSalida`, `idEntrada`, `id
 
 CREATE TABLE IF NOT EXISTS `descuento` (
   `idDescuento` int(11) NOT NULL AUTO_INCREMENT,
-  `porcentaje` decimal(10,0) NOT NULL,
+  `porcentaje` float NOT NULL,
   `descripcion` varchar(45) NOT NULL,
   `estado` varchar(1) NOT NULL,
   PRIMARY KEY (`idDescuento`)
@@ -187,13 +187,13 @@ CREATE TABLE IF NOT EXISTS `descuento` (
 --
 
 INSERT INTO `descuento` (`idDescuento`, `porcentaje`, `descripcion`, `estado`) VALUES
-(1, '15', 'General', 'I'),
-(2, '30', 'Tercera edad', 'A'),
-(3, '50', 'Black friday', 'I'),
-(4, '20', 'Navideño', 'I'),
-(5, '20', 'Año nuevo', 'I'),
-(6, '20', 'Verano', 'I'),
-(7, '10', 'Familiares y amigos', 'A'),
+(1, '1.5', 'General', 'I'),
+(2, '0.3', 'Tercera edad', 'A'),
+(3, '0.5', 'Black friday', 'I'),
+(4, '0.2', 'Navideño', 'I'),
+(5, '0.2', 'Año nuevo', 'I'),
+(6, '0.2', 'Verano', 'I'),
+(7, '0.1', 'Familiares y amigos', 'A'),
 (8, '0', 'Ninguno', 'A');
 
 -- --------------------------------------------------------
@@ -423,7 +423,7 @@ CREATE TABLE IF NOT EXISTS `fotos` (
 
 CREATE TABLE IF NOT EXISTS `impuesto` (
   `idImpuesto` int(11) NOT NULL AUTO_INCREMENT,
-  `porcentaje` decimal(10,0) NOT NULL,
+  `porcentaje` float NOT NULL,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idImpuesto`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
@@ -433,7 +433,7 @@ CREATE TABLE IF NOT EXISTS `impuesto` (
 --
 
 INSERT INTO `impuesto` (`idImpuesto`, `porcentaje`, `descripcion`) VALUES
-(1, '15', 'ISR ');
+(1, '0.15', 'ISR ');
 
 -- --------------------------------------------------------
 
@@ -781,7 +781,7 @@ INSERT INTO `requisitos` (`idRequisitos`, `descripcion`) VALUES
 CREATE TABLE IF NOT EXISTS `salida` (
   `idSalida` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
-  `FechaSalida` varchar(45) DEFAULT NULL,
+  `FechaSalida` DATE NOT NULL,
   `idTipoSalida` varchar(45) NOT NULL,
   PRIMARY KEY (`idSalida`),
   KEY `fk_Salida_TipoSalida1` (`idTipoSalida`)
