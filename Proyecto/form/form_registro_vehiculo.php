@@ -260,7 +260,7 @@
                                             <label for="txt_placa"><b>Placa:</b></label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="txt_placa" class="form-control border border-secondary"
+                                            <input type="text" id="txt_placa" class="form-control border border-secondary" pattern="[A-Za-z0-9]{7-8}" maxlength="8" required
                                                 placeholder="Ingrese la placa del vehiculo">
                                         </div>
                 
@@ -274,10 +274,18 @@
                                     </div>
                                     <div class="row p-2">
                                         <div class="col-sm-2">
-                                            <label for="date_fechaRegistro"><b>Fecha de registro:</b></label>
+                                            <label for="date_fechaRegistro"><b>año:</b></label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="date" id="date_fechaRegistro" class="form-control border border-secondary">
+                                            <select name="slc_anio" id="slc_anio" class="form-control border border-secondary">
+                                            <?php 
+                                            $year = date("Y");
+                                            for ($i= date("Y"); $i >= 1945 ; $i--) {                        
+                                                echo'<option VALUE="'.$i.'">'.$i.'</option>';
+                                            }
+                                            ?>
+                                            
+                                            </select>
                                         </div>
                                     
                                         <div class="col-sm-2">
@@ -323,6 +331,16 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <select id="slc_Cilindraje" class="form-control border border-secondary">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="slc_inventario"><b>Inventario:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="slc_inventario" class="form-control border border-secondary">
                                                 
                                             </select>
                                         </div>

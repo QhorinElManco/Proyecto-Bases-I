@@ -50,6 +50,16 @@ $(document).ready(function(){
     }//llenarTipoVehiculo
     llenarCilindraje();
 
+    llenarInventario = function(){
+        $.ajax({ 
+    		url:"../ajax/eventos_form_registro_vehiculo.php?accion=6",
+			success:function(resultado){
+				$("#slc_inventario").html(resultado);
+			}
+    	});//ajax
+    }//llenarTipoVehiculo
+    llenarInventario();
+
     $("#btn_agregar").click(function(){
 		var errors = validarDatos();
 		if(!errors == ""){
@@ -63,15 +73,16 @@ $(document).ready(function(){
 						"&txt_precioRentaDia=" + $("#txt_precioRentaDia").val()+
 						"&txt_placa=" + $("#txt_placa").val()+
 						"&txt_chasis=" + $("#txt_chasis").val()+
-						"&date_fechaRegistro=" + $("#date_fechaRegistro").val()+
+						"&slc_anio=" + $("#slc_anio").val()+
 						"&slc_modelo=" + $("#slc_modelo").val()+
 						"&slc_tipoVehiculo=" + $("#slc_tipoVehiculo").val()+
 						"&slc_tipoMotor=" + $("#slc_tipoMotor").val()+
 						"&slc_tipoTransmision=" + $("#slc_tipoTransmision").val()+
 						"&slc_Cilindraje=" + $("#slc_Cilindraje").val()+
-						"&txt_descripcion=" + $("#txt_descripcion").val();
+                        "&txt_descripcion=" + $("#txt_descripcion").val()+
+                        "&slc_inventario=" + $("#slc_inventario").val();
 		$.ajax({
-			url:"../ajax/eventos_form_registro_vehiculo.php?accion=6",
+			url:"../ajax/eventos_form_registro_vehiculo.php?accion=7",
 			method: "POST",
 			data: parametros,
 		success:function(resultado){
@@ -95,64 +106,70 @@ $(document).ready(function(){
             });//ajax
         });//inputfile*/
 
-	});//btn guardar
-    slc_color
-    txt_precioVenta
-    txt_precioRentaHora
-    txt_precioRentaDia
-    txt_placa
-    txt_chasis
-    date_fechaRegistro
-    slc_modelo
-    slc_tipoVehiculo
-    slc_tipoMotor
-    slc_tipoTransmision
-    slc_Cilindraje
-    txt_descripcion
+    });//btn guardar
+    
     validarDatos = function () {
 		var errors = "";
-		var correo = validarCorreo();
-		var contra = validarContraseña();
-		var file = document.getElementById('file_foto');
+		var re = new RegExp(/[+-]?([0-9]*[.])?[0-9]+/);
+		//var file = document.getElementById('file_foto');
 
 		if($("#slc_color").val() ==''){
 			errors += "Debe ingresar el color del vehiculo\n";
-		}
+        }  
 		if($("#txt_precioVenta").val() ==''){
 			errors += "Debe ingresar el precio venta del vehiculo\n";
-		}
+        }
+        
+        if ($("#txt_precioVenta").val().match(re)) {
+        console.log("precio venta si es float");
+        }else{
+            errors += "Debe ingresar un precio Venta válido\n";
+        }
 		if($("#txt_precioRentaHora").val() ==''){
 			errors += "Debe ingresar el precio renta dia\n";
-		}
+        }
+        if ($("#txt_precioRentaHora").val().match(re)) {
+        console.log("precio renta hora si es float");
+        }else{
+            errors += "Debe ingresar un precio Venta válido\n";
+        }
 		if($("#txt_precioRentaDia").val() ==''){
 			errors += "Debe ingresar el precio renta dia\n";
-		}
+        }
+        if ($("#txt_precioRentaDia").val().match(re)) {
+            console.log("precio renta dia si es float");
+            }else{
+                errors += "Debe ingresar un precio Venta válido\n";
+        }
 		if($("#txt_placa").val() ==''){
 			errors += "Debe ingresar la placa\n";
 		}
 		if($("#txt_chasis").val() ==''){
 			errors += "Debe ingresar el chasis\n";
 		}
-		if($("#date_fechaRegistro").val() ==''){
-			errors += "Debe ingresar la direccion\n";
+		if($("#slc_anio").val() ==''){
+			errors += "Debe selecionar el año\n";
 		}
 		if($("#slc_modelo").val() ==''){
-			errors += "Debe ingresar el telefono\n";
+			errors += "Debe seleccionar el modelo\n";
 		}
 		if($("#slc_tipoVehiculo").val() ==''){
-			errors += "Debe ingresar la fecha de inicio\n";
+			errors += "Debe seleccionar el tipo de vehiculo\n";
 		}
 		if($("#slc_tipoMotor").val() ==''){
-			errors += "Debe ingresar la fecha fin\n";
+			errors += "Debe seleccionar el tipo de motor\n";
 		}
-		if ($("#slc_tipoTransmision").val() < $("#date_fechaInicio").val()) {
-			errors += "la fecha fin es menor que la fecha inicio, ingrese correctamente las fechas\n";
+		if ($("#slc_tipoTransmision").val() == '') {
+			errors += "Debe seleccionar el tipo de transmicion\n";
 		}
 		if($("#slc_Cilindraje").val() ==''){
-			errors += "Debe seleccionar el cargo\n";
+			errors += "Debe seleccionar el cilindraje\n";
 		}
 		if($("#txt_descripcion").val() ==''){
 			errors += "Debe ingresar la descripcion\n";
+        }
+        if($("#slc_inventario").val() ==''){
+			errors += "Debe seleccionar el inventario\n";
 		}
 		return errors;
 	}

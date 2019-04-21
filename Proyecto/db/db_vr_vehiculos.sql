@@ -394,10 +394,10 @@ INSERT INTO `formapago` (`idFormaPago`, `descripcion`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `formapagofactura` (
-  `FormaPago_idFormaPago` int(11) NOT NULL,
-  `Factura_idFactura` int(11) NOT NULL,
-  PRIMARY KEY (`FormaPago_idFormaPago`,`Factura_idFactura`),
-  KEY `fk_FormaPago_has_Factura_Factura1` (`Factura_idFactura`)
+  `idFormaPago` int(11) NOT NULL,
+  `idFactura` int(11) NOT NULL,
+  PRIMARY KEY (`idFormaPago`,`idFactura`),
+  KEY `fk_FormaPago_has_Factura_Factura1` (`idFactura`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1366,6 +1366,40 @@ DROP TABLE IF EXISTS `vw_empleado_ver`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleado_ver` AS (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`snombre` AS `snombre`,`p`.`papellido` AS `papellido`,`p`.`sapellido` AS `sapellido`,`p`.`correo` AS `correo`,`c`.`descripcion` AS `cargo`,`p`.`noIdentidad` AS `noIdentidad`,`p`.`direccion` AS `direccion`,`e`.`fechaInicio` AS `fechaInicio`,`e`.`fechaFin` AS `fechaFin`,`u`.`nombreUsuario` AS `nombreUsuario`,`u`.`contraseña` AS `contrasenia`,`u`.`rutaImagen` AS `rutaImagen`,group_concat(`t`.`telefono` separator ',') AS `telefonos`,`c`.`idCargo` AS `idCargo` from ((((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) join `usuario` `u` on((`u`.`idUsuario` = `e`.`idUsuario`))) join `telefonos` `t` on((`t`.`idPersona` = `p`.`idPersona`))) where (`e`.`eliminado` <> 1) group by `e`.`idEmpleado`,`p`.`pnombre`,`p`.`snombre`,`p`.`papellido`,`p`.`sapellido`,`p`.`correo`,`c`.`descripcion`,`p`.`noIdentidad`,`p`.`direccion`,`e`.`fechaInicio`,`e`.`fechaFin`,`u`.`nombreUsuario`,`u`.`contraseña`,`u`.`rutaImagen`,`c`.`idCargo`);
 
 ALTER TABLE vehiculo ADD COLUMN eliminado BOOLEAN NOT NULL;
+
+INSERT INTO marca (idMarca, descripcion) VALUES
+(1, 'Isuzu'),
+(2, 'Mazda'),
+(3, 'Porsche'),
+(4, 'BMW'),
+(5, 'Honda'),
+(6, 'Nissan'),
+(7, 'Ferrari'),
+(8, 'Jaguar'),
+(9, 'Hummer'),
+(10, 'Lamborghini'),
+(11, 'Mercedes-Benz'),
+(12, 'Toyota'),
+(13, 'Cadillac'),
+(14, 'Hyundai'),
+(15, 'Jeep'),
+(16, 'Maserati'),
+(17, 'Volkswagen'),
+(18, 'Ford'),
+(19, 'KIA'),
+(20, 'Mitsubishi'),
+(21, 'CATERPILLAR'),
+(22, 'HITACHI'),
+(23, 'JOHN DEERE'),
+(24, 'KOMATSU'),
+(25, 'VOLVO'),
+(26, 'DINA'),
+(27, 'YAMAHA'),
+(28, 'Ducati'),
+(30, 'FERRETI YATCHS'),
+(31, 'Bavaria Yatchs'),
+(32, 'Azimut'),
+(33, 'Suzuki');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
