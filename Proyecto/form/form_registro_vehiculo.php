@@ -205,10 +205,10 @@
                 <!-- ============================================================== -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos del Vehiculo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Fotografias</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -219,11 +219,19 @@
                                     <h3 style="margin: 0px 0px 30px 0px;">Registro de vehiculo</h3>
                                     <div class="row p-2">
                                         <div class="col-sm-2">
-                                            <label for="txt_color"><b>color:</b></label>
+                                            <label for="slc_color"><b>color:</b></label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control border border-secondary" id="txt_color"
-                                                maxlength="50" placeholder="Ingrese el color del vehiculo">
+                                            <select name="slc_color" id="slc_color" class="form-control border border-secondary">
+                                                <option value="Azul">Azul</option>
+                                                <option value="Rojo">Rojo</option>
+                                                <option value="Amarillo">Amarillo</option>
+                                                <option value="Verde">Verde</option>
+                                                <option value="Negro">Negro</option>
+                                                <option value="Gris">Gris</option>
+                                                <option value="Blanco">Blanco</option>
+                                                <option value="Anaranjado">Anaranjado</option>
+                                            </select>
                                         </div>                            
                                         <div class="col-sm-2">
                                             <label for="txt_precioVenta"><b>Precio venta:</b></label>
@@ -324,7 +332,7 @@
                                             <label for="txt_descripcion"><b>Descripcion del vehiculo:</b></label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <textarea id="txt_descripcion" cols="30"
+                                            <textarea id="txt_descripcion" cols="95"
                                                 placeholder="ingrese la descripcion del vehiculo"></textarea>
                                         </div>
                                     </div>
@@ -350,9 +358,9 @@
                     </div>
                     
                 </div>
-                <div class="card-body" style="text-align:center">
-                    <button type="button" class="btn btn-success btn-lg">Siguiente</button>
-                </div>
+                <button id="btn_agregar" type="button" class="btn btn-primary">Añadir vehiculo</button>
+                <button onclick="location.href='form_vehiculos_lista.php'" type="button" class="btn btn-danger">Cancelar</button>
+                <div id="div_resultado2"></div>
                 <!-- ============================================================== -->
                 <!-- Fin de formulario  -->
                 <!-- ============================================================== -->

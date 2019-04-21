@@ -1225,7 +1225,7 @@ CREATE TABLE IF NOT EXISTS `vehiculo` (
   `precioRentaHora` float NOT NULL,
   `precioRentaDia` float NOT NULL,
   `placa` varchar(8) DEFAULT NULL,
-  `Año` int(11) NOT NULL,
+  `Año` YEAR NOT NULL,
   `idModelo` int(11) NOT NULL,
   `idInventario` int(11) NOT NULL,
   `idTipoVehiculo` int(11) NOT NULL,
@@ -1246,38 +1246,38 @@ CREATE TABLE IF NOT EXISTS `vehiculo` (
 --
 
 INSERT INTO `vehiculo` (`idVehiculo`, `descripcion`, `color`, `precioVenta`, `precioRentaHora`, `precioRentaDia`, `placa`, `Año`, `idModelo`, `idInventario`, `idTipoVehiculo`, `idTipoGasolina`, `idTransmision`, `idCilindraje`) VALUES
-(1, '', 'rojo', 1000000, 100, 200, 'PCU28959', 2018, 1, 2, 1, 1, 2, 1),
-(2, '', 'Negro', 1400000, 100, 200, 'LMU3325', 2017, 2, 2, 1, 2, 1, 2),
-(3, '', 'Negro', 1200000, 100, 200, 'JKL90432', 2015, 3, 2, 1, 3, 3, 3),
-(4, '', 'Negro', 1200000, 100, 200, 'ANM89233', 2016, 4, 2, 1, 4, 1, 4),
-(5, '', 'Azul', 1300000, 100, 200, 'QUWJ2839', 2015, 5, 2, 1, 4, 1, 5),
-(6, '', 'Verde', 1700000, 100, 200, 'CKL87392', 2018, 6, 2, 1, 3, 2, 5),
-(7, '', 'Blanco', 1800000, 100, 200, 'PKS34940', 2017, 7, 2, 1, 2, 2, 6),
-(8, '', 'Negro', 1500000, 100, 200, 'PKJUE829', 2015, 8, 2, 1, 1, 3, 7),
-(9, '', 'Azul', 2000000, 100, 200, 'WERT3829', 2017, 9, 2, 1, 1, 1, 1),
-(10, '', 'Blanco', 2500000, 100, 200, 'IOP00292', 2018, 10, 2, 1, 2, 1, 2),
-(11, '', 'Azul', 1700000, 100, 200, 'UIE793J2', 2015, 11, 2, 1, 3, 1, 3),
-(12, '', 'Negro', 1500000, 100, 200, '2YWHJD88', 2016, 12, 2, 1, 4, 1, 4),
-(13, '', 'Negro', 1600000, 100, 200, 'LKI89772', 2016, 13, 2, 1, 4, 2, 5),
-(14, '', 'Negro', 1500000, 100, 200, 'KLIO0383', 2018, 14, 2, 1, 3, 2, 6),
-(15, '', 'Verde', 1400000, 100, 200, 'PCWHEE24', 2017, 15, 2, 1, 2, 3, 7),
-(16, '', 'Verde', 1300000, 50, 200, 'JKL90432', 2015, 16, 1, 2, 1, 3, 2),
-(17, '', 'Verde', 1200000, 50, 200, 'ANM89233', 2016, 17, 1, 2, 1, 2, 3),
-(18, '', 'Verde', 1500000, 50, 200, 'QUWJ2839', 2016, 18, 1, 2, 2, 2, 2),
-(19, '', 'Rojo', 1200000, 50, 200, 'CKL87392', 2017, 19, 1, 2, 3, 2, 2),
-(20, '', 'Rojo', 1300000, 50, 200, 'PKS34940', 2015, 20, 1, 2, 4, 1, 1),
-(21, '', 'Rojo', 80000, 50, 200, 'PKJUE829', 2018, 21, 7, 3, 4, 1, 2),
-(22, '', 'Azul', 350000, 50, 200, 'WERT3829', 2019, 22, 7, 3, 3, 1, 4),
-(23, '', 'Azul', 70000, 50, 200, 'PCWHEE24', 2016, 23, 7, 3, 2, 2, 5),
-(24, '', 'Azul', 60000, 50, 200, 'KLIO0383', 2015, 24, 7, 3, 1, 1, 2),
-(25, '', 'Amarillo', 500000, 500, 2000, '2YWHJD88', 2016, 25, 4, 5, 4, 1, 6),
-(26, '', 'amarillo', 500000, 500, 2000, 'UIE793J2', 2017, 26, 4, 5, 3, 2, 7),
-(27, '', 'Amarillo', 500000, 500, 2000, 'IOP00292', 2016, 27, 8, 5, 2, 2, 3),
-(28, '', 'Amarillo', 650000, 500, 2000, 'WERT3829', 2015, 28, 9, 5, 1, 3, 2),
-(29, '', 'Amarillo', 600000, 500, 2000, 'PKJUE829', 2018, 29, 8, 5, 4, 3, 2),
-(30, '', 'Blanco', 1300000, 1500, 20000, 'QUWJ2839', 2015, 30, 5, 4, 2, 3, 4),
-(31, '', 'Blanco', 1200000, 1200, 20000, 'KLIO0383', 2017, 30, 5, 4, 2, 3, 5),
-(32, '', 'Blanco', 15000000, 1000, 20000, 'UIE793J2', 2018, 30, 5, 4, 2, 2, 6);
+(1, '', 'rojo', 1000000, 100, 200, 'PCU28959', '2018', 1, 2, 1, 1, 2, 1),
+(2, '', 'Negro', 1400000, 100, 200, 'LMU3325', '2017', 2, 2, 1, 2, 1, 2),
+(3, '', 'Negro', 1200000, 100, 200, 'JKL90432', '2015', 3, 2, 1, 3, 3, 3),
+(4, '', 'Negro', 1200000, 100, 200, 'ANM89233', '2016', 4, 2, 1, 4, 1, 4),
+(5, '', 'Azul', 1300000, 100, 200, 'QUWJ2839', '2015', 5, 2, 1, 4, 1, 5),
+(6, '', 'Verde', 1700000, 100, 200, 'CKL87392', '2018', 6, 2, 1, 3, 2, 5),
+(7, '', 'Blanco', 1800000, 100, 200, 'PKS34940', '2017', 7, 2, 1, 2, 2, 6),
+(8, '', 'Negro', 1500000, 100, 200, 'PKJUE829', '2015', 8, 2, 1, 1, 3, 7),
+(9, '', 'Azul', 2000000, 100, 200, 'WERT3829', '2017', 9, 2, 1, 1, 1, 1),
+(10, '', 'Blanco', 2500000, 100, 200, 'IOP00292', '2018', 10, 2, 1, 2, 1, 2),
+(11, '', 'Azul', 1700000, 100, 200, 'UIE793J2', '2015', 11, 2, 1, 3, 1, 3),
+(12, '', 'Negro', 1500000, 100, 200, '2YWHJD88', '2016', 12, 2, 1, 4, 1, 4),
+(13, '', 'Negro', 1600000, 100, 200, 'LKI89772', '2016', 13, 2, 1, 4, 2, 5),
+(14, '', 'Negro', 1500000, 100, 200, 'KLIO0383', '2018', 14, 2, 1, 3, 2, 6),
+(15, '', 'Verde', 1400000, 100, 200, 'PCWHEE24', '2017', 15, 2, 1, 2, 3, 7),
+(16, '', 'Verde', 1300000, 50, 200, 'JKL90432', '2015', 16, 1, 2, 1, 3, 2),
+(17, '', 'Verde', 1200000, 50, 200, 'ANM89233', '2016', 17, 1, 2, 1, 2, 3),
+(18, '', 'Verde', 1500000, 50, 200, 'QUWJ2839', '2016', 18, 1, 2, 2, 2, 2),
+(19, '', 'Rojo', 1200000, 50, 200, 'CKL87392', '2017', 19, 1, 2, 3, 2, 2),
+(20, '', 'Rojo', 1300000, 50, 200, 'PKS34940', '2015', 20, 1, 2, 4, 1, 1),
+(21, '', 'Rojo', 80000, 50, 200, 'PKJUE829', '2018', 21, 7, 3, 4, 1, 2),
+(22, '', 'Azul', 350000, 50, 200, 'WERT3829', '2019', 22, 7, 3, 3, 1, 4),
+(23, '', 'Azul', 70000, 50, 200, 'PCWHEE24', '2016', 23, 7, 3, 2, 2, 5),
+(24, '', 'Azul', 60000, 50, 200, 'KLIO0383', '2015', 24, 7, 3, 1, 1, 2),
+(25, '', 'Amarillo', 500000, 500, 2000, '2YWHJD88', '2016', 25, 4, 5, 4, 1, 6),
+(26, '', 'amarillo', 500000, 500, 2000, 'UIE793J2', '2017', 26, 4, 5, 3, 2, 7),
+(27, '', 'Amarillo', 500000, 500, 2000, 'IOP00292', '2016', 27, 8, 5, 2, 2, 3),
+(28, '', 'Amarillo', 650000, 500, 2000, 'WERT3829', '2015', 28, 9, 5, 1, 3, 2),
+(29, '', 'Amarillo', 600000, 500, 2000, 'PKJUE829', '2018', 29, 8, 5, 4, 3, 2),
+(30, '', 'Blanco', 1300000, 1500, 20000, 'QUWJ2839', '2015', 30, 5, 4, 2, 3, 4),
+(31, '', 'Blanco', 1200000, 1200, 20000, 'KLIO0383', '2017', 30, 5, 4, 2, 3, 5),
+(32, '', 'Blanco', 15000000, 1000, 20000, 'UIE793J2', '2018', 30, 5, 4, 2, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -1364,6 +1364,8 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vw_empleado_ver`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleado_ver` AS (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`snombre` AS `snombre`,`p`.`papellido` AS `papellido`,`p`.`sapellido` AS `sapellido`,`p`.`correo` AS `correo`,`c`.`descripcion` AS `cargo`,`p`.`noIdentidad` AS `noIdentidad`,`p`.`direccion` AS `direccion`,`e`.`fechaInicio` AS `fechaInicio`,`e`.`fechaFin` AS `fechaFin`,`u`.`nombreUsuario` AS `nombreUsuario`,`u`.`contraseña` AS `contrasenia`,`u`.`rutaImagen` AS `rutaImagen`,group_concat(`t`.`telefono` separator ',') AS `telefonos`,`c`.`idCargo` AS `idCargo` from ((((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) join `usuario` `u` on((`u`.`idUsuario` = `e`.`idUsuario`))) join `telefonos` `t` on((`t`.`idPersona` = `p`.`idPersona`))) where (`e`.`eliminado` <> 1) group by `e`.`idEmpleado`,`p`.`pnombre`,`p`.`snombre`,`p`.`papellido`,`p`.`sapellido`,`p`.`correo`,`c`.`descripcion`,`p`.`noIdentidad`,`p`.`direccion`,`e`.`fechaInicio`,`e`.`fechaFin`,`u`.`nombreUsuario`,`u`.`contraseña`,`u`.`rutaImagen`,`c`.`idCargo`);
+
+ALTER TABLE vehiculo ADD COLUMN eliminado BOOLEAN NOT NULL;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
