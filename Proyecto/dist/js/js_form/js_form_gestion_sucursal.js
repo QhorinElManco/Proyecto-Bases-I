@@ -9,7 +9,9 @@ $(document).ready(function () {
                 data: "nombre="+$("#txt_nombre").val()+"&"
                        +"direccion="+$("#txt_direccion").val(),
                 success: function (respuesta) {
-                    alert(respuesta);
+                    $("#cuerpoModal").empty();
+                    $("#cuerpoModal").append(respuesta);
+                    $("#ModalMensaje").modal("show");
                     $("#lista").empty();
                     verSucursales();
                 },
@@ -24,10 +26,13 @@ $(document).ready(function () {
                 url: "../ajax/eventos_gestion_sucursal.php?accion=3",
                 method: "POST",
                 dataType: "html",
-                data: "id="+$("#int_id_edit").val()+"&"+"nombre="+$("#txt_nombre_edit").val()+"&"
-                       +"direccion="+$("#txt_direccion_edit").val(),
+                data: "id="+$("#int_id_edit").val()
+                        +"&"+"nombre="+$("#txt_nombre_edit").val()
+                        +"&"+"direccion="+$("#txt_direccion_edit").val(),
                 success: function (respuesta) {
-                    alert(respuesta);
+                    $("#cuerpoModal").empty();
+                    $("#cuerpoModal").append(respuesta);
+                    $("#ModalMensaje").modal("show");
                     $("#lista").empty();
                     verSucursales();
                 },
@@ -44,7 +49,9 @@ $(document).ready(function () {
             dataType: "html",
             data: "id="+$("#int_id_remove").val(),
             success: function (respuesta) {
-                alert(respuesta);
+                $("#cuerpoModal").empty();
+                $("#cuerpoModal").append(respuesta);
+                $("#ModalMensaje").modal("show");
                 $("#lista").empty();
                 verSucursales();
             },
@@ -62,7 +69,7 @@ function verSucursales() {
         method: "POST",
         dataType: "html",
         success: function (respuesta) {
-            $("#lista").append(respuesta);
+            $("#lista").html(respuesta);
         },
         error: function(error){
             console.log(error);

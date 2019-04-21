@@ -33,10 +33,6 @@
 		public function obtenerFila($resultado){
 			return mysqli_fetch_array($resultado);
 		}
-		public function arregloAsociativo($resultado){
-			return mysqli_fetch_array($resultado);
-		}
-
 		public function liberarResultado($resultado){
 			mysqli_free_result($resultado);
 		}

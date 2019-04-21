@@ -6,7 +6,8 @@
             $conexion = new conexion();
 
             $sql = "SELECT v.idVehiculo, m.descripcion FROM vehiculo v
-                    INNER JOIN modelo m ON m.idModelo=v.idModelo";
+                    INNER JOIN modelo m ON m.idModelo=v.idModelo
+                    ORDER BY m.descripcion ASC;";
             $resultado = $conexion->ejecutarInstruccion($sql);
             if(!$resultado){
                 echo "No hay resultado de la consulta";
@@ -23,7 +24,8 @@
             $conexion = new conexion();
 
             $sql = "SELECT e.idEmpleado, CONCAT_WS(' ',p.pnombre, p.snombre, papellido, sapellido) AS NombreCompleto FROM empleado e
-                    INNER JOIN persona p ON p.idPersona=e.idPersona";
+                    INNER JOIN persona p ON p.idPersona=e.idPersona
+                    ORDER BY NombreCompleto ASC";
             $resultado = $conexion->ejecutarInstruccion($sql);
             if(!$resultado){
                 echo "No hay resultado de la consulta";
@@ -39,7 +41,8 @@
         case 'cargarTipoMantenimiento':
             $conexion = new conexion();
 
-            $sql = "SELECT idTipoMantenimiento, descripcion FROM tipomantenimiento";
+            $sql = "SELECT idTipoMantenimiento, descripcion FROM tipomantenimiento
+                    ORDER BY descripcion ASC";
             $resultado = $conexion->ejecutarInstruccion($sql);
             if(!$resultado){
                 echo "No hay resultado de la consulta";
@@ -53,22 +56,60 @@
         break;
         
         case 'cargarClientes':
-        $conexion = new conexion();
+            $conexion = new conexion();
 
-        $sql = "SELECT c.idCliente, CONCAT_WS(' ',p.pnombre, p.snombre, papellido, sapellido) AS NombreCompleto FROM cliente c
-                INNER JOIN persona p ON p.idPersona=c.idPersona";
-        $resultado = $conexion->ejecutarInstruccion($sql);
-        if(!$resultado){
-            echo "No hay resultado de la consulta";
-        }
-        else{
-            while($fila = $conexion->obtenerFila($resultado)){
-                echo '<option value="'.$fila["idCliente"].'">'.$fila["NombreCompleto"].'</option>';
+            $sql = "SELECT c.idCliente, CONCAT_WS(' ',p.pnombre, p.snombre, papellido, sapellido) AS NombreCompleto FROM cliente c
+                    INNER JOIN persona p ON p.idPersona=c.idPersona
+                    ORDER BY NombreCompleto ASC";
+            $resultado = $conexion->ejecutarInstruccion($sql);
+            if(!$resultado){
+                echo "No hay resultado de la consulta";
             }
-        }
-        $conexion->cerrarConexion();
-    break;
+            else{
+                while($fila = $conexion->obtenerFila($resultado)){
+                    echo '<option value="'.$fila["idCliente"].'">'.$fila["NombreCompleto"].'</option>';
+                }
+            }
+            $conexion->cerrarConexion();
+        break;
 
+        case 'agregar':
+           if(isset($_POST["idVehiculo"])){
+                $idVehiculo=$_POST["idVehiculo"];
+            }
+            if(isset($_POST["idEmpleado"])){
+                $idEmpleado=$_POST["idEmpleado"];
+            }            
+            if(isset($_POST["idTipoMantenimiento"])){
+                $idTipoMantenimiento=$_POST["idTipoMantenimiento"];
+            }            
+            if(isset($_POST["idCliente"])){
+                $idCliente=$_POST["idCliente"];
+            }
+            if(isset($_POST["fechaFin"])){
+                $fechaFin=$_POST["fechaFin"];
+            }
+            $fechaFin="2019-04-18";
+            $conexion=new conexion();
+            $accion="AGREGAR";
+            $sql="CALL SP_SOLICITUD_MANTENIMIENTO('0','$idVehiculo','$idEmpleado','$idTipoMantenimiento','$idCliente','$fechaFin','$accion','estado',@p8,@p9);";
+            $salida = "SELECT @p8 AS Codigo, @p9 AS Mensaje";
+            $resultado = $conexion->ejecutarInstruccion($sql);
+            $respuesta = $conexion->ejecutarInstruccion($salida);
+            if(!$respuesta){
+                echo "No hay respuesta";
+            }
+            else{
+                
+                $fila = $conexion->obtenerFila($respuesta);
+                echo $fila["Mensaje"];    
+            }
+            $conexion->cerrarConexion();
+        break;
+
+
+        case 'editar':
+        break;
 
 
         default:

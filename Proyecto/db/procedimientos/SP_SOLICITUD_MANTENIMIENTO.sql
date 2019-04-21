@@ -26,12 +26,18 @@ SP:BEGIN
         LEAVE SP;
     END IF;
     IF pcAccion='AGREGAR' THEN
+        IF pnidVehiculo='' OR pnidVehiculo IS NULL THEN
+            SET vcTempMensajeError=CONCAT(vcTempMensajeError, 'Vehiculo');
+        END IF;
         IF pnidEmpleado='' OR pnidEmpleado IS NULL THEN
             SET vcTempMensajeError=CONCAT(vcTempMensajeError, 'Empleado');
         END IF;
         IF pnidTipoMantenimiento='' OR pnidTipoMantenimiento IS NULL THEN
             SET vcTempMensajeError=CONCAT(vcTempMensajeError, 'Tipo de mantenimiento');
-        END IF;        
+        END IF;      
+        IF pdFechaFin='' OR pdFechaFin IS NULL THEN
+            SET vcTempMensajeError=CONCAT(vcTempMensajeError, 'Fecha fin');
+        END IF;  
         IF vcTempMensajeError<>'' THEN
             SET pcMensajeError=CONCAT('Se necesita que ingrese los siguientes campos: ', vcTempMensajeError);
             LEAVE SP;
@@ -62,13 +68,13 @@ SP:BEGIN
         END IF;
 
         SELECT COUNT(*) INTO vnConteo FROM solicitudmantenimiento
-        WHERE idVehiculo=pnidVehiculo AND estado="PENDIENTE";
+        WHERE idVehiculo=pnidVehiculo AND estado="Pendiente";
 
         IF vnConteo>0 THEN
             SET pcMensajeError="Ya tiene una solicitud pendiente";
             LEAVE SP;
         END IF;
-        --OJO ACA CARLOS
+        
         IF pnidCliente=0 THEN
             SET pnidCliente=NULL;
         ELSE
@@ -80,12 +86,12 @@ SP:BEGIN
                 LEAVE SP;
             END IF;
         END IF;
-        --OJO ACA CARLOS
-        IF pdFechaFin=vdFechaSolicitud THEN
-            SET vcEstado="aprobada";
-        ELSE
-            SET vcEstado="pendiente";
+        
+        IF pdFechaFin<vdFechaSolicitud THEN
+            SET vcEstado="Pendiente";
             SET pdFechaFin=NULL;
+        ELSE
+            SET vcEstado="Aprobada";
         END IF;
         
         SELECT (MAX(idSolicitudMantenimiento)+1) INTO vnConteo FROM solicitudmantenimiento;
@@ -93,7 +99,7 @@ SP:BEGIN
         INSERT solicitudmantenimiento(idSolicitudMantenimiento, idVehiculo, fechaSolicitud, fechaFin, estado, idEmpleado, idTipoMantenimiento, idCliente)
         VALUES (vnConteo, pnidVehiculo, vdFechaSolicitud, pdFechaFin, vcEstado, pnidEmpleado,pnidTipoMantenimiento, pnidCliente);
         COMMIT;
-        SET pcMensajeError='Solicitud enviada';
+        SET pcMensajeError='Solicitud guardada exitosamente';
         SET pbOcurreError=FALSE;
         LEAVE SP;
     END IF;
@@ -125,16 +131,16 @@ SP:BEGIN
             SET pcMensajeError='La solicitud que desea editar no existe';
             LEAVE SP;
         END IF;
-        IF pcEstado="pendiente" THEN
+        IF pcEstado="Pendiente" THEN
             SET pdFechaFin=NULL;
         END IF;
-        IF  pcEstado="aprobada" OR pcEstado="rechazada" THEN
+        IF  pcEstado="Aprobada" OR pcEstado="rechazada" THEN
             SET pdFechaFin=CURDATE();
         ELSE
             SET pcMensajeError="estado invalido";
             LEAVE SP;
         END IF;
-        --OJO ACA CARLOS
+        
         IF pnidCliente=0 THEN
             SET pnidCliente=NULL;
         ELSE

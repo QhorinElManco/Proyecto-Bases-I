@@ -11,7 +11,9 @@ $(document).ready(function () {
                 success: function (respuesta) {
                     $("#lista").empty();
                     verTalleres();
-                    alert(respuesta);
+                    $("#cuerpoModal").empty();
+                    $("#cuerpoModal").append(respuesta);
+                    $("#ModalMensaje").modal("show");
                 },
                 error: function(error){
                     console.log(error);
@@ -29,7 +31,9 @@ $(document).ready(function () {
                 success: function (respuesta) {
                     $("#lista").empty();
                     verTalleres();
-                    alert(respuesta);
+                    $("#cuerpoModal").empty();
+                    $("#cuerpoModal").append(respuesta);
+                    $("#ModalMensaje").modal("show");
                 },
                 error: function(error){
                     console.log(error);
@@ -48,7 +52,9 @@ $(document).ready(function () {
                 console.log("despues de la respuesta");
                 $("#lista").empty();
                 verTalleres();
-                alert(respuesta);
+                $("#cuerpoModal").empty();
+                $("#cuerpoModal").append(respuesta);
+                $("#ModalMensaje").modal("show");
             },
             error: function(error){
                 console.log(error);

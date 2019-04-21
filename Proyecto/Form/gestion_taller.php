@@ -136,29 +136,40 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="gestion_taller.php" aria-expanded="false"><i class="mdi mdi-cash"></i><span
                                     class="hide-menu">Gestion de talleres</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
-                                    class="hide-menu">Historial</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../tables.html" aria-expanded="false"><i class="mdi mdi-oil"></i><span
-                                    class="hide-menu">Mantenimiento</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
+                                    class="hide-menu">Solicitud mantenimiento </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="../agregar_solicitud_mantenimiento.php"
+                                        class="sidebar-link"><i class="mdi mdi-playlist-plus"></i><span
+                                            class="hide-menu">
+                                            Agregar solicitud
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="../ver_solicitud_mantenimiento.php"
+                                        class="sidebar-link"><i class="mdi mdi-format-list-bulleted"></i><span
+                                            class="hide-menu"> Ver las
+                                            solicitudes </span></a></li>
+                            </ul>
+                        </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="../grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
                                     class="hide-menu">Repuestos</span></a></li>
 
-                                    
-                                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
                                     class="hide-menu">Facturacion</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta </span></a>
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta
+                                        </span></a>
                                 </li>
                                 <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
                                             class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
                                         </span></a></li>
-                                 <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Mantenimiento
+                                <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura
+                                            Mantenimiento
                                         </span></a></li>
                             </ul>
                         </li>
@@ -189,7 +200,7 @@
         <div class="page-wrapper">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="" >
+            <div class="container-fluid" style="">
                 <div style="width:80%; margin: auto;">
                     <div class="row el-element-overlay" style="padding-top:100px;">
                         <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
@@ -251,7 +262,8 @@
                                             <div class="card-body" style="text-align:center;">
                                                 <div class="form-group row">
                                                     <label
-                                                        class="col-sm-3 text-left control-label col-form-label">Nombre de taller</label>
+                                                        class="col-sm-3 text-left control-label col-form-label">Nombre
+                                                        de taller</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" class="form-control" id="txt_descripcion"
                                                             placeholder="Nombre de taller">
@@ -260,7 +272,8 @@
                                                 <br>
                                                 <div class="form-group row">
                                                     <label
-                                                        class="col-sm-3 text-left control-label col-form-label">Nombre de sucursal</label>
+                                                        class="col-sm-3 text-left control-label col-form-label">Nombre
+                                                        de sucursal</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" class="form-control" id="txt_nombreSucursal"
                                                             placeholder="Nombre sucursal">
@@ -369,6 +382,23 @@
                             </div>
                         </div>
                         <!--FIN MODAL ELIMINAR-->
+                        <!-- Modal -->
+                        <div class="modal fade" id="ModalMensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true ">
+                            <div class="modal-dialog" role="document ">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true ">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="cuerpoModal">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
                     </div>
 
                 </div>
@@ -407,7 +437,7 @@
     <!--Menu sidebar -->
     <script src="../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="../dist/js/custom.min.js"></script>    
+    <script src="../dist/js/custom.min.js"></script>
     <!--This page JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

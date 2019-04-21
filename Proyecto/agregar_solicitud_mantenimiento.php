@@ -10,12 +10,11 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+    <title>AutoMotor</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="assets/libs/select2/dist/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="assets/libs/jquery-minicolors/jquery.minicolors.css">
-    <link rel="stylesheet" type="text/css"
-        href="assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" type="text/css" href="assets/libs/quill/dist/quill.snow.css">
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -157,15 +156,32 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
                                     class="hide-menu">Solicitud mantenimiento </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="agregar_solicitud_mantenimiento.html"
+                                <li class="sidebar-item"><a href="agregar_solicitud_mantenimiento.php"
                                         class="sidebar-link"><i class="mdi mdi-playlist-plus"></i><span
                                             class="hide-menu">
                                             Agregar solicitud
                                         </span></a></li>
-                                <li class="sidebar-item"><a href="ver_solicitud_mantenimiento.html"
+                                <li class="sidebar-item"><a href="ver_solicitud_mantenimiento.php"
                                         class="sidebar-link"><i class="mdi mdi-format-list-bulleted"></i><span
                                             class="hide-menu"> Ver las
                                             solicitudes </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
+                                    class="hide-menu">Facturacion</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta
+                                        </span></a>
+                                </li>
+                                <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura
+                                            Mantenimiento
+                                        </span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -196,11 +212,12 @@
                         <div class="col-md-4">
                             <div class="card"
                                 style="margin-top:50px; margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)">
-                                <div class="card-body">
+                                <div class="card-body form">
                                     <div class="border-bottom">
                                         <h3 class="card-title" style="color:white; text-align: center">Llene la
                                             solicitud</h3>
                                     </div>
+                                <form id="formulario">
                                     <div class="row mb-3 align-items-center" style="padding-top:30px;">
                                         <div class="col-lg-4 col-md-12 text-left">
                                             <span style="color:white;">Vehiculo</span>
@@ -208,7 +225,7 @@
                                         <div class="col-lg-8 col-md-12">
                                             <select class="form-control " style="width: 100%; height:36px;"
                                                 id="vehiculo">
-                                                <option value="0">Seleccione el vehiculo</option>
+                                                <option value="">Seleccione el vehiculo</option>
                                             </select>
                                         </div>
                                     </div>
@@ -219,7 +236,7 @@
                                         <div class="col-lg-8 col-md-12">
                                             <select class="form-control " style="width: 100%; height:36px;"
                                                 id="empleado">
-                                                <option value="0">Seleccione el empleado</option>
+                                                <option value="">Seleccione el empleado</option>
                                             </select>
                                         </div>
                                     </div>
@@ -229,7 +246,7 @@
                                         </div>
                                         <div class="col-lg-8 col-md-12">
                                             <select class="form-control " style="width: 100%; height:36px;" id="tipoMantenimiento">
-                                                <option value="0">Seleccione tipo de mantenimiento</option>
+                                                <option value="">Seleccione tipo de mantenimiento</option>
                                             </select>
                                         </div>
                                     </div>
@@ -238,7 +255,8 @@
                                             <span style="color:white;">Cliente</span>
                                         </div>
                                         <div class="col-lg-8 col-md-12">
-                                            <select class="form-control " style="width: 100%; height:36px;" id="cliente">
+                                            <select class="form-control " style="width: 100%; height:36px;" id="cliente"  data-toggle="tooltip"
+                                            title="Si es de la empresa deje en blanco">
                                                 <option value="0">Seleccione el cliente</option>
                                             </select>
                                         </div>
@@ -248,9 +266,9 @@
                                             <span style="color:white;">Fecha fin</span>
                                         </div>
                                         <div class="col-lg-8 col-md-12 input-group">
-                                            <input type="text" class="form-control" id="datepicker-autoclose"
+                                            <input type="text" class="form-control" id="fechaFin"
                                                 placeholder="mm/dd/yyyy" data-toggle="tooltip"
-                                                title="Si sera aprobada seleccione la fecha actual" id="fechaFin">
+                                                title="Si sera aprobada seleccione la fecha actual" >
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                             </div>
@@ -261,12 +279,30 @@
                                             <button type="button" class="btn btn-success" id="agregar">Agregar</button>
                                         </div>
                                     </div>
+                                </form>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                         </div>
                     </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true ">
+                            <div class="modal-dialog" role="document ">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true ">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="cuerpoModal">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
                     <!-- ============================================================== -->
                     <!-- End PAge Content -->
                     <!-- ============================================================== -->
@@ -359,7 +395,7 @@
             });
             /*datwpicker*/
             jQuery('.mydatepicker').datepicker();
-            jQuery('#datepicker-autoclose').datepicker({
+            jQuery('#fechaFin').datepicker({
                 autoclose: true,
                 todayHighlight: true
             });

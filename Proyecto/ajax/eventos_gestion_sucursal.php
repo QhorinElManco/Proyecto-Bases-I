@@ -49,7 +49,6 @@
                 $respuesta = $conexion->ejecutarInstruccion($salida);
                 if(!$respuesta){
                     echo "No hay respuesta del procedimiento";
-                    $lista[]=$fila;
                 }
                 else{
                     $fila=$conexion->obtenerFila($respuesta);

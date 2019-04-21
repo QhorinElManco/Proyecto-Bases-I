@@ -146,12 +146,21 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="gestion_taller.php" aria-expanded="false"><i class="mdi mdi-cash"></i><span
                                     class="hide-menu">Gestion de talleres</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
-                                    class="hide-menu">Historial</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../tables.html" aria-expanded="false"><i class="mdi mdi-oil"></i><span
-                                    class="hide-menu">Mantenimiento</span></a></li>
+                                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
+                                    class="hide-menu">Solicitud mantenimiento </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="../agregar_solicitud_mantenimiento.php"
+                                        class="sidebar-link"><i class="mdi mdi-playlist-plus"></i><span
+                                            class="hide-menu">
+                                            Agregar solicitud
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="../ver_solicitud_mantenimiento.php"
+                                        class="sidebar-link"><i class="mdi mdi-format-list-bulleted"></i><span
+                                            class="hide-menu"> Ver las
+                                            solicitudes </span></a></li>
+                            </ul>
+                        </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="../grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
                                     class="hide-menu">Repuestos</span></a></li>
@@ -380,6 +389,23 @@
                             </div>
                         </div>
                         <!--FIN MODAL ELIMINAR-->
+                        <!-- Modal -->
+                        <div class="modal fade" id="ModalMensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true ">
+                            <div class="modal-dialog" role="document ">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true ">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="cuerpoModal">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
                 </div>
             </div>
             <!-- ============================================================== -->

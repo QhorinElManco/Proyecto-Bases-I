@@ -808,7 +808,7 @@ CREATE TABLE IF NOT EXISTS `solicitudmantenimiento` (
   `idSolicitudMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idVehiculo` int(11) NOT NULL,
   `fechaSolicitud` date NOT NULL,
-  `fechaFin` date NOT NULL,
+  `fechaFin` date NULL,
   `estado` varchar(20) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
   `idTipoMantenimiento` int(11) NOT NULL,
