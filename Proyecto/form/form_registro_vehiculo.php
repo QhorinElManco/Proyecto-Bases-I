@@ -203,138 +203,156 @@
                 <!-- ============================================================== -->
                 <!-- Inicio de formulario  -->
                 <!-- ============================================================== -->
-                <div class= "row">
-                    <div class="col-md-11 auth-box  border-top border-secondary float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class= "row">
+                            <div class="col-md-11 auth-box  border-top border-secondary float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >         
+                                <div class="card-body" style="text-align:center;">                            
+                                    <h3 style="margin: 0px 0px 30px 0px;">Registro de vehiculo</h3>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="txt_color"><b>color:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control border border-secondary" id="txt_color"
+                                                maxlength="50" placeholder="Ingrese el color del vehiculo">
+                                        </div>                            
+                                        <div class="col-sm-2">
+                                            <label for="txt_precioVenta"><b>Precio venta:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="txt_precioVenta" class="form-control border border-secondary"placeholder="Ingrese el precio venta del vehiculo">
+                                        </div>                                
+                                    </div>
                                 
-                                        
-                        <div class="card-body" style="text-align:center;">
-                            
-                            <IMG SRC="../logo/logo_automotor.png" style="margin: 0px 0px 30px 0px;">
-                        <h3 style="margin: 0px 0px 30px 0px;">Registro de vehiculo</h3>
-                            <div class="row p-2">
-                                <div class="col-sm-2">
-                                    <label for="txt_color"><b>color:</b></label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control border border-secondary" id="txt_color"
-                                        maxlength="50" placeholder="Ingrese el color del vehiculo">
-                                </div>
-                            
-                                <div class="col-sm-2">
-                                    <label for="txt_precioVenta"><b>Precio venta:</b></label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="txt_precioVenta" class="form-control border border-secondary"placeholder="Ingrese el precio venta del vehiculo">
-                                </div>
-                                
-                            </div>
-                        
-                        <div class="row p-2" >
-                            <div class="col-sm-2">
-                                <label for="txt_precioRentaHora"><b>Precio renta/hora:</b></label>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" id="txt_precioRentaHora" class="form-control border border-secondary" placeholder="Ingrese el precio renta por hora">
-                            </div>
-                            <div class="col-sm-2">
-                                    <label for="txt_precioRentaDia"><b>Precio renta/dia:</b></label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" id="txt_precioRentaDia" class="form-control border border-secondary" placeholder="Ingrese el precio renta por dia">
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-2">
-                                <label for="txt_placa"><b>Placa:</b></label>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" id="txt_placa" class="form-control border border-secondary"
-                                    placeholder="Ingrese la placa del vehiculo">
-                            </div>
-    
-                            <div class="col-sm-2">
-                                <label for="txt_chasis"><b>Chasis:</b></label>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" id="txt_chasis" class="form-control border border-secondary"
-                                    placeholder="Ingrese el chasis del vehiculo">
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-2">
-                                <label for="date_fechaRegistro"><b>Fecha de registro:</b></label>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="date" id="date_fechaRegistro" class="form-control border border-secondary">
-                            </div>
-                        
-                            <div class="col-sm-2">
-                                <label for="slc_modelo"><b>Modelo:</b></label>
-                            </div>
-                            <div class="col-sm-4">
-                                <select id="slc_modelo" class="form-control border border-secondary">
-                                    
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-2">
-                                <label for="slc_tipoVehiculo"><b>Tipo de vehiculo:</b></label>
-                            </div>
-                            <div class="col-sm-4">
-                                <select id="slc_tipoVehiculo" class="form-control border border-secondary">
-                                    
-                                </select>
-                            </div>
-                        
-                            <div class="col-sm-2">
-                                <label for="slc_tipoMotor"><b>Tipo de motor:</b></label>
-                            </div>
-                            <div class="col-sm-4">
-                                <select id="slc_tipoMotor" class="form-control border border-secondary">
-
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-2">
-                                <label for="slc_tipoTransmision"><b>Tipo de transmision:</b></label>
-                            </div>
-                            <div class="col-sm-4">
-                                <select id="slc_tipoTransmision" class="form-control border border-secondary">
-                                    
-                                </select>
-                            </div>
-                        
-                            <div class="col-sm-2">
-                                <label for="slc_Cilindraje"><b>cilindraje:</b></label>
-                            </div>
-                            <div class="col-sm-4">
-                                <select id="slc_Cilindraje" class="form-control border border-secondary">
-                                    
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-2">
-                                <label for="txt_descripcion"><b>Descripcion del vehiculo:</b></label>
-                            </div>
-                            <div class="col-sm-7">
-                                <textarea id="txt_descripcion" cols="30"
-                                    placeholder="ingrese la descripcion del vehiculo"></textarea>
-                            </div>
-                        </div>
-                        
-                        </div>
-                        <div class="card-body" style="text-align:center">
-                            <button type="button" class="btn btn-success btn-lg">Siguiente</button>
-                        </div>
-        
+                                    <div class="row p-2" >
+                                        <div class="col-sm-2">
+                                            <label for="txt_precioRentaHora"><b>Precio renta/hora:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="txt_precioRentaHora" class="form-control border border-secondary" placeholder="Ingrese el precio renta por hora">
+                                        </div>
+                                        <div class="col-sm-2">
+                                                <label for="txt_precioRentaDia"><b>Precio renta/dia:</b></label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="txt_precioRentaDia" class="form-control border border-secondary" placeholder="Ingrese el precio renta por dia">
+                                        </div>
+                                        </div>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="txt_placa"><b>Placa:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="txt_placa" class="form-control border border-secondary"
+                                                placeholder="Ingrese la placa del vehiculo">
+                                        </div>
                 
-                       
+                                        <div class="col-sm-2">
+                                            <label for="txt_chasis"><b>Chasis:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="txt_chasis" class="form-control border border-secondary"
+                                                placeholder="Ingrese el chasis del vehiculo">
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="date_fechaRegistro"><b>Fecha de registro:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="date" id="date_fechaRegistro" class="form-control border border-secondary">
+                                        </div>
+                                    
+                                        <div class="col-sm-2">
+                                            <label for="slc_modelo"><b>Modelo:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="slc_modelo" class="form-control border border-secondary">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="slc_tipoVehiculo"><b>Tipo de vehiculo:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="slc_tipoVehiculo" class="form-control border border-secondary">
+                                                
+                                            </select>
+                                        </div>
+                                    
+                                        <div class="col-sm-2">
+                                            <label for="slc_tipoMotor"><b>Tipo de motor:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="slc_tipoMotor" class="form-control border border-secondary">
 
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="slc_tipoTransmision"><b>Tipo de transmision:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="slc_tipoTransmision" class="form-control border border-secondary">
+                                                
+                                            </select>
+                                        </div>
+                                    
+                                        <div class="col-sm-2">
+                                            <label for="slc_Cilindraje"><b>cilindraje:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="slc_Cilindraje" class="form-control border border-secondary">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="txt_descripcion"><b>Descripcion del vehiculo:</b></label>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <textarea id="txt_descripcion" cols="30"
+                                                placeholder="ingrese la descripcion del vehiculo"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class= "row">
+                            <div class="col-md-6 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                                <div class="card-body" style="text-align:center;">
+                                    <form method="post" id="form_img" enctype="multipart/form-data">
+                                        <p><h3>Ingrese las fotografias del vehiculo</h3><br>
+                                            <input type="file" name="file_foto[]" id="file_foto[]" multiple="">
+                                        </p>
+                                        <hr>
+                                        <div id="div_resultado"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card-body" style="text-align:center">
+                    <button type="button" class="btn btn-success btn-lg">Siguiente</button>
+                </div>
                 <!-- ============================================================== -->
                 <!-- Fin de formulario  -->
                 <!-- ============================================================== -->
