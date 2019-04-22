@@ -29,6 +29,11 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
     <style>
+        A:link {text-decoration: none }
+        a{
+            color: black;
+            font-family: arial;
+            text-decoration: none}
     </style>
 </head>
 
@@ -126,22 +131,29 @@
             </nav>
         </header>
         <!-- End Topbar header -->
-
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <aside class="left-sidebar" data-sidebarbg="skin5">
-
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
-
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
-                    <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="lista_autos_venta.html" aria-expanded="false"><i
-                                    class="mdi mdi-shopping"></i><span class="hide-menu">Compra</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="lista_autos_renta.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
-                                    class="hide-menu">Renta</span></a></li>
+                <ul id="sidebarnav" class="p-t-30">
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
+                                    class="hide-menu">Vehiculos</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="ver_todos_autos.php" class="sidebar-link"><i
+                                            class="mdi mdi-car"></i><span class="hide-menu">
+                                            Ver todos
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="lista_autos_venta.php" class="sidebar-link"><i
+                                            class="mdi mdi-shopping"></i><span class="hide-menu">Vehiculos en
+                                            venta</span></a></li>
+                                <li class="sidebar-item"><a href="lista_autos_renta.php" class="sidebar-link"><i
+                                            class="mdi mdi-cash"></i><span class="hide-menu"> Vehiculos en
+                                            renta</span></a></li>
+                            </ul>
+                        </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
                                     class="hide-menu">Historial</span></a></li>
@@ -166,101 +178,17 @@
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
-
             </div>
             <!-- End Sidebar scroll-->
-
         </aside>
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-
-
         <!-- Page wrapper  -->
         <div class="page-wrapper"
-            style="background-image: url(assets/images/background/img7.jpg); background-repeat: no-repeat; background-size:cover;  width: 100%; height: 100vh;">
+            style="background-image: url(assets/images/background/img2.jpg); background-repeat: no-repeat; background-size:cover;  width: 100%; height: 100vh;">
             <input type="hidden" id="int_idVehiculo" name="int_idVehiculo" value="<?php echo $_GET["idVehiculo"];?>">
             <!-- Container fluid  -->
             <div class="container-fluid" style="padding-top:80px; padding-left: 120px;">
                 <div class="row el-element-overlay" id="contenedor">
-                    <!--Div Fotorama-->
-                    <div class="col-lg-5 col-md-5" style="background-color: rgba(255, 255, 255, 0.6); padding: 20px; -webkit-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
-                    -moz-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
-                    box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55)">
-                        <div>
-                            <div class="fotorama" data-width="100%" data-ratio="800/600" data-nav="thumbs"
-                                data-autoplay="2000" data-fit="cover" data-loop="true"
-                                style="margin-left:auto; margin-right:auto;">
-                                <img src="assets/images/autos/Mercedez Benz Clase-G/img1.jpg">
-                                <img src="assets/images/autos/Mercedez Benz Clase-G/img2.jpg">
-                                <img src="assets/images/autos/Mercedez Benz Clase-G/img3.jpg">
-                                <img src="assets/images/autos/Mercedez Benz Clase-G/img4.jpg">
-                                <img src="assets/images/autos/Mercedez Benz Clase-G/img5.jpg">
-                                <img src="assets/images/autos/Mercedez Benz Clase-G/img6.jpg">
-                                <img src="assets/images/autos/Mercedez Benz Clase-G/img7.jpg">
-                                <img src="assets/images/autos/Mercedez Benz Clase-G/img8.jpg">
-                            </div>
-                        </div>
-                    </div>
-                    <!--Fin Div Fotorama-->
-                    <div class="col-lg-1 col-md-1 col-sm-0 col-xs-0"></div>
-                    <!--Div Ficha Tecnica-->
-                    <div class="col-lg-5 col-md-5" style="background-color: rgba(255, 255, 255, 0.9); padding: 20px; -webkit-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
-                                -moz-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
-                                box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55)">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class="thead-dark">
-                                    <th colspan="2" style="text-align:center; font-size:24px">Descripcion</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row" style="border-top:0px; font-size:22px">Marca:</th>
-                                        <td style="border-top:0px; font-size:22px">Mercedes-Benz</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" style="border-top:0px; font-size:22px">
-                                            Modelo:
-                                        </th>
-                                        <td style="border-top:0px; font-size:22px">G-500-Biturbo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" style="border-top:0px; font-size:22px">
-                                            Año:
-                                        </th>
-                                        <td style="border-top:0px; font-size:22px">2019</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" style="border-top:0px; font-size:22px">
-                                            Transmision:
-                                        </th>
-                                        <td style="border-top:0px; font-size:22px">Automática</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" style="border-top:0px; font-size:22px">
-                                            Motor:
-                                        </th>
-                                        <td style="border-top:0px; font-size:22px">Gasolina</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" style="border-top:0px; font-size:22px">
-                                            Cilindraje:
-                                        </th>
-                                        <td style="border-top:0px; font-size:22px">8 cilindros</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" style="border-top:0px; font-size:22px">
-                                            Precio Venta:
-                                        </th>
-                                        <td style="border-top:0px; font-size:22px">L3,471,202</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <br>
-                            <div style="text-align:right; width:580px"><button type="button"
-                                    class="btn btn-dark btn-lg"><i class="mdi mdi-cart"> Comprar</i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Fin Div Ficha Tecnica-->
                 </div>
             </div>
             <br>
@@ -270,10 +198,8 @@
             <footer class="footer text-center">
             </footer>
             <!-- End footer -->
-
         </div>
         <!-- End Page wrapper  -->
-
     </div>
     <!-- End Wrapper -->
 

@@ -22,6 +22,14 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
+<style>
+    a{ 
+color: rgb(0,0,0); 
+} 
+a:hover{ 
+color:rgb(0,0,0); 
+} 
+</style>
 
 <body>
     <!-- ============================================================== -->
@@ -49,7 +57,7 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.php">
                         <!-- Logo icon -->
                         <b class="logo-icon p-l-10">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -206,10 +214,10 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="background-color:#343a40">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="padding: 0">
+            <div class="container-fluid" style="padding: 0" >
                 <!-- ============================================================== -->
                 <!-- Galeria -->
                 <!-- ============================================================== -->
@@ -218,43 +226,38 @@
                     <?php
                         include("class/class_conexion.php");
                         $conexion = new conexion();
-                        $sql = "SELECT v.idVehiculo, mo.descripcion AS modelo, mr.descripcion AS marca FROM vehiculo v
-                                INNER JOIN modelo mo ON mo.idModelo=v.idModelo
-                                INNER JOIN marca mr ON mr.idMarca=mo.idMarca
-                                WHERE v.eliminado=0;";
-                                /**"SELECT v.idVehiculo, mo.descripcion AS modelo, mr.descripcion AS marca, f.directorioEnDisco AS ruta FROM vehiculo v
+                        $sql = "SELECT v.idVehiculo, mo.descripcion AS modelo, mr.descripcion AS marca, f.direccionEnDisco FROM vehiculo v
                                 INNER JOIN modelo mo ON mo.idModelo=v.idModelo
                                 INNER JOIN marca mr ON mr.idMarca=mo.idMarca
                                 INNER JOIN fotos f ON f.idVehiculo=v.idVehiculo
-                                WHERE v.eliminado=0;" */
+                                WHERE v.eliminado=0
+                                GROUP BY modelo;";
+
                         $resultado=$conexion->ejecutarInstruccion($sql);
                         if(!$resultado){
                             echo "Actualmente no hay vehiculos";
                         }
                         else{
                             while($fila=$conexion->obtenerFila($resultado)){
-                                
+                                $ruta = str_replace("../", " ", $fila["direccionEnDisco"]);
                                 echo '
                                     <div class="col-lg-4 col-md-6">
                                         <div class="card">
                                             <div class="el-card-item">
-                                                <div class="el-card-avatar el-overlay-1"> <img
-                                                        src="assets/images/autos/Mazda Cx-3/1.jpg" alt="user" />
-                                                    <div class="el-overlay">
-                                                    </div>
+                                                <div class="el-card-avatar el-overlay-1" style="height: 300px;" > <img
+                                                        src="'.$ruta.'" alt="user" object-fit:/>
                                                 </div>
                                                 <div class="el-card-content">
-                                                    <h4 class="m-b-0">'.$fila["marca"].' '.$fila["modelo"].'</h4> <span class="text-muted"><a href="descripcion_vehiculo.php?idVehiculo='.$fila["idVehiculo"].'">Ver detalles</a></span>
+                                                    <h4 class="m-b-0">'.$fila["marca"].' '.$fila["modelo"].'</h4> <span class="text-muted">
+                                                    <a href="descripcion_vehiculo.php?idVehiculo='.$fila["idVehiculo"].'">Ver detalles</a></span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>';
-            
                             }
                         }
                         $conexion->liberarResultado($resultado);
                         $conexion->cerrarConexion();    
-
                     ?>
                 </div>
                 <!-- ============================================================== -->
@@ -264,14 +267,10 @@
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
-
-
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Matrix-admin. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -310,6 +309,21 @@
     <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="dist/js/pages/chart/chart-page-init.js"></script>
+    <!--<script>
+        $(document).ready(function(){//ACCION CUANDO CARGUE LA PAGINA
+
+            var altura_arr = [];//CREAMOS UN ARREGLO VACIO
+            $('.card').each(function(){//RECORREMOS TODOS LOS CONTENEDORES DE LAS IMAGENES, DEBEN TENER LA MISMA CLASE
+                var altura = $(this).height(); //LES SACAMOS LA ALTURA
+                altura_arr.push(altura);//METEMOS LA ALTURA AL ARREGLO
+                });
+            altura_arr.sort(function(a, b){return b-a}); //ACOMODAMOS EL ARREGLO EN ORDEN DESCENDENTE
+                $('.card').each(function(){//RECORREMOS DE NUEVO LOS CONTENEDORES
+                $(this).css('height',altura_arr[0]);//LES PONEMOS A TODOS LOS CONTENEDORES EL PRIMERO ELEMENTO DE ALTURA DEL ARREGLO, QUE ES EL MAS GRANDE.
+            });
+        });
+    </script>-->
+    
 </body>
 
 </html>
