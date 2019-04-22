@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-04-2019 a las 07:48:08
+-- Tiempo de generación: 22-04-2019 a las 01:35:40
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -19,6 +19,136 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `db_vr_vehiculos`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_FACTURA_VENTA`(
+    IN      pnidVehiculo                INT,
+    IN      pnidCliente                 INT,
+    IN      pnidEmpleado                INT,
+    IN      pnidFormaPago               INT,
+    IN      pnidDescuento               INT,
+    OUT     pfTotal                     FLOAT,
+    OUT     pbOcurreError 		        BOOLEAN,
+    OUT     pcMensajeError			    VARCHAR(1000)
+)
+SP:BEGIN
+    DECLARE vnConteo, vnidFactura, vnidVentas, vnidTipoSalida, vnidSalida, vnidControl, vnidInventario INT;
+    DECLARE vfSubtotal, vfDescuento, vfImpuesto FLOAT;
+    DECLARE vcTempMensajeError VARCHAR(1000);
+    SET vcTempMensajeError='';
+    SET pbOcurreError=TRUE;
+    SET autocommit=0;
+    START TRANSACTION;
+       IF pnidVehiculo='' OR pnidVehiculo IS NULL THEN
+        SET vcTempMensajeError='Vehiculo ';
+    END IF;
+    IF pnidCliente='' OR pnidCliente IS NULL THEN
+        SET vcTempMensajeError='Cliente ';
+    END IF;
+    IF pnidEmpleado='' OR pnidEmpleado IS NULL THEN
+        SET vcTempMensajeError='Empleado ';
+    END IF;
+    IF pnidFormaPago='' OR pnidFormaPago IS NULL THEN
+        SET vcTempMensajeError='Forma de pago ';
+    END IF;
+    IF vcTempMensajeError<>'' THEN
+        SET pcMensajeError=CONCAT('Se necesita que ingrese los siguientes campos: ', vcTempMensajeError);
+        LEAVE SP;
+    END IF;
+    
+      
+    SELECT COUNT(*) INTO vnConteo FROM vehiculo
+    WHERE idVehiculo=pnidVehiculo;
+
+    IF vnConteo=0 THEN
+        SET pcMensajeError='El vehiculo no existe';
+        LEAVE SP;
+    END IF;
+   
+    SELECT COUNT(*) INTO vnConteo FROM ventas
+    WHERE idVehiculo=pnidVehiculo;
+
+    IF vnConteo>0 THEN
+        SET pcMensajeError='Ya vehiculo ya se vendio';
+        LEAVE SP;
+    END IF;
+   
+    SELECT COUNT(*) INTO vnConteo FROM cliente
+    WHERE idCliente=pnidCliente;
+
+    IF vnConteo=0 THEN
+        SET pcMensajeError='El cliente no existe, por favor haga su respectivo registro';
+        LEAVE SP;
+    END IF;
+    
+    SELECT COUNT(*) INTO vnConteo FROM empleado
+    WHERE idempleado=pnidempleado;
+
+    IF vnConteo=0 THEN
+        SET pcMensajeError='El empleado no existe, por favor haga su respectivo registro';
+        LEAVE SP;
+    END IF;
+      
+    SELECT COUNT(*) INTO vnConteo FROM formapago
+    WHERE idFormaPago=pnidFormaPago;
+
+    IF vnConteo=0 THEN
+        SET pcMensajeError='La forma de pago no existe';
+        LEAVE SP;
+    END IF;
+         
+    SELECT precioVenta INTO vfSubtotal FROM vehiculo
+    WHERE idVehiculo=pnidVehiculo;
+       
+    SELECT porcentaje INTO vfDescuento FROM descuento
+    WHERE idDescuento=pnidDescuento;
+           SELECT porcentaje INTO vfImpuesto FROM impuesto
+    WHERE idImpuesto=1;
+           SET pfTotal=(vfSubtotal-(vfSubtotal*vfDescuento))+((vfSubtotal-(vfSubtotal*vfDescuento))*vfImpuesto);
+
+    SELECT (MAX(idFactura)+1) INTO vnidFactura FROM factura;
+
+    INSERT factura(idFactura, fechaEmision, Total, idCliente, idEmpleado, idImpuesto, idFacturaMantenimiento)
+            VALUES(vnidFactura, CURDATE(), pfTotal, pnidCliente, pnidEmpleado, 1, NULL);
+ 
+    INSERT formapagofactura(idFormaPago, idFactura)
+            VALUES(pnidFormaPago, vnidFactura);
+   
+    INSERT descuentofactura(idFactura, idDescuento, fecha)
+            VALUES(vnidFactura, pnidDescuento, CURDATE());
+    
+    SELECT (MAX(idVentas)+1) INTO vnidVentas FROM ventas;
+
+    INSERT ventas(idVentas, idFactura, idVehiculo)
+            VALUES(vnidVentas, vnidFactura, pnidVehiculo);
+  
+    
+    SELECT (MAX(idSalida)+1) INTO vnidSalida FROM salida;
+
+    INSERT salida(idSalida, descripcion,FechaSalida,  idTipoSalida,idRenta,  idVentas)
+    VALUES (vnidSalida, "Venta", CURDATE(), '1',NULL, vnidVentas );
+ 
+    SELECT idInventario INTO vnidInventario FROM vehiculo
+    WHERE idVehiculo=pnidVehiculo;
+
+    SELECT (MAX(idControl)+1) INTO vnidControl FROM control;
+
+    INSERT control (idControl , idInventario, idSalida, idEntrada, idEmpleado)
+    VALUES (vnidControl, vnidInventario, vnidSalida, NULL, pnidEmpleado);
+    COMMIT;
+    SET pbOcurreError=FALSE;
+    IF pbOcurreError = FALSE THEN 
+            UPDATE Vehiculo SET eliminado='1'
+            where idVehiculo=pnidVehiculo;
+    END if;
+    SET pcMensajeError="Se agregado de forma exitosa la factura";
+    LEAVE SP;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -152,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `control` (
   KEY `fk_Control_Salida1` (`idSalida`),
   KEY `fk_Control_Entrada1` (`idEntrada`),
   KEY `fk_Control_Empleado1` (`idEmpleado`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Volcado de datos para la tabla `control`
@@ -166,7 +296,10 @@ INSERT INTO `control` (`idControl`, `idInventario`, `idSalida`, `idEntrada`, `id
 (5, 4, 5, NULL, 5),
 (6, 7, NULL, 1, 6),
 (7, 6, NULL, 2, 7),
-(8, 8, NULL, 3, 8);
+(8, 8, NULL, 3, 8),
+(9, 2, 5, NULL, 1),
+(10, 2, 7, NULL, 1),
+(11, 2, 8, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -187,14 +320,14 @@ CREATE TABLE IF NOT EXISTS `descuento` (
 --
 
 INSERT INTO `descuento` (`idDescuento`, `porcentaje`, `descripcion`, `estado`) VALUES
-(1, '1.5', 'General', 'I'),
-(2, '0.3', 'Tercera edad', 'A'),
-(3, '0.5', 'Black friday', 'I'),
-(4, '0.2', 'Navideño', 'I'),
-(5, '0.2', 'Año nuevo', 'I'),
-(6, '0.2', 'Verano', 'I'),
-(7, '0.1', 'Familiares y amigos', 'A'),
-(8, '0', 'Ninguno', 'A');
+(1, 1.5, 'General', 'I'),
+(2, 0.3, 'Tercera edad', 'A'),
+(3, 0.5, 'Black friday', 'I'),
+(4, 0.2, 'Navideño', 'I'),
+(5, 0.2, 'Año nuevo', 'I'),
+(6, 0.2, 'Verano', 'I'),
+(7, 0.1, 'Familiares y amigos', 'A'),
+(8, 0, 'Ninguno', 'A');
 
 -- --------------------------------------------------------
 
@@ -220,7 +353,16 @@ INSERT INTO `descuentofactura` (`idFactura`, `idDescuento`, `fecha`) VALUES
 (3, 8, '0000-00-00'),
 (4, 2, '0000-00-00'),
 (5, 7, '0000-00-00'),
-(6, 8, '0000-00-00');
+(6, 8, '0000-00-00'),
+(22, 2, '2019-04-21'),
+(23, 2, '2019-04-21'),
+(24, 2, '2019-04-21'),
+(25, 2, '2019-04-21'),
+(26, 2, '2019-04-21'),
+(27, 2, '2019-04-21'),
+(28, 8, '2019-04-21'),
+(29, 2, '2019-04-21'),
+(30, 8, '2019-04-21');
 
 -- --------------------------------------------------------
 
@@ -267,11 +409,11 @@ INSERT INTO `empleado` (`idEmpleado`, `fechaInicio`, `fechaFin`, `idPersona`, `i
 CREATE TABLE IF NOT EXISTS `entrada` (
   `idEntrada` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
-  `fechaEntrada` DATE NOT NULL,
-  `idTipoEntrada` int(11) NOT NULL,  
-  `idProveedores` int(11),
-  `idVentas` int(11),
-  `idRenta` int(11),
+  `fechaEntrada` date NOT NULL,
+  `idTipoEntrada` int(11) NOT NULL,
+  `idProveedores` int(11) DEFAULT NULL,
+  `idVentas` int(11) DEFAULT NULL,
+  `idRenta` int(11) DEFAULT NULL,
   PRIMARY KEY (`idEntrada`),
   KEY `fk_TipoEntrada_Proveedores1` (`idProveedores`),
   KEY `fk_TipoEntrada_Ventas1` (`idVentas`),
@@ -283,8 +425,8 @@ CREATE TABLE IF NOT EXISTS `entrada` (
 -- Volcado de datos para la tabla `entrada`
 --
 
-INSERT INTO `entrada` (`idEntrada`, `descripcion`, `fechaEntrada`, `idTipoEntrada`, `idProveedores`, `idVentas`,`idRenta`) VALUES
-(1, NULL, '2015-12-12', 1,NULL, NULL, NULL),
+INSERT INTO `entrada` (`idEntrada`, `descripcion`, `fechaEntrada`, `idTipoEntrada`, `idProveedores`, `idVentas`, `idRenta`) VALUES
+(1, NULL, '2015-12-12', 1, NULL, NULL, NULL),
 (2, NULL, '2018-12-05', 2, NULL, NULL, NULL),
 (3, NULL, '2018-12-05', 3, NULL, NULL, NULL);
 
@@ -307,7 +449,7 @@ CREATE TABLE IF NOT EXISTS `factura` (
   KEY `fk_Factura_Empleado1` (`idEmpleado`),
   KEY `fk_Factura_Impuesto1` (`idImpuesto`),
   KEY `fk_Factura_FacturaMantenimiento1` (`idFacturaMantenimiento`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- Volcado de datos para la tabla `factura`
@@ -333,7 +475,17 @@ INSERT INTO `factura` (`idFactura`, `fechaEmision`, `Total`, `idCliente`, `idEmp
 (17, '2015-08-07', 2500, 4, 8, 1, 5),
 (18, '2016-09-20', 3500, 5, 5, 1, 10),
 (19, '2018-01-29', 4500, 6, 4, 1, NULL),
-(20, '2019-02-27', 5500, 7, 2, 1, NULL);
+(20, '2019-02-27', 5500, 7, 2, 1, NULL),
+(21, '2019-04-21', 1127000, 1, 1, 1, NULL),
+(22, '2019-04-21', 1288000, 1, 1, 1, NULL),
+(23, '2019-04-21', 1288000, 1, 1, 1, NULL),
+(24, '2019-04-21', 1288000, 1, 1, 1, NULL),
+(25, '2019-04-21', 1288000, 1, 1, 1, NULL),
+(26, '2019-04-21', 1288000, 1, 1, 1, NULL),
+(27, '2019-04-21', 1288000, 1, 1, 1, NULL),
+(28, '2019-04-21', 1840000, 5, 6, 1, NULL),
+(29, '2019-04-21', 1207500, 1, 1, 1, NULL),
+(30, '2019-04-21', 1150000, 1, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -406,6 +558,21 @@ CREATE TABLE IF NOT EXISTS `formapagofactura` (
   KEY `fk_FormaPago_has_Factura_Factura1` (`idFactura`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `formapagofactura`
+--
+
+INSERT INTO `formapagofactura` (`idFormaPago`, `idFactura`) VALUES
+(5, 22),
+(5, 23),
+(5, 24),
+(5, 25),
+(5, 26),
+(5, 27),
+(5, 28),
+(5, 29),
+(5, 30);
+
 -- --------------------------------------------------------
 
 --
@@ -439,7 +606,7 @@ CREATE TABLE IF NOT EXISTS `impuesto` (
 --
 
 INSERT INTO `impuesto` (`idImpuesto`, `porcentaje`, `descripcion`) VALUES
-(1, '0.15', 'ISR ');
+(1, 0.15, 'ISR ');
 
 -- --------------------------------------------------------
 
@@ -518,7 +685,45 @@ CREATE TABLE IF NOT EXISTS `marca` (
   `idMarca` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idMarca`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+
+--
+-- Volcado de datos para la tabla `marca`
+--
+
+INSERT INTO `marca` (`idMarca`, `descripcion`) VALUES
+(1, 'Isuzu'),
+(2, 'Mazda'),
+(3, 'Porsche'),
+(4, 'BMW'),
+(5, 'Honda'),
+(6, 'Nissan'),
+(7, 'Ferrari'),
+(8, 'Jaguar'),
+(9, 'Hummer'),
+(10, 'Lamborghini'),
+(11, 'Mercedes-Benz'),
+(12, 'Toyota'),
+(13, 'Cadillac'),
+(14, 'Hyundai'),
+(15, 'Jeep'),
+(16, 'Maserati'),
+(17, 'Volkswagen'),
+(18, 'Ford'),
+(19, 'KIA'),
+(20, 'Mitsubishi'),
+(21, 'CATERPILLAR'),
+(22, 'HITACHI'),
+(23, 'JOHN DEERE'),
+(24, 'KOMATSU'),
+(25, 'VOLVO'),
+(26, 'DINA'),
+(27, 'YAMAHA'),
+(28, 'Ducati'),
+(30, 'FERRETI YATCHS'),
+(31, 'Bavaria Yatchs'),
+(32, 'Azimut'),
+(33, 'Suzuki');
 
 -- --------------------------------------------------------
 
@@ -787,25 +992,28 @@ INSERT INTO `requisitos` (`idRequisitos`, `descripcion`) VALUES
 CREATE TABLE IF NOT EXISTS `salida` (
   `idSalida` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
-  `FechaSalida` DATE NOT NULL,
+  `FechaSalida` date NOT NULL,
   `idTipoSalida` int(11) NOT NULL,
-  `idVentas` int(11),
-  `idRenta` int(11),
+  `idVentas` int(11) DEFAULT NULL,
+  `idRenta` int(11) DEFAULT NULL,
   PRIMARY KEY (`idSalida`),
   KEY `fk_Salida_has_Ventas_Ventas1` (`idVentas`),
   KEY `fk_Salida_has_Ventas_Renta1` (`idRenta`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `salida`
 --
 
-INSERT INTO `salida` (`idSalida`, `descripcion`, `FechaSalida`, `idTipoSalida`, `idVentas`,`idRenta`) VALUES
-(1, NULL, '2019-02-01', '1', NULL, NULL),
-(2, NULL, '2018-05-12', '2', NULL, NULL),
-(3, NULL, '2019-12-20', '3', NULL, NULL),
-(4, NULL, '2018-07-30', '4', NULL, NULL),
-(5, NULL, '2018-11-27', '5', NULL, NULL);
+INSERT INTO `salida` (`idSalida`, `descripcion`, `FechaSalida`, `idTipoSalida`, `idVentas`, `idRenta`) VALUES
+(1, NULL, '2019-02-01', 1, NULL, NULL),
+(2, NULL, '2018-05-12', 2, NULL, NULL),
+(3, NULL, '2019-12-20', 3, NULL, NULL),
+(4, NULL, '2018-07-30', 4, NULL, NULL),
+(5, NULL, '2018-11-27', 5, NULL, NULL),
+(6, '', '2019-04-21', 1, 1, NULL),
+(7, 'Venta', '2019-04-21', 1, 2, NULL),
+(8, 'Venta', '2019-04-21', 1, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -817,7 +1025,7 @@ CREATE TABLE IF NOT EXISTS `solicitudmantenimiento` (
   `idSolicitudMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idVehiculo` int(11) NOT NULL,
   `fechaSolicitud` date NOT NULL,
-  `fechaFin` date NULL,
+  `fechaFin` date DEFAULT NULL,
   `estado` varchar(20) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
   `idTipoMantenimiento` int(11) NOT NULL,
@@ -1220,17 +1428,18 @@ CREATE TABLE IF NOT EXISTS `vehiculo` (
   `idVehiculo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   `color` varchar(45) NOT NULL,
-  `precioVenta` float NOT NULL,
-  `precioRentaHora` float NOT NULL,
-  `precioRentaDia` float NOT NULL,
+  `precioVenta` float DEFAULT NULL,
+  `precioRentaHora` float DEFAULT NULL,
+  `precioRentaDia` float DEFAULT NULL,
   `placa` varchar(8) DEFAULT NULL,
-  `Año` YEAR NOT NULL,
+  `Año` year(4) NOT NULL,
   `idModelo` int(11) NOT NULL,
   `idInventario` int(11) NOT NULL,
   `idTipoVehiculo` int(11) NOT NULL,
   `idTipoGasolina` int(11) NOT NULL,
   `idTransmision` int(11) NOT NULL,
   `idCilindraje` int(11) NOT NULL,
+  `eliminado` tinyint(1) NOT NULL,
   PRIMARY KEY (`idVehiculo`),
   KEY `fk_Vehiculo_Modelo1` (`idModelo`),
   KEY `fk_Vehiculo_Productos1` (`idInventario`),
@@ -1244,39 +1453,39 @@ CREATE TABLE IF NOT EXISTS `vehiculo` (
 -- Volcado de datos para la tabla `vehiculo`
 --
 
-INSERT INTO `vehiculo` (`idVehiculo`, `descripcion`, `color`, `precioVenta`, `precioRentaHora`, `precioRentaDia`, `placa`, `Año`, `idModelo`, `idInventario`, `idTipoVehiculo`, `idTipoGasolina`, `idTransmision`, `idCilindraje`) VALUES
-(1, '', 'rojo', 1000000, 100, 200, 'PCU28959', '2018', 1, 2, 1, 1, 2, 1),
-(2, '', 'Negro', 1400000, 100, 200, 'LMU3325', '2017', 2, 2, 1, 2, 1, 2),
-(3, '', 'Negro', 1200000, 100, 200, 'JKL90432', '2015', 3, 2, 1, 3, 3, 3),
-(4, '', 'Negro', 1200000, 100, 200, 'ANM89233', '2016', 4, 2, 1, 4, 1, 4),
-(5, '', 'Azul', 1300000, 100, 200, 'QUWJ2839', '2015', 5, 2, 1, 4, 1, 5),
-(6, '', 'Verde', 1700000, 100, 200, 'CKL87392', '2018', 6, 2, 1, 3, 2, 5),
-(7, '', 'Blanco', 1800000, 100, 200, 'PKS34940', '2017', 7, 2, 1, 2, 2, 6),
-(8, '', 'Negro', 1500000, 100, 200, 'PKJUE829', '2015', 8, 2, 1, 1, 3, 7),
-(9, '', 'Azul', 2000000, 100, 200, 'WERT3829', '2017', 9, 2, 1, 1, 1, 1),
-(10, '', 'Blanco', 2500000, 100, 200, 'IOP00292', '2018', 10, 2, 1, 2, 1, 2),
-(11, '', 'Azul', 1700000, 100, 200, 'UIE793J2', '2015', 11, 2, 1, 3, 1, 3),
-(12, '', 'Negro', 1500000, 100, 200, '2YWHJD88', '2016', 12, 2, 1, 4, 1, 4),
-(13, '', 'Negro', 1600000, 100, 200, 'LKI89772', '2016', 13, 2, 1, 4, 2, 5),
-(14, '', 'Negro', 1500000, 100, 200, 'KLIO0383', '2018', 14, 2, 1, 3, 2, 6),
-(15, '', 'Verde', 1400000, 100, 200, 'PCWHEE24', '2017', 15, 2, 1, 2, 3, 7),
-(16, '', 'Verde', 1300000, 50, 200, 'JKL90432', '2015', 16, 1, 2, 1, 3, 2),
-(17, '', 'Verde', 1200000, 50, 200, 'ANM89233', '2016', 17, 1, 2, 1, 2, 3),
-(18, '', 'Verde', 1500000, 50, 200, 'QUWJ2839', '2016', 18, 1, 2, 2, 2, 2),
-(19, '', 'Rojo', 1200000, 50, 200, 'CKL87392', '2017', 19, 1, 2, 3, 2, 2),
-(20, '', 'Rojo', 1300000, 50, 200, 'PKS34940', '2015', 20, 1, 2, 4, 1, 1),
-(21, '', 'Rojo', 80000, 50, 200, 'PKJUE829', '2018', 21, 7, 3, 4, 1, 2),
-(22, '', 'Azul', 350000, 50, 200, 'WERT3829', '2019', 22, 7, 3, 3, 1, 4),
-(23, '', 'Azul', 70000, 50, 200, 'PCWHEE24', '2016', 23, 7, 3, 2, 2, 5),
-(24, '', 'Azul', 60000, 50, 200, 'KLIO0383', '2015', 24, 7, 3, 1, 1, 2),
-(25, '', 'Amarillo', 500000, 500, 2000, '2YWHJD88', '2016', 25, 4, 5, 4, 1, 6),
-(26, '', 'amarillo', 500000, 500, 2000, 'UIE793J2', '2017', 26, 4, 5, 3, 2, 7),
-(27, '', 'Amarillo', 500000, 500, 2000, 'IOP00292', '2016', 27, 8, 5, 2, 2, 3),
-(28, '', 'Amarillo', 650000, 500, 2000, 'WERT3829', '2015', 28, 9, 5, 1, 3, 2),
-(29, '', 'Amarillo', 600000, 500, 2000, 'PKJUE829', '2018', 29, 8, 5, 4, 3, 2),
-(30, '', 'Blanco', 1300000, 1500, 20000, 'QUWJ2839', '2015', 30, 5, 4, 2, 3, 4),
-(31, '', 'Blanco', 1200000, 1200, 20000, 'KLIO0383', '2017', 30, 5, 4, 2, 3, 5),
-(32, '', 'Blanco', 15000000, 1000, 20000, 'UIE793J2', '2018', 30, 5, 4, 2, 2, 6);
+INSERT INTO `vehiculo` (`idVehiculo`, `descripcion`, `color`, `precioVenta`, `precioRentaHora`, `precioRentaDia`, `placa`, `Año`, `idModelo`, `idInventario`, `idTipoVehiculo`, `idTipoGasolina`, `idTransmision`, `idCilindraje`, `eliminado`) VALUES
+(1, '', 'rojo', 1000000, 0, 0, 'PCU28959', 2018, 1, 2, 1, 1, 2, 1, 1),
+(2, '', 'Negro', 0, 100, 200, 'LMU3325', 2017, 2, 2, 1, 2, 1, 2, 0),
+(3, '', 'Negro', 1200000, 0, 0, 'JKL90432', 2015, 3, 2, 1, 3, 3, 3, 0),
+(4, '', 'Negro', 0, 100, 200, 'ANM89233', 2016, 4, 2, 1, 4, 1, 4, 0),
+(5, '', 'Azul', 1300000, 0, 0, 'QUWJ2839', 2015, 5, 2, 1, 4, 1, 5, 0),
+(6, '', 'Verde', 0, 100, 200, 'CKL87392', 2018, 6, 2, 1, 3, 2, 5, 0),
+(7, '', 'Blanco', 1800000, 0, 0, 'PKS34940', 2017, 7, 2, 1, 2, 2, 6, 0),
+(8, '', 'Negro', 0, 100, 200, 'PKJUE829', 2015, 8, 2, 1, 1, 3, 7, 0),
+(9, '', 'Azul', 2000000, 0, 0, 'WERT3829', 2017, 9, 2, 1, 1, 1, 1, 0),
+(10, '', 'Blanco', 0, 100, 200, 'IOP00292', 2018, 10, 2, 1, 2, 1, 2, 0),
+(11, '', 'Azul', 1700000, 0, 0, 'UIE793J2', 2015, 11, 2, 1, 3, 1, 3, 0),
+(12, '', 'Negro', 0, 100, 200, '2YWHJD88', 2016, 12, 2, 1, 4, 1, 4, 0),
+(13, '', 'Negro', 1600000, 0, 0, 'LKI89772', 2016, 13, 2, 1, 4, 2, 5, 1),
+(14, '', 'Negro', 1500000, 0, 0, 'KLIO0383', 2018, 14, 2, 1, 3, 2, 6, 1),
+(15, '', 'Verde', 0, 100, 200, 'PCWHEE24', 2017, 15, 2, 1, 2, 3, 7, 0),
+(16, '', 'Verde', 1300000, 0, 0, 'JKL90432', 2015, 16, 1, 2, 1, 3, 2, 0),
+(17, '', 'Verde', 0, 50, 200, 'ANM89233', 2016, 17, 1, 2, 1, 2, 3, 0),
+(18, '', 'Verde', 1500000, 0, 0, 'QUWJ2839', 2016, 18, 1, 2, 2, 2, 2, 0),
+(19, '', 'Rojo', 0, 50, 200, 'CKL87392', 2017, 19, 1, 2, 3, 2, 2, 0),
+(20, '', 'Rojo', 1300000, 0, 0, 'PKS34940', 2015, 20, 1, 2, 4, 1, 1, 0),
+(21, '', 'Rojo', 0, 50, 200, 'PKJUE829', 2018, 21, 7, 3, 4, 1, 2, 0),
+(22, '', 'Azul', 350000, 0, 0, 'WERT3829', 2019, 22, 7, 3, 3, 1, 4, 0),
+(23, '', 'Azul', 0, 50, 200, 'PCWHEE24', 2016, 23, 7, 3, 2, 2, 5, 0),
+(24, '', 'Azul', 60000, 0, 0, 'KLIO0383', 2015, 24, 7, 3, 1, 1, 2, 0),
+(25, '', 'Amarillo', 0, 500, 2000, '2YWHJD88', 2016, 25, 4, 5, 4, 1, 6, 0),
+(26, '', 'amarillo', 500000, 0, 0, 'UIE793J2', 2017, 26, 4, 5, 3, 2, 7, 0),
+(27, '', 'Amarillo', 0, 500, 2000, 'IOP00292', 2016, 27, 8, 5, 2, 2, 3, 0),
+(28, '', 'Amarillo', 650000, 0, 0, 'WERT3829', 2015, 28, 9, 5, 1, 3, 2, 0),
+(29, '', 'Amarillo', 0, 500, 2000, 'PKJUE829', 2018, 29, 8, 5, 4, 3, 2, 0),
+(30, '', 'Blanco', 1300000, 0, 0, 'QUWJ2839', 2015, 30, 5, 4, 2, 3, 4, 0),
+(31, '', 'Blanco', 0, 1200, 20000, 'KLIO0383', 2017, 30, 5, 4, 2, 3, 5, 0),
+(32, '', 'Blanco', 0, 1000, 20000, 'UIE793J2', 2018, 30, 5, 4, 2, 2, 6, 0);
 
 -- --------------------------------------------------------
 
@@ -1298,18 +1507,9 @@ CREATE TABLE IF NOT EXISTS `ventas` (
 --
 
 INSERT INTO `ventas` (`idVentas`, `idFactura`, `idVehiculo`) VALUES
-('1', 2, 2),
-('10', 6, 19),
-('11', 8, 20),
-('12', 3, 22),
-('2', 3, 4),
-('3', 4, 6),
-('4', 5, 8),
-('5', 6, 10),
-('6', 2, 12),
-('7', 3, 14),
-('8', 4, 16),
-('9', 5, 18);
+('3', 30, 1),
+('2', 29, 14),
+('1', 28, 13);
 
 -- --------------------------------------------------------
 
@@ -1363,42 +1563,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vw_empleado_ver`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleado_ver` AS (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`snombre` AS `snombre`,`p`.`papellido` AS `papellido`,`p`.`sapellido` AS `sapellido`,`p`.`correo` AS `correo`,`c`.`descripcion` AS `cargo`,`p`.`noIdentidad` AS `noIdentidad`,`p`.`direccion` AS `direccion`,`e`.`fechaInicio` AS `fechaInicio`,`e`.`fechaFin` AS `fechaFin`,`u`.`nombreUsuario` AS `nombreUsuario`,`u`.`contraseña` AS `contrasenia`,`u`.`rutaImagen` AS `rutaImagen`,group_concat(`t`.`telefono` separator ',') AS `telefonos`,`c`.`idCargo` AS `idCargo` from ((((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) join `usuario` `u` on((`u`.`idUsuario` = `e`.`idUsuario`))) join `telefonos` `t` on((`t`.`idPersona` = `p`.`idPersona`))) where (`e`.`eliminado` <> 1) group by `e`.`idEmpleado`,`p`.`pnombre`,`p`.`snombre`,`p`.`papellido`,`p`.`sapellido`,`p`.`correo`,`c`.`descripcion`,`p`.`noIdentidad`,`p`.`direccion`,`e`.`fechaInicio`,`e`.`fechaFin`,`u`.`nombreUsuario`,`u`.`contraseña`,`u`.`rutaImagen`,`c`.`idCargo`);
-
-ALTER TABLE vehiculo ADD COLUMN eliminado BOOLEAN NOT NULL;
-
-INSERT INTO marca (idMarca, descripcion) VALUES
-(1, 'Isuzu'),
-(2, 'Mazda'),
-(3, 'Porsche'),
-(4, 'BMW'),
-(5, 'Honda'),
-(6, 'Nissan'),
-(7, 'Ferrari'),
-(8, 'Jaguar'),
-(9, 'Hummer'),
-(10, 'Lamborghini'),
-(11, 'Mercedes-Benz'),
-(12, 'Toyota'),
-(13, 'Cadillac'),
-(14, 'Hyundai'),
-(15, 'Jeep'),
-(16, 'Maserati'),
-(17, 'Volkswagen'),
-(18, 'Ford'),
-(19, 'KIA'),
-(20, 'Mitsubishi'),
-(21, 'CATERPILLAR'),
-(22, 'HITACHI'),
-(23, 'JOHN DEERE'),
-(24, 'KOMATSU'),
-(25, 'VOLVO'),
-(26, 'DINA'),
-(27, 'YAMAHA'),
-(28, 'Ducati'),
-(30, 'FERRETI YATCHS'),
-(31, 'Bavaria Yatchs'),
-(32, 'Azimut'),
-(33, 'Suzuki');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
