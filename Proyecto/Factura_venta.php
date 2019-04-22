@@ -21,7 +21,10 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 </head>
+
+
 
 <body>
     <!-- ============================================================== -->
@@ -212,107 +215,84 @@
                                         <IMG SRC="assets/images/logo2.png">
                                     </div>
                                     <h3 style="margin: 0px 0px 30px 0px;">FACTURA DE VENTA</h3>
-                                                <input type="hidden" id="idPersona">
-                                                <input type="hidden" id="idCliente">
+                                                
                                                <div class="form-group row">
                                                         <label class="col-sm-3 text-left control-label col-form-label">Codigo de Factura</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_codigoFactura"
-                                                                placeholder="Codigo No">
+                                                        <div class="col-sm-9" id="codigoFactura">
+                                                           
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 text-left control-label col-form-label">Fecha</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="Date" class="form-control" id="txt_fecha" >
+                                                        <div class="col-sm-9" id="fecha">
+                                                            
                                                         </div>
                                                     </div>
                                                  <div class="form-group row">
                                                     <label class="col-sm-3 text-left control-label col-form-label">Nombre Cliente</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="txt_pnombre"
-                                                            placeholder="Primer nombre">
-                                                    </div>
-                                                    <div class="col-sm-5">
-                                                        <input type="text" class="form-control" id="txt_snombre"
-                                                            placeholder="Segundo nombre">
-                                                    </div>
-                                                 </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 text-left control-label col-form-label">Apellidos Cliente</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="txt_papellido"
-                                                            placeholder="Primer apellido">
-                                                    </div>
-                                                    <div class="col-sm-5">
-                                                        <input type="text" class="form-control" id="txt_saptxt_papellido"
-                                                            placeholder="Segundo apellido">
-                                                    </div>
-                                                </div>
+                                                    <div class="col-sm-9">
+                                                        <select type="text" id="idCliente" class="form-control border border-secondary" maxlength="50">
+                                                        <option value="">Seleccione el nombre del cliente</option>
+                                                           
+                                                        </select>
+                                                        </div>
+                                                </div> 
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 text-left control-label col-form-label">Nombre Empleado</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="txt_pnombre"
-                                                            placeholder="Primer nombre">
-                                                    </div>
-                                                     <div class="col-sm-5">
-                                                        <input type="text" class="form-control" id="txt_papellido"
-                                                            placeholder="Primer apellido">
-                                                    </div>                                         
+                                                    <div class="col-sm-9">
+                                                        <select type="text" id="idEmpleado" class="form-control border border-secondary" maxlength="50">
+                                                        <option value="">Seleccione el nombre del empleado</option>
+                                                           
+                                                        </select>
+                                                        </div>                                        
                                                                                      
                                                 </div>
+
                                                 <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Vehiculo</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_vehiculo"
-                                                                placeholder="Vehiculo">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Total Venta</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_totalVenta"
-                                                                placeholder="Total">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Impuesto</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_Imp"
-                                                                placeholder="Impuesto">
-                                                        </div>
-                                                    </div>
-                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label"> Tipo de Descuento</label>
+                                                        <label class="col-sm-3 text-left control-label col-form-label"> Forma de Pago</label>
                                                         <div class="col-sm-9">
                                                         
-                                                        <select type="text" id="tipoDescuento" class="form-control border border-secondary" maxlength="50">
-                                                            <option value="1">Tercera Edad</option>
-                                                            <option value="2">Familiares y amigos</option>
-                                                            <option value="3">Navidad</option>
-                                                            <option value="4">Año Nuevo</option>
+                                                        <select type="text" id="idFormaPago" class="form-control border border-secondary" maxlength="50">
+                                                          
+                                                        <option value="">Seleccione la forma de pago</option>
                                                         </select>
                                                     
                                                         </div>
                                                     </div>
-                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Descuento</label>
+
+                                                <div class="form-group row">
+                                                        <label class="col-sm-3 text-left control-label col-form-label">Vehiculo</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_Des"
-                                                                placeholder="Descuento">
+                                                        <select type="text" id="idVehiculo" class="form-control border border-secondary" maxlength="50">
+                                                            
+                                                        <option value="">Seleccione el vehiculo</option>
+                                                        </select>
                                                         </div>
                                                     </div>
+                                                    
+                                                     <div class="form-group row">
+                                                        <label class="col-sm-3 text-left control-label col-form-label"> Tipo de Descuento</label>
+                                                        <div class="col-sm-9">
+                                                        
+                                                        <select type="text" id="idTipoDescuento" class="form-control border border-secondary" maxlength="50">
+                                                        <option value="">Seleccione el tipo de descuento</option>
+                                                        </select>
+                                                    
+                                                        </div>
+                                                    </div>
+                                                     
 
                                                      <div class="form-group row">
                                                         <label class="col-sm-3 text-left control-label col-form-label">Total</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_Total"
-                                                                placeholder="Total">
+                                                        <div class="col-sm-9" id="total">
+                                                       
+                                                            
+                                                    
                                                         </div>
                                                     </div>
                                             </div>
                                                     <div class="card-body" style="text-align:center;">
-                                    <button type="button" class="btn btn-success btn-lg" style=" background-color:#2F4F4F; border-color:white ">IMPRIMIR</button>
+                                    <button type="button" class="btn btn-success btn-lg" style=" background-color:#2F4F4F; border-color:white " id="AGREGAR">IMPRIMIR</button>
                                 </div>
                                 </form>
                                 
@@ -373,6 +353,8 @@
     <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="dist/js/pages/chart/chart-page-init.js"></script>
+    <script src="dist/js/js_form/js_factura_venta.js"></script>
+   
 
 </body>
 
