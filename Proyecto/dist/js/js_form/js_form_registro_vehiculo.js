@@ -65,7 +65,7 @@ $(document).ready(function(){
 		if(!errors == ""){
 			alert(errors);
 			return;
-	  }
+	  	}
 
 		var parametros= "slc_color=" + $("#slc_color").val()+
 						"&txt_precioVenta=" + $("#txt_precioVenta").val()+
@@ -91,23 +91,29 @@ $(document).ready(function(){
 		}
         });//ajax
         
-        /*$("input[name='file_foto[]']").on("change", function(){
-            var formData = new FormData($("#form_img")[0]);
-            image = formData;
-            $.ajax({
-                    url: "../ajax/eventos_form_registro_vehiculo.php?accion=7",
-                    type: "POST",
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function(datos){
-                            $("#div_resultado").html(datos);
-                    }
-            });//ajax
-        });//inputfile*/
+	   var file = document.getElementById('file_foto[]');
+	   if (file.value === '') {
+		console.log ("debe ingresar la foto del empleado");
+		}
+		else {
+			var formData = new FormData($("#form_img")[0]);
+			image = formData;
+			$.ajax({
+					url: "../ajax/eventos_form_registro_vehiculo.php?accion=8",
+					type: "POST",
+					data: formData,
+					contentType: false,
+					processData: false,
+					success: function(datos){
+							$("#div_resultado").html(datos);
+					}
+			});//ajax
+		}
+	   
 
-    });//btn guardar
-    
+	});//btn guardar
+	
+
     validarDatos = function () {
 		var errors = "";
 		var re = new RegExp(/[+-]?([0-9]*[.])?[0-9]+/);
