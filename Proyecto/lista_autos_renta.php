@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Autos en renta</title>
+    <title>Vehiculos en renta</title>
     <!-- Custom CSS -->
     <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -156,36 +156,46 @@
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
-                    <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="lista_autos_venta.html" aria-expanded="false"><i
-                                    class="mdi mdi-shopping"></i><span class="hide-menu">Compra</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="lista_autos_renta.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
-                                    class="hide-menu">Renta</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
-                                    class="hide-menu">Historial</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="tables.html" aria-expanded="false"><i class="mdi mdi-oil"></i><span
-                                    class="hide-menu">Mantenimiento</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
-                                    class="hide-menu">Repuestos</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
-                                    class="hide-menu">Authentication </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="authentication-login.html" class="sidebar-link"><i
-                                            class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Login </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="authentication-register.html" class="sidebar-link"><i
-                                            class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Register
-                                        </span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
+                        <ul id="sidebarnav" class="p-t-30">
+                            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                    href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
+                                        class="hide-menu">Vehiculos</span></a>
+                                <ul aria-expanded="false" class="collapse  first-level">
+                                    <li class="sidebar-item"><a href="ver_todos_autos.php" class="sidebar-link"><i
+                                                class="mdi mdi-car"></i><span class="hide-menu">
+                                                Ver todos
+                                            </span></a></li>
+                                    <li class="sidebar-item"><a href="lista_autos_venta.php" class="sidebar-link"><i
+                                                class="mdi mdi-shopping"></i><span class="hide-menu">Vehiculos en
+                                                venta</span></a></li>
+                                    <li class="sidebar-item"><a href="lista_autos_renta.php" class="sidebar-link"><i
+                                                class="mdi mdi-cash"></i><span class="hide-menu"> Vehiculos en
+                                                renta</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
+                                        class="hide-menu">Historial</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="tables.html" aria-expanded="false"><i class="mdi mdi-oil"></i><span
+                                        class="hide-menu">Mantenimiento</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
+                                        class="hide-menu">Repuestos</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                    href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
+                                        class="hide-menu">Authentication </span></a>
+                                <ul aria-expanded="false" class="collapse  first-level">
+                                    <li class="sidebar-item"><a href="authentication-login.html" class="sidebar-link"><i
+                                                class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Login </span></a>
+                                    </li>
+                                    <li class="sidebar-item"><a href="authentication-register.html" class="sidebar-link"><i
+                                                class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Register
+                                            </span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->

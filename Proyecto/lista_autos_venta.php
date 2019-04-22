@@ -9,19 +9,18 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Detalle del Empleado</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>Vehiculos en venta</title>
     <!-- Custom CSS -->
-    <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="../dist/css/style.min.css" rel="stylesheet">
+    <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-    
 </head>
 
 <body>
@@ -50,19 +49,19 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="../index.html">
+                    <a class="navbar-brand" href="index.html">
                         <!-- Logo icon -->
                         <b class="logo-icon p-l-10">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="../assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+                            <img src="assets/images/logo-icon.png" alt="homepage" class="light-logo" />
 
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="../assets/images/logo2.png" alt="homepage" class="light-logo" />
+                            <img src="assets/images/logo2.png" alt="homepage" class="light-logo" />
 
                         </span>
                         <!-- Logo icon -->
@@ -117,7 +116,28 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                    src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
+                                    My Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i>
+                                    My Balance</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i>
+                                    Inbox</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                        class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                        class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <div class="dropdown-divider"></div>
+                                <div class="p-l-30 p-10"><a href="javascript:void(0)"
+                                        class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                            </div>
+                        </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -136,36 +156,46 @@
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
-                    <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../index.html" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
-                                    class="hide-menu">Compra</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../charts.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
-                                    class="hide-menu">Renta</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
-                                    class="hide-menu">Historial</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../tables.html" aria-expanded="false"><i class="mdi mdi-oil"></i><span
-                                    class="hide-menu">Mantenimiento</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
-                                    class="hide-menu">Repuestos</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
-                                    class="hide-menu">Authentication </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="authentication-login.html" class="sidebar-link"><i
-                                            class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Login </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="authentication-register.html" class="sidebar-link"><i
-                                            class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Register
-                                        </span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
+                        <ul id="sidebarnav" class="p-t-30">
+                            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                    href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
+                                        class="hide-menu">Vehiculos</span></a>
+                                <ul aria-expanded="false" class="collapse  first-level">
+                                    <li class="sidebar-item"><a href="ver_todos_autos.html" class="sidebar-link"><i
+                                                class="mdi mdi-car"></i><span class="hide-menu">
+                                                Ver todos
+                                            </span></a></li>
+                                    <li class="sidebar-item"><a href="lista_autos_venta.php" class="sidebar-link"><i
+                                                class="mdi mdi-shopping"></i><span class="hide-menu">Vehiculos en
+                                                venta</span></a></li>
+                                    <li class="sidebar-item"><a href="lista_autos_renta.php" class="sidebar-link"><i
+                                                class="mdi mdi-cash"></i><span class="hide-menu"> Vehiculos en
+                                                renta</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
+                                        class="hide-menu">Historial</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="tables.html" aria-expanded="false"><i class="mdi mdi-oil"></i><span
+                                        class="hide-menu">Mantenimiento</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
+                                        class="hide-menu">Repuestos</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                    href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
+                                        class="hide-menu">Authentication </span></a>
+                                <ul aria-expanded="false" class="collapse  first-level">
+                                    <li class="sidebar-item"><a href="authentication-login.html" class="sidebar-link"><i
+                                                class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Login </span></a>
+                                    </li>
+                                    <li class="sidebar-item"><a href="authentication-register.html" class="sidebar-link"><i
+                                                class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Register
+                                            </span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -179,49 +209,51 @@
         <div class="page-wrapper">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="padding: 50px">
+            <div class="container-fluid" style="padding: 0">
                 <!-- ============================================================== -->
-                <!-- Inicio Formulario -->
+                <!-- Galeria -->
                 <!-- ============================================================== -->
-                <input type="hidden" id="txt_idEmpleado"name="txt_idEmpleado" value="<?php echo $_GET["idEmpleado"];?>">
-                
-                <div class= "row">
-                    <div class="col-md-9 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
-                        <div id="div_respuesta" class="card-body" style="text-align:center;">
-                            
-                        </div>
-                        <div id="div_respuesta2" class="card-body" style="text-align:center;">
-                            
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ventana de confirmacion</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Esta seguro de borrar el empleado.
 
-                    </div>
-                    <div class="modal-footer">
-                        <button id="confEliminar" type="button" class="btn btn-danger" data-dismiss="modal">Si</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                    
+                <div class="row el-element-overlay" style="padding:100px;">
+                <?php
+                        include("class/class_conexion.php");
+                        $conexion = new conexion();
+                        $sql = "SELECT v.idVehiculo, mo.descripcion AS modelo, mr.descripcion AS marca FROM vehiculo v
+                                INNER JOIN modelo mo ON mo.idModelo=v.idModelo
+                                INNER JOIN marca mr ON mr.idMarca=mo.idMarca
+                                WHERE v.eliminado=0;";
+                        $resultado=$conexion->ejecutarInstruccion($sql);
+                        if(!$resultado){
+                            echo "Actualmente no hay vehiculos";
+                        }
+                        else{
+                            while($fila=$conexion->obtenerFila($resultado)){
+                                
+                                echo '
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+                                            <div class="el-card-item">
+                                                <div class="el-card-avatar el-overlay-1"> <img
+                                                        src="assets/images/autos/Mazda Cx-3/1.jpg" alt="user" />
+                                                    <div class="el-overlay">
+                                                    </div>
+                                                </div>
+                                                <div class="el-card-content">
+                                                    <h4 class="m-b-0">'.$fila["marca"].' '.$fila["modelo"].'</h4> <span class="text-muted">Ver detalles</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>';
+            
+                            }
+                        }
+                        $conexion->liberarResultado($resultado);
+                        $conexion->cerrarConexion();    
 
-                
+                    ?>
+                </div>
                 <!-- ============================================================== -->
-                <!-- Fin Formulario -->
+                <!-- Fin Galeria -->
                 <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
@@ -250,32 +282,30 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="../assets/extra-libs/sparkline/sparkline.js"></script>
+    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
     <!--Wave Effects -->
-    <script src="../dist/js/waves.js"></script>
+    <script src="dist/js/waves.js"></script>
     <!--Menu sidebar -->
-    <script src="../dist/js/sidebarmenu.js"></script>
+    <script src="dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="../dist/js/custom.min.js"></script>
+    <script src="dist/js/custom.min.js"></script>
     <!--This page JavaScript -->
     <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
     <!-- Charts js Files -->
-    <script src="../assets/libs/flot/excanvas.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.pie.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.time.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.stack.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
-    <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="../dist/js/pages/chart/chart-page-init.js"></script>
-    <!-- controlador -->
-    <script src="../dist/js/js_form/js_form_empleado.js"></script>
-    
+    <script src="assets/libs/flot/excanvas.js"></script>
+    <script src="assets/libs/flot/jquery.flot.js"></script>
+    <script src="assets/libs/flot/jquery.flot.pie.js"></script>
+    <script src="assets/libs/flot/jquery.flot.time.js"></script>
+    <script src="assets/libs/flot/jquery.flot.stack.js"></script>
+    <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
+    <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="dist/js/pages/chart/chart-page-init.js"></script>
+
 </body>
 
 </html>
