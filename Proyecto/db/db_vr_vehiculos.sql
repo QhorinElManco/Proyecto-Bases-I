@@ -581,7 +581,7 @@ INSERT INTO `formapagofactura` (`idFormaPago`, `idFactura`) VALUES
 
 CREATE TABLE IF NOT EXISTS `fotos` (
   `idFotos` int(11) NOT NULL AUTO_INCREMENT,
-  `direccionEnDisco` varchar(45) NOT NULL,
+  `direccionEnDisco` varchar(1000) NOT NULL,
   `idVehiculo` int(11) NOT NULL,
   PRIMARY KEY (`idFotos`),
   UNIQUE KEY `direccionEnDisco` (`direccionEnDisco`),

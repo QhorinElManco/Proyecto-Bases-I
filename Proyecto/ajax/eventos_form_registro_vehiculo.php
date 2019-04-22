@@ -63,7 +63,7 @@
             $conexion->cerrarConexion();
         break;
         case '7'://guardar vehiculo
-            $conexion = new Conexion();             
+            $conexion = new Conexion();
 
             $slc_color = $_POST['slc_color'];
             $txt_precioVenta= $_POST['txt_precioVenta'];
@@ -130,7 +130,7 @@
                                 $sql4 = "CALL SP_GESTION_VEHICULO_FOTO('$idVehiculo','','$destino','$accion2',@p5,@p6);";
                                 $salida4 = "SELECT @p5 AS OcurreError, @p6 AS mensaje;";
                                 $resultado4 = $conexion->ejecutarInstruccion($sql4);
-                                $respuesta4 = $conexion->ejecutarInstruccion($salida4);//*/
+                                $respuesta4 = $conexion->ejecutarInstruccion($salida4);//
                             }
                             else{
                                 echo "<br>No se ha podido mover el archivo: ".$_FILES["file_foto"]["name"][$i];

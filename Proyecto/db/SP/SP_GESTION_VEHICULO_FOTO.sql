@@ -3,7 +3,7 @@ DROP PROCEDURE IF EXISTS SP_GESTION_VEHICULO_FOTO$$
 CREATE PROCEDURE SP_GESTION_VEHICULO_FOTO(
     IN pnIdVehiculo INT,
     IN pnIdFotos INT,
-    IN pcDireccionEnDisco VARCHAR(45),
+    IN pcDireccionEnDisco VARCHAR(1000),
     IN pcAccion VARCHAR(45),
     OUT pbOcurreError BOOLEAN,
     OUT pcMensajeError VARCHAR(1000)
