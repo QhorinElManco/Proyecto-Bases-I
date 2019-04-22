@@ -117,7 +117,11 @@ $(document).ready(function(){
     validarDatos = function () {
 		var errors = "";
 		var re = new RegExp(/[+-]?([0-9]*[.])?[0-9]+/);
-		//var file = document.getElementById('file_foto');
+		var file = document.getElementById('file_foto[]');
+
+	   if (file.value === '') {
+		errors += "Debe ingresar el color del vehiculo\n";
+		}
 
 		if($("#slc_color").val() ==''){
 			errors += "Debe ingresar el color del vehiculo\n";

@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-04-2019 a las 01:35:40
--- Versión del servidor: 5.5.24-log
+-- Tiempo de generación: 22-04-2019 a las 08:32:10
+-- Versión del servidor: 5.00.15
 -- Versión de PHP: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -146,6 +146,602 @@ SP:BEGIN
     END if;
     SET pcMensajeError="Se agregado de forma exitosa la factura";
     LEAVE SP;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_EMPLEADO`(
+    IN pcpNombre VARCHAR(45),
+    IN pcsNombre VARCHAR(45),
+    IN pcpApellido VARCHAR(45),
+    IN pcsApellido VARCHAR(45),
+    IN pcCorreo VARCHAR(45),
+    IN pcDireccion VARCHAR(60),
+    IN pcNoIdentidad VARCHAR(45),
+    IN pcTelefono VARCHAR(45),
+    IN pdFechaInicio DATE,
+    IN pdFechaFin DATE,
+    IN pnIdCargo INT,
+    IN pcNombreUsuario VARCHAR(45),
+    IN pcContrasenia VARCHAR(45),
+    IN pcRutaImagen VARCHAR(1000),
+    IN pnIdEmpleado INT,
+    IN pcAccion VARCHAR(100),
+    OUT pbOcurreError BOOLEAN,
+    OUT pcMensajeError VARCHAR(1000)
+)
+SP:BEGIN
+    DECLARE vnConteo, vnIdPersona, vnIdEmpleado, vnIdTelefonos, vnIdUsuario, vnIdPersona2,vnConteo2 INT;
+    DECLARE vcMensajeTemp VARCHAR(1000);
+    SET pbOcurreError = TRUE;
+    SET vcMensajeTemp = '';
+
+    SET AUTOCOMMIT=0;
+    START TRANSACTION;
+
+    IF pcAccion = 'AGREGAR' OR pcAccion = 'EDITAR' THEN
+        IF pcpNombre = '' OR pcpNombre  IS NULL THEN
+            SET vcMensajeTemp = 'Primer nombre, ';
+        END IF;
+        IF pcsNombre = '' OR pcsNombre IS NULL THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'Segundo nombre, ');
+        END IF;
+        IF pcpApellido = '' OR pcpApellido IS NULL THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'primer apellido, ');
+        END IF;
+        IF pcsApellido = '' OR pcsApellido IS NULL THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'segundo apellido, ');
+        END IF;
+        IF pcCorreo = '' OR pcCorreo IS NULL THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'correo, ');
+        END IF;
+        IF pcDireccion = '' OR pcDireccion IS NULL THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'direccion, ');
+        END IF;
+        IF pcNoIdentidad = '' OR pcNoIdentidad IS NULL THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'identidad, ');
+        END IF;
+        IF pcTelefono = '' OR pcTelefono IS NULL THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'telefono, ');
+        END IF;
+        IF pdFechaInicio = '' OR pdFechaInicio IS NULL THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'fecha de inicio, ');
+        END IF;
+        IF pdFechaFin = '' THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'fecha fin, ');
+        END IF;
+        IF pnIdCargo = '' OR pnIdCargo IS NULL THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'cargo, ');
+        END IF;
+        IF pcNombreUsuario = '' OR pcNombreUsuario IS NULL THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'nombre de usuario, ');
+        END IF;
+        IF pccontrasenia = '' OR pccontrasenia IS NULL THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'contrasenia, ');
+        END IF;
+        IF pcRutaImagen = '' OR pcRutaImagen IS NULL THEN
+            SET vcMensajeTemp = CONCAT(vcMensajeTemp,'ruta de la imagen, ');
+        END IF;
+        IF vcMensajeTemp <> '' THEN
+            SET pcMensajeError = CONCAT('Faltan los siguientes campos: ', vcMensajeTemp);
+            LEAVE SP;
+        END IF;
+
+        SELECT COUNT(*) INTO vnConteo FROM Cargo
+        WHERE idCargo = pnIdCargo;
+        IF vnConteo = 0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError = 'No existe el idCargo';
+            LEAVE SP;
+        END IF;
+        
+    END IF;
+    IF pcAccion = 'ELIMINAR' OR pcAccion = 'EDITAR' THEN
+
+        IF pnIdEmpleado = '' OR pnIdEmpleado IS NULL THEN
+            SET vcMensajeTemp =  'idEmpleado, ';
+        END IF;
+        IF vcMensajeTemp <> '' THEN
+            SET pcMensajeError = CONCAT('Faltan campos requeridos: ', vcMensajeTemp);
+        END IF;
+
+        SELECT COUNT(*) INTO vnConteo FROM Empleado
+        WHERE idEmpleado = pnIdEmpleado;
+        IF vnConteo = 0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError = 'idEmpleado no existe';
+            LEAVE SP;
+        END if;
+
+        SELECT COUNT(*) INTO vnConteo FROM Empleado e
+        INNER JOIN Usuario u ON u.idUsuario = e.idUsuario
+        WHERE e.idEmpleado = pnIdEmpleado;
+        IF vnConteo = 0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError = 'El empleado no tiene usuario';
+            LEAVE SP;
+        END IF;
+        SELECT COUNT(*) INTO vnConteo FROM Empleado e
+        INNER JOIN Persona p ON p.idPersona = e.idPersona
+        INNER JOIN telefonos t ON t.idPersona = p.idPersona
+        WHERE e.idEmpleado = pnIdEmpleado;
+        IF vnConteo = 0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError = 'El empleado no tiene telefonos';
+            LEAVE SP;
+        END IF;
+
+    END IF;
+
+    IF pcAccion = 'AGREGAR' THEN
+        
+
+        SELECT COUNT(*) INTO vnConteo FROM Usuario 
+        WHERE nombreUsuario = pcNombreUsuario;
+        IF vnConteo > 0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError= CONCAT('El usuario', pcNombreUsuario,' ya existe en el SI');
+            LEAVE SP; 
+        END IF;        
+
+        SELECT idPersona, COUNT(*) INTO  vnIdPersona2, vnConteo2 FROM persona
+        WHERE noIdentidad = pcNoIdentidad;
+        IF vnConteo2 = 0 THEN
+            INSERT INTO persona
+                    (idPersona, 
+                    pnombre, 
+                    snombre, 
+                    papellido, 
+                    sapellido, 
+                    correo, 
+                    direccion, 
+                    noIdentidad) 
+            VALUES (NULL,
+                    pcpNombre,
+                    pcsNombre,
+                    pcpApellido,
+                    pcsApellido,
+                    pcCorreo,
+                    pcDireccion,
+                    pcNoIdentidad);
+            
+
+            SELECT MAX(idPersona) INTO vnIdPersona FROM Persona;
+
+            INSERT INTO telefonos
+                        (idTelefonos
+                        , telefono
+                        , idPersona) 
+            VALUES (NULL
+                    ,pcTelefono
+                    ,vnIdPersona);
+            
+            INSERT INTO usuario
+                    (idUsuario
+                    , nombreUsuario
+                    , contraseña
+                    , rutaImagen) 
+            VALUES (NULL
+                    ,pcNombreUsuario
+                    ,pcContrasenia
+                    ,pcRutaImagen);
+            
+            SELECT MAX(idUsuario) INTO vnIdUsuario FROM usuario;
+
+            INSERT INTO empleado
+                        (idEmpleado
+                        , fechaInicio
+                        , fechaFin
+                        , idPersona
+                        , idCargo
+                        , idUsuario) 
+            VALUES (NULL
+                    ,pdFechaInicio
+                    ,pdFechaFin
+                    ,vnIdPersona
+                    ,pnIdCargo
+                    ,vnIdUsuario);
+        END IF;
+        IF vnConteo2 > 0 THEN
+            SELECT COUNT(*) INTO vnConteo FROM Persona p
+            INNER JOIN Cliente c ON c.idPersona = p.idPersona
+            WHERE p.idPersona = vnIdPersona2;
+            IF vnConteo = 0 THEN
+                SET pbOcurreError = TRUE;
+                SET pcMensajeError= CONCAT('La persona con el noIdentidad', pcNoIdentidad ,' ya existe en el SI');
+                LEAVE SP;
+            END IF;
+            IF vnConteo > 0 THEN
+                INSERT INTO usuario
+                        (idUsuario
+                        , nombreUsuario
+                        , contraseña
+                        , rutaImagen) 
+                VALUES (NULL
+                        ,pcNombreUsuario
+                        ,pcContrasenia
+                        ,pcRutaImagen);
+                
+                SELECT MAX(idUsuario) INTO vnIdUsuario FROM usuario;
+
+                INSERT INTO empleado
+                            (idEmpleado
+                            , fechaInicio
+                            , fechaFin
+                            , idPersona
+                            , idCargo
+                            , idUsuario)
+                VALUES (NULL
+                        ,pdFechaInicio
+                        ,pdFechaFin
+                        ,vnIdPersona2
+                        ,pnIdCargo
+                        ,vnIdUsuario);
+            END IF;
+        
+        END IF;
+
+
+        
+        
+    END IF;
+    IF pcAccion = 'EDITAR' THEN
+        SELECT COUNT(*)-1 INTO vnConteo FROM Usuario 
+        WHERE nombreUsuario = pcNombreUsuario;
+        IF vnConteo > 0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError= CONCAT('El usuario', pcNombreUsuario,' ya existe en el SI');
+            LEAVE SP; 
+        END IF;
+        SELECT COUNT(*)-1 INTO vnConteo FROM Persona
+        WHERE correo = pcCorreo;
+        IF vnConteo > 0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError= CONCAT('El correo', pcCorreo,' ya existe en el SI');
+            LEAVE SP; 
+        END IF;
+
+        SELECT COUNT(*)-1 INTO vnConteo FROM Persona
+        WHERE noIdentidad = pcNoIdentidad;
+        IF vnConteo >0 THEN
+            SET pbOcurreError = TRUE;
+            SET pcMensajeError= CONCAT('La persona con el noIdentidad', pcNoIdentidad ,' ya existe en el SI');
+            LEAVE SP;
+        END IF;
+
+        SELECT p.idPersona INTO vnIdPersona FROM Persona p
+        INNER JOIN Empleado e ON e.idPersona = p.idPersona
+        WHERE e.idEmpleado = pnIdEmpleado;
+
+        UPDATE empleado 
+        SET fechaInicio= pdFechaInicio
+            ,fechaFin= pdFechaFin
+            ,idCargo= pnIdCargo 
+        WHERE idEmpleado = pnIdEmpleado;
+
+        UPDATE persona 
+        SET pnombre= pcpNombre
+            ,snombre= pcsNombre
+            ,papellido= pcpApellido
+            ,sapellido=pcsApellido
+            ,correo= pcCorreo
+            ,direccion=pcDireccion
+            ,noIdentidad=pcNoIdentidad
+        WHERE idPersona = vnIdPersona;
+
+        UPDATE telefonos 
+        SET telefono=pcTelefono
+        WHERE idPersona = vnIdPersona;
+
+        SELECT u.idUsuario INTO vnIdUsuario FROM Usuario u
+        INNER JOIN Empleado e ON e.idUsuario = u.idUsuario
+        WHERE e.idEmpleado = pnIdEmpleado;
+
+        UPDATE usuario 
+        SET nombreUsuario= pcNombreUsuario
+            ,contraseña= pcContrasenia
+            ,rutaImagen= pcRutaImagen
+        WHERE idUsuario = vnIdUsuario;
+
+
+    END IF;
+    IF pcAccion = 'ELIMINAR' THEN
+
+        UPDATE Empleado
+        SET eliminado = TRUE
+        WHERE idEmpleado = pnIdEmpleado;
+
+        
+
+    END IF;
+
+    COMMIT;
+    SET pcMensajeError = 'Procedimiento realizado con exito.';
+    SET pbOcurreError = FALSE;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_VEHICULO`(
+    IN pcDescripcion VARCHAR(45),
+    IN pcColor VARCHAR(45),
+    IN pfPrecioVenta FLOAT,
+    IN pfPrecioRentaHora FLOAT,
+    IN pfPrecioRentaDia FLOAT,
+    IN pcPlaca VARCHAR(8),
+    IN pyAnio YEAR,
+    IN pnIdModelo INT,
+    IN pnIdInventario INT,
+    IN pnIdTipoVehiculo INT,
+    IN pnIdTipoGasolina INT,
+    IN pnIdTransmision INT,
+    IN pnIdCilindraje INT,
+    IN pnIdVehiculo INT,
+    IN pcAccion VARCHAR(10),
+    OUT pbOcurreError BOOLEAN,
+    OUT pcMensajeError VARCHAR(1000)
+)
+SP:BEGIN
+    DECLARE vnConteo, vnidVehiculo INT;
+    DECLARE vcMensajeTem VARCHAR(50);
+    SET vcMensajeTem = '';
+    SET pbOcurreError = TRUE;
+
+    SET AUTOCOMMIT = 0;
+    START TRANSACTION;
+    IF pcAccion = 'AGREGAR' OR pcAccion = 'EDITAR' THEN
+        IF pcDescripcion = '' OR pcDescripcion IS NULL THEN
+            SET vcMensajeTem = 'Descripcion, ';
+        END IF;
+        IF pcColor = '' OR pcColor IS NULL THEN
+            SET vcMensajeTem = CONCAT(vcMensajeTem,'Color, ');
+        END IF;
+        IF pfPrecioVenta = '' OR pfPrecioVenta IS NULL THEN
+            SET vcMensajeTem = CONCAT(vcMensajeTem,'precio venta, ');
+        END IF;
+        IF pfPrecioRentaHora = '' OR pfPrecioRentaHora IS NULL THEN
+            SET vcMensajeTem = CONCAT(vcMensajeTem,'precio venta hora, ');
+        END IF;
+        IF pfPrecioRentaDia = '' OR pfPrecioRentaDia IS NULL THEN
+            SET vcMensajeTem = CONCAT(vcMensajeTem,'precio venta dia, ');
+        END IF;
+        IF pcPlaca = '' OR pcPlaca IS NULL THEN
+            SET vcMensajeTem = CONCAT(vcMensajeTem,'placa, ');
+        END IF;
+        IF pyAnio = '' OR pyAnio IS NULL THEN
+            SET vcMensajeTem = CONCAT(vcMensajeTem,'anio, ');
+        END IF;
+        IF pnIdModelo = '' OR pnIdModelo IS NULL THEN
+            SET vcMensajeTem = CONCAT(vcMensajeTem,'modelo, ');
+        END IF;
+        IF pnIdInventario = '' OR pnIdInventario IS NULL THEN
+            SET vcMensajeTem = CONCAT(vcMensajeTem,'idInventario, ');
+        END IF;
+        IF pnIdTipoVehiculo = '' OR pnIdTipoVehiculo IS NULL THEN
+            SET vcMensajeTem = CONCAT(vcMensajeTem,'IdTipoVehiculo, ');
+        END IF;
+        IF pnIdTipoGasolina = '' OR pnIdTipoGasolina IS NULL THEN
+            SET vcMensajeTem = CONCAT(vcMensajeTem,'IdTipoGasolina, ');
+        END IF;
+        IF pnIdTransmision = '' OR pnIdTransmision IS NULL THEN
+            SET vcMensajeTem = CONCAT(vcMensajeTem,'IdTransmision, ');
+        END IF;
+        IF pnIdCilindraje = '' OR pnIdCilindraje IS NULL THEN
+            SET vcMensajeTem = CONCAT(vcMensajeTem,'IdTransmision, ');
+        END IF;
+        IF vcMensajeTem <> '' THEN
+            SET pcMensajeError = CONCAT('Faltan campos requeridos: ',vcMensajeTem);
+            LEAVE SP;
+        END IF;
+
+        SELECT COUNT(*) INTO vnConteo FROM Modelo
+        WHERE idModelo = pnIdModelo;
+        IF vnConteo = 0 THEN 
+            SET pcMensajeError = 'El idModelo no existe';
+            LEAVE SP; 
+        END IF;
+        SELECT COUNT(*) INTO vnConteo FROM Inventario
+        WHERE idInventario = pnIdInventario;
+        IF vnConteo = 0 THEN 
+            SET pcMensajeError = 'El idInventario no existe';
+            LEAVE SP; 
+        END IF;
+        SELECT COUNT(*) INTO vnConteo FROM TipoVehiculo
+        WHERE idTipoVehiculo = pnIdTipoVehiculo;
+        IF vnConteo = 0 THEN 
+            SET pcMensajeError = 'El idTipoVehiculo no existe';
+            LEAVE SP; 
+        END IF;
+        SELECT COUNT(*) INTO vnConteo FROM TipoMotor
+        WHERE idTipoGasolina = pnIdTipoGasolina;
+        IF vnConteo = 0 THEN 
+            SET pcMensajeError = 'El idTipoGasolina no existe';
+            LEAVE SP; 
+        END IF;
+        SELECT COUNT(*) INTO vnConteo FROM Transmision
+        WHERE idTransmision = pnIdTransmision;
+        IF vnConteo = 0 THEN 
+            SET pcMensajeError = 'El idTransmision no existe';
+            LEAVE SP; 
+        END IF;
+        SELECT COUNT(*) INTO vnConteo FROM Cilindraje
+        WHERE idCilindraje = pnIdCilindraje;
+        IF vnConteo = 0 THEN 
+            SET pcMensajeError = 'El idCilindraje no existe';
+            LEAVE SP; 
+        END IF;
+
+          
+    END IF;
+
+    IF pcAccion = 'EDITAR' OR pcAccion = 'ELIMINAR' THEN
+
+        IF pnIdVehiculo = '' OR pnIdVehiculo IS NULL THEN
+            SET pcMensajeError = 'Falta campo requerido: idVehiculo';
+            LEAVE SP;
+        END IF;
+
+        SELECT COUNT(*) INTO vnConteo FROM Vehiculo
+        WHERE idVehiculo = pnIdVehiculo;
+        IF vnConteo = 0 THEN
+            SET pcMensajeError = 'El idVehiculo no existe';
+            LEAVE SP;
+        END IF;
+
+    END IF;
+
+    IF pcAccion = 'AGREGAR' THEN
+    
+        SELECT COUNT(*) INTO vnConteo FROM Vehiculo
+        WHERE placa = pcPlaca;
+        IF vnConteo >0 THEN 
+            SET pcMensajeError = 'Ya existe un vehiculo con ese numero de placa';
+            LEAVE SP; 
+        END IF; 
+
+        INSERT INTO vehiculo
+        (idVehiculo
+        , descripcion
+        , color
+        , precioVenta
+        , precioRentaHora
+        , precioRentaDia
+        , placa
+        , Año
+        , idModelo
+        , idInventario
+        , idTipoVehiculo
+        , idTipoGasolina
+        , idTransmision
+        , idCilindraje) 
+        VALUES (NULL
+                ,pcDescripcion
+                ,pcColor
+                ,pfPrecioVenta
+                ,pfPrecioRentaHora
+                ,pfPrecioRentaDia
+                ,pcPlaca
+                ,pyAnio
+                ,pnIdModelo
+                ,pnIdInventario
+                ,pnIdTipoVehiculo
+                ,pnIdTipoGasolina
+                ,pnIdTransmision
+                ,pnIdCilindraje);
+
+    END IF;
+
+    IF pcAccion = 'EDITAR' THEN 
+
+        UPDATE vehiculo 
+        SET descripcion= pcDescripcion
+            ,color= pcColor
+            ,precioVenta= pfPrecioVenta
+            ,precioRentaHora= pfPrecioRentaHora
+            ,precioRentaDia= pfPrecioRentaDia
+            ,placa= pcPlaca
+            ,Año= pyAnio
+            ,idModelo=pnIdModelo
+            ,idInventario= pnIdInventario
+            ,idTipoVehiculo=pnIdTipoVehiculo
+            ,idTipoGasolina= pnIdTipoGasolina
+            ,idTransmision= pnIdTransmision
+            ,idCilindraje= pnIdCilindraje
+        WHERE idVehiculo = pnIdVehiculo;
+    END IF;
+    IF pcAccion = 'ELIMINAR' THEN 
+        DELETE FROM vehiculo 
+        WHERE idVehiculo = pnIdVehiculo;
+    END IF;
+    
+    COMMIT;
+    SET pcMensajeError = 'Procedimiento realizado con exito.';
+    SET pbOcurreError = FALSE;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_VEHICULO_FOTO`(
+    IN pnIdVehiculo INT,
+    IN pnIdFotos INT,
+    IN pcDireccionEnDisco VARCHAR(1000),
+    IN pcAccion VARCHAR(45),
+    OUT pbOcurreError BOOLEAN,
+    OUT pcMensajeError VARCHAR(1000)
+)
+SP:BEGIN
+    DECLARE vnConteo INT;
+    DECLARE vcMensajeTem VARCHAR(100);
+    SET vcMensajeTem = '';
+    SET pbOcurreError = TRUE;
+
+    SET AUTOCOMMIT = 0;
+    START TRANSACTION;
+
+    IF pcAccion = 'ELIMINARTODO' OR pcAccion = 'AGREGAR'  THEN
+        IF pnIdVehiculo = '' OR pnIdVehiculo IS NULL THEN
+            SET pcMensajeError = 'Pendiente campo requerido: idVehiculo, ';
+            LEAVE SP;
+        END IF;
+        SELECT COUNT(*) INTO vnConteo FROM Vehiculo
+        WHERE idVehiculo = pnIdVehiculo;
+        IF vnConteo = 0 THEN
+            SET pcMensajeError = 'El idVehiculo no existe';
+            LEAVE SP;
+        END IF;
+    END IF;
+
+    IF pcAccion = 'AGREGAR' OR pcAccion = 'EDITAR' THEN
+        IF pcDireccionEnDisco = '' OR pcDireccionEnDisco IS NULL THEN
+            SET vcMensajeTem = 'DireccionEnDisco, ';
+        END IF;
+        IF vcMensajeTem <> '' THEN
+            SET pcMensajeError = CONCAT('Pendiente campos requeridos: ', vcMensajeTem);
+            LEAVE SP;
+        END IF;
+        
+    END IF;
+    IF pcAccion = 'EDITAR' OR pcAccion = 'ELIMINAR' THEN
+
+        IF pnIdFotos = '' OR pnIdFotos IS NULL THEN
+            SET pcMensajeError = 'Pendiente campo requerido: idFoto, ';
+            LEAVE SP;
+        END IF;
+        SELECT COUNT(*) INTO vnConteo FROM fotos
+        WHERE idFotos = pnIdFotos;
+        IF vnConteo = 0 THEN
+            SET pcMensajeError = 'El idFoto no existe, ';
+            LEAVE SP;
+        END IF;
+
+    END IF;
+    IF pcAccion = 'AGREGAR' THEN
+        
+        INSERT INTO fotos
+                    (idFotos
+                    , direccionEnDisco
+                    , idVehiculo) 
+        VALUES (NULL
+                ,pcDireccionEnDisco
+                ,pnIdVehiculo);
+    END IF;
+
+    IF pcAccion = 'EDITAR' THEN
+        UPDATE fotos 
+        SET direccionEnDisco=pcDireccionEnDisco
+        WHERE idFotos = pnIdFotos;
+    END IF;
+
+    IF pcAccion = 'ELIMINAR' THEN
+        DELETE FROM fotos 
+        WHERE idFotos = pnIdFotos;
+    END IF;
+
+    IF pcAccion = 'ELIMINARTODO' THEN
+        DELETE FROM fotos 
+        WHERE idVehiculo = pnIdVehiculo;
+    END IF;
+
+
+    COMMIT;
+    SET pcMensajeError = 'Procedimiento realizado con exito.';
+    SET pbOcurreError = FALSE;
 END$$
 
 DELIMITER ;
@@ -586,7 +1182,88 @@ CREATE TABLE IF NOT EXISTS `fotos` (
   PRIMARY KEY (`idFotos`),
   UNIQUE KEY `direccionEnDisco` (`direccionEnDisco`),
   KEY `fk_Fotos_Vehiculo1` (`idVehiculo`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
+
+--
+-- Volcado de datos para la tabla `fotos`
+--
+
+INSERT INTO `fotos` (`idFotos`, `direccionEnDisco`, `idVehiculo`) VALUES
+(1, '../assets/images/fotos/vehiculos/Mazda/Mazda Cx-3/1/1 cx33.jpg', 1),
+(2, '../assets/images/fotos/vehiculos/Mazda/Mazda Cx-3/1/1 cx32.jpg', 1),
+(3, '../assets/images/fotos/vehiculos/Mazda/Mazda Cx-3/1/1 cx3.jpg', 1),
+(4, '../assets/images/fotos/vehiculos/Mazda/Mazda Rx-8/2/2 rx82.jpg', 2),
+(5, '../assets/images/fotos/vehiculos/Mazda/Mazda Rx-8/2/2 rx8.jpg', 2),
+(6, '../assets/images/fotos/vehiculos/Porsche/Porsche cayenne-platinum-edition/3/3 Porsche cayenne-platinum-edition.jpg', 3),
+(7, '../assets/images/fotos/vehiculos/Porsche/Porsche cayenne-platinum-edition/3/3 Porsche cayenne-platinum-edition 3.jpg', 3),
+(8, '../assets/images/fotos/vehiculos/Porsche/Porsche cayenne-platinum-edition/3/3 Porsche cayenne-platinum-edition 2.jpg', 3),
+(9, '../assets/images/fotos/vehiculos/BMW/BMW X5/4/4 BMW X5.jpg', 4),
+(10, '../assets/images/fotos/vehiculos/BMW/BMW X5/4/4 BMW X5 2.jpg', 4),
+(11, '../assets/images/fotos/vehiculos/Honda/Honda Civic/5/5Honda Civic.png', 5),
+(12, '../assets/images/fotos/vehiculos/Honda/Honda Civic/5/5 Honda Civic 2.jpg', 5),
+(13, '../assets/images/fotos/vehiculos/Nissan/Nissan Navara/6/6 Nissan Navara2.jpg', 6),
+(14, '../assets/images/fotos/vehiculos/Nissan/Nissan Navara/6/6 Nissan Navara.jpg', 6),
+(15, '../assets/images/fotos/vehiculos/Ferrari/Ferrari 458 Italia/7/7 Ferrari 458 Italia3.jpg', 7),
+(16, '../assets/images/fotos/vehiculos/Ferrari/Ferrari 458 Italia/7/7 Ferrari 458 Italia.jpg', 7),
+(17, '../assets/images/fotos/vehiculos/Ferrari/Ferrari 458 Italia/7/7 Ferrari 458 Italia 2.jpg', 7),
+(18, '../assets/images/fotos/vehiculos/Jaguar/Jaguar E-Pace/8/8 Jaguar E-Pace.jpg', 8),
+(19, '../assets/images/fotos/vehiculos/Jaguar/Jaguar E-Pace/8/8 Jaguar E-Pace 3.jpg', 8),
+(20, '../assets/images/fotos/vehiculos/Jaguar/Jaguar E-Pace/8/8 Jaguar E-Pace 2.jpg', 8),
+(21, '../assets/images/fotos/vehiculos/Hummer/Hummer H3/9/9 Hummer H3.jpg', 9),
+(22, '../assets/images/fotos/vehiculos/Hummer/Hummer H3/9/9 Hummer H3 3.jpg', 9),
+(23, '../assets/images/fotos/vehiculos/Hummer/Hummer H3/9/9 Hummer H3 2.jpg', 9),
+(24, '../assets/images/fotos/vehiculos/Lamborghini/Lamborghini Gallardo/10/9 Hummer H3.jpg', 10),
+(25, '../assets/images/fotos/vehiculos/Lamborghini/Lamborghini Gallardo/10/9 Hummer H3 3.jpg', 10),
+(26, '../assets/images/fotos/vehiculos/Lamborghini/Lamborghini Gallardo/10/9 Hummer H3 2.jpg', 10),
+(27, '../assets/images/fotos/vehiculos/Lamborghini/Lamborghini Gallardo/10/10 Lamborghini Gallardo.jpg', 10),
+(28, '../assets/images/fotos/vehiculos/Lamborghini/Lamborghini Gallardo/10/10 Lamborghini Gallardo 3.jpg', 10),
+(29, '../assets/images/fotos/vehiculos/Lamborghini/Lamborghini Gallardo/10/10 Lamborghini Gallardo 2.jpg', 10),
+(30, '../assets/images/fotos/vehiculos/Mercedes-Benz/Mercedez Benz Clase-G/11/11Mercedez Benz Clase-G3.jpg', 11),
+(31, '../assets/images/fotos/vehiculos/Mercedes-Benz/Mercedez Benz Clase-G/11/11Mercedez Benz Clase-G2.jpg', 11),
+(32, '../assets/images/fotos/vehiculos/Mercedes-Benz/Mercedez Benz Clase-G/11/11Mercedez Benz Clase-G.jpg', 11),
+(33, '../assets/images/fotos/vehiculos/Toyota/Toyota Hilux/12/12 Toyota Hilux.jpg', 12),
+(34, '../assets/images/fotos/vehiculos/Toyota/Toyota Hilux/12/12 Toyota Hilux 3.jpg', 12),
+(35, '../assets/images/fotos/vehiculos/Toyota/Toyota Hilux/12/12 Toyota Hilux 2.jpg', 12),
+(36, '../assets/images/fotos/vehiculos/Hyundai/Hyundai H-1/13/13 Hyundai H-1.jpg', 13),
+(37, '../assets/images/fotos/vehiculos/Volkswagen/Volkswagen New Beetle/14/14 Volkswagen New Beetle.jpg', 14),
+(38, '../assets/images/fotos/vehiculos/Volkswagen/Volkswagen New Beetle/14/14 Volkswagen New Beetle 2.jpg', 14),
+(39, '../assets/images/fotos/vehiculos/Jeep/Jeep Compass/15/15 Jeep Compass.jpg', 15),
+(40, '../assets/images/fotos/vehiculos/BMW/C 400 GT/16/16 C 400 GT.jpg', 16),
+(41, '../assets/images/fotos/vehiculos/BMW/C 400 GT/16/16 C 400 GT 3.jpg', 16),
+(42, '../assets/images/fotos/vehiculos/BMW/C 400 GT/16/16 C 400 GT 2.jpg', 16),
+(43, '../assets/images/fotos/vehiculos/BMW/C 650 sport/17/17 C 650 sport.jpg', 17),
+(44, '../assets/images/fotos/vehiculos/Ducati/Panigale V4/18/18 Panigale V4.jpg', 18),
+(45, '../assets/images/fotos/vehiculos/Ducati/Panigale V4/18/18 Panigale V4 2.jpg', 18),
+(46, '../assets/images/fotos/vehiculos/Honda/CB 100R/19/19 CB 100R.jpg', 19),
+(47, '../assets/images/fotos/vehiculos/Honda/CB 100R/19/19 CB 100R 2.jpg', 19),
+(48, '../assets/images/fotos/vehiculos/YAMAHA/X-MAX 400/20/20 X-MAX 400.jpg', 20),
+(49, '../assets/images/fotos/vehiculos/YAMAHA/X-MAX 400/20/20 X-MAX 400 2.jpg', 20),
+(50, '../assets/images/fotos/vehiculos/DINA/Buller/21/21 Buller3.jpg', 21),
+(51, '../assets/images/fotos/vehiculos/DINA/Buller/21/21 Buller2.jpg', 21),
+(52, '../assets/images/fotos/vehiculos/DINA/Buller/21/21 Buller.jpg', 21),
+(53, '../assets/images/fotos/vehiculos/VOLVO/9800 2017/22/22 9800 2017.jpg', 22),
+(54, '../assets/images/fotos/vehiculos/VOLVO/9800 2017/22/22 9800 2017 2.jpg', 22),
+(55, '../assets/images/fotos/vehiculos/Mercedes-Benz/Turiclass/23/23 Turiclass.jpg', 23),
+(56, '../assets/images/fotos/vehiculos/Mercedes-Benz/Turiclass/23/23 Turiclass 3.jpg', 23),
+(57, '../assets/images/fotos/vehiculos/Mercedes-Benz/Turiclass/23/23 Turiclass 2.jpg', 23),
+(58, '../assets/images/fotos/vehiculos/Isuzu/ELF 600 Bus/24/24 ELF 600 Bus.jpg', 24),
+(59, '../assets/images/fotos/vehiculos/Isuzu/ELF 600 Bus/24/24 ELF 600 Bus 2.jpg', 24),
+(60, '../assets/images/fotos/vehiculos/CATERPILLAR/Wildleder - Shovel 966K/25/25 Wildleder - Shovel 966K.jpg', 25),
+(61, '../assets/images/fotos/vehiculos/CATERPILLAR/Wildleder - Shovel 966K/25/25 Wildleder - Shovel 966K 2.jpg', 25),
+(62, '../assets/images/fotos/vehiculos/CATERPILLAR/CS 56/26/26CS 56.jpg', 26),
+(63, '../assets/images/fotos/vehiculos/CATERPILLAR/CS 56/26/26CS 56 2.jpg', 26),
+(64, '../assets/images/fotos/vehiculos/HITACHI/Graafmachine ZX135US-3/27/27 Graafmachine ZX135US-3.jpg', 27),
+(65, '../assets/images/fotos/vehiculos/HITACHI/Graafmachine ZX135US-3/27/27 Graafmachine ZX135US-3 3.jpg', 27),
+(66, '../assets/images/fotos/vehiculos/HITACHI/Graafmachine ZX135US-3/27/27 Graafmachine ZX135US-3 2.jpg', 27),
+(67, '../assets/images/fotos/vehiculos/JOHN DEERE/6920/28/28 6920 2.jpg', 28),
+(68, '../assets/images/fotos/vehiculos/JOHN DEERE/6920/28/28 6920.jpg', 28),
+(69, '../assets/images/fotos/vehiculos/KOMATSU/PC110R/29/29 PC110R.JPG', 29),
+(70, '../assets/images/fotos/vehiculos/KOMATSU/PC110R/29/29 PC110R 3.JPG', 29),
+(71, '../assets/images/fotos/vehiculos/KOMATSU/PC110R/29/29 PC110R 2.JPG', 29),
+(72, '../assets/images/fotos/vehiculos/FERRETI YATCHS/430/30/30 430.jpg', 30),
+(73, '../assets/images/fotos/vehiculos/FERRETI YATCHS/430/30/30 430 4.jpg', 30),
+(74, '../assets/images/fotos/vehiculos/FERRETI YATCHS/430/30/30 430 3.jpg', 30),
+(75, '../assets/images/fotos/vehiculos/FERRETI YATCHS/430/30/30 430 2.jpg', 30);
 
 -- --------------------------------------------------------
 
@@ -784,7 +1461,7 @@ INSERT INTO `modelo` (`idModelo`, `descripcion`, `idMarca`) VALUES
 (26, 'CS 56', 21),
 (27, 'Graafmachine ZX135US-3', 22),
 (28, '6920', 23),
-(29, 'PC110R\n Textos completos	\nidModelo\ndescripcio', 24),
+(29, 'PC110R', 24),
 (30, '430', 30),
 (31, '27', 31),
 (32, '43 fly', 32);
