@@ -349,8 +349,8 @@
                                         <div class="col-sm-2">
                                             <label for="txt_descripcion"><b>Descripcion del vehiculo:</b></label>
                                         </div>
-                                        <div class="col-sm-7">
-                                            <textarea id="txt_descripcion" cols="95"
+                                        <div class="col-sm-10 form-group">
+                                            <textarea id="txt_descripcion"  class="form-control"
                                                 placeholder="ingrese la descripcion del vehiculo"></textarea>
                                         </div>
                                     </div>

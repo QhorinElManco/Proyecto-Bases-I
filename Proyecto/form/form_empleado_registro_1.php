@@ -323,7 +323,7 @@
 
                                         </div>
                                                                         
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 form-group">
                                             <input type="password" id="txt_contraseña2" class="form-control border border-dark" maxlength="50" placeholder="Reingrese su contraseña">
                                             <span id="contraseña2ok"></span>
                                         </div>

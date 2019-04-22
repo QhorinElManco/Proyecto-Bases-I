@@ -128,10 +128,9 @@ $(document).ready(function(){
         }  
 		if($("#txt_precioVenta").val() ==''){
 			errors += "Debe ingresar el precio venta del vehiculo\n";
-        }
-        
+        }        
         if ($("#txt_precioVenta").val().match(re)) {
-        console.log("precio venta si es float");
+        	console.log("precio venta si es float");
         }else{
             errors += "Debe ingresar un precio Venta válido\n";
         }
@@ -139,7 +138,7 @@ $(document).ready(function(){
 			errors += "Debe ingresar el precio renta dia\n";
         }
         if ($("#txt_precioRentaHora").val().match(re)) {
-        console.log("precio renta hora si es float");
+        	console.log("precio renta hora si es float");
         }else{
             errors += "Debe ingresar un precio Venta válido\n";
         }

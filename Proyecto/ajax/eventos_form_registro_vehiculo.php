@@ -124,8 +124,8 @@
                             $origen=$_FILES["file_foto"]["tmp_name"][$i];
                             $destino=$carpetaDestino.$_FILES["file_foto"]["name"][$i];
                             if(@move_uploaded_file($origen, $destino)){ 
-                                echo "<br> $destino <br>";
-                                echo "<img src='$destino' class='img-responsive' width='250' height='200'>";
+                                //echo "<br> $destino <br>";
+                                echo "<img src='$destino' class='img-responsive img-thumbnail' width='250' height='200'>";
                                 $accion2 = 'AGREGAR';
                                 $sql4 = "CALL SP_GESTION_VEHICULO_FOTO('$idVehiculo','','$destino','$accion2',@p5,@p6);";
                                 $salida4 = "SELECT @p5 AS OcurreError, @p6 AS mensaje;";
@@ -143,7 +143,6 @@
                     else{
                         echo "<br>".$_FILES["file_foto"]["name"][$i]." - NO es imagen jpg, png o gif";
                     }
-
                 }                
             }else{
             echo "No se encontro el archivo";
