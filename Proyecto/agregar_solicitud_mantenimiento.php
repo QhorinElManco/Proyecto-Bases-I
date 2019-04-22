@@ -197,7 +197,7 @@
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper"
-            style="background-image: url(assets/images/background/img3.jpg); background-repeat: no-repeat; background-size:cover;  width: 100%; height: 100vh; ">
+            style="background-image: url(assets/images/background/img3.jpg); background-repeat: no-repeat; background-size:cover;  width: 100%; height: 100vh;">
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
