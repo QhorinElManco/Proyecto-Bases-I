@@ -214,7 +214,7 @@ color:rgb(0,0,0);
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper" style="background-color:#343a40">
+        <div class="page-wrapper" style="background-color:rgb(0,0,0)">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid" style="padding: 0">
