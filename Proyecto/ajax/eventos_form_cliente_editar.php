@@ -5,19 +5,17 @@
 	switch ($_GET["accion"]) {
 		case '1'://Llenar informacion del formulario
         $conexion = new Conexion();
-        $idEmpleado = $_POST['idEmpleado'];
+        $idCliente = $_POST['idCliente'];
         $accion = "EDITAR";
-        $sql = "SELECT idEmpleado, pnombre, snombre, papellido, sapellido, correo, cargo , noIdentidad, direccion, fechaInicio, fechaFin, nombreUsuario, contrasenia, rutaImagen, telefonos, idCargo 
-                FROM VW_EMPLEADO_VER 
-                WHERE idEmpleado = $idEmpleado;";
+        $sql = "SELECT idPersona, pnombre, snombre, papellido, sapellido, correo, noIdentidad, direccion, idCliente, idUsuario, nombreUsuario, contrasenia, rutaImagen, telefonos
+        FROM vw_cliente
+        WHERE idCliente = '$idCliente'";
         
         $resultado = $conexion->ejecutarInstruccion($sql);
         while ($fila= $conexion->obtenerFila($resultado)) { ?>
             <input type="hidden" id="rutaImagen" value="<?php echo $fila['rutaImagen'];?>">
             <input type="hidden" id="contrasenia" value="<?php echo $fila['contrasenia'];?>">
             <input type="hidden" id="nombreUsuario" value="<?php echo $fila['nombreUsuario'];?>">
-            <input type="hidden" id="fechaFin" value="<?php echo $fila['fechaFin'];?>">
-            <input type="hidden" id="fechaInicio" value="<?php echo $fila['fechaInicio'];?>">
             <input type="hidden" id="direccion" value="<?php echo $fila['direccion'];?>">
             <input type="hidden" id="noIdentidad" value="<?php echo $fila['noIdentidad'];?>">
             <input type="hidden" id="telefonos" value="<?php echo $fila['telefonos'];?>">
@@ -26,26 +24,13 @@
             <input type="hidden" id="papellido" value="<?php echo $fila['papellido'];?>">
             <input type="hidden" id="snombre" value="<?php echo $fila['snombre'];?>">
             <input type="hidden" id="pnombre" value="<?php echo $fila['pnombre'];?>">
-            <input type="hidden" id="idCargo" value="<?php echo $fila['idCargo'];?>">
 
         <?php    
         }
         
-        
-        
         $conexion->cerrarConexion();
         break;
         
-        case '2'://llenar cargo
-            $conexion = new Conexion();
-            $sql = sprintf("SELECT idCargo, descripcion FROM  Cargo");
-            $resultado = $conexion->ejecutarInstruccion($sql);
-            while ($fila= $conexion->obtenerFila($resultado)) { ?>
-                    <option value="<?php echo $fila["idCargo"] ?>"><?php echo $fila["descripcion"] ;?></option>
-            <?php   
-            }
-            $conexion->cerrarConexion();
-        break;
         case '3'://guardar imagen
             if(isset($_FILES["file_foto"])){
                 $file = $_FILES["file_foto"];
@@ -56,7 +41,7 @@
                 $dimensiones = getimagesize($ruta_provisional);
                 $width = $dimensiones[0];
                 $height = $dimensiones[1];
-                $carpeta = "../assets/images/fotos/empleados/";
+                $carpeta = "../assets/images/fotos/clientes/";
                 //C:\wamp\www\Proyecto\assets\images\fotos\empleados
                 
                 if ($tipo != 'image/jpg' && $tipo != 'image/jpeg' && $tipo != 'image/png' && $tipo != 'image/gif'){
@@ -84,7 +69,7 @@
     
         break;
         case '4'://editar empleado
-             $idEmpleado = $_POST['idEmpleado'];
+             $idCliente = $_POST['idCliente'];
              $txt_pnombre = $_POST['txt_pnombre'];
              $txt_snombre= $_POST['txt_snombre'];
              $txt_papellido= $_POST['txt_papellido'];
@@ -93,22 +78,18 @@
              $txt_direccion= $_POST['txt_direccion'];
              $txt_noIdentidad= $_POST['txt_noIdentidad'];
              $txt_telefono=$_POST['txt_telefono'];
-             $date_fechaInicio=$_POST['date_fechaInicio'];
-             $date_fechaFin=$_POST['date_fechaFin'];
-             $txt_usuario=$_POST['txt_usuario'] ;
-             $txt_contraseña=$_POST['txt_contraseña'] ;
-             $slc_cargo=$_POST['slc_cargo'] ;
+             $txt_usuario=$_POST['txt_usuario'];
+             $txt_contraseña=$_POST['txt_contraseña'];
             
             $conexion = new Conexion();
             $accion = "EDITAR";
-
             if (isset($_POST["img"])) {
                 $ruta2 = $_POST["img"];
-                $sql = "CALL SP_GESTION_EMPLEADO('$txt_pnombre','$txt_snombre','$txt_papellido','$txt_sapellido','$txt_correo','$txt_direccion','$txt_noIdentidad','$txt_telefono','$date_fechaInicio','$date_fechaFin','$slc_cargo','$txt_usuario','$txt_contraseña ','$ruta2','$idEmpleado','$accion',@p17,@p18);";
+                $sql= sprintf(" CALL SP_GESTION_CLIENTE('$txt_pnombre','$txt_snombre', '$txt_papellido','$txt_sapellido', '$txt_correo', '$txt_direccion','$txt_noIdentidad','$txt_telefono', '$txt_usuario','$txt_contraseña', '$ruta2', '$accion', '$idCliente',@p17, @p18);");
             }
             else{
                 $ruta=$_SESSION["ruta"];
-                $sql = "CALL SP_GESTION_EMPLEADO('$txt_pnombre','$txt_snombre','$txt_papellido','$txt_sapellido','$txt_correo','$txt_direccion','$txt_noIdentidad','$txt_telefono','$date_fechaInicio','$date_fechaFin','$slc_cargo','$txt_usuario','$txt_contraseña ','../$ruta','$idEmpleado','$accion',@p17,@p18);";
+                $sql= sprintf(" CALL SP_GESTION_CLIENTE('$txt_pnombre','$txt_snombre', '$txt_papellido','$txt_sapellido', '$txt_correo', '$txt_direccion','$txt_noIdentidad','$txt_telefono', '$txt_usuario','$txt_contraseña', '$ruta', '$accion','$idCliente', @p17, @p18);");
             }
             $salida = "SELECT @p17 AS OcurreError, @p18 AS mensaje;";
             $resultado = $conexion->ejecutarInstruccion($sql);

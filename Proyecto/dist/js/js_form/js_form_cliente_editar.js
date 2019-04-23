@@ -1,10 +1,10 @@
 $(document).ready(function(){
-    var parametros = "idEmpleado= "+document.getElementById("txt_idEmpleado").value;
+    var parametros = "idCliente= "+document.getElementById("txt_idCliente").value;
     
     traerInfo = function(){
         
         $.ajax({ 
-            url:"../ajax/eventos_form_empleado_editar.php?accion=1",
+            url:"../ajax/eventos_form_cliente_editar.php?accion=1",
             method: "POST",
             data: parametros,
 			success:function(resultado){
@@ -26,32 +26,19 @@ $(document).ready(function(){
 		document.getElementById("txt_noIdentidad").value = document.getElementById("noIdentidad").value;
 		document.getElementById("txt_direccion").value = document.getElementById("direccion").value;
 		document.getElementById("txt_telefono").value = document.getElementById("telefonos").value;
-		document.getElementById("date_fechaInicio").value = document.getElementById("fechaInicio").value;
-		document.getElementById("date_fechaFin").value = document.getElementById("fechaFin").value;
-		document.getElementById("slc_cargo").value = document.getElementById("idCargo").value;
 		document.getElementById("txt_usuario").value = document.getElementById("nombreUsuario").value;
         document.getElementById("txt_contraseña").value = document.getElementById("contrasenia").value;
         document.getElementById("txt_contraseña2").value = document.getElementById("contrasenia").value;
         document.getElementById("img").src = document.getElementById("rutaImagen").value;
     }
     
-    llenarCargo = function(){
-        $.ajax({ 
-            url:"../ajax/eventos_form_empleado_editar.php?accion=2",
-            success:function(resultado){
-                $("#slc_cargo").html(resultado);
-            }
-        });//ajax
-    }//llenarCargo
-    llenarCargo();
-    //subirFotoFunc(false);
     var activacionFile = "N";
     //subir imagen
     $("input[name='file_foto']").on("change", function(){
 		var formData = new FormData($("#form_img")[0]);
 		image = formData;
 		$.ajax({
-				url: "../ajax/eventos_form_empleado_editar.php?accion=3",
+				url: "../ajax/eventos_form_cliente_editar.php?accion=3",
 				type: "POST",
 				data: formData,
 				contentType: false,
@@ -63,10 +50,7 @@ $(document).ready(function(){
         activacionFile = "S";
         //subirFotoFunc(true);
 	});//subir imagen
-    /*subirFotoFunc = function(){
-        var subir = 1;
-        return subir;
-    }*/
+    
     $("#btn_editar").click(function(){
 		var errors = validarDatos();
 		if(!errors == ""){
@@ -83,13 +67,10 @@ $(document).ready(function(){
 						"&txt_noIdentidad=" + $("#txt_noIdentidad").val()+
 						"&txt_direccion=" + $("#txt_direccion").val()+
 						"&txt_telefono=" + $("#txt_telefono").val()+
-						"&date_fechaInicio=" + $("#date_fechaInicio").val()+
-						"&date_fechaFin=" + $("#date_fechaFin").val()+
-						"&slc_cargo=" + $("#slc_cargo").val()+
 						"&txt_usuario=" + $("#txt_usuario").val()+
-						"&txt_contraseña=" + $("#txt_contraseña").val()+
-						"&idEmpleado= "+$("#txt_idEmpleado").val()+
-						"&img=";
+                        "&txt_contraseña=" + $("#txt_contraseña").val()+
+                        "&idCliente="+$("#txt_idCliente").val()+
+                        "&img=";
         }
         else{
             var urlImg = document.getElementById('img').src;
@@ -101,16 +82,13 @@ $(document).ready(function(){
 						"&txt_noIdentidad=" + $("#txt_noIdentidad").val()+
 						"&txt_direccion=" + $("#txt_direccion").val()+
 						"&txt_telefono=" + $("#txt_telefono").val()+
-						"&date_fechaInicio=" + $("#date_fechaInicio").val()+
-						"&date_fechaFin=" + $("#date_fechaFin").val()+
-						"&slc_cargo=" + $("#slc_cargo").val()+
 						"&txt_usuario=" + $("#txt_usuario").val()+
-						"&txt_contraseña=" + $("#txt_contraseña").val()+
-						"&idEmpleado= "+$("#txt_idEmpleado").val()+
-						"&img="+urlImg;
+                        "&txt_contraseña=" + $("#txt_contraseña").val()+
+                        "&idCliente="+$("#txt_idCliente").val()+
+                        "&img="+urlImg;
         }
 		$.ajax({
-			url:"../ajax/eventos_form_empleado_editar.php?accion=4",
+			url:"../ajax/eventos_form_cliente_editar.php?accion=4",
 			method: "POST",
 			data: parametros2,
 		success:function(resultado){
@@ -192,18 +170,7 @@ $(document).ready(function(){
 		if($("#txt_telefono").val() ==''){
 			errors += "Debe ingresar el telefono\n";
 		}
-		if($("#date_fechaInicio").val() ==''){
-			errors += "Debe ingresar la fecha de inicio\n";
-		}
-		if($("#date_fechaFin").val() ==''){
-			errors += "Debe ingresar la fecha fin\n";
-		}
-		if ($("#date_fechaFin").val() < $("#date_fechaInicio").val()) {
-			errors += "la fecha fin es menor que la fecha inicio, ingrese correctamente las fechas\n";
-		}
-		if($("#slc_cargo").val() ==''){
-			errors += "Debe seleccionar el cargo\n";
-		}
+		
 		if($("#txt_usuario").val() ==''){
 			errors += "Debe ingresar el usuario\n";
 		}

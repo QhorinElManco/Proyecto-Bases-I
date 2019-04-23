@@ -2241,6 +2241,14 @@ DROP TABLE IF EXISTS `vw_empleado_ver`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleado_ver` AS (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`snombre` AS `snombre`,`p`.`papellido` AS `papellido`,`p`.`sapellido` AS `sapellido`,`p`.`correo` AS `correo`,`c`.`descripcion` AS `cargo`,`p`.`noIdentidad` AS `noIdentidad`,`p`.`direccion` AS `direccion`,`e`.`fechaInicio` AS `fechaInicio`,`e`.`fechaFin` AS `fechaFin`,`u`.`nombreUsuario` AS `nombreUsuario`,`u`.`contraseña` AS `contrasenia`,`u`.`rutaImagen` AS `rutaImagen`,group_concat(`t`.`telefono` separator ',') AS `telefonos`,`c`.`idCargo` AS `idCargo` from ((((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) join `usuario` `u` on((`u`.`idUsuario` = `e`.`idUsuario`))) join `telefonos` `t` on((`t`.`idPersona` = `p`.`idPersona`))) where (`e`.`eliminado` <> 1) group by `e`.`idEmpleado`,`p`.`pnombre`,`p`.`snombre`,`p`.`papellido`,`p`.`sapellido`,`p`.`correo`,`c`.`descripcion`,`p`.`noIdentidad`,`p`.`direccion`,`e`.`fechaInicio`,`e`.`fechaFin`,`u`.`nombreUsuario`,`u`.`contraseña`,`u`.`rutaImagen`,`c`.`idCargo`);
 
+CREATE VIEW VW_CLIENTE AS (
+SELECT p.idPersona, p.pnombre, p.snombre, p.papellido, p.sapellido, p.correo,p.noIdentidad, p.direccion, c.idCliente, u.idUsuario, u.nombreUsuario, u.contraseña contrasenia, u.rutaImagen, GROUP_CONCAT(t.telefono) telefonos FROM Cliente c
+INNER JOIN Persona p ON p.idPersona = c.idPersona
+INNER JOIN Usuario u ON u.idUsuario = c.idUsuario
+INNER JOIN Telefonos t ON t.idPersona = p.idPersona
+GROUP BY idPersona, pnombre, snombre, papellido, sapellido, correo,noIdentidad, direccion, idCliente, idUsuario, nombreUsuario, contrasenia, rutaImagen);
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

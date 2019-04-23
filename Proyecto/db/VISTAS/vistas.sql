@@ -125,3 +125,13 @@ INNER JOIN TipoMotor tm ON tm.idTipoGasolina = v.idTipoGasolina
 INNER JOIN Transmision t ON t.idTransmision = v.idTransmision
 INNER JOIN Cilindraje c ON c.idCilindraje = v.idCilindraje
 WHERE v.eliminado <> TRUE)
+
+--Listado de clientes.
+CREATE VIEW VW_CLIENTE AS (
+SELECT p.idPersona, p.pnombre, p.snombre, p.papellido, p.sapellido, p.correo,p.noIdentidad, p.direccion, c.idCliente, u.idUsuario, u.nombreUsuario, u.contraseña contrasenia, u.rutaImagen, GROUP_CONCAT(t.telefono) telefonos FROM Cliente c
+INNER JOIN Persona p ON p.idPersona = c.idPersona
+INNER JOIN Usuario u ON u.idUsuario = c.idUsuario
+INNER JOIN Telefonos t ON t.idPersona = p.idPersona
+GROUP BY e.idEmpleado, p.pnombre, p.snombre, p.papellido, p.sapellido, 
+p.correo,  c.descripcion ,p.noIdentidad, p.direccion, e.fechaInicio
+    , e.fechaFin, u.nombreUsuario, u.contraseña, u.rutaImagen)
