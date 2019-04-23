@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Auto Motor</title>
+    <title>Empleado</title>
     <!-- Custom CSS -->
     <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -21,11 +21,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-    <style>
-        label {
-            color: rgba(255, 255, 255, 1)
-        }
-    </style>
+    
 </head>
 
 <body>
@@ -54,7 +50,7 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="../index.php">
+                    <a class="navbar-brand" href="../index.html">
                         <!-- Logo icon -->
                         <b class="logo-icon p-l-10">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -121,7 +117,7 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-
+                        
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -156,23 +152,6 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="../grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
                                     class="hide-menu">Repuestos</span></a></li>
-
-                                    
-                                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
-                                    class="hide-menu">Facturacion</span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
-                                        </span></a></li>
-                                 <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Mantenimiento
-                                        </span></a></li>
-                            </ul>
-                        </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
                                     class="hide-menu">Authentication </span></a>
@@ -200,96 +179,166 @@
         <div class="page-wrapper">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="" >
-                    <div style="width:100%; height:100%">
-                        <!-- ============================================================== -->
-                        <!-- Inicio Formulario -->
-                        <!-- ============================================================== -->
-                    
-                        <div class="row" style="" >
-                        
-                        
-                            <!--Margen de 3 columnas a la izquierda-->
-                            <div class="col-md-6 auth-box  border-top border-secondary float-left mx-auto" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
-                            
-                                    <form class="form-horizontal">
-                                        <div class="card-body" style="text-align:center;">
-                                            <div class="text-center p-t-20 p-b-20">
-                                                <IMG SRC="../assets/images/logo2.png">
-                                            </div>
-                                            <h3 style="margin: 20px 0px 30px 0px; color: rgba(255, 255, 255, 1)">¡BIENVENIDO!</h3>
-                                            <h3 style="margin: 20px 0px 30px 0px; color: rgba(255, 255, 255, 1)">Cree su cuenta
-                                                en AutoMotor</h3>
-                                            <input type="hidden" id="idPersona">
-                                            <input type="hidden" id="idCliente">
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Nombres</label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" class="form-control" id="txt_pnombre"
-                                                        placeholder="Primer nombre">
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="txt_snombre"
-                                                        placeholder="Segundo nombre">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Apellidos</label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" class="form-control" id="txt_papellido"
-                                                        placeholder="Primer apellido">
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="txt_papellido"
-                                                        placeholder="Segundo apellido">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Correo</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="txt_correo"
-                                                        placeholder="Correo electronico">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label
-                                                    class="col-sm-3 text-left control-label col-form-label">Contraseña</label>
-                                                <div class="col-sm-9">
-                                                    <input type="password" class="form-control" id="txt_Contraseña"
-                                                        placeholder="Ingrese su contraseña">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Verifique su
-                                                    contraseña</label>
-                                                <div class="col-sm-9">
-                                                    <input type="password" class="form-control" id="txt_Contraseña2"
-                                                        placeholder="Ingrese nuevamente la contraseña">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 text-left control-label col-form-label">Direccion</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="txt_Contraseña2"
-                                                        placeholder="Ingrese su direccion">
-                                                </div>
-                                            </div>
+            <div class="container-fluid" style="padding: 50px">
+                <!-- ============================================================== -->
+                <!-- Inicio Formulario -->
+                <!-- ============================================================== -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos Empleado</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Usuario</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" id="foto-tab" data-toggle="tab" href="#foto" role="tab" aria-controls="profile" aria-selected="false">Foto</a>
+                    </li>                
+                </ul>
+                
+                <div class="tab-content" id="myTabContent">
+                    <!-- Tab 1 -->
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class= "row">
+                            <div class="col-md-9 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                                <div class="card-body" style="text-align:center;">
+                                    <h3 style="margin: 0px 0px 30px 0px;">Crear cuenta AUTOMOTOR</h3>
+                                    <input type="hidden" id="idPersona">
+                                    <input type="hidden" id="idCliente">
+                                    <div class="row">
+                                        <div class="col-sm-2" style="text-align: left;">
+                                            <label for="txt_pnombre"><b>Nombre:</b></label>
                                         </div>
-                                        <div class="card-body" style="text-align:center">
-                                            <button type="button" class="btn btn-success btn-lg">Siguiente</button>
+                                    </div>
+                                    <div class="row "  >
+                                        <div class="col-sm-6 p-2" >
+                                            <input type="text" class="form-control border border-dark" id="txt_pnombre" maxlength="50" placeholder="Primer nombre">
                                         </div>
-                                    </form>
-                                
+                                        <div class="col-sm-6 p-2" >
+                                            <input type="text" class="form-control border border-dark" id="txt_snombre" maxlength="50"placeholder="segundo nombre">
+                                        </div>
+                                        <div class="col-sm-6 p-2" >
+                                            <input type="text" class="form-control border border-dark" id="txt_papellido" maxlength="50" placeholder="Primer apellido">
+                                        </div>
+                                        <div class="col-sm-6 p-2" >
+                                            <input type="text" class="form-control border border-dark" id="txt_sapellido" maxlength="50" placeholder="Segundo apellido">
+                                        </div>
+                                    </div>
+                                    <div class="row" >
+                                        <div class="col-sm-6" style="text-align: left;">
+                                            <label for="txt_correo"><b>Correo:</b></label>
+                                        </div>
+                                        <div class="col-sm-6" style="text-align: left;">
+                                            <label for="txt_telefono"><b>Telefono:</b></label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 0px 0px 30px 0px;">
+                                        <div class="col-sm-6">
+                                            <input type="text" id="txt_correo" class="form-control border border-dark" maxlength="50" placeholder="Ingrese su correo electronico">
+                                            <span id="emailOK"></span>
+                                        </div>
+                                        <div class="col-sm-6 " >
+                                            <input type="text" class="form-control border border-dark" id="txt_telefono" maxlength="50" placeholder="Ingrese su numero de telefono">
+                                        </div>
+                                    </div>
+                                    <div class="row" >
+                                        
+                                        
+                                        <div class="col-sm-6" style="text-align: left;">
+                                            <label for="txt_noIdentidad"><b>no Identidad:</b></label>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row" style="margin: 0px 0px 30px 0px;">
+                                        <div class="col-sm-6 " >
+                                            <input type="text" class="form-control border border-dark" id="txt_noIdentidad" maxlength="50" placeholder="Ingrese su numero de identidad">
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" style="text-align: left;">
+                                            <label for="txt_direccion"><b>Direccion:</b></label>
+                                        </div>
+                                    </div>
+                                    <div class="row p-1">
+                                        <div class="col" >
+                                            <textarea name="txt_direccion" id="txt_direccion" cols="80" rows="3" class="form-control border border-dark "></textarea>
+                                        </div>
+                                    </div>
+                                                                            
+                                    
                                 </div>
-
                             </div>
-
-                        </div> 
+                        </div>
                         
-                        <!-- ============================================================== -->
-                        <!-- Fin Formulario -->
-                        <!-- ============================================================== -->
-                    </div> 
+                    </div>
+                    <!-- /Tab 1 -->
+                    <!-- Tab 2 -->
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class= "row">
+                            <div class="col-md-6 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                                <div class="card-body" style="text-align:center;">
+                                    <h3 style="margin: 0px 0px 30px 0px;">ingresar usuario</h3>
+                                    
+                                    
+                                    <div class="row" >
+                                        <div class="col-sm-3">
+                                            <label for="txt_usuario"><b>Usuario:</b></label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 0px 0px 30px 0px;">
+                                        <div class="col">
+                                            <input type="text" id="txt_usuario" class="form-control border border-dark" maxlength="50" placeholder="Ingrese su nombre de usuario">
+                                        </div>
+                                    </div>
+                                    <div class="row" >
+                                        <div class="col-sm-2">
+                                            <label for="txt_contraseña"><b>Contraseña:</b></label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 0px 0px 30px 0px;">
+                                        <div class="col-sm-6">
+                                            <input type="password" id="txt_contraseña" class="form-control border border-dark" maxlength="50" placeholder="Ingrese su contraseña">
+
+                                        </div>
+                                                                        
+                                        <div class="col-sm-6 form-group">
+                                            <input type="password" id="txt_contraseña2" class="form-control border border-dark" maxlength="50" placeholder="Reingrese su contraseña">
+                                            <span id="contraseña2ok"></span>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    <!-- /Tab 2 -->
+                    <div class="tab-pane fade" id="foto" role="tabpanel" aria-labelledby="foto-tab">
+                        <div class= "row">
+                            <div class="col-md-6 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                                <div class="card-body" style="text-align:center;">
+                                    <form method="post" id="form_img" enctype="multipart/form-data">
+                                        <p><h3>Elije la foto del empleado</h3><br>
+                                            <input type="file" name="file_foto" id="file_foto">
+                                        </p>
+                                        <hr>
+                                        <div id="div_resultado"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <button id="btn_agregar" type="button" class="btn btn-primary">Añadir Empleado</button>
+                <button id="btn_cancelar" type="button" class="btn btn-danger">Cancelar</button>
+                <div id="div_resultado2"></div>
+
+
+                
+                <!-- ============================================================== -->
+                <!-- Fin Formulario -->
+                <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -300,6 +349,8 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
+                All Rights Reserved by Matrix-admin. Designed and Developed by <a
+                    href="https://wrappixel.com">WrapPixel</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -326,7 +377,7 @@
     <!--Menu sidebar -->
     <script src="../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="../dist/js/custom.min.js"></script>    
+    <script src="../dist/js/custom.min.js"></script>
     <!--This page JavaScript -->
     <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
     <!-- Charts js Files -->
@@ -338,12 +389,9 @@
     <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="../dist/js/pages/chart/chart-page-init.js"></script>
-
-    <!--Efecto transicion div_registro's-->
-    <script src="../dist/js/controlador.js"></script>
-    <!--dist\js\js_form\js_form_cliente_registro.js -->
-    <script src="../dist/js/js_form/js_form_cliente_registro.js"></script>
-
+    <!-- controlador -->
+    <script src="../dist/js/js_form/js_form_empleado_registro_1.js"></script>
+    
 </body>
 
 </html>

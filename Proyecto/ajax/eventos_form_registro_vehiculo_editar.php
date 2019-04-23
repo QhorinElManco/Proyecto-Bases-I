@@ -1,7 +1,8 @@
 <?php 
     include_once("../class/class_conexion.php");
     session_start();
-    switch ($_GET["accion"]) {
+    
+	switch ($_GET["accion"]) {
         case '1'://llenar select de modelo
             $conexion = new Conexion();
             $sql = sprintf("SELECT idModelo, descripcion FROM  Modelo");
@@ -67,44 +68,43 @@
             <?php   
             }
             $conexion->cerrarConexion();
-        break;
-        case '7'://guardar vehiculo
-            $conexion = new Conexion();
+		case '7'://Llenar informacion del formulario
+        $conexion = new Conexion();
+        $idVehiculo = $_POST['idVehiculo'];
+        $accion = "EDITAR";
+        $sql = "SELECT idVehiculo, color, descripcion, anio, precioVenta, precioRentaHora,
+                precioRentaDia, placa, eliminado, idModelo, idInventario, idTipoVehiculo,
+                idTipoGasolina, idTransmision, idCilindraje, modelo, inventario,
+                 tipovehiculo,  tipomotor, transmision,cilindraje
+                FROM VW_VEHICULO 
+                WHERE idVehiculo = '$idVehiculo';";
+        
+        $resultado = $conexion->ejecutarInstruccion($sql);
+        while ($fila= $conexion->obtenerFila($resultado)) { ?>
+            <input type="text" id="idVehiculo" value="<?php echo $fila['idVehiculo'];?>">
+            <input type="text" id="color" value="<?php echo $fila['color'];?>">
+            <input type="text" id="descripcion" value="<?php echo $fila['descripcion'];?>">
+            <input type="text" id="anio" value="<?php echo $fila['anio'];?>">
+            <input type="text" id="precioVenta" value="<?php echo $fila['precioVenta'];?>">
+            <input type="text" id="precioRentaHora" value="<?php echo $fila['precioRentaHora'];?>">
+            <input type="text" id="precioRentaDia" value="<?php echo $fila['precioRentaDia'];?>">
+            <input type="text" id="placa" value="<?php echo $fila['placa'];?>">
+            <input type="text" id="idModelo" value="<?php echo $fila['idModelo'];?>">
+            <input type="text" id="idInventario" value="<?php echo $fila['idInventario'];?>">
+            <input type="text" id="idTipoVehiculo" value="<?php echo $fila['idTipoVehiculo'];?>">
+            <input type="text" id="idTipoGasolina" value="<?php echo $fila['idTipoGasolina'];?>">
+            <input type="text" id="idTransmision" value="<?php echo $fila['idTransmision'];?>">
+            <input type="text" id="idCilindraje" value="<?php echo $fila['idCilindraje'];?>">
 
-            $slc_color = $_POST['slc_color'];
-            $txt_precioVenta= $_POST['txt_precioVenta'];
-            $txt_precioRentaHora= $_POST['txt_precioRentaHora'];
-            $txt_precioRentaDia= $_POST['txt_precioRentaDia'];
-            $txt_placa= $_POST['txt_placa'];
-            $slc_anio= $_POST['slc_anio'];
-            $slc_modelo=$_POST['slc_modelo'];
-            $slc_tipoVehiculo=$_POST['slc_tipoVehiculo'];
-            $slc_tipoMotor=$_POST['slc_tipoMotor'];
-            $slc_tipoTransmision=$_POST['slc_tipoTransmision'] ;
-            $slc_Cilindraje=$_POST['slc_Cilindraje'] ;
-            $txt_descripcion=$_POST['txt_descripcion'];
-            $slc_inventario=$_POST['slc_inventario'];
-
-            $_SESSION["slc_modelo"] = $slc_modelo;
-            $_SESSION["slc_anio"] = $slc_anio;
-            
-            $accion = "AGREGAR";
-            $sql = "CALL SP_GESTION_VEHICULO('$txt_descripcion','$slc_color','$txt_precioVenta','$txt_precioRentaHora','$txt_precioRentaDia','$txt_placa','$slc_anio','$slc_modelo','$slc_inventario','$slc_tipoVehiculo','$slc_tipoMotor','$slc_tipoTransmision','$slc_Cilindraje','NULL','$accion',@p16,@p17);";
-            $salida = "SELECT @p16 AS OcurreError, @p17 AS mensaje;";
-            $resultado = $conexion->ejecutarInstruccion($sql);
-            $respuesta = $conexion->ejecutarInstruccion($salida);
-            
-            if (!$respuesta) {
-                echo 'No hay respuesta del procedimiento';
-            }
-            else {
-                $fila = $conexion->obtenerFila($respuesta);
-                echo 'Ocurre error: '.$fila["OcurreError"].'<br>mensaje: '. $fila["mensaje"];
-            }
-            
-            $conexion->cerrarConexion();
+        <?php
+        }
+        
+        
+        
+        $conexion->cerrarConexion();
         break;
-        case '8':
+
+        case '8'://guardar imagen
             $conexion = new Conexion(); 
             $idModelo = $_SESSION["slc_modelo"];
 
@@ -154,10 +154,50 @@
             }//
             $conexion->cerrarConexion();
         break;
+        case '9'://editar empleado
+             $idEmpleado = $_POST['idEmpleado'];
+             $txt_pnombre = $_POST['txt_pnombre'];
+             $txt_snombre= $_POST['txt_snombre'];
+             $txt_papellido= $_POST['txt_papellido'];
+             $txt_sapellido= $_POST['txt_sapellido'];
+             $txt_correo= $_POST['txt_correo'];
+             $txt_direccion= $_POST['txt_direccion'];
+             $txt_noIdentidad= $_POST['txt_noIdentidad'];
+             $txt_telefono=$_POST['txt_telefono'];
+             $date_fechaInicio=$_POST['date_fechaInicio'];
+             $date_fechaFin=$_POST['date_fechaFin'];
+             $txt_usuario=$_POST['txt_usuario'] ;
+             $txt_contraseña=$_POST['txt_contraseña'] ;
+             $slc_cargo=$_POST['slc_cargo'] ;
+            
+            $conexion = new Conexion();
+            $accion = "EDITAR";
+
+            if (isset($_POST["img"])) {
+                $ruta2 = $_POST["img"];
+                $sql = "CALL SP_GESTION_EMPLEADO('$txt_pnombre','$txt_snombre','$txt_papellido','$txt_sapellido','$txt_correo','$txt_direccion','$txt_noIdentidad','$txt_telefono','$date_fechaInicio','$date_fechaFin','$slc_cargo','$txt_usuario','$txt_contraseña ','$ruta2','$idEmpleado','$accion',@p17,@p18);";
+            }
+            else{
+                $ruta=$_SESSION["ruta"];
+                $sql = "CALL SP_GESTION_EMPLEADO('$txt_pnombre','$txt_snombre','$txt_papellido','$txt_sapellido','$txt_correo','$txt_direccion','$txt_noIdentidad','$txt_telefono','$date_fechaInicio','$date_fechaFin','$slc_cargo','$txt_usuario','$txt_contraseña ','../$ruta','$idEmpleado','$accion',@p17,@p18);";
+            }
+            $salida = "SELECT @p17 AS OcurreError, @p18 AS mensaje;";
+            $resultado = $conexion->ejecutarInstruccion($sql);
+            $respuesta = $conexion->ejecutarInstruccion($salida);
+            
+            if (!$respuesta) {
+                echo 'No hay respuesta del procedimiento';
+            }
+            else {
+                $fila = $conexion->obtenerFila($respuesta);
+                echo 'Ocurre error: '.$fila["OcurreError"].'<br>mensaje: '. $fila["mensaje"];
+            }
+            
+            $conexion->cerrarConexion();
+        break;
+        
         default:
-            # code...
-            break;
+        # code...
+        break;
     }
-
-
 ?>

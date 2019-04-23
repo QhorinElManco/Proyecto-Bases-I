@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Auto Motor</title>
+    <title>Editar Vehiculo</title>
     <!-- Custom CSS -->
     <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -199,200 +199,195 @@
         <div class="page-wrapper">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="padding: 0">
+            <div class="container-fluid" style="padding: 50px">
                 <!-- ============================================================== -->
-                <!-- Banner Principal -->
+                <!-- Inicio de formulario  -->
                 <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div
-                            style="background-image: url(../assets/images/background/img1.1.jpg);background-repeat: no-repeat;background-size:cover; height:910px; width:auto;">
-                            <div style="background-color: rgba(0, 0, 0, 0.5); height:100%; width:100%;">
-                                <div style="width:525px; height:400px; margin: auto; padding-top: 220px">
-                                    <h5 style="color: rgba(255, 255, 255, 0.7)">La empresa numero uno de vehiculos en el
-                                        país</h5>
-                                    <br>
-                                    <h2 style="color: white;">LA COMODIDAD AL ALCANCE DE TUS MANOS</h2>
-                                    <br>
-                                    <p style="color: rgba(255, 255, 255, 0.9)">La empresa con la mejor atencion y los
-                                        mejores precios en renta y venta de vehiculos con
-                                        cobertura a nivel nacional</p>
-                                    <br>
-                                    <button type="button" class="btn btn-outline-warning"><a
-                                            href="#Explorar">Explorar</a></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- Fin Banner Principal -->
-                <!-- ============================================================== -->
-                <br>
-                <br>
-                <br><A name="Explorar"></a>
-                <br>
-                <br>
-                <!-- ============================================================== -->
-                <!-- Galeria -->
-                <!-- ============================================================== -->
+                <input type="text" id="txt_idEmpleado"name="txt_idEmpleado" value="<?php echo $_GET["idVehiculo"];?> ">
+                <div id="div_respuesta" name="div_respuesta"></div>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos del Vehiculo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Fotografias</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class= "row">
+                            <div class="col-md-11 auth-box  border-top border-secondary float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >         
+                                <div class="card-body" style="text-align:center;">                            
+                                    <h3 style="margin: 0px 0px 30px 0px;">Editar vehiculo</h3>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="slc_color"><b>color:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select name="slc_color" id="slc_color" class="form-control border border-secondary">
+                                                <option value="Azul">Azul</option>
+                                                <option value="Rojo">Rojo</option>
+                                                <option value="Amarillo">Amarillo</option>
+                                                <option value="Verde">Verde</option>
+                                                <option value="Negro">Negro</option>
+                                                <option value="Gris">Gris</option>
+                                                <option value="Blanco">Blanco</option>
+                                                <option value="Anaranjado">Anaranjado</option>
+                                            </select>
+                                        </div>                            
+                                        <div class="col-sm-2">
+                                            <label for="txt_precioVenta"><b>Precio venta:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="txt_precioVenta" class="form-control border border-secondary"placeholder="Ingrese el precio venta del vehiculo">
+                                        </div>                                
+                                    </div>
+                                
+                                    <div class="row p-2" >
+                                        <div class="col-sm-2">
+                                            <label for="txt_precioRentaHora"><b>Precio renta/hora:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="txt_precioRentaHora" class="form-control border border-secondary" placeholder="Ingrese el precio renta por hora">
+                                        </div>
+                                        <div class="col-sm-2">
+                                                <label for="txt_precioRentaDia"><b>Precio renta/dia:</b></label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="txt_precioRentaDia" class="form-control border border-secondary" placeholder="Ingrese el precio renta por dia">
+                                        </div>
+                                        </div>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="txt_placa"><b>Placa:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" id="txt_placa" class="form-control border border-secondary" pattern="[A-Za-z0-9]{7-8}" maxlength="8" required
+                                                placeholder="Ingrese la placa del vehiculo">
+                                        </div>
+                
+                                        <div class="col-sm-2">
+                                            <label for="slc_inventario"><b>Inventario:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="slc_inventario" class="form-control border border-secondary">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="date_fechaRegistro"><b>año:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select name="slc_anio" id="slc_anio" class="form-control border border-secondary">
+                                            <?php 
+                                            $year = date("Y");
+                                            for ($i= date("Y"); $i >= 1945 ; $i--) {                        
+                                                echo'<option VALUE="'.$i.'">'.$i.'</option>';
+                                            }
+                                            ?>
+                                            
+                                            </select>
+                                        </div>
+                                    
+                                        <div class="col-sm-2">
+                                            <label for="slc_modelo"><b>Modelo:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="slc_modelo" class="form-control border border-secondary">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="slc_tipoVehiculo"><b>Tipo de vehiculo:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="slc_tipoVehiculo" class="form-control border border-secondary">
+                                                
+                                            </select>
+                                        </div>
+                                    
+                                        <div class="col-sm-2">
+                                            <label for="slc_tipoMotor"><b>Tipo de motor:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="slc_tipoMotor" class="form-control border border-secondary">
 
-                <div class="row el-element-overlay" style="padding:100px;">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="slc_tipoTransmision"><b>Tipo de transmision:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="slc_tipoTransmision" class="form-control border border-secondary">
+                                                
+                                            </select>
+                                        </div>
+                                    
+                                        <div class="col-sm-2">
+                                            <label for="slc_Cilindraje"><b>cilindraje:</b></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select id="slc_Cilindraje" class="form-control border border-secondary">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-sm-2">
+                                            <label for="txt_descripcion"><b>Descripcion del vehiculo:</b></label>
+                                        </div>
+                                        <div class="col-sm-10 form-group">
+                                            <textarea id="txt_descripcion"  class="form-control"
+                                                placeholder="ingrese la descripcion del vehiculo"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class= "row">
+                            <div class="col-md-6 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                                <div class="card-body" style="text-align:center;">
+                                    <form method="post" id="form_img" enctype="multipart/form-data">
+                                        <p><h3>Ingrese las fotografias del vehiculo</h3><br>
+                                            <input type="file" name="file_foto[]" id="file_foto[]" multiple="">
+                                        </p>
+                                        <hr>
+                                        <div id="div_resultado"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
                     
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../assets/images/big/img1.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a
-                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="../assets/images/big/img1.jpg"><i
-                                                        class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link"
-                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
-                                        project</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../assets/images/big/img2.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a
-                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="../assets/images/big/img2.jpg"><i
-                                                        class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link"
-                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
-                                        project</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../assets/images/big/img3.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a
-                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="../assets/images/big/img3.jpg"><i
-                                                        class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link"
-                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
-                                        project</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../assets/images/big/img4.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a
-                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="../assets/images/big/img4.jpg"><i
-                                                        class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link"
-                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
-                                        project</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../assets/images/big/img3.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a
-                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="../assets/images/big/img3.jpg"><i
-                                                        class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link"
-                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
-                                        project</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="../assets/images/big/img5.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                        <ul class="list-style-none el-info">
-                                            <li class="el-item"><a
-                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
-                                                    href="../assets/images/big/img5.jpg"><i
-                                                        class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link"
-                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of
-                                        project</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                <button id="btn_agregar" type="button" class="btn btn-primary">Añadir vehiculo</button>
+                <button onclick="location.href='form_vehiculos_lista.php'" type="button" class="btn btn-danger">Cancelar</button>
+                <div id="div_resultado2"></div>
                 <!-- ============================================================== -->
-                <!-- Fin Galeria -->
+                <!-- Fin de formulario  -->
                 <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
-
-
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Matrix-admin. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
+                All Rights Reserved by AutoMotor. Designed and Developed by <a
+                    href="https://wrappixel.com">JCM</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -431,7 +426,8 @@
     <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="../dist/js/pages/chart/chart-page-init.js"></script>
-
+    <!-- Controlador -->
+    <script src="../dist/js/js_form/js_form_registro_vehiculo_editar.js"></script>
 </body>
 
 </html>

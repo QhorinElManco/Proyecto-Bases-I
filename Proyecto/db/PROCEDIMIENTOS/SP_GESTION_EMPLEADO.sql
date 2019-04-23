@@ -124,6 +124,7 @@ SP:BEGIN
     END IF;
 
     IF pcAccion = 'AGREGAR' THEN
+        
 
         SELECT COUNT(*) INTO vnConteo FROM Usuario 
         WHERE nombreUsuario = pcNombreUsuario;
@@ -131,14 +132,7 @@ SP:BEGIN
             SET pbOcurreError = TRUE;
             SET pcMensajeError= CONCAT('El usuario', pcNombreUsuario,' ya existe en el SI');
             LEAVE SP; 
-        END IF;
-        SELECT COUNT(*) INTO vnConteo FROM Persona
-        WHERE correo = pcCorreo;
-        IF vnConteo > 0 THEN
-            SET pbOcurreError = TRUE;
-            SET pcMensajeError= CONCAT('El correo', pcCorreo,' ya existe en el SI');
-            LEAVE SP; 
-        END IF;
+        END IF;        
 
         SELECT idPersona, COUNT(*) INTO  vnIdPersona2, vnConteo2 FROM persona
         WHERE noIdentidad = pcNoIdentidad;
@@ -198,42 +192,47 @@ SP:BEGIN
                     ,pnIdCargo
                     ,vnIdUsuario);
         END IF;
+        IF vnConteo2 > 0 THEN
+            SELECT COUNT(*) INTO vnConteo FROM Persona p
+            INNER JOIN Cliente c ON c.idPersona = p.idPersona
+            WHERE p.idPersona = vnIdPersona2;
+            IF vnConteo = 0 THEN
+                SET pbOcurreError = TRUE;
+                SET pcMensajeError= CONCAT('La persona con el noIdentidad', pcNoIdentidad ,' ya existe en el SI');
+                LEAVE SP;
+            END IF;
+            IF vnConteo > 0 THEN
+                INSERT INTO usuario
+                        (idUsuario
+                        , nombreUsuario
+                        , contraseña
+                        , rutaImagen) 
+                VALUES (NULL
+                        ,pcNombreUsuario
+                        ,pcContrasenia
+                        ,pcRutaImagen);
+                
+                SELECT MAX(idUsuario) INTO vnIdUsuario FROM usuario;
 
-
-        SELECT COUNT(*) INTO vnConteo FROM Persona p
-        INNER JOIN Cliente c ON c.idPersona = vnIdPersona2;
-        IF vnConteo = 0 THEN
-            SET pbOcurreError = TRUE;
-            SET pcMensajeError= CONCAT('La persona con el noIdentidad', pcNoIdentidad ,' ya existe en el SI');
-            LEAVE SP;
+                INSERT INTO empleado
+                            (idEmpleado
+                            , fechaInicio
+                            , fechaFin
+                            , idPersona
+                            , idCargo
+                            , idUsuario)
+                VALUES (NULL
+                        ,pdFechaInicio
+                        ,pdFechaFin
+                        ,vnIdPersona2
+                        ,pnIdCargo
+                        ,vnIdUsuario);
+            END IF;
+        
         END IF;
-        IF vnConteo > 0 THEN
-            INSERT INTO usuario
-                    (idUsuario
-                    , nombreUsuario
-                    , contraseña
-                    , rutaImagen) 
-            VALUES (NULL
-                    ,pcNombreUsuario
-                    ,pcContrasenia
-                    ,pcRutaImagen);
-            
-            SELECT MAX(idUsuario) INTO vnIdUsuario FROM usuario;
 
-            INSERT INTO empleado
-                        (idEmpleado
-                        , fechaInicio
-                        , fechaFin
-                        , idPersona
-                        , idCargo
-                        , idUsuario)
-            VALUES (NULL
-                    ,pdFechaInicio
-                    ,pdFechaFin
-                    ,vnIdPersona2
-                    ,pnIdCargo
-                    ,vnIdUsuario);
-        END IF;
+
+        
         
     END IF;
     IF pcAccion = 'EDITAR' THEN
@@ -298,25 +297,11 @@ SP:BEGIN
     END IF;
     IF pcAccion = 'ELIMINAR' THEN
 
-        SELECT p.idPersona INTO vnIdPersona FROM Persona p
-        INNER JOIN Empleado e ON e.idPersona = p.idPersona
-        WHERE e.idEmpleado = pnIdEmpleado;
-
-        SELECT u.idUsuario INTO vnIdUsuario FROM Usuario u
-        INNER JOIN Empleado e ON e.idUsuario = u.idUsuario
-        WHERE e.idEmpleado = pnIdEmpleado;
-
-        DELETE FROM Empleado
+        UPDATE Empleado
+        SET eliminado = TRUE
         WHERE idEmpleado = pnIdEmpleado;
 
-        DELETE FROM telefonos
-        WHERE idPersona = vnIdPersona;
-
-        DELETE FROM Persona
-        WHERE idPersona = vnIdPersona;
-
-        DELETE FROM Usuario
-        WHERE idUsuario = vnIdUsuario;
+        
 
     END IF;
 

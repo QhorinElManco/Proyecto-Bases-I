@@ -265,11 +265,12 @@
                                         </div>
                 
                                         <div class="col-sm-2">
-                                            <label for="txt_chasis"><b>Chasis:</b></label>
+                                            <label for="slc_inventario"><b>Inventario:</b></label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" id="txt_chasis" class="form-control border border-secondary"
-                                                placeholder="Ingrese el chasis del vehiculo">
+                                            <select id="slc_inventario" class="form-control border border-secondary">
+                                                
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -335,16 +336,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row p-2">
-                                        <div class="col-sm-2">
-                                            <label for="slc_inventario"><b>Inventario:</b></label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <select id="slc_inventario" class="form-control border border-secondary">
-                                                
-                                            </select>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="row p-2">
                                         <div class="col-sm-2">
                                             <label for="txt_descripcion"><b>Descripcion del vehiculo:</b></label>

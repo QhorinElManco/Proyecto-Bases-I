@@ -110,3 +110,18 @@ CREATE VIEW VW_EMPLEADO_VER AS(
     p.correo,  c.descripcion ,p.noIdentidad, p.direccion, e.fechaInicio
     , e.fechaFin, u.nombreUsuario, u.contraseña, u.rutaImagen
 )
+
+--listado de vehiculos
+CREATE VIEW VW_VEHICULO AS (
+SELECT v.idVehiculo, v.color, v.descripcion, v.año anio, v.precioVenta, v.precioRentaHora,
+	v.precioRentaDia, v.placa, v.eliminado, v.idModelo, v.idInventario, v.idTipoVehiculo,
+        v.idTipoGasolina, v.idTransmision, v.idCilindraje, m.descripcion modelo, i.descripcion inventario,
+        tv.descripcion tipovehiculo, tm.descripcion tipomotor, t.descripcion transmision, c.descripcion cilindraje
+FROM vehiculo v
+INNER JOIN Modelo m ON m.idModelo = v.idModelo
+INNER JOIN Inventario i ON i.idInventario =  v.idInventario
+INNER JOIN TipoVehiculo tv ON tv.idTipoVehiculo = v.idTipoVehiculo
+INNER JOIN TipoMotor tm ON tm.idTipoGasolina = v.idTipoGasolina
+INNER JOIN Transmision t ON t.idTransmision = v.idTransmision
+INNER JOIN Cilindraje c ON c.idCilindraje = v.idCilindraje
+WHERE v.eliminado <> TRUE)
