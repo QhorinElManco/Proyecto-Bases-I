@@ -125,7 +125,7 @@
                     
                     if($_FILES["file_foto"]["type"][$i]=="image/jpeg" || $_FILES["file_foto"]["type"][$i]=="image/pjpeg" || $_FILES["file_foto"]["type"][$i]=="image/gif" || $_FILES["file_foto"]["type"][$i]=="image/png"){
                         if(file_exists($carpetaDestino)|| @mkdir($carpetaDestino, 755, true)){
-                            
+            
                             $origen=$_FILES["file_foto"]["tmp_name"][$i];
                             $destino=$carpetaDestino.$_FILES["file_foto"]["name"][$i];
                             if(@move_uploaded_file($origen, $destino)){ 

@@ -22,6 +22,14 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
+<style>
+    a{ 
+color: rgb(0,0,0); 
+} 
+a:hover{ 
+color:rgb(0,0,0); 
+} 
+</style>
 
 <body>
     <!-- ============================================================== -->
@@ -206,7 +214,7 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="background-color:#343a40">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid" style="padding: 0">
@@ -215,103 +223,40 @@
                 <!-- ============================================================== -->
 
                 <div class="row el-element-overlay" style="padding:50px;">
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/Mazda Cx-3/1.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Mazda CX-3</h4> <span class="text-muted">Ver detalles</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/Mercedez Benz Clase-G/img7.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Mercedes Benz G-500-Biturbo</h4> <span class="text-muted">Ver
-                                        detalles</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="assets/images/autos/Mazda RX8/1.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Mazda RX8</h4> <span class="text-muted">ver detalles</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/BMW X5 2019/1.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                    <div class="el-card-content">
-                                        <h4 class="m-b-0">BMW X5 2019</h4> <span class="text-muted">Ver detalles</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/Hummer H3 2007/1.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Hummer H3 2007</h4> <span class="text-muted">Ver detalles</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/Toyota Hilux 2016/1.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Automovil 6</h4> <span class="text-muted">Ver detalles</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
+                <?php
+                        include("class/class_conexion.php");
+                        $conexion = new conexion();
+                        $sql = "SELECT v.idVehiculo, mo.descripcion AS modelo, mr.descripcion AS marca, f.direccionEnDisco FROM vehiculo v
+                                INNER JOIN modelo mo ON mo.idModelo=v.idModelo
+                                INNER JOIN marca mr ON mr.idMarca=mo.idMarca
+                                INNER JOIN fotos f ON f.idVehiculo=v.idVehiculo
+                                WHERE v.eliminado=0 AND (v.precioRentaDia>0 OR v.precioRentaHora>0)
+                                GROUP BY modelo;";
+                        $resultado=$conexion->ejecutarInstruccion($sql);
+                        if(!$resultado){
+                            echo "Actualmente no hay vehiculos";
+                        }
+                        else{
+                            while($fila=$conexion->obtenerFila($resultado)){
+                                $ruta = str_replace("../", " ", $fila["direccionEnDisco"]);
+                                echo '
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+                                            <div class="el-card-item">
+                                                <div class="el-card-avatar el-overlay-1" style="height: 300px;" > <img
+                                                        src="'.$ruta.'" alt="user" object-fit:/>
+                                                </div>
+                                                <div class="el-card-content">
+                                                    <h4 class="m-b-0">'.$fila["marca"].' '.$fila["modelo"].'</h4> <span class="text-muted"><a href="descripcion_vehiculo.php?idVehiculo='.$fila["idVehiculo"].'">Ver detalles</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>';
+                            }
+                        }
+                        $conexion->liberarResultado($resultado);
+                        $conexion->cerrarConexion();    
+                    ?>
                 </div>
                 <!-- ============================================================== -->
                 <!-- Fin Galeria -->
@@ -320,8 +265,6 @@
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
-
-
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
