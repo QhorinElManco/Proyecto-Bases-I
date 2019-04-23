@@ -168,7 +168,7 @@ color:rgb(0,0,0);
                                     href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
                                         class="hide-menu">Vehiculos</span></a>
                                 <ul aria-expanded="false" class="collapse  first-level">
-                                    <li class="sidebar-item"><a href="ver_todos_autos.html" class="sidebar-link"><i
+                                    <li class="sidebar-item"><a href="ver_todos_autos.php" class="sidebar-link"><i
                                                 class="mdi mdi-car"></i><span class="hide-menu">
                                                 Ver todos
                                             </span></a></li>
@@ -213,7 +213,7 @@ color:rgb(0,0,0);
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper" style="background-color:#343a40">
+        <div class="page-wrapper" style="background-color:rgb(0,0,0)">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid" style="padding: 0">

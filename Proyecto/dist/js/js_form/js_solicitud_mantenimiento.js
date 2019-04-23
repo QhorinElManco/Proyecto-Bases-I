@@ -14,8 +14,8 @@ $(document).ready(function () {
                     +"&idCliente="+$("#cliente").val()
                     +"&fechaFin="+$("#fechaFin").val(),
             success: function (respuesta) {
-                $("#cuerpoModal").empty();
-                $("#cuerpoModal").append(respuesta);
+                $("#cuerpoModal1").empty();
+                $("#cuerpoModal1").append(respuesta);
                 $("#Modal1").modal("show");
                 document.getElementById("formulario").reset();
             },
