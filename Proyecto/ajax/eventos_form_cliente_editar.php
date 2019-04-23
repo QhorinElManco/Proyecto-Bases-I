@@ -84,12 +84,12 @@
             $conexion = new Conexion();
             $accion = "EDITAR";
             if (isset($_POST["img"])) {
-                $ruta2 = $_POST["img"];
-                $sql= sprintf(" CALL SP_GESTION_CLIENTE('$txt_pnombre','$txt_snombre', '$txt_papellido','$txt_sapellido', '$txt_correo', '$txt_direccion','$txt_noIdentidad','$txt_telefono', '$txt_usuario','$txt_contraseña', '$ruta2', '$accion', '$idCliente',@p17, @p18);");
+                $ruta=$_SESSION["ruta"];
+                $sql = "CALL SP_GESTION_CLIENTE('$txt_pnombre','$txt_snombre','$txt_papellido','$txt_sapellido','$txt_correo','$txt_direccion','$txt_noIdentidad','$txt_telefono','$txt_usuario','$txt_contraseña ','../$ruta','$accion','$idCliente',@p17,@p18);";
             }
             else{
-                $ruta=$_SESSION["ruta"];
-                $sql= sprintf(" CALL SP_GESTION_CLIENTE('$txt_pnombre','$txt_snombre', '$txt_papellido','$txt_sapellido', '$txt_correo', '$txt_direccion','$txt_noIdentidad','$txt_telefono', '$txt_usuario','$txt_contraseña', '$ruta', '$accion','$idCliente', @p17, @p18);");
+                $ruta2 = $_POST["img"];
+                $sql = "CALL SP_GESTION_CLIENTE('$txt_pnombre','$txt_snombre','$txt_papellido','$txt_sapellido','$txt_correo','$txt_direccion','$txt_noIdentidad','$txt_telefono','$txt_usuario','$txt_contraseña ','$ruta2','$accion','$idCliente',@p17,@p18);";
             }
             $salida = "SELECT @p17 AS OcurreError, @p18 AS mensaje;";
             $resultado = $conexion->ejecutarInstruccion($sql);

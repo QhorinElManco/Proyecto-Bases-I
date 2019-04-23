@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Empleado</title>
+    <title>Editar Cliente</title>
     <!-- Custom CSS -->
     <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -205,7 +205,7 @@
                         <div class= "row">
                             <div class="col-md-9 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
                                 <div class="card-body" style="text-align:center;">
-                                    <h3 style="margin: 0px 0px 30px 0px;">Datos del Empleado</h3>
+                                    <h3 style="margin: 0px 0px 30px 0px;">Datos del Cliente</h3>
 
                                     <div class="row">
                                         <div class="col-sm-2" style="text-align: left;">

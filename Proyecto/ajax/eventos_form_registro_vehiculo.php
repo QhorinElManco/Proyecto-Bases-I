@@ -108,7 +108,7 @@
             $conexion = new Conexion(); 
             $idModelo = $_SESSION["slc_modelo"];
 
-            $sql2 = "SELECT m.descripcion modelo, ma.descripcion marca,  MAX(v.idVehiculo) FROM Vehiculo v
+            $sql2 = "SELECT m.descripcion modelo, ma.descripcion marca,  MAX(v.idVehiculo) idVehiculo FROM Vehiculo v
             INNER JOIN Modelo m ON m.idModelo = v.idModelo
             INNER JOIN Marca ma ON ma.idMarca = m.idMarca
             WHERE m.idModelo = '$idModelo'";
