@@ -40,7 +40,7 @@
             $acentos = $conexion->ejecutarInstruccion("SET NAMES 'utf8'");
             $idVehiculo = $_POST["idVehiculo"];
             $sql = "SELECT mr.descripcion AS marca, mo.descripcion AS modelo, v.Año , t.descripcion AS transmision, tm.descripcion AS motor,
-                        c.descripcion AS cilindraje, v.precioVenta, precioRentaDia FROM vehiculo v
+                        c.descripcion AS cilindraje, v.precioVenta, precioRentaDia, v.idVehiculo FROM vehiculo v
                         INNER JOIN modelo mo ON mo.idModelo=v.idVehiculo
                         INNER JOIN marca mr ON mr.idMarca=mo.idMarca
                         INNER JOIN transmision t ON t.idTransmision=v.idTransmision
@@ -114,7 +114,7 @@
                                 </table>
                                 <br>
                                 <div style="text-align:right; width:580px"><button type="button"
-                                        class="btn btn-dark btn-lg"><i class="mdi mdi-cart"> Comprar</i></button>
+                                        class="btn btn-dark btn-lg"><a href="Form/form_registro_vehiculo.php?idVehiculo='.$datos["idVehiculo"].'">Editar</a></button>
                                 </div>
                             </div>
                         </div>

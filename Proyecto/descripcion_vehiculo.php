@@ -31,7 +31,7 @@
     <style>
         A:link {text-decoration: none }
         a{
-            color: black;
+            color: White;
             font-family: arial;
             text-decoration: none}
     </style>

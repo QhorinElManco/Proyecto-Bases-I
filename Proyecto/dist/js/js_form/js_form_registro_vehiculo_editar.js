@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var parametros = "idVehiculo= "+document.getElementById("txt_idEmpleado").value;
+    var parametros = "idVehiculo= "+document.getElementById("txt_idVehiculo").value;
 
     llenarModelo = function(){
         $.ajax({ 

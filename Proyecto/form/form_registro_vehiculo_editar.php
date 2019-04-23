@@ -203,7 +203,7 @@
                 <!-- ============================================================== -->
                 <!-- Inicio de formulario  -->
                 <!-- ============================================================== -->
-                <input type="text" id="txt_idEmpleado"name="txt_idEmpleado" value="<?php echo $_GET["idVehiculo"];?> ">
+                <input type="text" id="txt_idVehiculo" name="txt_idVehiculo" value="<?php echo $_GET["idVehiculo"];?>">
                 <div id="div_respuesta" name="div_respuesta"></div>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
