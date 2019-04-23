@@ -1,0 +1,41 @@
+Este archivo puede tener actualizaciones segun se vea necesario. ¡LEEALO POR FAVOR!
+
+--Los archivos css se colocaran en la siguiente ruta:
+	dist/css/
+	(si es algun plugin con varios archivos css cree su respectiva subcarpeta)
+
+
+
+--Los archivos js se colocaran en la siguiente ruta:
+	dist/js/
+	(si es algun plugin con varios archivos css cree su respectiva subcarpeta)
+
+
+
+--Las imagenes se guardaran en la siguiente ruta:
+	- Para los usuarios assets/images/users 
+	- Para fondos assets/images/background
+	- Los logos puede colocarlos dentro assets/images/
+	- Para los autos assets/images/autos/ En su respectiva carperta con el nombre compuesto por la marca modelo y ano ejemplo:
+			assets/imagenes/autos/Mazda CX-3/
+
+
+
+-- Colores neutros para el diseño del html
+	-Negro
+	-Blanco
+	-Gris
+	-U otro color discreto que quede bien con la plantilla
+
+
+
+-- Formularios en la carpeta Form con el siguiente formato en el nombre
+	form_lo_que_sea
+
+
+
+--	Tamaño ideal para las imagenes 690x450 pixeles
+
+
+
+-- 
