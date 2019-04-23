@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Empleado</title>
+    <title>Cliente</title>
     <!-- Custom CSS -->
     <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -318,7 +318,7 @@
                             <div class="col-md-6 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
                                 <div class="card-body" style="text-align:center;">
                                     <form method="post" id="form_img" enctype="multipart/form-data">
-                                        <p><h3>Elije la foto del empleado</h3><br>
+                                        <p><h3>Elije una foto de perfil</h3><br>
                                             <input type="file" name="file_foto" id="file_foto">
                                         </p>
                                         <hr>
@@ -330,9 +330,10 @@
                         
                     </div>
                 </div>
-                <button id="btn_agregar" type="button" class="btn btn-primary">Añadir Empleado</button>
-                <button id="btn_cancelar" type="button" class="btn btn-danger">Cancelar</button>
                 <div id="div_resultado2"></div>
+                <button id="btn_agregar" type="button" class="btn btn-primary">Crear cuenta</button>
+                <button id="btn_cancelar" type="button" class="btn btn-danger">Cancelar</button>
+                
 
 
                 
@@ -390,7 +391,7 @@
     <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="../dist/js/pages/chart/chart-page-init.js"></script>
     <!-- controlador -->
-    <script src="../dist/js/js_form/js_form_empleado_registro_1.js"></script>
+    <script src="../dist/js/js_form/js_form_cliente_registro.js"></script>
     
 </body>
 

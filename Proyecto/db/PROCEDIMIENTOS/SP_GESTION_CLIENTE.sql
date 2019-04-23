@@ -109,7 +109,7 @@
          IF pcAccion = 'AGREGAR' THEN
 
             SELECT COUNT(*) INTO vnConteo FROM Cliente 
-            WHERE nidCliente = pnIdCliente;
+            WHERE idCliente = pnIdCliente;
             IF vnConteo > 0 THEN
                 SET pcMensaje= CONCAT('El Cliente', pnIdCliente,' ya existe ');
                 LEAVE SP; 
@@ -129,8 +129,8 @@
 
             IF vnConteo > 0 THEN
                 SET pcMensaje= CONCAT('La persona con el noIdentidad', pcNoIdentidad ,' ya existe como empleado');
-                SELECT (MAX(a.idCliente)+1) INTO vnIdCliente FROM Cliente c;
-                SELECT (MAX(t.idUsuario)+1) INTO vnIdUsuario FROM Usuario u;
+                SELECT (MAX(c.idCliente)+1) INTO vnIdCliente FROM Cliente c;
+                SELECT (MAX(u.idUsuario)+1) INTO vnIdUsuario FROM Usuario u;
                INSERT INTO usuario(idUsuario, nombreUsuario , contraseña, rutaImagen) 
                 VALUES (vnIdUsuario,pcNombreUsuario,pcContrasenia,pcRutaImagen);
                 
@@ -139,10 +139,10 @@
                 LEAVE SP;
                     /* en caso contrario lo agregara desde la tabla persona, usuario, y cliente*/
                     ELSE
-                        SELECT (MAX(a.idCliente)+1) INTO vnIdCliente FROM Cliente c;
+                        SELECT (MAX(c.idCliente)+1) INTO vnIdCliente FROM Cliente c;
                         SELECT (MAX(p.idPersona)+1) INTO vnIdPersona FROM Persona p;
                         SELECT (MAX(t.idTelefonos)+1) INTO vnIdTelefono FROM Telefonos t;
-                        SELECT (MAX(t.idUsuario)+1) INTO vnIdUsuario FROM Usuario u;
+                        SELECT (MAX(u.idUsuario)+1) INTO vnIdUsuario FROM Usuario u;
 
                         INSERT INTO persona(idPersona,pnombre, snombre, papellido,sapellido, correo,direccion,noIdentidad) 
                         VALUES (vnIdPersona,pcpNombre, pcsNombre,pcpApellido,pcsApellido,pcCorreo,pcDireccion, pcNoIdentidad);
@@ -167,8 +167,8 @@
             WHERE p.noIdentidad=pcNoIdentidad;
             IF vnConteo > 0 THEN
                 SET pcMensaje= CONCAT('La persona con el noIdentidad', pcNoIdentidad ,' ya existe ');
-                SELECT (MAX(a.idCliente)+1) INTO vnIdCliente FROM Cliente c;
-                SELECT (MAX(t.idUsuario)+1) INTO vnIdUsuario FROM Usuario u;
+                SELECT (MAX(c.idCliente)+1) INTO vnIdCliente FROM Cliente c;
+                SELECT (MAX(u.idUsuario)+1) INTO vnIdUsuario FROM Usuario u;
                INSERT INTO usuario(idUsuario, nombreUsuario , contraseña, rutaImagen) 
                 VALUES (vnIdUsuario,pcNombreUsuario,pcContrasenia,pcRutaImagen);
                 
@@ -178,10 +178,10 @@
 
                  /* en caso contrario lo agregara desde la tabla persona, usuario, y cliente*/
                     ELSE
-                        SELECT (MAX(a.idCliente)+1) INTO vnIdCliente FROM Cliente c;
+                        SELECT (MAX(c.idCliente)+1) INTO vnIdCliente FROM Cliente c;
                         SELECT (MAX(p.idPersona)+1) INTO vnIdPersona FROM Persona p;
                         SELECT (MAX(t.idTelefonos)+1) INTO vnIdTelefono FROM Telefonos t;
-                        SELECT (MAX(t.idUsuario)+1) INTO vnIdUsuario FROM Usuario u;
+                        SELECT (MAX(u.idUsuario)+1) INTO vnIdUsuario FROM Usuario u;
 
                         INSERT INTO persona(idPersona,pnombre, snombre, papellido,sapellido, correo,direccion,noIdentidad) 
                         VALUES (vnIdPersona,pcpNombre, pcsNombre,pcpApellido,pcsApellido,pcCorreo,pcDireccion, pcNoIdentidad);

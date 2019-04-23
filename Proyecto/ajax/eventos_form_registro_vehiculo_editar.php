@@ -81,6 +81,8 @@
         
         $resultado = $conexion->ejecutarInstruccion($sql);
         while ($fila= $conexion->obtenerFila($resultado)) { ?>
+            echo $fila['idVehiculo'];
+
             <input type="text" id="idVehiculo" value="<?php echo $fila['idVehiculo'];?>">
             <input type="text" id="color" value="<?php echo $fila['color'];?>">
             <input type="text" id="descripcion" value="<?php echo $fila['descripcion'];?>">

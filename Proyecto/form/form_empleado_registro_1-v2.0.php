@@ -12,9 +12,10 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Empleado</title>
     <!-- Custom CSS -->
-    <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
-    <!-- Custom CSS -->
+    <link href="../assets/libs/jquery-steps/jquery.steps.css" rel="stylesheet">
+    <link href="../assets/libs/jquery-steps/steps.css" rel="stylesheet">
     <link href="../dist/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -176,186 +177,139 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="background-color: rgb(0,0,0); height:930px;">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid" style="padding: 50px">
                 <!-- ============================================================== -->
                 <!-- Inicio Formulario -->
                 <!-- ============================================================== -->
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos Empleado</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Usuario</a>
-                    </li> 
-                    <li class="nav-item">
-                        <a class="nav-link" id="foto-tab" data-toggle="tab" href="#foto" role="tab" aria-controls="profile" aria-selected="false">Foto</a>
-                    </li>                
-                </ul>
-                
-                <div class="tab-content" id="myTabContent">
-                    <!-- Tab 1 -->
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class= "row">
-                            <div class="col-md-9 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
-                                <div class="card-body" style="text-align:center;">
-                                    <h3 style="margin: 0px 0px 30px 0px;">Datos del Empleado</h3>
-                                    <input type="hidden" id="idPersona">
-                                    <input type="hidden" id="idCliente">
-                                    <div class="row">
-                                        <div class="col-sm-2" style="text-align: left;">
-                                            <label for="txt_pnombre"><b>Nombre:</b></label>
-                                        </div>
-                                    </div>
-                                    <div class="row "  >
-                                        <div class="col-sm-6 p-2" >
-                                            <input type="text" class="form-control border border-dark" id="txt_pnombre" maxlength="50" placeholder="Primer nombre">
-                                        </div>
-                                        <div class="col-sm-6 p-2" >
-                                            <input type="text" class="form-control border border-dark" id="txt_snombre" maxlength="50"placeholder="segundo nombre">
-                                        </div>
-                                        <div class="col-sm-6 p-2" >
-                                            <input type="text" class="form-control border border-dark" id="txt_papellido" maxlength="50" placeholder="Primer apellido">
-                                        </div>
-                                        <div class="col-sm-6 p-2" >
-                                            <input type="text" class="form-control border border-dark" id="txt_sapellido" maxlength="50" placeholder="Segundo apellido">
-                                        </div>
-                                    </div>
-                                    <div class="row" >
-                                        <div class="col-sm-6" style="text-align: left;">
-                                            <label for="txt_correo"><b>Correo:</b></label>
-                                        </div>
-                                        <div class="col-sm-6" style="text-align: left;">
-                                            <label for="txt_telefono"><b>Telefono:</b></label>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="margin: 0px 0px 30px 0px;">
-                                        <div class="col-sm-6">
-                                            <input type="text" id="txt_correo" class="form-control border border-dark" maxlength="50" placeholder="Ingrese su correo electronico">
-                                            <span id="emailOK"></span>
-                                        </div>
-                                        <div class="col-sm-6 " >
-                                            <input type="text" class="form-control border border-dark" id="txt_telefono" maxlength="50" placeholder="Ingrese su numero de telefono">
-                                        </div>
-                                    </div>
-                                    <div class="row" >
-                                        
-                                        <div class="col-sm-6" style="text-align: left;">
-                                            <label for="slc_cargo"><b>Cargo:</b></label>
-                                        </div>
-                                        <div class="col-sm-6" style="text-align: left;">
-                                            <label for="txt_noIdentidad"><b>no Identidad:</b></label>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="row" style="margin: 0px 0px 30px 0px;">
-                                        
-                                        <div class="col-sm-6">
-                                            <select id="slc_cargo" class="form-control border border-dark" placeholder="Ingrese su genero">
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-6 " >
-                                            <input type="text" class="form-control border border-dark" id="txt_noIdentidad" maxlength="50" placeholder="Ingrese su numero de identidad">
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="row">
-                                        <div class="col" style="text-align: left;">
-                                            <label for="txt_direccion"><b>Direccion:</b></label>
-                                        </div>
-                                    </div>
-                                    <div class="row p-1">
-                                        <div class="col" >
-                                            <textarea name="txt_direccion" id="txt_direccion" cols="80" rows="3" class="form-control border border-dark "></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row" >
-                                        <div class="col-sm-6" style="text-align: left;">
-                                            <label for="date_fechaInicio"><b>Fecha de inicio:</b></label>
-                                        </div>
-                                        <div class="col-sm-6" style="text-align: left;">
-                                            <label for="date_fechaFin"><b>Fecha fin:</b></label>
-                                        </div>                                        
-                                    </div>
-                                    <div class="row" style="margin: 0px 0px 30px 0px;">
-                                        <div class="col-sm-6">
-                                            <input type="date" id="date_fechaInicio" class="form-control border border-dark">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="date" id="date_fechaFin" class="form-control border border-dark">
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
+                <div class="row">
+                    <div class="col-lg-2 col-md-2">
                     </div>
-                    <!-- /Tab 1 -->
-                    <!-- Tab 2 -->
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class= "row">
-                            <div class="col-md-6 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
-                                <div class="card-body" style="text-align:center;">
-                                    <h3 style="margin: 0px 0px 30px 0px;">ingresar usuario</h3>
-                                    <div class="row" >
-                                        <div class="col-sm-3">
-                                            <label for="txt_usuario"><b>Usuario:</b></label>
-                                        </div>
+                    <div class="col-lg-8 col-md-8">
+                        <div class="card">
+                            <div class="card-body wizard-content">
+                                <h4 class="card-title">Datos del empleado</h4>
+                                <h6 class="card-subtitle"></h6>
+                                <form id="example-form" action="#" class="m-t-40">
+                                    <div>
+                                        <h3>Datos personales</h3>
+                                        <section>
+                                            <label for="txt_pnombre">Primer nombre *</label>
+                                            <input id="txt_pnombre" name="name" type="text" class="required form-control">
+                                            <label for="txt_snombre">Segundo nombre *</label>
+                                            <input id="txt_snombre" name="name" type="text" class="required form-control">
+                                            <label for="txt_papellido">Primer apellido *</label>
+                                            <input id="txt_papellido" name="surname" type="text" class="required form-control"> 
+                                            <label for="txt_sapellido">Segundo apellido *</label>
+                                            <input id="txt_sapellido" name="surname" type="text" class="required form-control">
+                                            <label for="txt_noIdentidad">No Identidad *</label>
+                                            <input id="txt_noIdentidad" name="surname" type="text" class="required form-control">
+                                            <p>(*) Obligatorio</p>
+                                        </section>
+                                        <h3>Contacto</h3>
+                                        <section>
+                                            <label for="txt_correo">Correo electronico *</label>
+                                            <input id="txt_correo" name="email" type="text" class="required email form-control"><span id="emailOK"></span>
+                                            <label for="txt_telefono">Telefono</label>
+                                            <input id="txt_telefono" name="address" type="text" class=" form-control">      
+                                            <label for="txt_direccion">Direccion</label>
+                                            <textarea name="txt_direccion" id="txt_direccion" cols="80" rows="3" class="required form-control"></textarea>
+                                            <p>(*) Obligatorio</p>
+                                        </section>
+                                        <h3>Cargo</h3>
+                                        <section>
+                                            <label for="slc_cargo">Cargo</label>
+                                            <select id="slc_cargo" class="required form-control" placeholder="Ingrese su genero"></select>
+                        
+                                            <label for="date_fechaInicio">Fecha inicio</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control datepicker-autoclose" id="date_fechaInicio" placeholder="mm/dd/yyyy">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                            </div>
+                                            
+                                            <label for="date_fechaFin">Fecha fin</label>
+                                            <div class="input-group"> 
+                                                <input type="text" class="form-control datepicker-autoclose" id="date_fechaFin" placeholder="mm/dd/yyyy">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                            </div>
+                                            <p>(*) Obligatorio</p>
+                                        </section>
+                                        <h3>Cuenta</h3>
+                                        <section>
+                                            <ul>
+                                            <label for="txt_usuario">Usuario *</label>
+                                            <input id="txt_usuario" name="userName" type="text" class="required form-control">
+                                            <label for="txt_contraseña">Contraseña *</label>
+                                            <input id="txt_contraseña" name="password" type="text" class="required form-control">
+                                            <label for="txt_contraseña2">Confirme la contraseña *</label>
+                                            <input id="txt_contraseña2" name="confirm" type="text" class="required form-control"><span id="contraseña2ok"></span>
+                                            </ul>
+                                        </section>
+                                        <h3>Foto de perfil</h3>
+                                        <section>
+                                            <div class= "row">
+                                                <div class="col-md-6 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                                                    <div class="card-body" style="text-align:center;">
+                                                        <form method="post" id="form_img" enctype="multipart/form-data">
+                                                            <p><h3>Elije la foto del empleado</h3><br>
+                                                                <input type="file" name="file_foto" id="file_foto">
+                                                            </p>
+                                                            <hr>
+                                                            <div id="div_resultado"></div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
                                     </div>
-                                    <div class="row" style="margin: 0px 0px 30px 0px;">
-                                        <div class="col">
-                                            <input type="text" id="txt_usuario" class="form-control border border-dark" maxlength="50" placeholder="Ingrese su nombre de usuario">
-                                        </div>
-                                    </div>
-                                    <div class="row" >
-                                        <div class="col-sm-2">
-                                            <label for="txt_contraseña"><b>Contraseña:</b></label>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="margin: 0px 0px 30px 0px;">
-                                        <div class="col-sm-6">
-                                            <input type="password" id="txt_contraseña" class="form-control border border-dark" maxlength="50" placeholder="Ingrese su contraseña">
-
-                                        </div>
-                                                                        
-                                        <div class="col-sm-6 form-group">
-                                            <input type="password" id="txt_contraseña2" class="form-control border border-dark" maxlength="50" placeholder="Reingrese su contraseña">
-                                            <span id="contraseña2ok"></span>
-                                        </div>
-                                    </div>                                    
-                                </div>
+                                </form>
+                                <button id="btn_agregar" type="button" class="btn btn-primary" hidden="">Añadir Empleado</button>
                             </div>
                         </div>
-                        
-                        
                     </div>
-                    <!-- /Tab 2 -->
-                    <div class="tab-pane fade" id="foto" role="tabpanel" aria-labelledby="foto-tab">
-                        <div class= "row">
-                            <div class="col-md-6 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
-                                <div class="card-body" style="text-align:center;">
-                                    <form method="post" id="form_img" enctype="multipart/form-data">
-                                        <p><h3>Elije la foto del empleado</h3><br>
-                                            <input type="file" name="file_foto" id="file_foto">
-                                        </p>
-                                        <hr>
-                                        <div id="div_resultado"></div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        
+                    <div class="col-lg-2 col-md-2">
                     </div>
                 </div>
-                <button id="btn_agregar" type="button" class="btn btn-primary">Añadir Empleado</button>
-                <button id="btn_cancelar" type="button" class="btn btn-danger">Cancelar</button>
-                <div id="div_resultado2"></div>
+                    <!-- Modal -->
+                        <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true ">
+                            <div class="modal-dialog" role="document ">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true ">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="cuerpoModal1">
 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <!-- Modal -->
+                        <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true ">
+                            <div class="modal-dialog" role="document ">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true ">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="cuerpoModal2">
 
-                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
                 <!-- ============================================================== -->
                 <!-- Fin Formulario -->
                 <!-- ============================================================== -->
@@ -369,8 +323,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Matrix-admin. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
+
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -398,17 +351,46 @@
     <script src="../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="../dist/js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-    <!-- Charts js Files -->
-    <script src="../assets/libs/flot/excanvas.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.pie.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.time.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.stack.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
-    <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="../dist/js/pages/chart/chart-page-init.js"></script>
+    <script src="../assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="../assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="../assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        // Basic Example with form
+    var form = $("#example-form");
+    form.validate({
+        errorPlacement: function errorPlacement(error, element) { element.before(error); },
+        rules: {
+            confirm: {
+                equalTo: "#txt_contraseña"
+            }
+        }
+    });
+     form.children("div").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        onStepChanging: function(event, currentIndex, newIndex) {
+            form.validate().settings.ignore = ":disabled,:hidden";
+            return form.valid();
+        },
+        onFinishing: function(event, currentIndex) {
+            form.validate().settings.ignore = ":disabled";
+            return form.valid();
+        },
+        onFinished: function(event, currentIndex) {
+            $("#btn_agregar").trigger("click");
+        }
+
+
+
+    });
+    jQuery('.mydatepicker').datepicker();
+        jQuery('.datepicker-autoclose').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+
     <!-- controlador -->
     <script src="../dist/js/js_form/js_form_empleado_registro_1.js"></script>
     
