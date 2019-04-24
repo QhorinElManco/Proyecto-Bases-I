@@ -23,6 +23,29 @@
 <![endif]-->
     
 </head>
+<style>
+.nav-tabs{
+  background-color:rgba(0,0,0,0);
+}
+.tab-content{
+    background-color:rgba(0,0,0,0);
+    color:#fff;
+    padding:5px
+}
+.nav-tabs > li > a{
+  border: medium none;
+}
+.nav-tabs > li > a:hover{
+  background-color: #303136 !important;
+    border: medium none;
+    border-radius: 0;
+    color:#fff;
+}
+.nav-tabs > li > a {
+  color: white;
+}
+
+</style>
 
 <body>
     <!-- ============================================================== -->
@@ -243,10 +266,10 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="background-image: url(../assets/images/background/img3.jpg); background-repeat: no-repeat; background-size:cover;  width: 100%; height: 100vh;">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="padding: 50px">
+            <div class="container-fluid" >
                 <!-- ============================================================== -->
                 <!-- Inicio Formulario -->
                 <!-- ============================================================== -->
@@ -266,7 +289,7 @@
                     <!-- Tab 1 -->
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <div class= "row">
-                            <div class="col-md-9 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                            <div class="col-lg-5 col-md-5 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px; margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)"" >
                                 <div class="card-body" style="text-align:center;">
                                     <h3 style="margin: 0px 0px 30px 0px;">Datos del Empleado</h3>
                                     <input type="hidden" id="idPersona">
@@ -364,7 +387,7 @@
                     <!-- Tab 2 -->
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class= "row">
-                            <div class="col-md-6 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                            <div class="col-lg-5 col-md-5 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
                                 <div class="card-body" style="text-align:center;">
                                     <h3 style="margin: 0px 0px 30px 0px;">ingresar usuario</h3>
                                     <div class="row" >
@@ -402,7 +425,7 @@
                     <!-- /Tab 2 -->
                     <div class="tab-pane fade" id="foto" role="tabpanel" aria-labelledby="foto-tab">
                         <div class= "row">
-                            <div class="col-md-6 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                            <div class="col-lg-5 col-md-5 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
                                 <div class="card-body" style="text-align:center;">
                                     <form method="post" id="form_img" enctype="multipart/form-data">
                                         <p><h3>Elije la foto del empleado</h3><br>
@@ -416,10 +439,26 @@
                         </div>
                         
                     </div>
+                </div >
+                <div style="text-align:center">
+                    <button id="btn_cancelar" type="button" class="btn btn-danger">Cancelar</button>
+                    <button id="btn_agregar" type="button" class="btn btn-success">Añadir Empleado</button>
                 </div>
-                <button id="btn_agregar" type="button" class="btn btn-primary">Añadir Empleado</button>
-                <button id="btn_cancelar" type="button" class="btn btn-danger">Cancelar</button>
-                <div id="div_resultado2"></div>
+                <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true ">
+                            <div class="modal-dialog" role="document ">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true ">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="div_resultado2">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
                 
@@ -436,8 +475,6 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Matrix-admin. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

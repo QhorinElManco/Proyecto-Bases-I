@@ -53,6 +53,7 @@ $(document).ready(function(){
 			data: parametros,
 		success:function(resultado){
 			$("#div_resultado2").html(resultado);
+			$("#Modal1").modal("show");
 			$("#btn_agregar").attr("disabled", true);
 		}
 		});//ajax
