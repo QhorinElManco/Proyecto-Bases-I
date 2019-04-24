@@ -38,7 +38,7 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper">
+    <div id="main-wrapper" data-sidebartype="mini-sidebar" class="mini-sidebar">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -194,7 +194,7 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
                                     class="hide-menu">Authentication </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="authentication-login.html" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="login.php" class="sidebar-link"><i
                                             class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Login </span></a>
                                 </li>
                                 <li class="sidebar-item"><a href="authentication-register.html" class="sidebar-link"><i
@@ -215,15 +215,15 @@
         <!-- Login box.scss -->
         <!-- ============================================================== -->
         <div style="background-color: rgba(0, 0, 0, 0.5); height:100%; width:100%;">
-        <div class="page-wrapper d-flex no-block justify-content-center align-items-center bg-dark " style="background-color: rgba(0, 0, 0, 0.5); height:100%; width:100%;background-image: url(assets/images/background/fondo2.3.jpg);background-repeat: no-repeat;background-size:cover;" >
+        <div class="page-wrapper d-flex no-block justify-content-center align-items-center bg-dark " style="background-color: rgba(0, 0, 0, 0.5); height: 100vh; width:100%;background-image: url(assets/images/background/fondo2.3.jpg);background-repeat: no-repeat;background-size:cover;" >
          
         <div class="auth-box  bg-dark border-top border-secondary" style="margin-bottom:100px; margin-top:100px ;width:300px;height:400px ;">
                 <div id="loginform" style="margin-left:15px;margin-right:15px">
                     <div class="text-center p-t-20 p-b-20" style=" margin-top:20px">
-                        <span class="db"><img src="assets/images/logo.png" alt="logo" /></span>
+                        <span class="db"><img src="assets/images/logo2.png" alt="logo" /></span>
                     </div>
                     <!-- Form -->
-                    <form class="form-horizontal m-t-20" id="loginform" action="index.html">
+                    <form class="form-horizontal m-t-20" id="loginform" action="index.php">
                         <div class="row p-b-30">
                             <div class="col-12">
                                 <div class="input-group mb-3">

@@ -46,7 +46,7 @@
         </div>
     </div>
     <!-- Main wrapper - style you can find in pages.scss -->
-    <div id="main-wrapper">
+    <div id="main-wrapper" data-sidebartype="mini-sidebar" class="mini-sidebar">
         <!-- Topbar header - style you can find in pages.scss -->
         <header class="topbar" data-navbarbg="skin5">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
