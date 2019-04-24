@@ -184,8 +184,9 @@ switch($_GET["accion"]){
                     echo "No hay respuesta del procedimiento";
                 }
                 else{
-                    $fila=$conexion->obtenerFila($respuesta);
-                    echo json_encode($fila);
+                    while($fila=$conexion->obtenerFila($respuesta)){
+                        echo $fila["mensaje"];
+                    }
                 }
                 $conexion->cerrarConexion();
             }
@@ -193,14 +194,14 @@ switch($_GET["accion"]){
         case "9":
         $conexion = new conexion();
         $acentos = $conexion->ejecutarInstruccion("SET NAMES 'utf8'");
-        $sql = "SELECT MAX(idFactura), Total FROM Factura;";
+        $sql = "SELECT MAX(idFactura) as idFactura, Total FROM factura;";
         $resultado = $conexion->ejecutarInstruccion($sql);
         if(!$resultado){
             echo "No hay resultado de la consulta";
         }
         else{
             $fila = $conexion->obtenerFila($resultado);
-                echo '<input type="text" readonly=”readonly” class="form-control" id="txt_Des"
+                echo'<input type="text" readonly=”readonly” class="form-control" id=""
                 placeholder="'.$fila["Total"].'">';
         }
         $conexion->cerrarConexion();

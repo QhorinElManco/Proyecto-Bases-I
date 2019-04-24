@@ -11,11 +11,10 @@ $(document).ready(function () {
              +"&idFormaPago="+$("#idFormaPago").val()+"&"
              +"&idTipoDescuento="+$("#idTipoDescuento").val() ,
             success: function (respuesta) {
-                console.log(respuesta);
-                //$("#cuerpoModal").empty();
-                //$("#cuerpoModal").append(respuesta);
-                //$("#Modal1").modal("show");
-                //total();
+                $("#cuerpoModal").empty();
+                $("#cuerpoModal").append(respuesta);
+                $("#Modal1").modal("show");
+                total();
                 document.getElementById("formulario").reset();
             },
             error: function(error){
@@ -27,7 +26,7 @@ $(document).ready(function () {
 
 
 })
-/*function total() {
+function total() {
     $.ajax({
         url: "ajax/eventos_factura_venta.php?accion=9",
         method: "POST",
@@ -40,7 +39,7 @@ $(document).ready(function () {
             console.log(error);
         }
     });
-}*/
+}
 
 
 function verInfo() {
@@ -75,7 +74,8 @@ function verInfo() {
         method: "POST",
         dataType: "html",
         success: function (respuesta) {
-            $("#idVehiculo").append(respuesta);
+            var res = respuesta.replace(";", " ");
+            $("#idVehiculo").append(res);
         },
         error: function(error){
             console.log(error);
@@ -86,7 +86,8 @@ function verInfo() {
         method: "POST",
         dataType: "html",
         success: function (respuesta) {
-            $("#idTipoDescuento").append(respuesta);
+            var res = respuesta.replace(";", " ");
+            $("#idTipoDescuento").append(res);
            
         },
         error: function(error){
@@ -98,7 +99,8 @@ function verInfo() {
         method: "POST",
         dataType: "html",
         success: function (respuesta) {
-            $("#idEmpleado").append(respuesta);
+            var res = respuesta.replace(";", " ");
+            $("#idEmpleado").append(res);
            
         },
         error: function(error){
@@ -110,7 +112,8 @@ function verInfo() {
         method: "POST",
         dataType: "html",
         success: function (respuesta) {
-            $("#idCliente").append(respuesta);
+            var res = respuesta.replace(";", " ");
+            $("#idCliente").append(res);
            
         },
         error: function(error){
@@ -122,7 +125,8 @@ function verInfo() {
         method: "POST",
         dataType: "html",
         success: function (respuesta) {
-            $("#idFormaPago").append(respuesta);
+            var res = respuesta.replace(";", " ");
+            $("#idFormaPago").append(res);
            
         },
         error: function(error){
