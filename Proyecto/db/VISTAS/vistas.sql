@@ -79,13 +79,19 @@ SELECT * FROM proveedores pr
 INNER JOIn tipoentrada te ON te.idProveedores = pr.idProveedores
 INNER JOIn persona p On p.idPersona = pr.idPersona
 )
-
---Listado de las rentas
-CREATE VIEW VW_Proveedores AS (
-SELECT * FROM solicitudrenta sr
+------------------------------------------------------------
+--Listado de las rentas aprobadas
+CREATE VIEW VW_RENTAS_APROBADAS AS (
+SELECT sr.idSolicitudRenta, p2.pnombre nombreCliente, p2.papellido apellidoCliente, m.descripcion modelo, ma.descripcion marca, v.año anio, p1.pnombre nombreEmpleado, p2.papellido apellidoEmpleado   FROM solicitudrenta sr
 INNER JOIN empleado e ON e.idEmpleado = sr.idEmpleado
 INNER JOIN vehiculo v ON v.idVehiculo = sr.idVehiculo
-)
+INNER JOIN Modelo m ON m.idModelo = v.idModelo
+INNER JOIN Marca ma ON ma.idMarca = m.idMarca
+INNER JOIN Cliente c ON c.idCliente = sr.idCliente
+INNER JOIN Persona p1 ON p1.idPersona = e.idEmpleado
+INNER JOIN Persona p2 ON p2.idPersona = c.idCliente
+WHERE sr.estado = 'Aprobada' AND e.eliminado <> TRUE
+);
 
 --Listado de todos los empleados de la empresa
 CREATE VIEW VW_EMPLEADOS AS(
@@ -93,7 +99,7 @@ CREATE VIEW VW_EMPLEADOS AS(
     INNER JOIN Persona p ON p.idPersona = e.idPersona
     INNER JOIN Cargo c ON c.idCargo = e.idCargo
     WHERE e.eliminado <> TRUE
-)
+);
 
 --listado de empleado
 CREATE VIEW VW_EMPLEADO_VER AS(
@@ -109,7 +115,7 @@ CREATE VIEW VW_EMPLEADO_VER AS(
     GROUP BY e.idEmpleado, p.pnombre, p.snombre, p.papellido, p.sapellido, 
     p.correo,  c.descripcion ,p.noIdentidad, p.direccion, e.fechaInicio
     , e.fechaFin, u.nombreUsuario, u.contraseña, u.rutaImagen
-)
+);
 
 --listado de vehiculos
 CREATE VIEW VW_VEHICULO AS (
@@ -124,7 +130,7 @@ INNER JOIN TipoVehiculo tv ON tv.idTipoVehiculo = v.idTipoVehiculo
 INNER JOIN TipoMotor tm ON tm.idTipoGasolina = v.idTipoGasolina
 INNER JOIN Transmision t ON t.idTransmision = v.idTransmision
 INNER JOIN Cilindraje c ON c.idCilindraje = v.idCilindraje
-WHERE v.eliminado <> TRUE)
+WHERE v.eliminado <> TRUE);
 
 --Listado de clientes.
 CREATE VIEW VW_CLIENTE AS (
@@ -133,4 +139,4 @@ INNER JOIN Persona p ON p.idPersona = c.idPersona
 INNER JOIN Usuario u ON u.idUsuario = c.idUsuario
 INNER JOIN Telefonos t ON t.idPersona = p.idPersona
 GROUP BY c.idCliente, p.pnombre, p.snombre, p.papellido, p.sapellido, 
-p.correo,p.noIdentidad, p.direccion, u.nombreUsuario, u.contraseña, u.rutaImagen)
+p.correo,p.noIdentidad, p.direccion, u.nombreUsuario, u.contraseña, u.rutaImagen);
