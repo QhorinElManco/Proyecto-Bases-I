@@ -44,7 +44,6 @@
 .nav-tabs > li > a {
   color: white;
 }
-
 </style>
 
 <body>
@@ -444,6 +443,8 @@
                     <button id="btn_cancelar" type="button" class="btn btn-danger">Cancelar</button>
                     <button id="btn_agregar" type="button" class="btn btn-success">Añadir Empleado</button>
                 </div>
+<!--MODAL DEL MENSAJE -->
+                <!--<div id="div_resultado2"></div>-->
                 <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true ">
                             <div class="modal-dialog" role="document ">
                                 <div class="modal-content">
@@ -453,15 +454,12 @@
                                             <span aria-hidden="true ">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body" id="div_resultado2">
-
+<!--DONDE SE IMPRIME EL MENSAJE --> <div class="modal-body" id="div_resultado2">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-                
+                        </div>    
+<!--MODAL DEL MENSAJE -->   
                 <!-- ============================================================== -->
                 <!-- Fin Formulario -->
                 <!-- ============================================================== -->

@@ -24,6 +24,19 @@
     <?php 
 ?>
 </head>
+<style>
+    a {
+        color: yellow;
+    }
+
+    a:hover {
+        color: yellow;
+    }
+
+    a:visited {
+        color:
+    }
+</style>
 
 <body>
     <!-- ============================================================== -->
@@ -38,7 +51,7 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-sidebartype="mini-sidebar" class="mini-sidebar">
+    <div id="main-wrapper">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -160,28 +173,6 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span
-                                    class="hide-menu">Clientes</span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="Form/form_cliente_registro.php" class="sidebar-link"><i
-                                            class="mdi mdi-account-plus"></i><span class="hide-menu">Agregar cliente
-                                        </span></a></li>
-                                <li class="sidebar-item"><a href="Form/form_cliente_lista.php" class="sidebar-link"><i
-                                            class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Lista de clientes</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
-                                    class="hide-menu">Empleados</span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="Form/form_empleado_registro_1.php" class="sidebar-link"><i
-                                            class="mdi mdi-account-plus"></i><span class="hide-menu">Agregar empleado
-                                        </span></a></li>
-                                <li class="sidebar-item"><a href="Form/form_empleado_lista.php" class="sidebar-link"><i
-                                            class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Lista de empleados</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
                                     class="hide-menu">Vehiculos</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
@@ -197,50 +188,13 @@
                                             renta</span></a></li>
                             </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
-                                    class="hide-menu">Solicitud mantenimiento </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="agregar_solicitud_mantenimiento.php"
-                                        class="sidebar-link"><i class="mdi mdi-playlist-plus"></i><span
-                                            class="hide-menu">
-                                            Agregar solicitud
-                                        </span></a></li>
-                                <li class="sidebar-item"><a href="ver_solicitud_mantenimiento.php"
-                                        class="sidebar-link"><i class="mdi mdi-format-list-bulleted"></i><span
-                                            class="hide-menu"> Ver las
-                                            solicitudes </span></a></li>
-                            </ul>
-                        </li>
-                        
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
-                                    class="hide-menu">Facturacion</span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
-                                        </span></a></li>
-                                <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura
-                                            Mantenimiento
-                                        </span></a></li>
-                            </ul>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="sucursal.php" aria-expanded="false"><i
+                                    class="fas fa-users"></i><span class="hide-menu">Sucursales</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="solicitud_renta.php" aria-expanded="false"><i class="mdi mdi-calendar-multiple"></i><span
-                                    class="hide-menu">Solicitud renta</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="Form/gestion_sucursal.php" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
-                                    class="hide-menu">Gestion Sucursal</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="Form/gestion_taller.php" aria-expanded="false"><i class="mdi mdi-engine"></i><span
-                                    class="hide-menu">Gestion de talleres</span></a></li>
-
-
+                                href="service.php" aria-expanded="false"><i class="fas fa-handshake"></i><span
+                                    class="hide-menu">Servicios</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
                                     class="hide-menu">Authentication </span></a>
@@ -253,6 +207,9 @@
                                         </span></a></li>
                             </ul>
                         </li>
+
+
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -268,57 +225,38 @@
         <div class="page-wrapper">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="padding: 0">
+            <div class="container-fluid" style="padding: 0px; background-color:black">
                 <!-- ============================================================== -->
                 <!-- Banner Principal -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
-                        <div
-                            style="background-image: url(assets/images/background/img1.jpg);background-repeat: no-repeat;background-size:cover; height:910px; width:auto;">
-                            <div style="background-color: rgba(0, 0, 0, 0.5); height:100%; width:100%;">
-                                <div style="width:525px; height:400px; margin: auto; padding-top: 220px">
-                                    <h5 style="color: rgba(255, 255, 255, 0.7)">La empresa numero uno de vehiculos en el
-                                        país</h5>
-                                    <br>
-                                    <h2 style="color: white;">LA COMODIDAD AL ALCANCE DE TUS MANOS</h2>
-                                    <br>
-                                    <p style="color: rgba(255, 255, 255, 0.9)">La empresa con la mejor atencion y los
-                                        mejores precios en renta y venta de vehiculos con
-                                        cobertura a nivel nacional</p>
-
-                                    <br>
-                                    <button type="button" class="btn btn-outline-warning"><a
-                                            href="#Explorar">Explorar</a></button>
-                                </div>
+                <div class="col-12"  style="padding:30px;padding-bottom:0px">
+                        <div class="card" style="margin-top:10px; margin-right:0px;margin-left:10px;text-align:center">
+                        
+                            <div class="card-body" style="margin-left:20px;margin-right:20px;margin-top:10px;margin-bottom:10px;background-color:rgba(128, 128, 128,0.1);border-right-color:black">
+                           <div class="text-center p-t-20 p-b-20" style="margin-right:0px">
+                                        <IMG SRC="logo/logo_automotor.PNG">
+                                    </div >
+                                     <hr style="height:4px; background-color:#3e5569">
+                                
+                                    
+                                    <h5 class="card-title" style="margin-bottom:10px;margin-top:10px;color:black; font-size:20px; font-weight:700; font-family:Comic Sans MS">CONOCE NUESTRAS SUCURSALES</h5>
+                              <hr style="height:4px; background-color:#3e5569">
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- Fin Banner Principal -->
-                <!-- ============================================================== -->
-                <br>
-                <br>
-                <br><A name="Explorar"></a>
-                <br>
-                <br>
-                <!-- ============================================================== -->
-                <!-- Galeria -->
-                <!-- ============================================================== -->
-
-                <div class="row el-element-overlay" style="padding:100px;">
+                    <div class="row el-element-overlay" style="padding:40px; padding-top:0px">
                     <!--Tarjeta-->
                     <div class="col-lg-4 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
                                 <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/Mazda Cx-3/1.jpg" alt="user" />
+                                        src="assets/images/sucursal/sucursal9.jpg" alt="user" />
                                     <div class="el-overlay">
                                     </div>
                                 </div>
                                 <div class="el-card-content">
-                                    <h4 class="m-b-0">Mazda CX-3</h4> <span class="text-muted">Ver detalles</span>
+                                    <h4 class="m-b-0">TEGUCIGALPA</h4> <span class="text-muted">Carrizal</span>
                                 </div>
                             </div>
                         </div>
@@ -329,29 +267,12 @@
                         <div class="card">
                             <div class="el-card-item">
                                 <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/BMW X5 2019/1.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                    <div class="el-card-content">
-                                        <h4 class="m-b-0">BMW X5 2019</h4> <span class="text-muted">Ver detalles</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/Mercedez Benz Clase-G/img7.jpg" alt="user" />
+                                        src="assets/images/sucursal/sucursal2.jpg" alt="user" />
                                     <div class="el-overlay">
                                     </div>
                                 </div>
                                 <div class="el-card-content">
-                                    <h4 class="m-b-0">Mercedes Benz G-500-Biturbo</h4> <span class="text-muted">Ver
-                                        detalles</span>
+                                    <h4 class="m-b-0">SAN PEDRO SULA</h4> <span class="text-muted">Brisas de Canadá</span>
                                 </div>
                             </div>
                         </div>
@@ -362,12 +283,12 @@
                         <div class="card">
                             <div class="el-card-item">
                                 <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/Toyota Hilux 2016/1.jpg" alt="user" />
+                                        src="assets/images/sucursal/sucursal3.jpeg" alt="user" />
                                     <div class="el-overlay">
                                     </div>
                                 </div>
                                 <div class="el-card-content">
-                                    <h4 class="m-b-0">Automovil 6</h4> <span class="text-muted">Ver detalles</span>
+                                    <h4 class="m-b-0">COMAYGUA</h4> <span class="text-muted">Los Hidalgos</span>
                                 </div>
                             </div>
                         </div>
@@ -377,13 +298,29 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="assets/images/autos/Mazda RX8/1.jpg"
+                                <div class="el-card-avatar el-overlay-1"> <img
+                                        src="assets/images/sucursal/sucursal4.jpg" alt="user" />
+                                    <div class="el-overlay">
+                                    </div>
+                                </div>
+                                <div class="el-card-content">
+                                    <h4 class="m-b-0">TELA</h4> <span class="text-muted">Villa Franca</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Tarjeta Fin-->
+                    <!--Tarjeta-->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="assets/images/sucursal/sucursal5.jpg"
                                         alt="user" />
                                     <div class="el-overlay">
                                     </div>
                                 </div>
                                 <div class="el-card-content">
-                                    <h4 class="m-b-0">Mazda RX8</h4> <span class="text-muted">ver detalles</span>
+                                    <h4 class="m-b-0">CHOLUTECA</h4> <span class="text-muted">La Sabana</span>
                                 </div>
                             </div>
                         </div>
@@ -394,7 +331,7 @@
                         <div class="card">
                             <div class="el-card-item">
                                 <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/Hummer H3 2007/1.jpg" alt="user" />
+                                        src="assets/images/sucursal/sucursal6.jpg" alt="user" />
                                     <div class="el-overlay">
                                     </div>
                                 </div>
@@ -406,21 +343,19 @@
                     </div>
                     <!--Tarjeta Fin-->
                 </div>
+                    
+                </div>
                 <!-- ============================================================== -->
-                <!-- Fin Galeria -->
+                <!-- Fin Banner Principal -->
                 <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
-
-
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Matrix-admin. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en">
 
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,8 +23,10 @@
 <![endif]-->
 </head>
 <style>
-    label{color:white;}
-    </style>
+    label {
+        color: white;
+    }
+</style>
 
 <body>
     <!-- ============================================================== -->
@@ -119,7 +121,7 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-                        
+
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -139,36 +141,94 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../index.html" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
-                                    class="hide-menu">Compra</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../charts.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
-                                    class="hide-menu">Renta</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
-                                    class="hide-menu">Historial</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../tables.html" aria-expanded="false"><i class="mdi mdi-oil"></i><span
-                                    class="hide-menu">Mantenimiento</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
-                                    class="hide-menu">Repuestos</span></a></li>
-                     <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i
+                                    class="mdi mdi-account-edit"></i><span class="hide-menu">Clientes</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="Form/form_cliente_registro.php"
+                                        class="sidebar-link"><i class="mdi mdi-account-plus"></i><span
+                                            class="hide-menu">Agregar cliente
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="Form/form_cliente_lista.php" class="sidebar-link"><i
+                                            class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Lista de
+                                            clientes</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
+                                    class="hide-menu">Empleados</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="Form/form_empleado_registro_1.php"
+                                        class="sidebar-link"><i class="mdi mdi-account-plus"></i><span
+                                            class="hide-menu">Agregar empleado
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="Form/form_empleado_lista.php" class="sidebar-link"><i
+                                            class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Lista de
+                                            empleados</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
+                                    class="hide-menu">Vehiculos</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="ver_todos_autos.php" class="sidebar-link"><i
+                                            class="mdi mdi-car"></i><span class="hide-menu">
+                                            Ver todos
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="lista_autos_venta.php" class="sidebar-link"><i
+                                            class="mdi mdi-shopping"></i><span class="hide-menu">Vehiculos en
+                                            venta</span></a></li>
+                                <li class="sidebar-item"><a href="lista_autos_renta.php" class="sidebar-link"><i
+                                            class="mdi mdi-cash"></i><span class="hide-menu"> Vehiculos en
+                                            renta</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
+                                    class="hide-menu">Solicitud mantenimiento </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="agregar_solicitud_mantenimiento.php"
+                                        class="sidebar-link"><i class="mdi mdi-playlist-plus"></i><span
+                                            class="hide-menu">
+                                            Agregar solicitud
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="ver_solicitud_mantenimiento.php"
+                                        class="sidebar-link"><i class="mdi mdi-format-list-bulleted"></i><span
+                                            class="hide-menu"> Ver las
+                                            solicitudes </span></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
                                     class="hide-menu">Facturacion</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta </span></a>
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta
+                                        </span></a>
                                 </li>
                                 <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
                                             class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
                                         </span></a></li>
-                                 <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Mantenimiento
+                                <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura
+                                            Mantenimiento
                                         </span></a></li>
                             </ul>
                         </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="solicitud_renta.php" aria-expanded="false"><i
+                                    class="mdi mdi-calendar-multiple"></i><span class="hide-menu">Solicitud
+                                    renta</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="Form/gestion_sucursal.php" aria-expanded="false"><i
+                                    class="mdi mdi-shopping"></i><span class="hide-menu">Gestion Sucursal</span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="Form/gestion_taller.php" aria-expanded="false"><i class="mdi mdi-engine"></i><span
+                                    class="hide-menu">Gestion de talleres</span></a></li>
+
+
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
                                     class="hide-menu">Authentication </span></a>
@@ -193,181 +253,156 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper" style="background-color:rgb(0,0,0)">
+        <div class="page-wrapper"
+            style="background-image: url(assets/images/background/img2.jpg); background-repeat: repeat; background-size:cover;  width: 100%; height: 100vh; ">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="background-image: url(assets/images/background/img3.jpg); background-repeat: repeat; background-size:cover;  width: 100%; height: 100vh; ">
+            <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Inicio Formulario -->
                 <!-- ============================================================== -->
-               
-                        <div class="row" style="" >
-                        
-                        
-                            <!--Margen de 3 columnas a la izquierda-->
-                            <div class="col-md-6 auth-box  border-top border-secondary float-left mx-auto" style="background-color:rgba(52, 58, 64,0.8)" >
-                
-                                <form class="form-horizontal">
-                                <div class="card-body" style="text-align:center;">
-                                <div class="text-center p-t-20 p-b-20">
-                                        <IMG SRC="assets/images/logo2.png">
+                <div class="row" style="">
+                    <!--Margen de 3 columnas a la izquierda-->
+                    <div class="col-md-5 auth-box  border-top border-secondary float-left mx-auto"
+                        style="background-color:rgba(52, 58, 64,0.8)">
+                        <form class="form-horizontal">
+                            <div class="card-body" style="text-align:center;">
+                                <h3 style="margin: 0px 0px 30px 0px; color:white;">FACTURA MANTENIMIENTO</h3>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-left control-label col-form-label">Codigo de
+                                        Factura</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="txt_codigoFactura"
+                                            placeholder="Codigo No">
                                     </div>
-                                    <h3 style="margin: 0px 0px 30px 0px; color:white;">FACTURA DE VENTA</h3>
-                                                <input type="hidden" id="idPersona">
-                                                <input type="hidden" id="idCliente">
-                                               <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label" >Codigo de Factura</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_codigoFactura"
-                                                                placeholder="Codigo No">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Fecha</label>
-                                                        <div class="col-sm-9">
-                                                        <input type="text" class="form-control" id="datepicker-autoclose"
-                                        placeholder="mm/dd/yyyy">
-                                                        </div>
-                                                    </div>
-                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 text-left control-label col-form-label">Nombre Cliente</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="txt_pnombre"
-                                                            placeholder="Primer nombre">
-                                                    </div>
-                                                    <div class="col-sm-5">
-                                                        <input type="text" class="form-control" id="txt_snombre"
-                                                            placeholder="Segundo nombre">
-                                                    </div>
-                                                 </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 text-left control-label col-form-label">Apellidos Cliente</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="txt_papellido"
-                                                            placeholder="Primer apellido">
-                                                    </div>
-                                                    <div class="col-sm-5">
-                                                        <input type="text" class="form-control" id="txt_saptxt_papellido"
-                                                            placeholder="Segundo apellido">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 text-left control-label col-form-label">Nombre Empleado</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="txt_pnombre"
-                                                            placeholder="Primer nombre">
-                                                    </div>
-                                                     <div class="col-sm-5">
-                                                        <input type="text" class="form-control" id="txt_papellido"
-                                                            placeholder="Primer apellido">
-                                                    </div>                                         
-                                                                                     
-                                                </div>
-                                                <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Vehiculo</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_vehiculo"
-                                                                placeholder="Vehiculo">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Tipo de Mantenimiento</label>
-                                                        <div class="col-sm-9">
-                                                        <select name="tipoMantenimiento" id="tipoMantenimiento" class="form-control border border-secondary" maxlength="50">
-                                                        <option value="1">Cambio de aceite</option>
-                                                            <option value="2">Cambio de bujias</option>
-                                                            <option value="3">Cambio de LLantas</option>
-                                                            <option value="4">Cambio de motor</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-6 text-center control-label col-form-label">Fecha Entrada</label>
-                                                        <label class="col-sm-6 text-center control-label col-form-label">Fecha Salida</label>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                       <div class="col-sm-6">
-                                                            <input type="Date" class="form-control" id="txt_fechaEntrada"
-                                                               >
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <input type="Date" class="form-control" id="txt_fechaSalida"
-                                                               >
-                                                        </div>
-                                                      
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Precio por Mantenimiento</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_totalVenta"
-                                                                placeholder="Total">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Impuesto</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_Imp"
-                                                                placeholder="Impuesto">
-                                                        </div>
-                                                    </div>
-                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label"> Tipo de Descuento</label>
-                                                        <div class="col-sm-9">
-                                                        
-                                                        <select type="text" id="tipoDescuento" class="form-control border border-secondary" maxlength="50">
-                                                            <option value="1">Tercera Edad</option>
-                                                            <option value="2">Familiares y amigos</option>
-                                                            <option value="3">Navidad</option>
-                                                            <option value="4">Año Nuevo</option>
-                                                        </select>
-                                                    
-                                                        </div>
-                                                    </div>
-                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Descuento</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_Des"
-                                                                placeholder="Descuento">
-                                                        </div>
-                                                    </div>
-
-                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Total</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_Total"
-                                                                placeholder="Total">
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                                    <div class="card-body" style="text-align:center;">
-                                    <button type="button" class="btn btn-success" style=" background-color:#2F4F4F; border-color:white ">IMPRIMIR</button>
                                 </div>
-                                </form>
-                                
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-left control-label col-form-label">Fecha</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="datepicker-autoclose"
+                                            placeholder="mm/dd/yyyy">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-left control-label col-form-label">Nombre
+                                        Cliente</label>
+                                    <div class="col-sm-9">
+                                        <select name="tipoMantenimiento" id="tipoMantenimiento"
+                                            class="form-control border border-secondary" maxlength="50">
+                                            <option value="0">Seleccione un empleado</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-left control-label col-form-label">Nombre
+                                        Empleado</label>
+                                    <div class="col-sm-9">
+                                        <select name="tipoMantenimiento" id="tipoMantenimiento"
+                                            class="form-control border border-secondary" maxlength="50">
+                                            <option value="0">Seleccione un empleado</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-left control-label col-form-label">Vehiculo</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="txt_vehiculo"
+                                            placeholder="Vehiculo">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-left control-label col-form-label">Tipo de
+                                        Mantenimiento</label>
+                                    <div class="col-sm-9">
+                                        <select name="tipoMantenimiento" id="tipoMantenimiento"
+                                            class="form-control border border-secondary" maxlength="50">
+                                            <option value="1">Cambio de aceite</option>
+                                            <option value="2">Cambio de bujias</option>
+                                            <option value="3">Cambio de LLantas</option>
+                                            <option value="4">Cambio de motor</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-left control-label col-form-label">Fecha Entrada/Fecha
+                                        Salida</label>
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <input type="date" class="form-control" id="date_fechaEntrada">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="date" class="form-control" id="date_fechaSalida">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-left control-label col-form-label">Precio por
+                                        Mantenimiento</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="txt_totalVenta" placeholder="Total">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-left control-label col-form-label">Impuesto</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="txt_Imp" placeholder="Impuesto">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-left control-label col-form-label"> Tipo de
+                                        Descuento</label>
+                                    <div class="col-sm-9">
+
+                                        <select type="text" id="tipoDescuento"
+                                            class="form-control border border-secondary" maxlength="50">
+                                            <option value="">Seleccione el descuento</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-left control-label col-form-label">Descuento</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="txt_Des" placeholder="Descuento">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-left control-label col-form-label">Total</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="txt_Total" placeholder="Total">
+                                    </div>
+                                </div>
                             </div>
-
-                        
-                        </div>
-
-                 </div> 
+                            <div class="card-body" style="text-align:center;">
+                                <button type="button" class="btn btn-success">Agregar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-
-
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
+        <!-- End Container fluid  -->
         <!-- ============================================================== -->
+
+
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer text-center">
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -402,4 +437,4 @@
 
 </body>
 
-</html> 
+</html>

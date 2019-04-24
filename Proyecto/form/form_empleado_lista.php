@@ -13,6 +13,7 @@
     <title>Lista de Empleados</title>
     <!-- Custom CSS -->
     <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <link href="../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -21,7 +22,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-    
+
 </head>
 
 <body>
@@ -117,7 +118,7 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-                        
+
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -138,14 +139,15 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span
-                                    class="hide-menu">Clientes</span></a>
+                                href="javascript:void(0)" aria-expanded="false"><i
+                                    class="mdi mdi-account-edit"></i><span class="hide-menu">Clientes</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="form_cliente_registro.php" class="sidebar-link"><i
                                             class="mdi mdi-account-plus"></i><span class="hide-menu">Agregar cliente
                                         </span></a></li>
                                 <li class="sidebar-item"><a href="form_cliente_lista.php" class="sidebar-link"><i
-                                            class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Lista de clientes</span></a></li>
+                                            class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Lista de
+                                            clientes</span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
@@ -156,7 +158,8 @@
                                             class="mdi mdi-account-plus"></i><span class="hide-menu">Agregar empleado
                                         </span></a></li>
                                 <li class="sidebar-item"><a href="form_empleado_lista.php" class="sidebar-link"><i
-                                            class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Lista de empleados</span></a></li>
+                                            class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Lista de
+                                            empleados</span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
@@ -190,7 +193,7 @@
                                             solicitudes </span></a></li>
                             </ul>
                         </li>
-                        
+
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
                                     class="hide-menu">Facturacion</span></a>
@@ -209,8 +212,9 @@
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../solicitud_renta.php" aria-expanded="false"><i class="mdi mdi-calendar-multiple"></i><span
-                                    class="hide-menu">Solicitud renta</span></a></li>
+                                href="../solicitud_renta.php" aria-expanded="false"><i
+                                    class="mdi mdi-calendar-multiple"></i><span class="hide-menu">Solicitud
+                                    renta</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="gestion_sucursal.php" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
                                     class="hide-menu">Gestion Sucursal</span></a></li>
@@ -243,86 +247,180 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="page-wrapper"
+            style="background-image: url(../assets/images/background/img3.jpg); background-repeat: no-repeat; background-size:cover;  width: 100%; height: 100vh; ">
+            <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="padding: 50px">
-                <!-- ============================================================== -->
-                <!-- Inicio Formulario -->
-                <!-- ============================================================== -->
-                
-                <div class= "row">
-                    <div class="col-sm-12 table-responsive">
-                        <table class="table table-striped table-hover table-dark" >
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">No Identidad</th>
-                                    <th scope="col">Nombre </th>
-                                    <th scope="col">Cargo</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbl_tista" name="tbl_tista">
-                                
-                            </tbody>
-                        </table>
+            <div class="container-fluid" style="padding:0px; ">
+                <div style="background-color: rgba(0, 0, 0, 0.5) ;width:100%; height:100%">
+                    <!-- ============================================================== -->
+                    <!-- Start Page Content -->
+                    <!-- ============================================================== -->
+                    <div style="width:80%; margin: auto;">
+                        <div class="row el-element-overlay" style="padding-top:100px;">
+                            <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
+                            </div>
+                            <!--Div Tabla de sucursales-->
+                            <div class="col-lg-8 col-md-8" style="background-color: rgba(255, 255, 255); padding:10px; -webkit-box-shadow: 11px 10px 25px 4px rgba(255,255,255,0.55);
+                        -moz-box-shadow: 11px 10px 25px 4px rgba(255,255,255,0.55);
+                        box-shadow: 11px 10px 25px 4px rgba(255,255,255,0.55)">
+
+                                <div class="card" style="background-color: rgba(255, 255, 255)">
+                                    <div class="card-body">
+                                        <h5 class="card-title m-b-0">Lista de solicitudes</h5>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table id="zero" class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>No Identidad</th>
+                                                    <th>Nombre </th>
+                                                    <th>Cargo</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php 
+                                                    include("../class/class_conexion.php");
+                                                    $conexion = new Conexion();
+                                                    $sql= sprintf("SELECT idEmpleado,pnombre, papellido, noIdentidad, descripcion FROM vw_empleados");
+                                                    $resultado = $conexion->ejecutarInstruccion($sql);
+                                                    $i=0;
+                                                    while ($fila= $conexion->obtenerFila($resultado)) {
+                                                        $i+=1;
+                                                        
+                                                        echo '<tr>
+                                                                <th scope="row">'.$i.'</th>
+                                                                <td>'.$fila["noIdentidad"].'</td>
+                                                                <td>'.$fila["pnombre"].' '.$fila["papellido"].'</td>
+                                                                <td>'.$fila["descripcion"].'</td>
+                                                                <td><a href="form_empleado.php?idEmpleado='.$fila["idEmpleado"].'">ver</a></td>
+                                                            </tr>';
+                                                    }
+                                                    $conexion->liberarResultado($resultado);
+                                                    $conexion->cerrarConexion();
+                                                    ?>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                            <!--Fin Div Tabla de sucursales-->
+                            <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0"></div>
+                        </div>
+                        <!-- ============================================================== -->
+                        <!-- End PAge Content -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- Right sidebar -->
+                        <!-- ============================================================== -->
+                        <!-- .right-sidebar -->
+                        <!-- ============================================================== -->
+                        <!-- End Right sidebar -->
+                        <!-- ============================================================== -->
                     </div>
+                    <!-- ============================================================== -->
+                    <!-- End Container fluid  -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- footer -->
+                    <!-- ============================================================== -->
+                    <footer class="footer text-center">
+
+                    </footer>
+                    <!-- ============================================================== -->
+                    <!-- End footer -->
+                    <!-- ============================================================== -->
                 </div>
                 <!-- ============================================================== -->
-                <!-- Fin Formulario -->
+                <!-- End Page wrapper  -->
                 <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-
-
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
+            <!-- End Page wrapper  -->
             <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
+        <!-- End Wrapper -->
         <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="../assets/extra-libs/sparkline/sparkline.js"></script>
-    <!--Wave Effects -->
-    <script src="../dist/js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="../dist/js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="../dist/js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-    <!-- Charts js Files -->
-    <script src="../assets/libs/flot/excanvas.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.pie.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.time.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.stack.js"></script>
-    <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
-    <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="../dist/js/pages/chart/chart-page-init.js"></script>
-    <!-- controlador -->
-    <script src="../dist/js/js_form/js_form_empleado_lista.js"></script>
-    
+        <!-- ============================================================== -->
+        <!-- All Jquery -->
+        <!-- ============================================================== -->
+        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
+        <script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+        <script src="../assets/extra-libs/sparkline/sparkline.js"></script>
+        <!--Wave Effects -->
+        <script src="../dist/js/waves.js"></script>
+        <!--Menu sidebar -->
+        <script src="../dist/js/sidebarmenu.js"></script>
+        <!--Custom JavaScript -->
+        <script src="../dist/js/custom.min.js"></script>
+        <script src="../assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+        <script src="dist/js/pages/mask/mask.init.js"></script>
+        <script src="../assets/libs/select2/dist/js/select2.full.min.js"></script>
+        <script src="../assets/libs/select2/dist/js/select2.min.js"></script>
+        <script src="../assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
+        <script src="../assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
+        <script src="../assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
+        <script src="../assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
+        <script src="../assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+        <script src="../assets/libs/quill/dist/quill.min.js"></script>
+        <script src="../assets/extra-libs/DataTables/datatables.min.js"></script>
+        <script>
+            //***********************************//
+            // For select 2
+            //***********************************//
+            $(".select2").select2();
+
+            /*colorpicker*/
+            $('.demo').each(function () {
+                //
+                // Dear reader, it's actually very easy to initialize MiniColors. For example:
+                //
+                //  $(selector).minicolors();
+                //
+                // The way I've done it below is just for the demo, so don't get confused
+                // by it. Also, data- attributes aren't supported at this time...they're
+                // only used for this demo.
+                //
+                $(this).minicolors({
+                    control: $(this).attr('data-control') || 'hue',
+                    position: $(this).attr('data-position') || 'bottom left',
+
+                    change: function (value, opacity) {
+                        if (!value) return;
+                        if (opacity) value += ', ' + opacity;
+                        if (typeof console === 'object') {
+                            console.log(value);
+                        }
+                    },
+                    theme: 'bootstrap'
+                });
+
+            });
+            /*datwpicker*/
+            jQuery('.mydatepicker').datepicker();
+            jQuery('#datepicker-autoclose').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            });
+            var quill = new Quill('#editor', {
+                theme: 'snow'
+            });
+            $('#zero').DataTable();
+
+        </script>
+
 </body>
 
 </html>
