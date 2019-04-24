@@ -4,8 +4,7 @@
         case "1":
             $conexion = new Conexion();
             $acentos = $conexion->ejecutarInstruccion("SET NAMES 'utf8'");
-            $sql = "SELECT t.idTaller, t.descripcion, s.nombre, s.direccion FROM taller t
-                    INNER JOIN sucursal s ON s.idSucursal=t.idSucursal;";
+            $sql = "SELECT * FROM vw_sucursales_taller";
             $resultado = $conexion->ejecutarInstruccion($sql);	
             if(!$resultado){
                 echo "alert(`Hay una error en la sentencia sql:`.$sql)";

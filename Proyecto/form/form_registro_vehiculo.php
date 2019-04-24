@@ -22,6 +22,28 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
+<style>
+.nav-tabs{
+  background-color:rgba(0,0,0,0);
+}
+.tab-content{
+    background-color:rgba(0,0,0,0);
+    color:#fff;
+    padding:5px
+}
+.nav-tabs > li > a{
+  border: medium none;
+}
+.nav-tabs > li > a:hover{
+  background-color: #303136 !important;
+    border: medium none;
+    border-radius: 0;
+    color:#fff;
+}
+.nav-tabs > li > a {
+  color: white;
+}
+</style>
 
 <body>
     <!-- ============================================================== -->
@@ -183,6 +205,10 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
                                     class="hide-menu">Vehiculos</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
+                            <li class="sidebar-item"><a href="form_registro_vehiculo.php" class="sidebar-link"><i
+                                            class="fas fa-car"></i><span class="hide-menu">
+                                            Agregar vehiculo
+                                        </span></a></li>
                                 <li class="sidebar-item"><a href="../ver_todos_autos.php" class="sidebar-link"><i
                                             class="mdi mdi-car"></i><span class="hide-menu">
                                             Ver todos
@@ -263,7 +289,7 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="background-image: url(../assets/images/background/img3.jpg); background-repeat: no-repeat; background-size:cover;  width: 100%; height: 100vh;">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid" style="padding: 50px">
@@ -281,7 +307,7 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class= "row">
-                            <div class="col-md-11 auth-box  border-top border-secondary float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >         
+                            <div class="col-md-6 auth-box  border-top border-secondary float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >         
                                 <div class="card-body" style="text-align:center;">                            
                                     <h3 style="margin: 0px 0px 30px 0px;">Registro de vehiculo</h3>
                                     <div class="row p-2">
@@ -435,8 +461,10 @@
                     </div>
                     
                 </div>
-                <button id="btn_agregar" type="button" class="btn btn-primary">Añadir vehiculo</button>
+                <div style="text-align:center;">
                 <button onclick="location.href='form_vehiculos_lista.php'" type="button" class="btn btn-danger">Cancelar</button>
+                <button id="btn_agregar" type="button" class="btn btn-success">Añadir vehiculo</button>
+                </div>
                 <div id="div_resultado2"></div>
                 <!-- ============================================================== -->
                 <!-- Fin de formulario  -->
@@ -449,8 +477,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by AutoMotor. Designed and Developed by <a
-                    href="https://wrappixel.com">JCM</a>.
+
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

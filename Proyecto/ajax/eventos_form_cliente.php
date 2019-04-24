@@ -14,39 +14,40 @@
         
             ?>
             <div class="row">
-                <div class="col"><img class="img-thumbnail" src=<?php echo $fila["rutaImagen"]; ?> alt="" width="250" height="200"></div>
-                
+                <div class="col"><img class="img-thumbnail" src=<?php echo $fila["rutaImagen"]; ?> alt="" width="250" height="200"></div>  
             </div><br>
-            
             <div class="row">
-                <div class="col-sm-6">Nombre:</div>
-                <div clas="col-sm-6"><?php echo $fila["pnombre"] .' '. $fila["snombre"].' '. $fila["papellido"] .' '. $fila["sapellido"];?></div>
+            <div class="col-lg-6 auth-box" style="margin-left:auto; margin-right:auto;">
+            <div class="row">
+                <div class="col-sm-6" style="text-align: left;">Nombre:</div>
+                <div class="col-sm-6" style="text-align: left;"><?php echo $fila["pnombre"] .' '. $fila["snombre"].' '. $fila["papellido"] .' '. $fila["sapellido"];?></div>
             </div>
             <div class="row">
-                <div class="col-sm-6">Correo: </div>
-                <div clas="col-sm-6"><?php echo $fila["correo"];?></div>
+                <div class="col-sm-6" style="text-align: left;">Correo: </div>
+                <div class="col-sm-6" style="text-align: left;"><?php echo $fila["correo"];?></div>
             </div>
             <div class="row">
-                <div class="col-sm-6">Telefonos: </div>
-                <div clas="col-sm-6"><?php echo $fila["telefonos"];?></div>
+                <div class="col-sm-6" style="text-align: left;">Telefonos: </div>
+                <div class="col-sm-6" style="text-align: left;"><?php echo $fila["telefonos"];?></div>
             </div>
             <div class="row">
-                <div class="col-sm-6">No Identidad: </div>
-                <div clas="col-sm-6"><?php echo $fila["noIdentidad"];?></div>
+                <div class="col-sm-6" style="text-align: left;">No Identidad: </div>
+                <div class="col-sm-6" style="text-align: left;"><?php echo $fila["noIdentidad"];?></div>
             </div>
             <div class="row">
-                <div class="col-sm-6">Direccion: </div>
-                <div clas="col-sm-6"><?php echo $fila["direccion"];?></div>
+                <div class="col-sm-6" style="text-align: left;">Direccion: </div>
+                <div class="col-sm-6" style="text-align: left;"><?php echo $fila["direccion"];?></div>
             </div>
             <div class="row">
-                <div class="col-sm-6">Usuario: </div>
-                <div clas="col-sm-6"><?php echo $fila["nombreUsuario"];?></div>
+                <div class="col-sm-6" style="text-align: left;">Usuario: </div>
+                <div class="col-sm-6" style="text-align: left;"><?php echo $fila["nombreUsuario"];?></div>
             </div>
             <div class="row p-4">
                 <div class="col">
-                    <button id="btn_editar" type="button" class="btn btn-dark" onclick="location.href='form_cliente_editar.php?idCliente=<?php echo $idCliente;?>'">Editar</button>
-                    
+                    <button id="btn_editar" type="button" class="btn btn-dark" onclick="location.href='form_cliente_editar.php?idCliente=<?php echo $idCliente;?>'">Editar</button>  
                 </div>
+                </div>
+            </div>
             </div>
         <?php
         }
