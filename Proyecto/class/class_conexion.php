@@ -2,8 +2,8 @@
 
 	class Conexion{
 
-		private $usuario="root";
-		private $contrasena="";
+		private $usuario="admin";
+		private $contrasena="$%admin123";
 		private $host="localhost";
 		private $baseDatos="db_vr_vehiculos";
 		private $puerto="3306";

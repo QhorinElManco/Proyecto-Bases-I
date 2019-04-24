@@ -1,22 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
--- https://www.phpmyadmin.net/
+-- version 3.5.1
+-- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-04-2019 a las 20:56:07
+-- Tiempo de generación: 24-04-2019 a las 07:21:24
 -- Versión del servidor: 5.00.15
 -- Versión de PHP: 5.4.3
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de datos: `db_vr_vehiculos`
@@ -26,8 +24,8 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-DROP PROCEDURE IF EXISTS `SP_FACTURA_VENTA`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_FACTURA_VENTA` (IN `pnidVehiculo` INT, IN `pnidCliente` INT, IN `pnidEmpleado` INT, IN `pnidFormaPago` INT, IN `pnidDescuento` INT, OUT `pfTotal` FLOAT, OUT `pbOcurreError` BOOLEAN, OUT `pcMensajeError` VARCHAR(1000))  SP:BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_FACTURA_VENTA`(IN `pnidVehiculo` INT, IN `pnidCliente` INT, IN `pnidEmpleado` INT, IN `pnidFormaPago` INT, IN `pnidDescuento` INT, OUT `pfTotal` FLOAT, OUT `pbOcurreError` BOOLEAN, OUT `pcMensajeError` VARCHAR(1000))
+SP:BEGIN
     DECLARE vnConteo, vnidFactura, vnidVentas, vnidTipoSalida, vnidSalida, vnidControl, vnidInventario INT;
     DECLARE vfSubtotal, vfDescuento, vfImpuesto FLOAT;
     DECLARE vcTempMensajeError VARCHAR(1000);
@@ -753,8 +751,8 @@ SP:BEGIN
 
 END$$
 
-DROP PROCEDURE IF EXISTS `SP_GESTION_SUCURSAL`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_SUCURSAL` (IN `pnidSucursal` INT, IN `pcNombre` VARCHAR(50), IN `pcDireccion` VARCHAR(100), IN `pcAccion` VARCHAR(10), OUT `pcMensajeError` VARCHAR(1000), OUT `pbOcurreError` BOOLEAN)  SP:BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_SUCURSAL`(IN `pnidSucursal` INT, IN `pcNombre` VARCHAR(50), IN `pcDireccion` VARCHAR(100), IN `pcAccion` VARCHAR(10), OUT `pcMensajeError` VARCHAR(1000), OUT `pbOcurreError` BOOLEAN)
+SP:BEGIN
     DECLARE vnConteo INT;
     DECLARE vcTempMensajeError VARCHAR(1000);
     SET vcTempMensajeError='';
@@ -863,8 +861,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_SUCURSAL` (IN `pnidSucur
     END IF;
 END$$
 
-DROP PROCEDURE IF EXISTS `SP_GESTION_TALLER`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_TALLER` (IN `pnidTaller` INT, IN `pnidSucursal` INT, IN `pcDescripcion` VARCHAR(50), IN `pcAccion` VARCHAR(10), OUT `pcMensajeError` VARCHAR(1000), OUT `pbOcurreError` BOOLEAN)  SP:BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_TALLER`(IN `pnidTaller` INT, IN `pnidSucursal` INT, IN `pcDescripcion` VARCHAR(50), IN `pcAccion` VARCHAR(10), OUT `pcMensajeError` VARCHAR(1000), OUT `pbOcurreError` BOOLEAN)
+SP:BEGIN
     DECLARE vnConteo, vnidSucursal INT;
     DECLARE vcTempMensajeError VARCHAR(1000);
     SET vcTempMensajeError='';
@@ -985,8 +983,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_TALLER` (IN `pnidTaller`
     END IF;
 END$$
 
-DROP PROCEDURE IF EXISTS `SP_GESTION_VEHICULO`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_VEHICULO` (IN `pcDescripcion` VARCHAR(45), IN `pcColor` VARCHAR(45), IN `pfPrecioVenta` FLOAT, IN `pfPrecioRentaHora` FLOAT, IN `pfPrecioRentaDia` FLOAT, IN `pcPlaca` VARCHAR(8), IN `pyAnio` YEAR, IN `pnIdModelo` INT, IN `pnIdInventario` INT, IN `pnIdTipoVehiculo` INT, IN `pnIdTipoGasolina` INT, IN `pnIdTransmision` INT, IN `pnIdCilindraje` INT, IN `pnIdVehiculo` INT, IN `pcAccion` VARCHAR(10), OUT `pbOcurreError` BOOLEAN, OUT `pcMensajeError` VARCHAR(1000))  SP:BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_VEHICULO`(IN `pcDescripcion` VARCHAR(45), IN `pcColor` VARCHAR(45), IN `pfPrecioVenta` FLOAT, IN `pfPrecioRentaHora` FLOAT, IN `pfPrecioRentaDia` FLOAT, IN `pcPlaca` VARCHAR(8), IN `pyAnio` YEAR, IN `pnIdModelo` INT, IN `pnIdInventario` INT, IN `pnIdTipoVehiculo` INT, IN `pnIdTipoGasolina` INT, IN `pnIdTransmision` INT, IN `pnIdCilindraje` INT, IN `pnIdVehiculo` INT, IN `pcAccion` VARCHAR(10), OUT `pbOcurreError` BOOLEAN, OUT `pcMensajeError` VARCHAR(1000))
+SP:BEGIN
     DECLARE vnConteo, vnidVehiculo INT;
     DECLARE vcMensajeTem VARCHAR(50);
     SET vcMensajeTem = '';
@@ -1165,8 +1163,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_VEHICULO` (IN `pcDescrip
 
 END$$
 
-DROP PROCEDURE IF EXISTS `SP_GESTION_VEHICULO_FOTO`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_VEHICULO_FOTO` (IN `pnIdVehiculo` INT, IN `pnIdFotos` INT, IN `pcDireccionEnDisco` VARCHAR(1000), IN `pcAccion` VARCHAR(45), OUT `pbOcurreError` BOOLEAN, OUT `pcMensajeError` VARCHAR(1000))  SP:BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_VEHICULO_FOTO`(IN `pnIdVehiculo` INT, IN `pnIdFotos` INT, IN `pcDireccionEnDisco` VARCHAR(1000), IN `pcAccion` VARCHAR(45), OUT `pbOcurreError` BOOLEAN, OUT `pcMensajeError` VARCHAR(1000))
+SP:BEGIN
     DECLARE vnConteo INT;
     DECLARE vcMensajeTem VARCHAR(100);
     SET vcMensajeTem = '';
@@ -1245,8 +1243,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_VEHICULO_FOTO` (IN `pnId
     SET pbOcurreError = FALSE;
 END$$
 
-DROP PROCEDURE IF EXISTS `SP_SOLICITUD_MANTENIMIENTO`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_SOLICITUD_MANTENIMIENTO` (IN `pnidSolicitudMantenimiento` INT, IN `pnidVehiculo` INT, IN `pnidEmpleado` INT, IN `pnidTipoMantenimiento` INT, IN `pnidCliente` INT, IN `pdFechaFin` DATE, IN `pcAccion` VARCHAR(10), IN `pcEstado` VARCHAR(10), OUT `pbOcurreError` BOOLEAN, OUT `pcMensajeError` VARCHAR(1000))  SP:BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_SOLICITUD_MANTENIMIENTO`(IN `pnidSolicitudMantenimiento` INT, IN `pnidVehiculo` INT, IN `pnidEmpleado` INT, IN `pnidTipoMantenimiento` INT, IN `pnidCliente` INT, IN `pdFechaFin` DATE, IN `pcAccion` VARCHAR(10), IN `pcEstado` VARCHAR(10), OUT `pbOcurreError` BOOLEAN, OUT `pcMensajeError` VARCHAR(1000))
+SP:BEGIN
     DECLARE vnConteo    INT;
     DECLARE vcTempMensajeError, vcEstado VARCHAR(1000);
     DECLARE vdFechaSolicitud, vdFechaFin DATE;
@@ -1436,7 +1434,6 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `agenda`
 --
 
-DROP TABLE IF EXISTS `agenda`;
 CREATE TABLE IF NOT EXISTS `agenda` (
   `idAgenda` int(11) NOT NULL AUTO_INCREMENT,
   `fechaReserva` date NOT NULL,
@@ -1444,7 +1441,7 @@ CREATE TABLE IF NOT EXISTS `agenda` (
   `fechaDevolución` datetime NOT NULL,
   `TiempoRenta` varchar(45) NOT NULL,
   PRIMARY KEY (`idAgenda`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `agenda`
@@ -1468,12 +1465,11 @@ INSERT INTO `agenda` (`idAgenda`, `fechaReserva`, `fechaEntrega`, `fechaDevoluci
 -- Estructura de tabla para la tabla `cargo`
 --
 
-DROP TABLE IF EXISTS `cargo`;
 CREATE TABLE IF NOT EXISTS `cargo` (
   `idCargo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idCargo`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `cargo`
@@ -1497,12 +1493,11 @@ INSERT INTO `cargo` (`idCargo`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `cilindraje`
 --
 
-DROP TABLE IF EXISTS `cilindraje`;
 CREATE TABLE IF NOT EXISTS `cilindraje` (
   `idCilindraje` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(10) NOT NULL,
   PRIMARY KEY (`idCilindraje`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Volcado de datos para la tabla `cilindraje`
@@ -1523,7 +1518,6 @@ INSERT INTO `cilindraje` (`idCilindraje`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `cliente`
 --
 
-DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE IF NOT EXISTS `cliente` (
   `idCliente` int(11) NOT NULL AUTO_INCREMENT,
   `idPersona` int(11) NOT NULL,
@@ -1531,7 +1525,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   PRIMARY KEY (`idCliente`),
   KEY `fk_Cliente_Persona1` (`idPersona`),
   KEY `fk_Cliente_Usuario1` (`idUsuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -1555,7 +1549,6 @@ INSERT INTO `cliente` (`idCliente`, `idPersona`, `idUsuario`) VALUES
 -- Estructura de tabla para la tabla `control`
 --
 
-DROP TABLE IF EXISTS `control`;
 CREATE TABLE IF NOT EXISTS `control` (
   `idControl` int(11) NOT NULL AUTO_INCREMENT,
   `idInventario` int(11) NOT NULL,
@@ -1567,7 +1560,7 @@ CREATE TABLE IF NOT EXISTS `control` (
   KEY `fk_Control_Salida1` (`idSalida`),
   KEY `fk_Control_Entrada1` (`idEntrada`),
   KEY `fk_Control_Empleado1` (`idEmpleado`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `control`
@@ -1596,14 +1589,13 @@ INSERT INTO `control` (`idControl`, `idInventario`, `idSalida`, `idEntrada`, `id
 -- Estructura de tabla para la tabla `descuento`
 --
 
-DROP TABLE IF EXISTS `descuento`;
 CREATE TABLE IF NOT EXISTS `descuento` (
   `idDescuento` int(11) NOT NULL AUTO_INCREMENT,
   `porcentaje` float NOT NULL,
   `descripcion` varchar(45) NOT NULL,
   `estado` varchar(1) NOT NULL,
   PRIMARY KEY (`idDescuento`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `descuento`
@@ -1625,7 +1617,6 @@ INSERT INTO `descuento` (`idDescuento`, `porcentaje`, `descripcion`, `estado`) V
 -- Estructura de tabla para la tabla `descuentofactura`
 --
 
-DROP TABLE IF EXISTS `descuentofactura`;
 CREATE TABLE IF NOT EXISTS `descuentofactura` (
   `idFactura` int(11) NOT NULL,
   `idDescuento` int(11) NOT NULL,
@@ -1640,7 +1631,6 @@ CREATE TABLE IF NOT EXISTS `descuentofactura` (
 -- Estructura de tabla para la tabla `empleado`
 --
 
-DROP TABLE IF EXISTS `empleado`;
 CREATE TABLE IF NOT EXISTS `empleado` (
   `idEmpleado` int(11) NOT NULL AUTO_INCREMENT,
   `fechaInicio` date NOT NULL,
@@ -1653,7 +1643,7 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   KEY `fk_Empleado_Persona1` (`idPersona`),
   KEY `fk_Empleado_Cargo1` (`idCargo`),
   KEY `fk_Empleado_Usuario1` (`idUsuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `empleado`
@@ -1677,7 +1667,6 @@ INSERT INTO `empleado` (`idEmpleado`, `fechaInicio`, `fechaFin`, `idPersona`, `i
 -- Estructura de tabla para la tabla `entrada`
 --
 
-DROP TABLE IF EXISTS `entrada`;
 CREATE TABLE IF NOT EXISTS `entrada` (
   `idEntrada` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -1691,7 +1680,7 @@ CREATE TABLE IF NOT EXISTS `entrada` (
   KEY `fk_TipoEntrada_Ventas1` (`idVentas`),
   KEY `fk_TipoEntrada_Renta1` (`idRenta`),
   KEY `fk_Entrada_TipoEntrada1` (`idTipoEntrada`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `entrada`
@@ -1708,7 +1697,6 @@ INSERT INTO `entrada` (`idEntrada`, `descripcion`, `fechaEntrada`, `idTipoEntrad
 -- Estructura de tabla para la tabla `factura`
 --
 
-DROP TABLE IF EXISTS `factura`;
 CREATE TABLE IF NOT EXISTS `factura` (
   `idFactura` int(11) NOT NULL AUTO_INCREMENT,
   `fechaEmision` date NOT NULL,
@@ -1722,7 +1710,7 @@ CREATE TABLE IF NOT EXISTS `factura` (
   KEY `fk_Factura_Empleado1` (`idEmpleado`),
   KEY `fk_Factura_Impuesto1` (`idImpuesto`),
   KEY `fk_Factura_FacturaMantenimiento1` (`idFacturaMantenimiento`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Volcado de datos para la tabla `factura`
@@ -1763,14 +1751,13 @@ INSERT INTO `factura` (`idFactura`, `fechaEmision`, `Total`, `idCliente`, `idEmp
 -- Estructura de tabla para la tabla `facturapormantenimiento`
 --
 
-DROP TABLE IF EXISTS `facturapormantenimiento`;
 CREATE TABLE IF NOT EXISTS `facturapormantenimiento` (
   `idFacturaMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   `idMantenimiento` int(11) NOT NULL,
   PRIMARY KEY (`idFacturaMantenimiento`),
   KEY `fk_FacturaPorMantenimiento_Mantenimiento1` (`idMantenimiento`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `facturapormantenimiento`
@@ -1799,12 +1786,11 @@ INSERT INTO `facturapormantenimiento` (`idFacturaMantenimiento`, `descripcion`, 
 -- Estructura de tabla para la tabla `formapago`
 --
 
-DROP TABLE IF EXISTS `formapago`;
 CREATE TABLE IF NOT EXISTS `formapago` (
   `idFormaPago` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idFormaPago`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `formapago`
@@ -1823,7 +1809,6 @@ INSERT INTO `formapago` (`idFormaPago`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `formapagofactura`
 --
 
-DROP TABLE IF EXISTS `formapagofactura`;
 CREATE TABLE IF NOT EXISTS `formapagofactura` (
   `idFormaPago` int(11) NOT NULL,
   `idFactura` int(11) NOT NULL,
@@ -1837,7 +1822,6 @@ CREATE TABLE IF NOT EXISTS `formapagofactura` (
 -- Estructura de tabla para la tabla `fotos`
 --
 
-DROP TABLE IF EXISTS `fotos`;
 CREATE TABLE IF NOT EXISTS `fotos` (
   `idFotos` int(11) NOT NULL AUTO_INCREMENT,
   `direccionEnDisco` varchar(1000) NOT NULL,
@@ -1845,7 +1829,7 @@ CREATE TABLE IF NOT EXISTS `fotos` (
   PRIMARY KEY (`idFotos`),
   UNIQUE KEY `direccionEnDisco` (`direccionEnDisco`),
   KEY `fk_Fotos_Vehiculo1` (`idVehiculo`)
-) ENGINE=MyISAM AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
 
 --
 -- Volcado de datos para la tabla `fotos`
@@ -1934,13 +1918,12 @@ INSERT INTO `fotos` (`idFotos`, `direccionEnDisco`, `idVehiculo`) VALUES
 -- Estructura de tabla para la tabla `impuesto`
 --
 
-DROP TABLE IF EXISTS `impuesto`;
 CREATE TABLE IF NOT EXISTS `impuesto` (
   `idImpuesto` int(11) NOT NULL AUTO_INCREMENT,
   `porcentaje` float NOT NULL,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idImpuesto`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `impuesto`
@@ -1955,7 +1938,6 @@ INSERT INTO `impuesto` (`idImpuesto`, `porcentaje`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `inventario`
 --
 
-DROP TABLE IF EXISTS `inventario`;
 CREATE TABLE IF NOT EXISTS `inventario` (
   `idInventario` int(11) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -1983,7 +1965,6 @@ INSERT INTO `inventario` (`idInventario`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `mantenimiento`
 --
 
-DROP TABLE IF EXISTS `mantenimiento`;
 CREATE TABLE IF NOT EXISTS `mantenimiento` (
   `idMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idEmpleado` int(11) NOT NULL,
@@ -1995,7 +1976,7 @@ CREATE TABLE IF NOT EXISTS `mantenimiento` (
   KEY `fk_Mantenimiento_Empleado1` (`idEmpleado`),
   KEY `fk_Mantenimiento_Taller1` (`idTaller`),
   KEY `fk_Mantenimiento_SolicitudMantenimiento1` (`idSolicitudMantenimiento`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `mantenimiento`
@@ -2024,12 +2005,11 @@ INSERT INTO `mantenimiento` (`idMantenimiento`, `idEmpleado`, `idTaller`, `descr
 -- Estructura de tabla para la tabla `marca`
 --
 
-DROP TABLE IF EXISTS `marca`;
 CREATE TABLE IF NOT EXISTS `marca` (
   `idMarca` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idMarca`)
-) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 --
 -- Volcado de datos para la tabla `marca`
@@ -2075,12 +2055,11 @@ INSERT INTO `marca` (`idMarca`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `marcarepuesto`
 --
 
-DROP TABLE IF EXISTS `marcarepuesto`;
 CREATE TABLE IF NOT EXISTS `marcarepuesto` (
   `idMarcaRepuesto` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idMarcaRepuesto`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2088,14 +2067,13 @@ CREATE TABLE IF NOT EXISTS `marcarepuesto` (
 -- Estructura de tabla para la tabla `modelo`
 --
 
-DROP TABLE IF EXISTS `modelo`;
 CREATE TABLE IF NOT EXISTS `modelo` (
   `idModelo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   `idMarca` int(11) NOT NULL,
   PRIMARY KEY (`idModelo`),
   KEY `fk_Modelo_Marca1` (`idMarca`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Volcado de datos para la tabla `modelo`
@@ -2141,7 +2119,6 @@ INSERT INTO `modelo` (`idModelo`, `descripcion`, `idMarca`) VALUES
 -- Estructura de tabla para la tabla `persona`
 --
 
-DROP TABLE IF EXISTS `persona`;
 CREATE TABLE IF NOT EXISTS `persona` (
   `idPersona` int(11) NOT NULL AUTO_INCREMENT,
   `pnombre` varchar(45) NOT NULL,
@@ -2153,7 +2130,7 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `noIdentidad` varchar(45) NOT NULL,
   PRIMARY KEY (`idPersona`),
   UNIQUE KEY `correo` (`correo`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Volcado de datos para la tabla `persona`
@@ -2192,14 +2169,13 @@ INSERT INTO `persona` (`idPersona`, `pnombre`, `snombre`, `papellido`, `sapellid
 -- Estructura de tabla para la tabla `proveedores`
 --
 
-DROP TABLE IF EXISTS `proveedores`;
 CREATE TABLE IF NOT EXISTS `proveedores` (
   `idProveedores` int(11) NOT NULL AUTO_INCREMENT,
   `idPersona` int(11) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idProveedores`),
   KEY `fk_Proveedores_Persona1` (`idPersona`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `proveedores`
@@ -2223,7 +2199,6 @@ INSERT INTO `proveedores` (`idProveedores`, `idPersona`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `renta`
 --
 
-DROP TABLE IF EXISTS `renta`;
 CREATE TABLE IF NOT EXISTS `renta` (
   `idRenta` int(11) NOT NULL AUTO_INCREMENT,
   `idFactura` int(11) NOT NULL,
@@ -2235,7 +2210,7 @@ CREATE TABLE IF NOT EXISTS `renta` (
   KEY `fk_Renta_Factura1` (`idFactura`),
   KEY `fk_Renta_Vehiculo1` (`idVehiculo`),
   KEY `fk_Renta_Agenda1` (`idAgenda`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Volcado de datos para la tabla `renta`
@@ -2261,7 +2236,6 @@ INSERT INTO `renta` (`idRenta`, `idFactura`, `idVehiculo`, `idAgenda`, `mora`, `
 -- Estructura de tabla para la tabla `repuestos`
 --
 
-DROP TABLE IF EXISTS `repuestos`;
 CREATE TABLE IF NOT EXISTS `repuestos` (
   `idRepuestos` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
@@ -2271,7 +2245,7 @@ CREATE TABLE IF NOT EXISTS `repuestos` (
   PRIMARY KEY (`idRepuestos`),
   KEY `fk_Repuestos_Inventario1` (`idInventario`),
   KEY `fk_Repuestos_MarcaRepuesto1` (`idMarcaRepuesto`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `repuestos`
@@ -2300,7 +2274,6 @@ INSERT INTO `repuestos` (`idRepuestos`, `descripcion`, `precio`, `idInventario`,
 -- Estructura de tabla para la tabla `repuestosmantenimiento`
 --
 
-DROP TABLE IF EXISTS `repuestosmantenimiento`;
 CREATE TABLE IF NOT EXISTS `repuestosmantenimiento` (
   `idRepuestosMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idMantenimiento` int(11) NOT NULL,
@@ -2309,7 +2282,7 @@ CREATE TABLE IF NOT EXISTS `repuestosmantenimiento` (
   PRIMARY KEY (`idRepuestosMantenimiento`),
   KEY `fk_Mantenimiento_has_Repuestos_Mantenimiento1` (`idMantenimiento`),
   KEY `fk_Mantenimiento_has_Repuestos_Repuestos1` (`idRepuestos`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2317,12 +2290,11 @@ CREATE TABLE IF NOT EXISTS `repuestosmantenimiento` (
 -- Estructura de tabla para la tabla `requisitos`
 --
 
-DROP TABLE IF EXISTS `requisitos`;
 CREATE TABLE IF NOT EXISTS `requisitos` (
   `idRequisitos` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idRequisitos`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `requisitos`
@@ -2341,7 +2313,6 @@ INSERT INTO `requisitos` (`idRequisitos`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `salida`
 --
 
-DROP TABLE IF EXISTS `salida`;
 CREATE TABLE IF NOT EXISTS `salida` (
   `idSalida` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -2352,7 +2323,7 @@ CREATE TABLE IF NOT EXISTS `salida` (
   PRIMARY KEY (`idSalida`),
   KEY `fk_Salida_has_Ventas_Ventas1` (`idVentas`),
   KEY `fk_Salida_has_Ventas_Renta1` (`idRenta`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -2360,7 +2331,6 @@ CREATE TABLE IF NOT EXISTS `salida` (
 -- Estructura de tabla para la tabla `solicitudmantenimiento`
 --
 
-DROP TABLE IF EXISTS `solicitudmantenimiento`;
 CREATE TABLE IF NOT EXISTS `solicitudmantenimiento` (
   `idSolicitudMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `idVehiculo` int(11) NOT NULL,
@@ -2375,7 +2345,7 @@ CREATE TABLE IF NOT EXISTS `solicitudmantenimiento` (
   KEY `fk_SolicitudMantenimiento_Empleado1` (`idEmpleado`),
   KEY `fk_SolicitudMantenimiento_TipoMantenimiento1` (`idTipoMantenimiento`),
   KEY `fk_SolicitudMantenimiento_Cliente1` (`idCliente`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `solicitudmantenimiento`
@@ -2394,7 +2364,6 @@ INSERT INTO `solicitudmantenimiento` (`idSolicitudMantenimiento`, `idVehiculo`, 
 -- Estructura de tabla para la tabla `solicitudrenta`
 --
 
-DROP TABLE IF EXISTS `solicitudrenta`;
 CREATE TABLE IF NOT EXISTS `solicitudrenta` (
   `idSolicitudRenta` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -2408,7 +2377,7 @@ CREATE TABLE IF NOT EXISTS `solicitudrenta` (
   KEY `fk_SolicitudRenta_Vehiculo1` (`idVehiculo`),
   KEY `fk_SolicitudRenta_Agenda1` (`idAgenda`),
   KEY `fk_SolicitudRenta_Empleado1` (`idEmpleado`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `solicitudrenta`
@@ -2437,7 +2406,6 @@ INSERT INTO `solicitudrenta` (`idSolicitudRenta`, `descripcion`, `estado`, `idCl
 -- Estructura de tabla para la tabla `solicitudrentarequisitos`
 --
 
-DROP TABLE IF EXISTS `solicitudrentarequisitos`;
 CREATE TABLE IF NOT EXISTS `solicitudrentarequisitos` (
   `idSolicitudRenta` int(11) NOT NULL,
   `idRequisitos` int(11) NOT NULL,
@@ -2463,13 +2431,12 @@ INSERT INTO `solicitudrentarequisitos` (`idSolicitudRenta`, `idRequisitos`, `est
 -- Estructura de tabla para la tabla `sucursal`
 --
 
-DROP TABLE IF EXISTS `sucursal`;
 CREATE TABLE IF NOT EXISTS `sucursal` (
   `idSucursal` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
   PRIMARY KEY (`idSucursal`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `sucursal`
@@ -2498,14 +2465,13 @@ INSERT INTO `sucursal` (`idSucursal`, `nombre`, `direccion`) VALUES
 -- Estructura de tabla para la tabla `taller`
 --
 
-DROP TABLE IF EXISTS `taller`;
 CREATE TABLE IF NOT EXISTS `taller` (
   `idTaller` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   `idSucursal` int(11) NOT NULL,
   PRIMARY KEY (`idTaller`),
   KEY `fk_Taller_Sucursal1` (`idSucursal`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `taller`
@@ -2534,14 +2500,13 @@ INSERT INTO `taller` (`idTaller`, `descripcion`, `idSucursal`) VALUES
 -- Estructura de tabla para la tabla `telefonos`
 --
 
-DROP TABLE IF EXISTS `telefonos`;
 CREATE TABLE IF NOT EXISTS `telefonos` (
   `idTelefonos` int(11) NOT NULL AUTO_INCREMENT,
   `telefono` varchar(45) NOT NULL,
   `idPersona` int(11) NOT NULL,
   PRIMARY KEY (`idTelefonos`),
   KEY `fk_Telefonos_Persona` (`idPersona`)
-) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
 
 --
 -- Volcado de datos para la tabla `telefonos`
@@ -2595,12 +2560,11 @@ INSERT INTO `telefonos` (`idTelefonos`, `telefono`, `idPersona`) VALUES
 -- Estructura de tabla para la tabla `tipoentrada`
 --
 
-DROP TABLE IF EXISTS `tipoentrada`;
 CREATE TABLE IF NOT EXISTS `tipoentrada` (
   `idTipoEntrada` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idTipoEntrada`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `tipoentrada`
@@ -2617,12 +2581,11 @@ INSERT INTO `tipoentrada` (`idTipoEntrada`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `tipomantenimiento`
 --
 
-DROP TABLE IF EXISTS `tipomantenimiento`;
 CREATE TABLE IF NOT EXISTS `tipomantenimiento` (
   `idTipoMantenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idTipoMantenimiento`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `tipomantenimiento`
@@ -2640,12 +2603,11 @@ INSERT INTO `tipomantenimiento` (`idTipoMantenimiento`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `tipomotor`
 --
 
-DROP TABLE IF EXISTS `tipomotor`;
 CREATE TABLE IF NOT EXISTS `tipomotor` (
   `idTipoGasolina` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(20) NOT NULL,
   PRIMARY KEY (`idTipoGasolina`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `tipomotor`
@@ -2664,7 +2626,6 @@ INSERT INTO `tipomotor` (`idTipoGasolina`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `tiposalida`
 --
 
-DROP TABLE IF EXISTS `tiposalida`;
 CREATE TABLE IF NOT EXISTS `tiposalida` (
   `idTipoSalida` varchar(45) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -2688,12 +2649,11 @@ INSERT INTO `tiposalida` (`idTipoSalida`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `tipovehiculo`
 --
 
-DROP TABLE IF EXISTS `tipovehiculo`;
 CREATE TABLE IF NOT EXISTS `tipovehiculo` (
   `idTipoVehiculo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`idTipoVehiculo`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `tipovehiculo`
@@ -2712,12 +2672,11 @@ INSERT INTO `tipovehiculo` (`idTipoVehiculo`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `transmision`
 --
 
-DROP TABLE IF EXISTS `transmision`;
 CREATE TABLE IF NOT EXISTS `transmision` (
   `idTransmision` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(20) NOT NULL,
   PRIMARY KEY (`idTransmision`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `transmision`
@@ -2734,7 +2693,6 @@ INSERT INTO `transmision` (`idTransmision`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `nombreUsuario` varchar(45) NOT NULL,
@@ -2742,7 +2700,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `rutaImagen` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `nombreUsuario` (`nombreUsuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -2776,7 +2734,6 @@ INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `contraseña`, `rutaImagen`
 -- Estructura de tabla para la tabla `vehiculo`
 --
 
-DROP TABLE IF EXISTS `vehiculo`;
 CREATE TABLE IF NOT EXISTS `vehiculo` (
   `idVehiculo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) NOT NULL,
@@ -2800,14 +2757,14 @@ CREATE TABLE IF NOT EXISTS `vehiculo` (
   KEY `fk_Vehiculo_TipoMotor1` (`idTipoGasolina`),
   KEY `fk_Vehiculo_Transmision1` (`idTransmision`),
   KEY `fk_Vehiculo_Cilindraje1` (`idCilindraje`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Volcado de datos para la tabla `vehiculo`
 --
 
 INSERT INTO `vehiculo` (`idVehiculo`, `descripcion`, `color`, `precioVenta`, `precioRentaHora`, `precioRentaDia`, `placa`, `Año`, `idModelo`, `idInventario`, `idTipoVehiculo`, `idTipoGasolina`, `idTransmision`, `idCilindraje`, `eliminado`) VALUES
-(1, '', 'rojo', 1000000, 0, 0, 'PCU28959', 2018, 1, 2, 1, 1, 2, 1, 0),
+(1, '', 'Rojo', 1000000, 0, 0, 'PCU28959', 2018, 1, 2, 1, 1, 2, 1, 0),
 (2, '', 'Negro', 0, 100, 200, 'LMU3325', 2017, 2, 2, 1, 2, 1, 2, 0),
 (3, '', 'Negro', 1200000, 0, 0, 'JKL90432', 2015, 3, 2, 1, 3, 3, 3, 0),
 (4, '', 'Negro', 0, 100, 200, 'ANM89233', 2016, 4, 2, 1, 4, 1, 4, 0),
@@ -2846,7 +2803,6 @@ INSERT INTO `vehiculo` (`idVehiculo`, `descripcion`, `color`, `precioVenta`, `pr
 -- Estructura de tabla para la tabla `ventas`
 --
 
-DROP TABLE IF EXISTS `ventas`;
 CREATE TABLE IF NOT EXISTS `ventas` (
   `idVentas` varchar(45) NOT NULL,
   `idFactura` int(11) NOT NULL,
@@ -2881,9 +2837,7 @@ CREATE TABLE IF NOT EXISTS `vw_cliente` (
 
 --
 -- Estructura Stand-in para la vista `vw_empleados`
--- (Véase abajo para la vista actual)
 --
-DROP VIEW IF EXISTS `vw_empleados`;
 CREATE TABLE IF NOT EXISTS `vw_empleados` (
 `idEmpleado` int(11)
 ,`pnombre` varchar(45)
@@ -2891,14 +2845,11 @@ CREATE TABLE IF NOT EXISTS `vw_empleados` (
 ,`noIdentidad` varchar(45)
 ,`descripcion` varchar(45)
 );
-
 -- --------------------------------------------------------
 
 --
 -- Estructura Stand-in para la vista `vw_empleado_ver`
--- (Véase abajo para la vista actual)
 --
-DROP VIEW IF EXISTS `vw_empleado_ver`;
 CREATE TABLE IF NOT EXISTS `vw_empleado_ver` (
 `idEmpleado` int(11)
 ,`pnombre` varchar(45)
@@ -2917,7 +2868,34 @@ CREATE TABLE IF NOT EXISTS `vw_empleado_ver` (
 ,`telefonos` text
 ,`idCargo` int(11)
 );
+-- --------------------------------------------------------
 
+--
+-- Estructura Stand-in para la vista `vw_vehiculo`
+--
+CREATE TABLE IF NOT EXISTS `vw_vehiculo` (
+`idVehiculo` int(11)
+,`color` varchar(45)
+,`descripcion` varchar(45)
+,`anio` year(4)
+,`precioVenta` float
+,`precioRentaHora` float
+,`precioRentaDia` float
+,`placa` varchar(8)
+,`eliminado` tinyint(1)
+,`idModelo` int(11)
+,`idInventario` int(11)
+,`idTipoVehiculo` int(11)
+,`idTipoGasolina` int(11)
+,`idTransmision` int(11)
+,`idCilindraje` int(11)
+,`modelo` varchar(45)
+,`inventario` varchar(45)
+,`tipovehiculo` varchar(45)
+,`tipomotor` varchar(20)
+,`transmision` varchar(20)
+,`cilindraje` varchar(10)
+);
 -- --------------------------------------------------------
 
 --
@@ -2934,7 +2912,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_empleados`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleados`  AS  (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`papellido` AS `papellido`,`p`.`noIdentidad` AS `noIdentidad`,`c`.`descripcion` AS `descripcion` from ((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) where (`e`.`eliminado` <> 1)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleados` AS (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`papellido` AS `papellido`,`p`.`noIdentidad` AS `noIdentidad`,`c`.`descripcion` AS `descripcion` from ((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) where (`e`.`eliminado` <> 1));
 
 -- --------------------------------------------------------
 
@@ -2944,6 +2922,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vw_empleado_ver`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleado_ver` AS (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`snombre` AS `snombre`,`p`.`papellido` AS `papellido`,`p`.`sapellido` AS `sapellido`,`p`.`correo` AS `correo`,`c`.`descripcion` AS `cargo`,`p`.`noIdentidad` AS `noIdentidad`,`p`.`direccion` AS `direccion`,`e`.`fechaInicio` AS `fechaInicio`,`e`.`fechaFin` AS `fechaFin`,`u`.`nombreUsuario` AS `nombreUsuario`,`u`.`contraseña` AS `contrasenia`,`u`.`rutaImagen` AS `rutaImagen`,group_concat(`t`.`telefono` separator ',') AS `telefonos`,`c`.`idCargo` AS `idCargo` from ((((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) join `usuario` `u` on((`u`.`idUsuario` = `e`.`idUsuario`))) join `telefonos` `t` on((`t`.`idPersona` = `p`.`idPersona`))) where (`e`.`eliminado` <> 1) group by `e`.`idEmpleado`,`p`.`pnombre`,`p`.`snombre`,`p`.`papellido`,`p`.`sapellido`,`p`.`correo`,`c`.`descripcion`,`p`.`noIdentidad`,`p`.`direccion`,`e`.`fechaInicio`,`e`.`fechaFin`,`u`.`nombreUsuario`,`u`.`contraseña`,`u`.`rutaImagen`,`c`.`idCargo`);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vw_vehiculo`
+--
+DROP TABLE IF EXISTS `vw_vehiculo`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_vehiculo` AS (select `v`.`idVehiculo` AS `idVehiculo`,`v`.`color` AS `color`,`v`.`descripcion` AS `descripcion`,`v`.`Año` AS `anio`,`v`.`precioVenta` AS `precioVenta`,`v`.`precioRentaHora` AS `precioRentaHora`,`v`.`precioRentaDia` AS `precioRentaDia`,`v`.`placa` AS `placa`,`v`.`eliminado` AS `eliminado`,`v`.`idModelo` AS `idModelo`,`v`.`idInventario` AS `idInventario`,`v`.`idTipoVehiculo` AS `idTipoVehiculo`,`v`.`idTipoGasolina` AS `idTipoGasolina`,`v`.`idTransmision` AS `idTransmision`,`v`.`idCilindraje` AS `idCilindraje`,`m`.`descripcion` AS `modelo`,`i`.`descripcion` AS `inventario`,`tv`.`descripcion` AS `tipovehiculo`,`tm`.`descripcion` AS `tipomotor`,`t`.`descripcion` AS `transmision`,`c`.`descripcion` AS `cilindraje` from ((((((`vehiculo` `v` join `modelo` `m` on((`m`.`idModelo` = `v`.`idModelo`))) join `inventario` `i` on((`i`.`idInventario` = `v`.`idInventario`))) join `tipovehiculo` `tv` on((`tv`.`idTipoVehiculo` = `v`.`idTipoVehiculo`))) join `tipomotor` `tm` on((`tm`.`idTipoGasolina` = `v`.`idTipoGasolina`))) join `transmision` `t` on((`t`.`idTransmision` = `v`.`idTransmision`))) join `cilindraje` `c` on((`c`.`idCilindraje` = `v`.`idCilindraje`))) where (`v`.`eliminado` <> 1));
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

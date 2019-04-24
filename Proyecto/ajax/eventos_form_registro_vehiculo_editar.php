@@ -69,8 +69,7 @@
             }
             $conexion->cerrarConexion();
         case '7'://Llenar informacion del formulario
-        echo '</h1> hola </h1>';
-        /*$conexion = new Conexion();
+        $conexion = new Conexion();
         $idVehiculo = $_POST['idVehiculo'];
         $accion = "EDITAR";
         $sql = "SELECT idVehiculo, color, descripcion, anio, precioVenta, precioRentaHora,
@@ -84,27 +83,35 @@
         while ($fila= $conexion->obtenerFila($resultado)) { ?>
             
 
-            <input type="text" id="idVehiculo" value="<?php echo $fila['idVehiculo'];?>">
-            <input type="text" id="color" value="<?php echo $fila['color'];?>">
-            <input type="text" id="descripcion" value="<?php echo $fila['descripcion'];?>">
-            <input type="text" id="anio" value="<?php echo $fila['anio'];?>">
-            <input type="text" id="precioVenta" value="<?php echo $fila['precioVenta'];?>">
-            <input type="text" id="precioRentaHora" value="<?php echo $fila['precioRentaHora'];?>">
-            <input type="text" id="precioRentaDia" value="<?php echo $fila['precioRentaDia'];?>">
-            <input type="text" id="placa" value="<?php echo $fila['placa'];?>">
-            <input type="text" id="idModelo" value="<?php echo $fila['idModelo'];?>">
-            <input type="text" id="idInventario" value="<?php echo $fila['idInventario'];?>">
-            <input type="text" id="idTipoVehiculo" value="<?php echo $fila['idTipoVehiculo'];?>">
-            <input type="text" id="idTipoGasolina" value="<?php echo $fila['idTipoGasolina'];?>">
-            <input type="text" id="idTransmision" value="<?php echo $fila['idTransmision'];?>">
-            <input type="text" id="idCilindraje" value="<?php echo $fila['idCilindraje'];?>">
+            <input type="hidden" id="idVehiculo" value="<?php echo $fila['idVehiculo'];?>">
+            <input type="hidden" id="color" value="<?php echo $fila['color'];?>">
+            <input type="hidden" id="descripcion" value="<?php echo $fila['descripcion'];?>">
+            <input type="hidden" id="anio" value="<?php echo $fila['anio'];?>">
+            <input type="hidden" id="precioVenta" value="<?php echo $fila['precioVenta'];?>">
+            <input type="hidden" id="precioRentaHora" value="<?php echo $fila['precioRentaHora'];?>">
+            <input type="hidden" id="precioRentaDia" value="<?php echo $fila['precioRentaDia'];?>">
+            <input type="hidden" id="placa" value="<?php echo $fila['placa'];?>">
+            <input type="hidden" id="idModelo" value="<?php echo $fila['idModelo'];?>">
+            <input type="hidden" id="idInventario" value="<?php echo $fila['idInventario'];?>">
+            <input type="hidden" id="idTipoVehiculo" value="<?php echo $fila['idTipoVehiculo'];?>">
+            <input type="hidden" id="idTipoGasolina" value="<?php echo $fila['idTipoGasolina'];?>">
+            <input type="hidden" id="idTransmision" value="<?php echo $fila['idTransmision'];?>">
+            <input type="hidden" id="idCilindraje" value="<?php echo $fila['idCilindraje'];?>">
 
+        <?php
+        }
+        $sql2 = "SELECT idFotos, direccionEnDisco
+                FROM Fotos 
+                WHERE idVehiculo = '$idVehiculo';";
+        
+        $resultado2 = $conexion->ejecutarInstruccion($sql2);
+        while ($fila2= $conexion->obtenerFila($resultado2)) { ?>
+            <input type="hidden" id="txt_direccionEnDisco[]" name="txt_direccionEnDisco[]" value="<?php echo $fila2['direccionEnDisco'];?>">
         <?php
         }
         
         
-        
-        $conexion->cerrarConexion();*/
+        $conexion->cerrarConexion();
         break;
 
         case '8'://guardar imagen

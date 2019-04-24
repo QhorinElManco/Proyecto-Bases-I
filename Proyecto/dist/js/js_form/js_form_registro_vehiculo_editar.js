@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	var parametros = "idCliente= "+$("#txt_idVehiculo").val();
+	var parametros = "idVehiculo= "+$("#txt_idVehiculo").val();
 	
     llenarModelo = function(){
         $.ajax({ 
@@ -71,10 +71,10 @@ $(document).ready(function(){
 				$("#div_respuesta").html(resultado);
 			}
         });//ajax
-        //setTimeout ("llenarInfo();", 2000); 
+        setTimeout ("llenarInfo();", 10000); 
         
         /**/
-    }//llenarInfo
+    }//traerInfo
     traerInfo();
     
 
@@ -91,8 +91,15 @@ $(document).ready(function(){
 		document.getElementById("slc_tipoVehiculo").value = document.getElementById("idTipoVehiculo").value;
 		document.getElementById("slc_tipoMotor").value = document.getElementById("idTipoGasolina").value;
         document.getElementById("slc_tipoTransmision").value = document.getElementById("idTransmision").value;
-        document.getElementById("slc_Cilindraje").value = document.getElementById("idCilindraje").value;
-        //document.getElementById("img").src = document.getElementById("rutaImagen").value;
+		document.getElementById("slc_Cilindraje").value = document.getElementById("idCilindraje").value;
+		var $imgn=[]; 
+		var $i= 0;
+		$('input[name^="txt_direccionEnDisco"]').each(function() {
+			$ruta = $("#txt_direccionEnDisco["+$i+"]").val();
+			$("#img["+$i+"]").attr("src",$ruta);
+			$i = $i +1;
+		});
+        //$("#img["+$i+"]").attr("src","+$("#txt_direccionEnDisco["+$i+"]").val+");$("#txt_papellido").val()
     }
     
     //subirFotoFunc(false);
