@@ -1,5 +1,4 @@
 <?php
-    header("Content-Type: text/html;charset=utf-8");
     include("../class/class_conexion.php");
         
     switch($_GET["accion"]){

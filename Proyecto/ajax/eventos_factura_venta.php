@@ -5,6 +5,7 @@ include("../class/class_conexion.php");
 switch($_GET["accion"]){
     case "1":
         $conexion = new Conexion();
+        $acentos = $conexion->ejecutarInstruccion("SET NAMES 'utf8'");
         $sql = "SELECT (MAX(f.idFactura)+1) as codigo, f.fechaEmision FROM Factura f";
         $resultado = $conexion->ejecutarInstruccion($sql);	
         if(!$resultado){
@@ -14,7 +15,7 @@ switch($_GET["accion"]){
             while($fila=$conexion->obtenerFila($resultado)){
               
                    echo '<input type="text" readonly=”readonly” class="form-control" id="codigoFactura"
-                   placeholder="'.$fila["codigo"].'"> ';
+                   placeholder="'.$fila["codigo"].'">';
                     }
         };
        
@@ -23,6 +24,7 @@ switch($_GET["accion"]){
         break;
         case "2":
         $conexion = new Conexion();
+        $acentos = $conexion->ejecutarInstruccion("SET NAMES 'utf8'");
         $sql = "SELECT  CURDATE() as fecha ";
         $resultado = $conexion->ejecutarInstruccion($sql);	
         if(!$resultado){
@@ -41,6 +43,7 @@ switch($_GET["accion"]){
 
         case "3":
         $conexion = new Conexion();
+        $acentos = $conexion->ejecutarInstruccion("SET NAMES 'utf8'");
         $sql = "SELECT m.descripcion, m.idModelo from vehiculo vh inner join Modelo m on m.idModelo=vh.idModelo where vh.eliminado not in (1) and vh.precioVenta>0";
         $resultado = $conexion->ejecutarInstruccion($sql);	
         if(!$resultado){
@@ -61,6 +64,7 @@ switch($_GET["accion"]){
 
         case "4":
         $conexion = new Conexion();
+        $acentos = $conexion->ejecutarInstruccion("SET NAMES 'utf8'");
         $sql = "SELECT  d.idDescuento,d.descripcion from Descuento d ";
         $resultado = $conexion->ejecutarInstruccion($sql);	
         if(!$resultado){
@@ -79,7 +83,7 @@ switch($_GET["accion"]){
 /* empleado */
         case "5":
         $conexion = new conexion();
-
+        $acentos = $conexion->ejecutarInstruccion("SET NAMES 'utf8'");
             $sql = "SELECT e.idEmpleado, CONCAT_WS(' ',p.pnombre, p.snombre, papellido, sapellido) AS NombreCompleto FROM empleado e
                     INNER JOIN persona p ON p.idPersona=e.idPersona";
             $resultado = $conexion->ejecutarInstruccion($sql);
@@ -97,7 +101,7 @@ switch($_GET["accion"]){
         /*cliente */
         case "6":
         $conexion = new conexion();
-
+        $acentos = $conexion->ejecutarInstruccion("SET NAMES 'utf8'");
         $sql = "SELECT c.idCliente, CONCAT_WS(' ',p.pnombre, p.snombre, papellido, sapellido) AS NombreCompleto FROM cliente c
                 INNER JOIN persona p ON p.idPersona=c.idPersona";
         $resultado = $conexion->ejecutarInstruccion($sql);
@@ -114,7 +118,7 @@ switch($_GET["accion"]){
 
         case "7":
         $conexion = new conexion();
-
+        $acentos = $conexion->ejecutarInstruccion("SET NAMES 'utf8'");
         $sql = "SELECT fp.idFormaPago, fp.descripcion FROM FormaPago fp;";
         $resultado = $conexion->ejecutarInstruccion($sql);
         if(!$resultado){
@@ -135,15 +139,14 @@ switch($_GET["accion"]){
             $idCliente=$_POST["idCliente"];
         }
             if($idCliente=="" || $idCliente==NULL){
-                $respuesta="Ingrese el nombre del cliente";
+                $respuesta="Ingrese el nombre del cliente, ";
                 echo $respuesta;
             }
             if(isset($_POST["idEmpleado"])){
                 $idEmpleado=$_POST["idEmpleado"];
-                
             }   
             if($idEmpleado=="" || $idEmpleado==NULL){
-                $respuesta="Ingrese el nombre del Empleado";
+                $respuesta="Ingrese el nombre del Empleado, ";
                 echo $respuesta;
             }         
              /* ------ */
@@ -151,7 +154,7 @@ switch($_GET["accion"]){
                 $idFormaPago = $_POST["idFormaPago"];
             }
             if($idFormaPago=="" || $idFormaPago==NULL){
-                $respuesta="Ingrese la forma de pago";
+                $respuesta="Ingrese la forma de pago, ";
                 echo $respuesta;
             }
             /* ------ */
@@ -159,23 +162,22 @@ switch($_GET["accion"]){
                 $idTipoDescuento = $_POST["idTipoDescuento"];
             }
             if($idTipoDescuento=="" || $idTipoDescuento==NULL){
-                $respuesta="Ingrese el tipo de descuento";
+                $respuesta="Ingrese el tipo de descuento, ";
                 echo $respuesta;
             }
-         
              /* ------ */
              if(isset($_POST["idVehiculo"])){
                 $idVehiculo=$_POST["idVehiculo"];
             }
             if($idVehiculo=="" || $idVehiculo==NULL){
-                $respuesta="Ingrese el vehiculo";
+                $respuesta="Ingrese el vehiculo, ";
                 echo $respuesta;
             
               } else{
                 $conexion = new Conexion();
-
+                $acentos = $conexion->ejecutarInstruccion("SET NAMES 'utf8'");
                 $sql = "CALL SP_FACTURA_VENTA('$idVehiculo', '$idCliente','$idEmpleado','$idFormaPago','$idTipoDescuento',@p3 ,@p4, @p5);";
-                $salida = "SELECT @p3 as total, @p4 AS mensaje, @p5 AS codigo;";
+                $salida = "SELECT @p3 as total, @p4 AS codigo, @p5 AS mensaje;";
                 $resultado = $conexion->ejecutarInstruccion($sql);
                 $respuesta = $conexion->ejecutarInstruccion($salida);
                 if(!$respuesta){
@@ -183,24 +185,23 @@ switch($_GET["accion"]){
                 }
                 else{
                     $fila=$conexion->obtenerFila($respuesta);
-                    echo $fila["mensaje"];
+                    echo json_encode($fila);
                 }
                 $conexion->cerrarConexion();
             }
         break;
         case "9":
         $conexion = new conexion();
-
-        $sql = "SELECT max(f.total) FROM Factura f;";
+        $acentos = $conexion->ejecutarInstruccion("SET NAMES 'utf8'");
+        $sql = "SELECT MAX(idFactura), Total FROM Factura;";
         $resultado = $conexion->ejecutarInstruccion($sql);
         if(!$resultado){
             echo "No hay resultado de la consulta";
         }
         else{
-            while($fila = $conexion->obtenerFila($resultado)){
-                echo '<input type="text" class="form-control" id="txt_Des"
-                placeholder="'.$fila["max(f.total)"].'">';
-            }
+            $fila = $conexion->obtenerFila($resultado);
+                echo '<input type="text" readonly=”readonly” class="form-control" id="txt_Des"
+                placeholder="'.$fila["Total"].'">';
         }
         $conexion->cerrarConexion();
         break;

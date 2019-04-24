@@ -7,7 +7,7 @@
         $sql= sprintf("SELECT idEmpleado,pnombre, papellido, noIdentidad, descripcion FROM vw_empleados");
         $resultado = $conexion->ejecutarInstruccion($sql);
         $i=0;
-        while ($fila= $conexion->obtenerFila($resultado)) { 
+        while ($fila= $conexion->obtenerFila($resultado)) {
             $i+=1;
             ?>
             <tr>

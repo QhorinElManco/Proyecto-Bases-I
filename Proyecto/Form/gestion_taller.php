@@ -152,6 +152,9 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="gestion_taller.php" aria-expanded="false"><i class="mdi mdi-cash"></i><span
                                     class="hide-menu">Gestion de talleres</span></a></li>
+                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="../solicitud_renta.php" aria-expanded="false"><i class="mdi mdi-cash"></i><span
+                                    class="hide-menu">Solicitud renta</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
                                     class="hide-menu">Solicitud mantenimiento </span></a>
@@ -167,20 +170,15 @@
                                             solicitudes </span></a></li>
                             </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
-                                    class="hide-menu">Repuestos</span></a></li>
-
-
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
                                     class="hide-menu">Facturacion</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="../Factura_venta.php" class="sidebar-link"><i
                                             class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta
                                         </span></a>
                                 </li>
-                                <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="../Factura_renta.php" class="sidebar-link"><i
                                             class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
                                         </span></a></li>
                                 <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
@@ -213,21 +211,22 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="background-color: rgba(0, 0, 0, 1);width:100%; height:100%">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="">
+            <div class="container-fluid">
                 <div style="width:80%; margin: auto;">
                     <div class="row el-element-overlay" style="padding-top:100px;">
-                        <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
-                        </div>
+                            <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
+                                </div>
                         <!--Div Tabla de sucursales-->
-                        <div class="col-lg-8 col-md-8" style="background-color: rgba(255, 255, 255, 0.5); padding:20px; -webkit-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
-                        -moz-box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55);
-                         box-shadow: 11px 10px 25px 4px rgba(0,0,0,0.55)">
+                        <div class="col-lg-8 col-md-8" style="padding-top:0; background-color: rgba(255, 255, 255, 1); -webkit-box-shadow: 11px 10px 25px 4px rgba(255,255,255,0.55);
+                    -webkit-box-shadow: 0px 0px 15px 4px rgba(255,255,255,1);
+-moz-box-shadow: 0px 0px 15px 4px rgba(255,255,255,1);
+box-shadow: 0px 0px 15px 4px rgba(255,255,255,1);">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title m-b-0">Lista de talleres</h5>
+                                    <h2 class="card-title m-b-0">Lista de talleres</h2>
                                 </div>
                                 <div class="card card-hover">
                                     <button type="button" class="btn btn-success" data-toggle="modal"

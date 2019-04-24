@@ -1,7 +1,5 @@
 $(document).ready(function () {
     verInfo();
-    total();
-
     $("#AGREGAR").click(function () {
         $.ajax({
             url: "ajax/eventos_factura_venta.php?accion=8",
@@ -13,12 +11,12 @@ $(document).ready(function () {
              +"&idFormaPago="+$("#idFormaPago").val()+"&"
              +"&idTipoDescuento="+$("#idTipoDescuento").val() ,
             success: function (respuesta) {
-                $("#total").empty();
-                total();
-                verInfo();
-                $("#idEmpleado").append(respuesta);
-                $("#idCliente").append(respuesta);
-                alert(respuesta);
+                console.log(respuesta);
+                //$("#cuerpoModal").empty();
+                //$("#cuerpoModal").append(respuesta);
+                //$("#Modal1").modal("show");
+                //total();
+                document.getElementById("formulario").reset();
             },
             error: function(error){
                 console.log(error);
@@ -29,19 +27,20 @@ $(document).ready(function () {
 
 
 })
-function total() {
+/*function total() {
     $.ajax({
         url: "ajax/eventos_factura_venta.php?accion=9",
         method: "POST",
         dataType: "html",
         success: function (respuesta) {
-            $("#total").append(respuesta);
+            var res = respuesta.replace(";", " ");
+            $("#total").append(res);
         },
         error: function(error){
             console.log(error);
         }
     });
-}
+}*/
 
 
 function verInfo() {
@@ -50,7 +49,8 @@ function verInfo() {
         method: "POST",
         dataType: "html",
         success: function (respuesta) {
-            $("#codigoFactura").append(respuesta);
+            var res = respuesta.replace(";", " ");
+            $("#codigoFactura").append(res);
            
         },
         error: function(error){
@@ -62,7 +62,8 @@ function verInfo() {
         method: "POST",
         dataType: "html",
         success: function (respuesta) {
-            $("#fecha").append(respuesta);
+            var res = respuesta.replace(";", " ");
+            $("#fecha").append(res);
         },
         error: function(error){
             console.log(error);
@@ -128,6 +129,4 @@ function verInfo() {
             console.log(error);
         }
     });
-  
-  
 }

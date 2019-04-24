@@ -186,6 +186,9 @@ color:rgb(0,0,0);
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="Form/gestion_taller.php" aria-expanded="false"><i class="mdi mdi-cash"></i><span
                                     class="hide-menu">Gestion de talleres</span></a></li>
+                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="solicitud_renta.php" aria-expanded="false"><i class="mdi mdi-cash"></i><span
+                                    class="hide-menu">Solicitud renta</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
                                     class="hide-menu">Solicitud mantenimiento </span></a>
@@ -201,20 +204,15 @@ color:rgb(0,0,0);
                                             solicitudes </span></a></li>
                             </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
-                                    class="hide-menu">Repuestos</span></a></li>
-
-
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
                                     class="hide-menu">Facturacion</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="../Factura_venta.php" class="sidebar-link"><i
                                             class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta
                                         </span></a>
                                 </li>
-                                <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="../Factura_renta.php" class="sidebar-link"><i
                                             class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
                                         </span></a></li>
                                 <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i

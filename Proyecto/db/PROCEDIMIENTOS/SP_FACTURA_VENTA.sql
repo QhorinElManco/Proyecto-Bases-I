@@ -1,4 +1,5 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_FACTURA_VENTA`(
+DROP PROCEDURE IF EXISTS SP_FACTURA_VENTA$$
+CREATE PROCEDURE SP_FACTURA_VENTA(
     IN      pnidVehiculo                INT,
     IN      pnidCliente                 INT,
     IN      pnidEmpleado                INT,
@@ -35,10 +36,18 @@ SP:BEGIN
     
       
     SELECT COUNT(*) INTO vnConteo FROM vehiculo
-    WHERE idVehiculo=pnidVehiculo;
+    WHERE idVehiculo=pnidVehiculo AND eliminado=1;
 
-    IF vnConteo=0 THEN
+    IF vnConteo>0 THEN
         SET pcMensajeError='El vehiculo no existe';
+        LEAVE SP;
+    END IF;
+
+    SELECT COUNT(*) INTO vnConteo FROM vehiculo
+    WHERE idVehiculo=pnidVehiculo AND (precioVenta=0 OR precioVenta IS NULL);
+
+    IF vnConteo>0 THEN
+        SET pcMensajeError='El vehiculo no esta en venta, pertenece a renta';
         LEAVE SP;
     END IF;
    
@@ -81,7 +90,7 @@ SP:BEGIN
     WHERE idDescuento=pnidDescuento;
            SELECT porcentaje INTO vfImpuesto FROM impuesto
     WHERE idImpuesto=1;
-           SET pfTotal=(vfSubtotal-(vfSubtotal*vfDescuento))+((vfSubtotal-(vfSubtotal*vfDescuento))*vfImpuesto);
+           SET pfTotal=(vfSubtotal-(vfSubtotal*vfDescuento)+ (vfSubtotal-(vfSubtotal*vfDescuento))*vfImpuesto);
 
     SELECT (MAX(idFactura)+1) INTO vnidFactura FROM factura;
 
@@ -102,7 +111,7 @@ SP:BEGIN
     
     SELECT (MAX(idSalida)+1) INTO vnidSalida FROM salida;
 
-    INSERT salida(idSalida, descripcion,FechaSalida,  idTipoSalida,idRenta,  idVentas)
+    INSERT salida(idSalida, descripcion, FechaSalida,  idTipoSalida,idRenta,  idVentas)
     VALUES (vnidSalida, "Venta", CURDATE(), '1',NULL, vnidVentas );
  
     SELECT idInventario INTO vnidInventario FROM vehiculo
@@ -112,12 +121,11 @@ SP:BEGIN
 
     INSERT control (idControl , idInventario, idSalida, idEntrada, idEmpleado)
     VALUES (vnidControl, vnidInventario, vnidSalida, NULL, pnidEmpleado);
+
+    UPDATE Vehiculo SET eliminado='1' where idVehiculo=pnidVehiculo;
+
     COMMIT;
     SET pbOcurreError=FALSE;
-    IF pbOcurreError = FALSE THEN 
-            UPDATE Vehiculo SET eliminado='1'
-            where idVehiculo=pnidVehiculo;
-    END if;
     SET pcMensajeError="Se agregado de forma exitosa la factura";
     LEAVE SP;
-END
+END$$

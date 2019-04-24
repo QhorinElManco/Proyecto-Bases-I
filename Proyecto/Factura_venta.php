@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en">
 
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Auto Motor</title>
+    <title>Facturacion</title>
     <!-- Custom CSS -->
     <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -119,7 +119,7 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-                        
+
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -139,33 +139,57 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
+                                    class="hide-menu">Vehiculos</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="../ver_todos_autos.php" class="sidebar-link"><i
+                                            class="mdi mdi-car"></i><span class="hide-menu">
+                                            Ver todos
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="../lista_autos_venta.php" class="sidebar-link"><i
+                                            class="mdi mdi-shopping"></i><span class="hide-menu">Vehiculos en
+                                            venta</span></a></li>
+                                <li class="sidebar-item"><a href="../lista_autos_renta.php" class="sidebar-link"><i
+                                            class="mdi mdi-cash"></i><span class="hide-menu"> Vehiculos en
+                                            renta</span></a></li>
+                            </ul>
+                        </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../index.html" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
-                                    class="hide-menu">Compra</span></a></li>
+                                href="gestion_sucursal.php" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
+                                    class="hide-menu">Gestion Sucursal</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../charts.html" aria-expanded="false"><i class="mdi mdi-cash"></i><span
-                                    class="hide-menu">Renta</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
-                                    class="hide-menu">Historial</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../tables.html" aria-expanded="false"><i class="mdi mdi-oil"></i><span
-                                    class="hide-menu">Mantenimiento</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
-                                    class="hide-menu">Repuestos</span></a></li>
-                                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="gestion_taller.php" aria-expanded="false"><i class="mdi mdi-cash"></i><span
+                                    class="hide-menu">Gestion de talleres</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
+                                    class="hide-menu">Solicitud mantenimiento </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="../agregar_solicitud_mantenimiento.php"
+                                        class="sidebar-link"><i class="mdi mdi-playlist-plus"></i><span
+                                            class="hide-menu">
+                                            Agregar solicitud
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="../ver_solicitud_mantenimiento.php"
+                                        class="sidebar-link"><i class="mdi mdi-format-list-bulleted"></i><span
+                                            class="hide-menu"> Ver las
+                                            solicitudes </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
                                     class="hide-menu">Facturacion</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta </span></a>
+                                <li class="sidebar-item"><a href="../Factura_venta.php" class="sidebar-link"><i
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta
+                                        </span></a>
                                 </li>
-                                <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="../Factura_renta.php" class="sidebar-link"><i
                                             class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
                                         </span></a></li>
-                                 <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Mantenimiento
+                                <li class="sidebar-item"><a href="../Factura_mantenimiento.php" class="sidebar-link"><i
+                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura
+                                            Mantenimiento
                                         </span></a></li>
                             </ul>
                         </li>
@@ -193,128 +217,145 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper" style="color:white">
+        <div class="page-wrapper"
+            style="background-image: url(assets/images/background/img3.jpg); background-repeat: no-repeat; background-size:cover;  width: 100%; height: 100vh;">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="padding:0px;background-image: url(ima/fondo1.1.jpg);background-repeat: no-repeat;background-size:cover; " >
+            <div class="container-fluid" style="padding:0px;">
                 <div style="background-color: rgba(0, 0, 0, 0.5) ;width:100%; height:100%">
-                <!-- ============================================================== -->
-                <!-- Inicio Formulario -->
-                <!-- ============================================================== -->
-               
-                        <div class="row" style="" >
-                        
-                        
-                            <!--Margen de 3 columnas a la izquierda-->
-                            <div class="col-md-6 auth-box  border-top border-secondary float-left mx-auto" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
-                            
-                                <form class="form-horizontal">
-                                <div class="card-body" style="text-align:center;">
-
-                                <div class="text-center p-t-20 p-b-20">
-                                        <IMG SRC="assets/images/logo2.png">
-                                    </div>
-                                    <h3 style="margin: 0px 0px 30px 0px;">FACTURA DE VENTA</h3>
-                                                
-                                               <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Codigo de Factura</label>
-                                                        <div class="col-sm-9" id="codigoFactura">
-                                                           
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Fecha</label>
-                                                        <div class="col-sm-9" id="fecha">
-                                                            
-                                                        </div>
-                                                    </div>
-                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 text-left control-label col-form-label">Nombre Cliente</label>
-                                                    <div class="col-sm-9">
-                                                        <select type="text" id="idCliente" class="form-control border border-secondary" maxlength="50">
-                                                        <option value="">Seleccione el nombre del cliente</option>
-                                                           
-                                                        </select>
-                                                        </div>
-                                                </div> 
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 text-left control-label col-form-label">Nombre Empleado</label>
-                                                    <div class="col-sm-9">
-                                                        <select type="text" id="idEmpleado" class="form-control border border-secondary" maxlength="50">
-                                                        <option value="">Seleccione el nombre del empleado</option>
-                                                           
-                                                        </select>
-                                                        </div>                                        
-                                                                                     
-                                                </div>
-
-                                                <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label"> Forma de Pago</label>
-                                                        <div class="col-sm-9">
-                                                        
-                                                        <select type="text" id="idFormaPago" class="form-control border border-secondary" maxlength="50">
-                                                          
-                                                        <option value="">Seleccione la forma de pago</option>
-                                                        </select>
-                                                    
-                                                        </div>
-                                                    </div>
-
-                                                <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Vehiculo</label>
-                                                        <div class="col-sm-9">
-                                                        <select type="text" id="idVehiculo" class="form-control border border-secondary" maxlength="50">
-                                                            
-                                                        <option value="">Seleccione el vehiculo</option>
-                                                        </select>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label"> Tipo de Descuento</label>
-                                                        <div class="col-sm-9">
-                                                        
-                                                        <select type="text" id="idTipoDescuento" class="form-control border border-secondary" maxlength="50">
-                                                        <option value="">Seleccione el tipo de descuento</option>
-                                                        </select>
-                                                    
-                                                        </div>
-                                                    </div>
-                                                     
-
-                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Total</label>
-                                                        <div class="col-sm-9" id="total">
-                                                       
-                                                            
-                                                    
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                                    <div class="card-body" style="text-align:center;">
-                                    <button type="button" class="btn btn-success btn-lg" style=" background-color:#2F4F4F; border-color:white " id="AGREGAR">IMPRIMIR</button>
-                                </div>
-                                </form>
-                                
-                            </div>
-
-                        
+                    <!-- ============================================================== -->
+                    <!-- Inicio Formulario -->
+                    <!-- ============================================================== -->
+                    <div class="row" style="padding-top: 5%;">
+                        <div class="col-md-4">
                         </div>
-
-                 </div> 
+                        <div class="col-md-4">
+                            <div class="card"
+                                style="margin-top:50px; margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)">
+                                <div class="card-body form">
+                                    <div class="border-bottom">
+                                        <h3 class="card-title" style="color:white; text-align: center">Llene la
+                                            solicitud</h3>
+                                    </div>
+                                    <form id="formulario">
+                                        <div class="row mb-3 align-items-center" style="padding-top:30px;">
+                                            <div class="col-lg-4 col-md-12 text-left">
+                                                <span style="color:white;">Codigo de
+                                                    Factura</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12" id="codigoFactura">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 align-items-center">
+                                            <div class="col-lg-4 col-md-12 text-left">
+                                                <span style="color:white;">Fecha</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12" id="fecha">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 align-items-center">
+                                            <div class="col-lg-4 col-md-12 text-left">
+                                                <span style="color:white;">Cliente</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12">
+                                                <select type="text" id="idCliente"
+                                                    class="form-control border border-secondary" maxlength="50">
+                                                    <option value="">Seleccione el nombre del cliente</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 align-items-center">
+                                            <div class="col-lg-4 col-md-12 text-left">
+                                                <span style="color:white;">Empleado</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12">
+                                                <select type="text" id="idEmpleado"
+                                                    class="form-control border border-secondary" maxlength="50">
+                                                    <option value="">Seleccione el nombre del empleado</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 align-items-center">
+                                            <div class="col-lg-4 col-md-12 text-left">
+                                                <span style="color:white;">Forma de
+                                                    pago</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12">
+                                                <select type="text" id="idFormaPago"
+                                                    class="form-control border border-secondary" maxlength="50">
+                                                    <option value="">Seleccione la forma de pago</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 align-items-center">
+                                            <div class="col-lg-4 col-md-12 text-left">
+                                                <span style="color:white;">Vehiculo</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12">
+                                                <select type="text" id="idVehiculo"
+                                                    class="form-control border border-secondary" maxlength="50">
+                                                    <option value="">Seleccione el vehiculo</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 align-items-center">
+                                            <div class="col-lg-4 col-md-12 text-left">
+                                                <span style="color:white;">Tipo de
+                                                    descuento</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12">
+                                                <select type="text" id="idTipoDescuento"
+                                                    class="form-control border border-secondary" maxlength="50">
+                                                    <option value="">Seleccione el tipo de descuento</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 align-items-center">
+                                            <div class="col-lg-4 col-md-12 text-left">
+                                                <span style="color:white;">Total</span>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12" id="total">
+                                            </div>
+                                        </div>
+                                        <div class="border-top">
+                                            <div class="card-body" style="text-align:center;">
+                                                <button type="button" class="btn btn-success"
+                                                    id="AGREGAR">Imprimir</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                </div>
             </div>
-                <!-- ============================================================== -->
-                <!-- Fin Formulario -->
-                <!-- ============================================================== -->
-            
+            <!-- ============================================================== -->
+            <!-- Fin Formulario -->
+            <!-- ============================================================== -->
+            <!-- Modal -->
+            <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true ">
+                <div class="modal-dialog" role="document ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true ">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="cuerpoModal">
 
-                
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Matrix-admin. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -354,7 +395,7 @@
     <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="dist/js/pages/chart/chart-page-init.js"></script>
     <script src="dist/js/js_form/js_factura_venta.js"></script>
-   
+
 
 </body>
 
