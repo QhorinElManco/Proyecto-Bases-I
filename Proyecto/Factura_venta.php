@@ -143,10 +143,10 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span
                                     class="hide-menu">Clientes</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="form_cliente_registro.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="Form/form_cliente_registro.php" class="sidebar-link"><i
                                             class="mdi mdi-account-plus"></i><span class="hide-menu">Agregar cliente
                                         </span></a></li>
-                                <li class="sidebar-item"><a href="form_cliente_lista.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="Form/form_cliente_lista.php" class="sidebar-link"><i
                                             class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Lista de clientes</span></a></li>
                             </ul>
                         </li>
@@ -154,10 +154,10 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
                                     class="hide-menu">Empleados</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="form_empleado_registro_1.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="Form/form_empleado_registro_1.php" class="sidebar-link"><i
                                             class="mdi mdi-account-plus"></i><span class="hide-menu">Agregar empleado
                                         </span></a></li>
-                                <li class="sidebar-item"><a href="form_empleado_lista.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="Form/form_empleado_lista.php" class="sidebar-link"><i
                                             class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Lista de empleados</span></a></li>
                             </ul>
                         </li>
@@ -169,14 +169,14 @@
                                             class="fas fa-car"></i><span class="hide-menu">
                                             Agregar vehiculo
                                         </span></a></li>
-                                <li class="sidebar-item"><a href="../ver_todos_autos.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="ver_todos_autos.php" class="sidebar-link"><i
                                             class="mdi mdi-car"></i><span class="hide-menu">
                                             Ver todos
                                         </span></a></li>
-                                <li class="sidebar-item"><a href="../lista_autos_venta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="lista_autos_venta.php" class="sidebar-link"><i
                                             class="mdi mdi-shopping"></i><span class="hide-menu">Vehiculos en
                                             venta</span></a></li>
-                                <li class="sidebar-item"><a href="../lista_autos_renta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="lista_autos_renta.php" class="sidebar-link"><i
                                             class="mdi mdi-cash"></i><span class="hide-menu"> Vehiculos en
                                             renta</span></a></li>
                             </ul>
@@ -185,12 +185,12 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
                                     class="hide-menu">Solicitud mantenimiento </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="../agregar_solicitud_mantenimiento.php"
+                                <li class="sidebar-item"><a href="agregar_solicitud_mantenimiento.php"
                                         class="sidebar-link"><i class="mdi mdi-playlist-plus"></i><span
                                             class="hide-menu">
                                             Agregar solicitud
                                         </span></a></li>
-                                <li class="sidebar-item"><a href="../ver_solicitud_mantenimiento.php"
+                                <li class="sidebar-item"><a href="ver_solicitud_mantenimiento.php"
                                         class="sidebar-link"><i class="mdi mdi-format-list-bulleted"></i><span
                                             class="hide-menu"> Ver las
                                             solicitudes </span></a></li>
@@ -201,11 +201,11 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
                                     class="hide-menu">Facturacion</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="../Factura_venta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
                                             class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta
                                         </span></a>
                                 </li>
-                                <li class="sidebar-item"><a href="../Factura_renta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
                                             class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
                                         </span></a></li>
                                 <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
@@ -215,13 +215,13 @@
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../solicitud_renta.php" aria-expanded="false"><i class="mdi mdi-calendar-multiple"></i><span
+                                href="solicitud_renta.php" aria-expanded="false"><i class="mdi mdi-calendar-multiple"></i><span
                                     class="hide-menu">Solicitud renta</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="gestion_sucursal.php" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
+                                href="Form/gestion_sucursal.php" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
                                     class="hide-menu">Gestion Sucursal</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="gestion_taller.php" aria-expanded="false"><i class="mdi mdi-engine"></i><span
+                                href="Form/gestion_taller.php" aria-expanded="false"><i class="mdi mdi-engine"></i><span
                                     class="hide-menu">Gestion de talleres</span></a></li>
 
 

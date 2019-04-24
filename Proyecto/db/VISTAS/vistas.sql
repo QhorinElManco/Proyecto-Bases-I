@@ -140,3 +140,34 @@ INNER JOIN Usuario u ON u.idUsuario = c.idUsuario
 INNER JOIN Telefonos t ON t.idPersona = p.idPersona
 GROUP BY c.idCliente, p.pnombre, p.snombre, p.papellido, p.sapellido, 
 p.correo,p.noIdentidad, p.direccion, u.nombreUsuario, u.contraseña, u.rutaImagen);
+
+--Todos los talleres con su respectiva sucursal y direccion
+CREATE VIEW VW_Sucursales_taller as (
+SELECT t.idTaller, t.descripcion, s.nombre, s.direccion FROM sucursal s
+INNER JOIN taller t ON t.idSucursal = s.idSucursal
+)
+
+--Todos los autos
+CREATE VIEW VW_VER_TODOS_AUTOS as (
+    SELECT v.idVehiculo, mo.descripcion AS modelo, mr.descripcion AS marca, f.direccionEnDisco FROM vehiculo v
+    INNER JOIN modelo mo ON mo.idModelo=v.idModelo
+    INNER JOIN marca mr ON mr.idMarca=mo.idMarca
+    INNER JOIN fotos f ON f.idVehiculo=v.idVehiculo
+    WHERE v.eliminado=0
+    GROUP BY modelo;
+)
+--Carga todos los autos en venta
+CREATE VIEW VW_AUTOS_VENTA AS (SELECT v.idVehiculo, mo.descripcion AS modelo, mr.descripcion AS marca, f.direccionEnDisco FROM vehiculo v
+    INNER JOIN modelo mo ON mo.idModelo=v.idModelo
+    INNER JOIN marca mr ON mr.idMarca=mo.idMarca
+    INNER JOIN fotos f ON f.idVehiculo=v.idVehiculo
+    WHERE v.eliminado=0 AND v.precioVenta>0
+    GROUP BY modelo)
+    
+--Carga todos los autos en renta
+CREATE VIEW VW_AUTOS_RENTA AS (SELECT v.idVehiculo, mo.descripcion AS modelo, mr.descripcion AS marca, f.direccionEnDisco FROM vehiculo v
+    INNER JOIN modelo mo ON mo.idModelo=v.idModelo
+    INNER JOIN marca mr ON mr.idMarca=mo.idMarca
+    INNER JOIN fotos f ON f.idVehiculo=v.idVehiculo
+    WHERE v.eliminado=0 AND (v.precioRentaDia>0 OR v.precioRentaHora>0)
+    GROUP BY modelo)
