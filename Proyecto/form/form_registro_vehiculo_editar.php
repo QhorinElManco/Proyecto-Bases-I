@@ -434,6 +434,7 @@
                                         </p>
                                         <hr>
                                         <div id="div_resultado"></div>
+                                        <img id="img[]"  class='img-responsive img-thumbnail' width='250' height='200'>
                                     </form>
                                 </div>
                             </div>
