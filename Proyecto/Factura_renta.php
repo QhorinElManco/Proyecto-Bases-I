@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Auto Motor</title>
+    <title>Renta</title>
     <!-- Custom CSS -->
     <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -162,6 +162,10 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
                                     class="hide-menu">Vehiculos</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
+                            <li class="sidebar-item"><a href="Form/form_registro_vehiculo.php" class="sidebar-link"><i
+                                            class="fas fa-car"></i><span class="hide-menu">
+                                            Agregar vehiculo
+                                        </span></a></li>
                                 <li class="sidebar-item"><a href="ver_todos_autos.php" class="sidebar-link"><i
                                             class="mdi mdi-car"></i><span class="hide-menu">
                                             Ver todos
@@ -245,8 +249,7 @@
         <div class="page-wrapper" style="color:white">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid" style="padding:0px;background-image: url(ima/fondo1.1.jpg);background-repeat: no-repeat;background-size:cover; " >
-                <div style="background-color: rgba(0, 0, 0, 0.5) ;width:100%; height:100%">
+            <div class="container-fluid" style="background-image: url(assets/images/background/img2.jpg); background-repeat: no-repeat; background-size:cover;  width: 100%; height: 100vh;">
                 <!-- ============================================================== -->
                 <!-- Inicio Formulario -->
                 <!-- ============================================================== -->
@@ -255,7 +258,7 @@
                         
                         
                             <!--Margen de 3 columnas a la izquierda-->
-                            <div class="col-md-6 auth-box  border-top border-secondary float-left mx-auto" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                            <div class="col-md-5 auth-box  border-top border-secondary float-left mx-auto" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
                             
                                 <form class="form-horizontal">
                                 <div class="card-body" style="text-align:center;">
@@ -280,63 +283,28 @@
                                                                >
                                                         </div>
                                                     </div>
-                                               
                                                  <div class="form-group row">
-                                                    <label class="col-sm-3 text-left control-label col-form-label">Nombre Cliente</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="txt_pnombre"
-                                                            placeholder="Primer nombre">
-                                                    </div>
-                                                    <div class="col-sm-5">
-                                                        <input type="text" class="form-control" id="txt_snombre"
-                                                            placeholder="Segundo nombre">
+                                                    <label class="col-sm-3 text-left control-label col-form-label">Cliente</label>
+                                                    <div class="col-sm-9">
+                                                    <select type="text" id="idCliente" class="form-control border border-secondary" maxlength="50">
+                                                            <option value="">Seleccione el cliente</option>
+                                                        </select>
                                                     </div>
                                                  </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 text-left control-label col-form-label">Apellidos Cliente</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="txt_papellido"
-                                                            placeholder="Primer apellido">
-                                                    </div>
-                                                    <div class="col-sm-5">
-                                                        <input type="text" class="form-control" id="txt_saptxt_papellido"
-                                                            placeholder="Segundo apellido">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 text-left control-label col-form-label">Nombre Empleado</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="txt_pnombre"
-                                                            placeholder="Primer nombre">
-                                                    </div>
-                                                     <div class="col-sm-5">
-                                                        <input type="text" class="form-control" id="txt_papellido"
-                                                            placeholder="Primer apellido">
-                                                    </div>             
+                                                    <label class="col-sm-3 text-left control-label col-form-label">Empleado</label>
+                                                    <div class="col-sm-9">
+                                                    <select type="text" id="idEmpleado" class="form-control border border-secondary" maxlength="50">
+                                                            <option value="">Seleccione el empleado</option>
+                                                        </select>
+                                                    </div>            
                                                 </div>
                                                 <div class="form-group row">
                                                         <label class="col-sm-3 text-left control-label col-form-label">Vehiculo</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_vehiculo"
-                                                                placeholder="Vehiculo">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Tiempo de Renta</label>
-                                                        <div class="col-sm-9">
-                                                        <select type="text" id="tiempoRenta" class="form-control border border-secondary" maxlength="50">
-                                                            <option value="1">Hora</option>
-                                                            <option value="2">Dia</option>
-                                                            <option value="3">Mes</option>
-                                                        
+                                                        <select type="text" id="idVehiculo" class="form-control border border-secondary" maxlength="50">
+                                                            <option value="">Seleccione el vehiculo</option>
                                                         </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Precio de la renta</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_precioRenta"
-                                                                placeholder="Precio Renta">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -345,72 +313,62 @@
                                                             <input type="text" class="form-control" id="txt_anticipo"
                                                                 placeholder="Anticipo">
                                                         </div>
-
-                                                    </div>
-
-                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 text-center control-label col-form-label">Fecha Reserva</label>
-                                                        <label class="col-sm-4 text-center control-label col-form-label">Fecha Entrega</label>
-                                                        <label class="col-sm-4 text-center control-label col-form-label">Fecha Devolucion</label>
-                                                        
                                                     </div>
                                                     <div class="form-group row">
-                                                       <div class="col-sm-4">
-                                                            <input type="Date" class="form-control" id="txt_fechaReserva"
-                                                               >
+                                                        <label class="col-sm-3 text-left control-label col-form-label">Tiempo de Renta</label>
+                                                        <div class="col-sm-3">
+                                                        <select type="text" id="tiempoRenta" class="form-control border border-secondary" maxlength="50">
+                                                            <option value="1">Hora</option>
+                                                            <option value="2">Dia</option>                                                      
+                                                        </select>
                                                         </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Date" class="form-control" id="txt_fechaEntrega"
-                                                               >
+                                                        <label class="col-sm-3 text-left control-label col-form-label">Precio de la renta</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="txt_precioRenta"
+                                                                placeholder="Precio Renta">
                                                         </div>
-                                                       <div class="col-sm-4">
-                                                            <input type="Date" class="form-control" id="txt_fechaDev" >
+                                                    </div>
+                                                     <div class="form-group row">
+                                                        <label class="col-sm-3 text-left control-label col-form-label">Fecha partida</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="Date" class="form-control" id="txt_fechaReserva">
+                                                        </div>
+                                                        <label class="col-sm-3 text-left control-label col-form-label">Fecha Devolucion</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="Date" class="form-control" id="txt_fechaReserva">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 text-left control-label col-form-label">Impuesto</label>
-                                                        <div class="col-sm-9">
+                                                        <div class="col-sm-3">
                                                             <input type="text" class="form-control" id="txt_Imp"
                                                                 placeholder="Impuesto">
                                                         </div>
-                                                    </div>
-                                                     <div class="form-group row">
                                                         <label class="col-sm-3 text-left control-label col-form-label"> Tipo de Descuento</label>
-                                                        <div class="col-sm-9">
-                                                        
+                                                        <div class="col-sm-3">
                                                         <select type="text" id="tipoDescuento" class="form-control border border-secondary" maxlength="50">
                                                             <option value="1">Tercera Edad</option>
                                                             <option value="2">Familiares y amigos</option>
                                                             <option value="3">Navidad</option>
                                                             <option value="4">Año Nuevo</option>
                                                         </select>
-                                                    
-                                                        </div>
-                                                    </div>
-                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 text-left control-label col-form-label">Descuento</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="txt_Des"
-                                                                placeholder="Descuento">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 text-left control-label col-form-label">Mora</label>
-                                                        <div class="col-sm-9">
+                                                        <div class="col-sm-3">
                                                             <input type="text" class="form-control" id="txt_mora"
                                                                 placeholder="Mora">
                                                         </div>
-                                                    </div>
-                                                     <div class="form-group row">
                                                         <label class="col-sm-3 text-left control-label col-form-label">Total</label>
-                                                        <div class="col-sm-9">
+                                                        <div class="col-sm-3">
                                                             <input type="text" class="form-control" id="txt_Total"
                                                                 placeholder="Total">
                                                         </div>
                                                     </div>
                                             </div>
                                                     <div class="card-body" style="text-align:center;">
-                                    <button type="button" class="btn btn-success btn-lg" style=" background-color:#2F4F4F; border-color:white ">IMPRIMIR</button>
+                                    <button type="button" class="btn btn-success btn-lg">IMPRIMIR</button>
                                 </div>
                                 </form>
                                 
@@ -430,8 +388,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Matrix-admin. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
+
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

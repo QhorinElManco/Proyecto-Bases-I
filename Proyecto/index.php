@@ -163,10 +163,10 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span
                                     class="hide-menu">Clientes</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="Form/form_cliente_registro.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="form_cliente_registro.php" class="sidebar-link"><i
                                             class="mdi mdi-account-plus"></i><span class="hide-menu">Agregar cliente
                                         </span></a></li>
-                                <li class="sidebar-item"><a href="Form/form_cliente_lista.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="form_cliente_lista.php" class="sidebar-link"><i
                                             class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Lista de clientes</span></a></li>
                             </ul>
                         </li>
@@ -174,10 +174,10 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
                                     class="hide-menu">Empleados</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="Form/form_empleado_registro_1.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="form_empleado_registro_1.php" class="sidebar-link"><i
                                             class="mdi mdi-account-plus"></i><span class="hide-menu">Agregar empleado
                                         </span></a></li>
-                                <li class="sidebar-item"><a href="Form/form_empleado_lista.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="form_empleado_lista.php" class="sidebar-link"><i
                                             class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Lista de empleados</span></a></li>
                             </ul>
                         </li>
@@ -185,14 +185,18 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
                                     class="hide-menu">Vehiculos</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="ver_todos_autos.php" class="sidebar-link"><i
+                            <li class="sidebar-item"><a href="Form/form_registro_vehiculo.php" class="sidebar-link"><i
+                                            class="fas fa-car"></i><span class="hide-menu">
+                                            Agregar vehiculo
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="../ver_todos_autos.php" class="sidebar-link"><i
                                             class="mdi mdi-car"></i><span class="hide-menu">
                                             Ver todos
                                         </span></a></li>
-                                <li class="sidebar-item"><a href="lista_autos_venta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="../lista_autos_venta.php" class="sidebar-link"><i
                                             class="mdi mdi-shopping"></i><span class="hide-menu">Vehiculos en
                                             venta</span></a></li>
-                                <li class="sidebar-item"><a href="lista_autos_renta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="../lista_autos_renta.php" class="sidebar-link"><i
                                             class="mdi mdi-cash"></i><span class="hide-menu"> Vehiculos en
                                             renta</span></a></li>
                             </ul>
@@ -201,12 +205,12 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
                                     class="hide-menu">Solicitud mantenimiento </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="agregar_solicitud_mantenimiento.php"
+                                <li class="sidebar-item"><a href="../agregar_solicitud_mantenimiento.php"
                                         class="sidebar-link"><i class="mdi mdi-playlist-plus"></i><span
                                             class="hide-menu">
                                             Agregar solicitud
                                         </span></a></li>
-                                <li class="sidebar-item"><a href="ver_solicitud_mantenimiento.php"
+                                <li class="sidebar-item"><a href="../ver_solicitud_mantenimiento.php"
                                         class="sidebar-link"><i class="mdi mdi-format-list-bulleted"></i><span
                                             class="hide-menu"> Ver las
                                             solicitudes </span></a></li>
@@ -217,11 +221,11 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
                                     class="hide-menu">Facturacion</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="../Factura_venta.php" class="sidebar-link"><i
                                             class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta
                                         </span></a>
                                 </li>
-                                <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="../Factura_renta.php" class="sidebar-link"><i
                                             class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
                                         </span></a></li>
                                 <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
@@ -231,13 +235,13 @@
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="solicitud_renta.php" aria-expanded="false"><i class="mdi mdi-calendar-multiple"></i><span
+                                href="../solicitud_renta.php" aria-expanded="false"><i class="mdi mdi-calendar-multiple"></i><span
                                     class="hide-menu">Solicitud renta</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="Form/gestion_sucursal.php" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
+                                href="gestion_sucursal.php" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
                                     class="hide-menu">Gestion Sucursal</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="Form/gestion_taller.php" aria-expanded="false"><i class="mdi mdi-engine"></i><span
+                                href="gestion_taller.php" aria-expanded="false"><i class="mdi mdi-engine"></i><span
                                     class="hide-menu">Gestion de talleres</span></a></li>
 
 
@@ -300,115 +304,10 @@
                 <!-- ============================================================== -->
                 <br>
                 <br>
-                <br><A name="Explorar"></a>
+                <br><A name="ver_todos_autos.php"></a>
                 <br>
                 <br>
-                <!-- ============================================================== -->
-                <!-- Galeria -->
-                <!-- ============================================================== -->
 
-                <div class="row el-element-overlay" style="padding:100px;">
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/Mazda Cx-3/1.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Mazda CX-3</h4> <span class="text-muted">Ver detalles</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/BMW X5 2019/1.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                    <div class="el-card-content">
-                                        <h4 class="m-b-0">BMW X5 2019</h4> <span class="text-muted">Ver detalles</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/Mercedez Benz Clase-G/img7.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Mercedes Benz G-500-Biturbo</h4> <span class="text-muted">Ver
-                                        detalles</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/Toyota Hilux 2016/1.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Automovil 6</h4> <span class="text-muted">Ver detalles</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="assets/images/autos/Mazda RX8/1.jpg"
-                                        alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Mazda RX8</h4> <span class="text-muted">ver detalles</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
-                    <!--Tarjeta-->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img
-                                        src="assets/images/autos/Hummer H3 2007/1.jpg" alt="user" />
-                                    <div class="el-overlay">
-                                    </div>
-                                </div>
-                                <div class="el-card-content">
-                                    <h4 class="m-b-0">Hummer H3 2007</h4> <span class="text-muted">Ver detalles</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tarjeta Fin-->
-                </div>
-                <!-- ============================================================== -->
-                <!-- Fin Galeria -->
-                <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->

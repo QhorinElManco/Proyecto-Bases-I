@@ -163,6 +163,10 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
                                     class="hide-menu">Vehiculos</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
+                            <li class="sidebar-item"><a href="form_registro_vehiculo.php" class="sidebar-link"><i
+                                            class="fas fa-car"></i><span class="hide-menu">
+                                            Agregar vehiculo
+                                        </span></a></li>
                                 <li class="sidebar-item"><a href="../ver_todos_autos.php" class="sidebar-link"><i
                                             class="mdi mdi-car"></i><span class="hide-menu">
                                             Ver todos
@@ -243,7 +247,7 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="background-image: url(../assets/images/background/img2.jpg); background-repeat: repeat; background-size:cover;  width: 100%; height: 100vh; ">
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid" style="padding: 50px">
@@ -279,7 +283,7 @@
                     </div>
                     <div class="modal-footer">
                         <button id="confEliminar" type="button" class="btn btn-danger" data-dismiss="modal">Si</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary btn-light" data-dismiss="modal">Cancelar</button>
                     </div>
                     </div>
                 </div>
@@ -300,8 +304,6 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Matrix-admin. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
