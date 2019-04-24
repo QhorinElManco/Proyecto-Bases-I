@@ -68,8 +68,9 @@
             <?php   
             }
             $conexion->cerrarConexion();
-		case '7'://Llenar informacion del formulario
-        $conexion = new Conexion();
+        case '7'://Llenar informacion del formulario
+        echo '</h1> hola </h1>';
+        /*$conexion = new Conexion();
         $idVehiculo = $_POST['idVehiculo'];
         $accion = "EDITAR";
         $sql = "SELECT idVehiculo, color, descripcion, anio, precioVenta, precioRentaHora,
@@ -81,7 +82,7 @@
         
         $resultado = $conexion->ejecutarInstruccion($sql);
         while ($fila= $conexion->obtenerFila($resultado)) { ?>
-            echo $fila['idVehiculo'];
+            
 
             <input type="text" id="idVehiculo" value="<?php echo $fila['idVehiculo'];?>">
             <input type="text" id="color" value="<?php echo $fila['color'];?>">
@@ -103,7 +104,7 @@
         
         
         
-        $conexion->cerrarConexion();
+        $conexion->cerrarConexion();*/
         break;
 
         case '8'://guardar imagen

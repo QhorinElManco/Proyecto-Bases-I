@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    var parametros = "idVehiculo= "+document.getElementById("txt_idVehiculo").value;
-
+	var parametros = "idCliente= "+$("#txt_idVehiculo").val();
+	
     llenarModelo = function(){
         $.ajax({ 
     		url:"../ajax/eventos_form_registro_vehiculo_editar.php?accion=1",
@@ -60,8 +60,8 @@ $(document).ready(function(){
     	});//ajax
     }//llenarTipoVehiculo
     llenarInventario();
-    
-    traerInfo = function(){
+	
+	traerInfo = function(){
         
         $.ajax({ 
             url:"../ajax/eventos_form_registro_vehiculo_editar.php?accion=7",
@@ -71,11 +71,12 @@ $(document).ready(function(){
 				$("#div_respuesta").html(resultado);
 			}
         });//ajax
-        setTimeout ("llenarInfo();", 15000); 
+        //setTimeout ("llenarInfo();", 2000); 
         
         /**/
     }//llenarInfo
     traerInfo();
+    
 
     llenarInfo = function(){
 		document.getElementById("slc_color").value = document.getElementById("color").value;
