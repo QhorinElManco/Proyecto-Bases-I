@@ -253,19 +253,19 @@
                                         </section>
                                         <h3>Foto de perfil</h3>
                                         <section>
-                                            <div class= "row">
-                                                <div class="col-md-6 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
-                                                    <div class="card-body" style="text-align:center;">
-                                                        <form method="post" id="form_img" enctype="multipart/form-data">
-                                                            <p><h3>Elije la foto del empleado</h3><br>
-                                                                <input type="file" name="file_foto" id="file_foto">
-                                                            </p>
-                                                            <hr>
-                                                            <div id="div_resultado"></div>
-                                                        </form>
-                                                    </div>
+                                        <div class= "row">
+                                            <div class="col-md-6 auth-box  border-top border-dark float-left mx-auto text-light" style="margin-top:50px;margin-bottom:50px;background-color:rgba(52, 58, 64,0.8)" >
+                                                <div class="card-body" style="text-align:center;">
+                                                    <form method="post" id="form_img" enctype="multipart/form-data">
+                                                        <p><h3>Elije la foto del empleado</h3><br>
+                                                            <input type="file" name="file_foto" id="file_foto">
+                                                        </p>
+                                                        <hr>
+                                                        <div id="div_resultado"></div>
+                                                    </form>
                                                 </div>
                                             </div>
+                                        </div>
                                         </section>
                                     </div>
                                 </form>

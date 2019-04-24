@@ -1,4 +1,5 @@
- DELIMITER $$ 
+DROP PROCEDURE IF EXISTS SP_GESTION_CLIENTE$$
+
  CREATE PROCEDURE SP_GESTION_CLIENTE(
     IN      pcpNombre           VARCHAR(45),
     IN      pcsNombre           VARCHAR(45),
@@ -95,7 +96,7 @@
                     SET pcMensaje = 'El Cliente no tiene usuario';
                     LEAVE SP;
                 END IF;
-                SELECT COUNT(*) INTO vnConteo FROM Cliente e
+                SELECT COUNT(*) INTO vnConteo FROM Cliente c
                 INNER JOIN Persona p ON p.idPersona = c.idPersona
                 INNER JOIN telefonos t ON t.idPersona = p.idPersona
                 WHERE c.idCliente= pnIdCliente;
@@ -204,18 +205,34 @@
      END IF;
 
     IF pcAccion = 'EDITAR' THEN
-                IF pnIdCliente = '' OR pnIdCliente IS NULL THEN
-                    SET tempMensaje = CONCAT(tempMensaje,'Cliente, ');
-                END IF;
+
+        SELECT COUNT(*) INTO vnConteo FROM Persona 
+        WHERE correo = pcCorreo;
+        IF vnConteo >1 THEN
+            SET pcMensaje = 'El correo existe en el sistema.';
+            SET pbOcurrioError = TRUE;
+            LEAVE SP;
+        END IF;
+
+        SELECT COUNT(*) INTO vnConteo FROM Usuario
+        WHERE nombreUsuario = pcNombreUsuario;
+        IF vnConteo >1 THEN
+            SET pcMensaje = 'El nombre de usuario ya existe.';
+            SET pbOcurrioError = TRUE;
+            LEAVE SP;
+        END IF;
+
+        SELECT COUNT(*) INTO vnConteo FROM Persona
+        WHERE noIdentidad = pcNoIdentidad;
+        IF vnConteo > 1 THEN
+            SET pcMensaje = 'El numero de identidad ya existe en el sistema.';
+            SET pbOcurrioError = TRUE;
+            LEAVE SP;
+        END IF;
 
         SELECT p.idPersona INTO vnIdPersona FROM Persona p
         INNER JOIN Cliente c ON c.idPersona = p.idPersona
         WHERE c.idCliente=pnIdCliente;
-
-        UPDATE Cliente 
-        SET  idPersona=vnIdPersona,
-            idUsuario=vnIdUsuario
-        WHERE idEmpleado = pnIdEmpleado;
 
         UPDATE persona 
         SET pnombre= pcpNombre
@@ -240,10 +257,10 @@
             ,contraseña= pcContrasenia
             ,rutaImagen= pcRutaImagen
         WHERE idUsuario = vnIdUsuario;
-        COMMIT;
-                        SET pcMensaje = 'cliente actualizado con exito.';
-                        SET pbOcurrioError = FALSE;
-                        LEAVE SP;
+        
+        SET pcMensaje = 'cliente actualizado con exito.';
+        SET pbOcurrioError = FALSE;
+        LEAVE SP;
 
 
 
@@ -275,4 +292,4 @@
     END IF;
 
 
- END
+ END$$

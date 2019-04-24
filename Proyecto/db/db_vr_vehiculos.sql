@@ -2,10 +2,10 @@
 -- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 24-04-2019 a las 00:25:30
--- Versión del servidor: 5.7.24
--- Versión de PHP: 7.2.14
+-- Servidor: localhost
+-- Tiempo de generación: 23-04-2019 a las 20:56:07
+-- Versión del servidor: 5.00.15
+-- Versión de PHP: 5.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -148,8 +148,321 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_FACTURA_VENTA` (IN `pnidVehiculo
     LEAVE SP;
 END$$
 
-DROP PROCEDURE IF EXISTS `SP_GESTION_EMPLEADO`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_EMPLEADO` (IN `pcpNombre` VARCHAR(45), IN `pcsNombre` VARCHAR(45), IN `pcpApellido` VARCHAR(45), IN `pcsApellido` VARCHAR(45), IN `pcCorreo` VARCHAR(45), IN `pcDireccion` VARCHAR(60), IN `pcNoIdentidad` VARCHAR(45), IN `pcTelefono` VARCHAR(45), IN `pdFechaInicio` DATE, IN `pdFechaFin` DATE, IN `pnIdCargo` INT, IN `pcNombreUsuario` VARCHAR(45), IN `pcContrasenia` VARCHAR(45), IN `pcRutaImagen` VARCHAR(1000), IN `pnIdEmpleado` INT, IN `pcAccion` VARCHAR(100), OUT `pbOcurreError` BOOLEAN, OUT `pcMensajeError` VARCHAR(1000))  SP:BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_CLIENTE`(
+    IN      pcpNombre           VARCHAR(45),
+    IN      pcsNombre           VARCHAR(45),
+    IN      pcpApellido         VARCHAR(45),
+    IN      pcsApellido         VARCHAR(45),
+    IN      pcCorreo            VARCHAR(45),
+    IN      pcDireccion         VARCHAR(60),
+    IN      pcNoIdentidad       VARCHAR(45),
+    IN      pcTelefono          VARCHAR(45),
+    IN      pcNombreUsuario     VARCHAR(45),
+    IN      pcContrasenia       VARCHAR(45),
+    IN      pcRutaImagen        VARCHAR(1000),
+    IN      pcAccion            VARCHAR(100),
+    IN      pnIdCliente         INT,
+    OUT     pbOcurrioError       BOOLEAN,
+    OUT     pcMensaje      VARCHAR(1000)
+
+
+
+ )
+SP:BEGIN
+
+        DECLARE vnConteo, vnIdCliente, vnIdTelefono, vnIdPersona, vnIdUsuario INT;
+        DECLARE tempMensaje VARCHAR(2000);
+        SET autocommit=0;
+		START TRANSACTION;
+		SET tempMensaje='';
+		SET pbOcurrioError=TRUE;
+
+        IF pcAccion= '' OR pcAccion IS NULL THEN
+            SET tempMensaje = CONCAT(tempMensaje,'Accion no puede ser nula, ');
+        END IF;
+
+        IF pcAccion = 'AGREGAR' OR pcAccion = 'EDITAR' THEN
+                IF pcpNombre = '' OR pcpNombre  IS NULL THEN
+                    SET tempMensaje = 'Primer nombre, ';
+                END IF;
+                IF pcsNombre = '' OR pcsNombre IS NULL THEN
+                    SET tempMensaje = CONCAT(tempMensaje,'Segundo nombre, ');
+                END IF;
+                IF pcpApellido = '' OR pcpApellido IS NULL THEN
+                    SET tempMensaje = CONCAT(tempMensaje,'primer apellido, ');
+                END IF;
+                IF pcsApellido = '' OR pcsApellido IS NULL THEN
+                    SET tempMensaje = CONCAT(tempMensaje,'segundo apellido, ');
+                END IF;
+                IF pcCorreo = '' OR pcCorreo IS NULL THEN
+                    SET tempMensaje = CONCAT(tempMensaje,'correo, ');
+                END IF;
+                IF pcDireccion = '' OR pcDireccion IS NULL THEN
+                    SET tempMensaje = CONCAT(tempMensaje,'direccion, ');
+                END IF;
+                IF pcNoIdentidad = '' OR pcNoIdentidad IS NULL THEN
+                    SET tempMensaje = CONCAT(tempMensaje,'identidad, ');
+                END IF;
+                IF pcTelefono = '' OR pcTelefono IS NULL THEN
+                    SET tempMensaje = CONCAT(tempMensaje,'telefono, ');
+                END IF;
+                IF pcNombreUsuario = '' OR pcNombreUsuario IS NULL THEN
+                    SET tempMensaje = CONCAT(tempMensaje,'nombre de usuario, ');
+                END IF;
+                IF pccontrasenia = '' OR pccontrasenia IS NULL THEN
+                    SET tempMensaje = CONCAT(tempMensaje,'contrasenia, ');
+                END IF;
+                IF pcRutaImagen = '' OR pcRutaImagen IS NULL THEN
+                    SET tempMensaje = CONCAT(tempMensaje,'ruta de la imagen, ');
+                END IF;
+                
+                IF tempMensaje <> '' THEN
+                    SET pcMensaje = CONCAT('Faltan los siguientes campos: ', tempMensaje);
+                    LEAVE SP;
+                END IF;
+        END IF;
+        IF pcAccion = 'ELIMINAR' OR pcAccion = 'EDITAR' THEN
+
+                IF pnIdCliente = '' OR pnIdCliente IS NULL THEN
+                    SET tempMensaje =  'idCliente, ';
+                END IF;
+                IF tempMensaje <> '' THEN
+                    SET pcMensaje= CONCAT('Faltan campos requeridos: ', tempMensaje);
+                END IF;
+
+                SELECT COUNT(*) INTO vnConteo FROM Cliente c
+                WHERE c.idCliente = pnIdCliente;
+                IF vnConteo = 0 THEN
+                    SET pcMensaje = 'idcliente no existe';
+                    LEAVE SP;
+                END if;
+
+                SELECT COUNT(*) INTO vnConteo FROM Cliente c
+                INNER JOIN Usuario u ON u.idUsuario = c.idUsuario
+                WHERE c.idcliente = pnIdCliente;
+                IF vnConteo = 0 THEN
+                    SET pcMensaje = 'El Cliente no tiene usuario';
+                    LEAVE SP;
+                END IF;
+                SELECT COUNT(*) INTO vnConteo FROM Cliente c
+                INNER JOIN Persona p ON p.idPersona = c.idPersona
+                INNER JOIN telefonos t ON t.idPersona = p.idPersona
+                WHERE c.idCliente= pnIdCliente;
+                IF vnConteo = 0 THEN
+                    SET pcMensaje = 'El Cliente no tiene telefonos';
+                    LEAVE SP;
+                END IF;
+
+        END IF; 
+
+         IF pcAccion = 'AGREGAR' THEN
+
+            SELECT COUNT(*) INTO vnConteo FROM Cliente 
+            WHERE idCliente = pnIdCliente;
+            IF vnConteo > 0 THEN
+                SET pcMensaje= CONCAT('El Cliente', pnIdCliente,' ya existe ');
+                LEAVE SP; 
+            END IF;
+
+            SELECT COUNT(*) INTO vnConteo FROM Usuario 
+            WHERE nombreUsuario = pcNombreUsuario;
+            IF vnConteo > 0 THEN
+                SET pcMensaje= CONCAT('El usuario', pcNombreUsuario,' ya existe en el SI');
+                LEAVE SP; 
+            END IF;
+                    /* si el la persona ya esta registrada con el numero de id y es empleado, la va a registrar solo en cliente y usuario*/
+
+            SELECT COUNT(*) INTO vnConteo FROM Empleado e
+            INNER JOIN persona p ON p.idPersona=e.idPersona
+            WHERE p.noIdentidad=pcNoIdentidad;
+
+            IF vnConteo > 0 THEN
+                SET pcMensaje= CONCAT('La persona con el noIdentidad', pcNoIdentidad ,' ya existe como empleado');
+                SELECT (MAX(c.idCliente)+1) INTO vnIdCliente FROM Cliente c;
+                SELECT (MAX(u.idUsuario)+1) INTO vnIdUsuario FROM Usuario u;
+               INSERT INTO usuario(idUsuario, nombreUsuario , contraseña, rutaImagen) 
+                VALUES (vnIdUsuario,pcNombreUsuario,pcContrasenia,pcRutaImagen);
+                
+                 INSERT INTO Cliente(idCliente,idPersona,idUsuario)
+                VALUES (vnIdCliente, vnIdPersona,vnIdUsuario);
+                LEAVE SP;
+                    /* en caso contrario lo agregara desde la tabla persona, usuario, y cliente*/
+                    ELSE
+                        SELECT (MAX(c.idCliente)+1) INTO vnIdCliente FROM Cliente c;
+                        SELECT (MAX(p.idPersona)+1) INTO vnIdPersona FROM Persona p;
+                        SELECT (MAX(t.idTelefonos)+1) INTO vnIdTelefono FROM Telefonos t;
+                        SELECT (MAX(u.idUsuario)+1) INTO vnIdUsuario FROM Usuario u;
+
+                        INSERT INTO persona(idPersona,pnombre, snombre, papellido,sapellido, correo,direccion,noIdentidad) 
+                        VALUES (vnIdPersona,pcpNombre, pcsNombre,pcpApellido,pcsApellido,pcCorreo,pcDireccion, pcNoIdentidad);
+                
+                        INSERT INTO telefonos (idTelefonos , telefono , idPersona) 
+                        VALUES (vnIdTelefono,pcTelefono ,vnIdPersona);
+                        
+                        INSERT INTO usuario(idUsuario, nombreUsuario , contraseña, rutaImagen) 
+                        VALUES (vnIdUsuario,pcNombreUsuario,pcContrasenia,pcRutaImagen);
+                        
+                        INSERT INTO Cliente(idCliente,idPersona,idUsuario)
+                        VALUES (vnIdCliente, vnIdPersona,vnIdUsuario);
+
+                        COMMIT;
+                        SET pcMensaje = 'Cliente agregado con exito.';
+                        SET pbOcurrioError = FALSE;
+                        LEAVE SP;
+                    
+            END IF;
+            /* si la persona solo esta registrada  en la tabla persona la agregara en cliente y usuario */        
+            SELECT COUNT(*) INTO vnConteo FROM persona p 
+            WHERE p.noIdentidad=pcNoIdentidad;
+            IF vnConteo > 0 THEN
+                SET pcMensaje= CONCAT('La persona con el noIdentidad', pcNoIdentidad ,' ya existe ');
+                SELECT (MAX(c.idCliente)+1) INTO vnIdCliente FROM Cliente c;
+                SELECT (MAX(u.idUsuario)+1) INTO vnIdUsuario FROM Usuario u;
+               INSERT INTO usuario(idUsuario, nombreUsuario , contraseña, rutaImagen) 
+                VALUES (vnIdUsuario,pcNombreUsuario,pcContrasenia,pcRutaImagen);
+                
+                 INSERT INTO Cliente(idCliente,idPersona,idUsuario)
+                VALUES (vnIdCliente, vnIdPersona,vnIdUsuario);
+                LEAVE SP;
+
+                 /* en caso contrario lo agregara desde la tabla persona, usuario, y cliente*/
+                    ELSE
+                        SELECT (MAX(c.idCliente)+1) INTO vnIdCliente FROM Cliente c;
+                        SELECT (MAX(p.idPersona)+1) INTO vnIdPersona FROM Persona p;
+                        SELECT (MAX(t.idTelefonos)+1) INTO vnIdTelefono FROM Telefonos t;
+                        SELECT (MAX(u.idUsuario)+1) INTO vnIdUsuario FROM Usuario u;
+
+                        INSERT INTO persona(idPersona,pnombre, snombre, papellido,sapellido, correo,direccion,noIdentidad) 
+                        VALUES (vnIdPersona,pcpNombre, pcsNombre,pcpApellido,pcsApellido,pcCorreo,pcDireccion, pcNoIdentidad);
+                
+                        INSERT INTO telefonos (idTelefonos , telefono , idPersona) 
+                        VALUES (vnIdTelefono,pcTelefono ,vnIdPersona);
+                        
+                        INSERT INTO usuario(idUsuario, nombreUsuario , contraseña, rutaImagen) 
+                        VALUES (vnIdUsuario,pcNombreUsuario,pcContrasenia,pcRutaImagen);
+                        
+                        INSERT INTO Cliente(idCliente,idPersona,idUsuario)
+                        VALUES (vnIdCliente, vnIdPersona,vnIdUsuario);
+
+                        COMMIT;
+                        SET pcMensaje = 'cliente agregado con exito.';
+                        SET pbOcurrioError = FALSE;
+                        LEAVE SP;
+            END IF;
+
+     END IF;
+
+    IF pcAccion = 'EDITAR' THEN
+
+        SELECT COUNT(*) INTO vnConteo FROM Persona 
+        WHERE correo = pcCorreo;
+        IF vnConteo >1 THEN
+            SET pcMensaje = 'El correo existe en el sistema.';
+            SET pbOcurrioError = TRUE;
+            LEAVE SP;
+        END IF;
+
+        SELECT COUNT(*) INTO vnConteo FROM Usuario
+        WHERE nombreUsuario = pcNombreUsuario;
+        IF vnConteo >1 THEN
+            SET pcMensaje = 'El nombre de usuario ya existe.';
+            SET pbOcurrioError = TRUE;
+            LEAVE SP;
+        END IF;
+
+        SELECT COUNT(*) INTO vnConteo FROM Persona
+        WHERE noIdentidad = pcNoIdentidad;
+        IF vnConteo > 1 THEN
+            SET pcMensaje = 'El numero de identidad ya existe en el sistema.';
+            SET pbOcurrioError = TRUE;
+            LEAVE SP;
+        END IF;
+
+        SELECT p.idPersona INTO vnIdPersona FROM Persona p
+        INNER JOIN Cliente c ON c.idPersona = p.idPersona
+        WHERE c.idCliente=pnIdCliente;
+
+        UPDATE persona 
+        SET pnombre= pcpNombre
+            ,snombre= pcsNombre
+            ,papellido= pcpApellido
+            ,sapellido=pcsApellido
+            ,correo= pcCorreo
+            ,direccion=pcDireccion
+            ,noIdentidad=pcNoIdentidad
+        WHERE idPersona = vnIdPersona;
+
+        UPDATE telefonos 
+        SET telefono=pcTelefono
+        WHERE idPersona = vnIdPersona;
+
+        SELECT u.idUsuario INTO vnIdUsuario FROM Usuario u
+        INNER JOIN Cliente c ON c.idUsuario = u.idUsuario
+        WHERE c.idcliente = pnIdCliente;
+
+        UPDATE usuario 
+        SET nombreUsuario= pcNombreUsuario
+            ,contraseña= pcContrasenia
+            ,rutaImagen= pcRutaImagen
+        WHERE idUsuario = vnIdUsuario;
+        
+        SET pcMensaje = 'cliente actualizado con exito.';
+        SET pbOcurrioError = FALSE;
+        LEAVE SP;
+
+
+
+    END IF;
+    IF pcAccion = 'ELIMINAR' THEN
+
+        SELECT p.idPersona INTO vnIdPersona FROM Persona p
+        INNER JOIN Cliente  c ON c.idPersona = p.idPersona
+        WHERE c.idCliente = pnIdCliente;
+
+        SELECT u.idUsuario INTO vnIdUsuario FROM Usuario u
+        INNER JOIN Cliente c ON c.idUsuario = u.idUsuario
+        WHERE c.idCliente= pnIdCliente;
+
+        DELETE FROM cliente
+        WHERE idCliente = pnIdCliente;
+
+        DELETE FROM telefonos
+        WHERE idPersona = vnIdPersona;
+
+        DELETE FROM Persona
+        WHERE idPersona = vnIdPersona;
+
+        DELETE FROM Usuario
+        WHERE idUsuario = vnIdUsuario;
+        COMMIT;
+            SET pcMensaje = 'Cliente eliminado con exito.';
+            SET pbOcurrioError = FALSE;
+    END IF;
+
+
+ END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTION_EMPLEADO`(
+    IN pcpNombre VARCHAR(45),
+    IN pcsNombre VARCHAR(45),
+    IN pcpApellido VARCHAR(45),
+    IN pcsApellido VARCHAR(45),
+    IN pcCorreo VARCHAR(45),
+    IN pcDireccion VARCHAR(60),
+    IN pcNoIdentidad VARCHAR(45),
+    IN pcTelefono VARCHAR(45),
+    IN pdFechaInicio DATE,
+    IN pdFechaFin DATE,
+    IN pnIdCargo INT,
+    IN pcNombreUsuario VARCHAR(45),
+    IN pcContrasenia VARCHAR(45),
+    IN pcRutaImagen VARCHAR(1000),
+    IN pnIdEmpleado INT,
+    IN pcAccion VARCHAR(100),
+    OUT pbOcurreError BOOLEAN,
+    OUT pcMensajeError VARCHAR(1000)
+)
+SP:BEGIN
     DECLARE vnConteo, vnIdPersona, vnIdEmpleado, vnIdTelefonos, vnIdUsuario, vnIdPersona2,vnConteo2 INT;
     DECLARE vcMensajeTemp VARCHAR(1000);
     SET pbOcurreError = TRUE;
@@ -2235,45 +2548,45 @@ CREATE TABLE IF NOT EXISTS `telefonos` (
 --
 
 INSERT INTO `telefonos` (`idTelefonos`, `telefono`, `idPersona`) VALUES
-(1, '+504-9175-6813', 1),
+(1, ' 504-9175-6813', 1),
 (2, '+504-3479-3934', 2),
-(3, '+504-9974-4267', 3),
+(3, ' 504-3137-8372', 3),
 (4, '+504-9028-3159', 4),
-(5, '+504-9048-5832', 5),
+(5, '504-9048-5832', 5),
 (6, '+504-3420-1067', 6),
-(7, '+504-9499-8923', 7),
+(7, '-9499-8923', 7),
 (8, '+504-9960-6230', 8),
-(9, '+504-9028-3980', 9),
+(9, ' 504-9163-2910', 9),
 (10, '+504-3465-6776', 10),
-(11, '+504-3494-1250', 11),
+(11, ' 504-9458-9499', 11),
 (12, '+504-3375-6121', 12),
-(13, '+504-3065-6461', 13),
+(13, '504-3065-6461', 13),
 (14, '+504-9604-7135', 14),
-(15, '+504-9614-7211', 15),
+(15, '504-3178-8316', 15),
 (16, '+504-3898-3310', 16),
-(17, '+504-9830-1714', 17),
+(17, ' 504-3329-9302, 504-9830-1714', 17),
 (18, '+504-3394-3443', 18),
-(19, '+504-3352-8853', 19),
+(19, ' 504-3341-2382, 504-3352-8853', 19),
 (20, '+504-3073-5522', 20),
-(21, '+504-3535-5196', 1),
+(21, ' 504-3535-5196', 1),
 (22, '+504-3551-6763', 2),
-(23, '+504-3137-8372', 3),
+(23, ' 504-9974-4267', 3),
 (24, '+504-9199-3532', 4),
-(25, '+504-3156-2507', 5),
+(25, ' 504-3156-2507', 5),
 (26, '+504-9324-1000', 6),
-(27, '+504-9998-1647', 7),
+(27, ' 504-9998-1647', 7),
 (28, '+504-3468-2892', 8),
-(29, '+504-9163-2910', 9),
+(29, '504-9028-3980', 9),
 (30, '+504-9128-3418', 10),
-(31, '+504-9458-9499', 11),
+(31, ' 504-3494-1250', 11),
 (32, '+504-9038-4956', 12),
-(33, '+504-3076-9390', 13),
+(33, ' 504-3076-9390', 13),
 (34, '+504-3061-2589', 14),
-(35, '+504-3178-8316', 15),
+(35, ' 504-9614-7211', 15),
 (36, '+504-3147-4384', 16),
-(37, '+504-3329-9302', 17),
+(37, ' 504-3329-9302, 504-9830-1714', 17),
 (38, '+504-3673-8423', 18),
-(39, '+504-3341-2382', 19),
+(39, ' 504-3341-2382, 504-3352-8853', 19),
 (40, '+504-9946-8064', 20);
 
 -- --------------------------------------------------------
@@ -2446,16 +2759,16 @@ INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `contraseña`, `rutaImagen`
 (8, 'user8', '123456', '../assets/images/fotos/empleados/2.png'),
 (9, 'user9', '123456', '../assets/images/fotos/empleados/4.jpg'),
 (10, 'user10', '123456', '../assets/images/fotos/empleados/15.jpg'),
-(11, 'user11', '123456', NULL),
-(12, 'user12', '123456', NULL),
-(13, 'user13', '123456', NULL),
-(14, 'user14', '123456', NULL),
-(15, 'user15', '123456', NULL),
-(16, 'user16', '123456', NULL),
-(17, 'user17', '123456', NULL),
-(18, 'user18', '123456', NULL),
-(19, 'user19', '123456', NULL),
-(20, 'user20', '123456', NULL);
+(11, 'user11', '123456 ', '../assets/images/fotos/clientes/1.jpg'),
+(12, 'user12', '123456 ', '../assets/images/fotos/clientes/2.jpg'),
+(13, 'user13', '123456 ', '../assets/images/fotos/clientes/3.jpg'),
+(14, 'user14', '123456 ', '../assets/images/fotos/clientes/4.jpg'),
+(15, 'user15', '123456 ', '../assets/images/fotos/clientes/5.jpg'),
+(16, 'user16', '123456 ', '../assets/images/fotos/clientes/6.jpg'),
+(17, 'user17', '123456 ', '../assets/images/fotos/clientes/7.jpg'),
+(18, 'user18', '123456 ', '../assets/images/fotos/clientes/8.jpg'),
+(19, 'user19', '123456 ', '../assets/images/fotos/clientes/9.jpg'),
+(20, 'user20', '123456 ', '../assets/images/fotos/clientes/10.jpg');
 
 -- --------------------------------------------------------
 
@@ -2546,6 +2859,27 @@ CREATE TABLE IF NOT EXISTS `ventas` (
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `vw_cliente`
+--
+CREATE TABLE IF NOT EXISTS `vw_cliente` (
+`idPersona` int(11)
+,`pnombre` varchar(45)
+,`snombre` varchar(45)
+,`papellido` varchar(45)
+,`sapellido` varchar(45)
+,`correo` varchar(45)
+,`noIdentidad` varchar(45)
+,`direccion` varchar(60)
+,`idCliente` int(11)
+,`idUsuario` int(11)
+,`nombreUsuario` varchar(45)
+,`contrasenia` varchar(45)
+,`rutaImagen` varchar(1000)
+,`telefonos` varchar(45)
+);
+-- --------------------------------------------------------
+
+--
 -- Estructura Stand-in para la vista `vw_empleados`
 -- (Véase abajo para la vista actual)
 --
@@ -2587,6 +2921,15 @@ CREATE TABLE IF NOT EXISTS `vw_empleado_ver` (
 -- --------------------------------------------------------
 
 --
+-- Estructura para la vista `vw_cliente`
+--
+DROP TABLE IF EXISTS `vw_cliente`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_cliente` AS (select `p`.`idPersona` AS `idPersona`,`p`.`pnombre` AS `pnombre`,`p`.`snombre` AS `snombre`,`p`.`papellido` AS `papellido`,`p`.`sapellido` AS `sapellido`,`p`.`correo` AS `correo`,`p`.`noIdentidad` AS `noIdentidad`,`p`.`direccion` AS `direccion`,`c`.`idCliente` AS `idCliente`,`u`.`idUsuario` AS `idUsuario`,`u`.`nombreUsuario` AS `nombreUsuario`,`u`.`contraseña` AS `contrasenia`,`u`.`rutaImagen` AS `rutaImagen`,max(`t`.`telefono`) AS `telefonos` from (((`cliente` `c` join `persona` `p` on((`p`.`idPersona` = `c`.`idPersona`))) join `usuario` `u` on((`u`.`idUsuario` = `c`.`idUsuario`))) join `telefonos` `t` on((`t`.`idPersona` = `p`.`idPersona`))) group by `c`.`idCliente`,`p`.`pnombre`,`p`.`snombre`,`p`.`papellido`,`p`.`sapellido`,`p`.`correo`,`p`.`noIdentidad`,`p`.`direccion`,`u`.`nombreUsuario`,`u`.`contraseña`,`u`.`rutaImagen`);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura para la vista `vw_empleados`
 --
 DROP TABLE IF EXISTS `vw_empleados`;
@@ -2600,8 +2943,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_empleado_ver`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleado_ver`  AS  (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`snombre` AS `snombre`,`p`.`papellido` AS `papellido`,`p`.`sapellido` AS `sapellido`,`p`.`correo` AS `correo`,`c`.`descripcion` AS `cargo`,`p`.`noIdentidad` AS `noIdentidad`,`p`.`direccion` AS `direccion`,`e`.`fechaInicio` AS `fechaInicio`,`e`.`fechaFin` AS `fechaFin`,`u`.`nombreUsuario` AS `nombreUsuario`,`u`.`contraseña` AS `contrasenia`,`u`.`rutaImagen` AS `rutaImagen`,group_concat(`t`.`telefono` separator ',') AS `telefonos`,`c`.`idCargo` AS `idCargo` from ((((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) join `usuario` `u` on((`u`.`idUsuario` = `e`.`idUsuario`))) join `telefonos` `t` on((`t`.`idPersona` = `p`.`idPersona`))) where (`e`.`eliminado` <> 1) group by `e`.`idEmpleado`,`p`.`pnombre`,`p`.`snombre`,`p`.`papellido`,`p`.`sapellido`,`p`.`correo`,`c`.`descripcion`,`p`.`noIdentidad`,`p`.`direccion`,`e`.`fechaInicio`,`e`.`fechaFin`,`u`.`nombreUsuario`,`u`.`contraseña`,`u`.`rutaImagen`,`c`.`idCargo`) ;
-COMMIT;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_empleado_ver` AS (select `e`.`idEmpleado` AS `idEmpleado`,`p`.`pnombre` AS `pnombre`,`p`.`snombre` AS `snombre`,`p`.`papellido` AS `papellido`,`p`.`sapellido` AS `sapellido`,`p`.`correo` AS `correo`,`c`.`descripcion` AS `cargo`,`p`.`noIdentidad` AS `noIdentidad`,`p`.`direccion` AS `direccion`,`e`.`fechaInicio` AS `fechaInicio`,`e`.`fechaFin` AS `fechaFin`,`u`.`nombreUsuario` AS `nombreUsuario`,`u`.`contraseña` AS `contrasenia`,`u`.`rutaImagen` AS `rutaImagen`,group_concat(`t`.`telefono` separator ',') AS `telefonos`,`c`.`idCargo` AS `idCargo` from ((((`empleado` `e` join `persona` `p` on((`p`.`idPersona` = `e`.`idPersona`))) join `cargo` `c` on((`c`.`idCargo` = `e`.`idCargo`))) join `usuario` `u` on((`u`.`idUsuario` = `e`.`idUsuario`))) join `telefonos` `t` on((`t`.`idPersona` = `p`.`idPersona`))) where (`e`.`eliminado` <> 1) group by `e`.`idEmpleado`,`p`.`pnombre`,`p`.`snombre`,`p`.`papellido`,`p`.`sapellido`,`p`.`correo`,`c`.`descripcion`,`p`.`noIdentidad`,`p`.`direccion`,`e`.`fechaInicio`,`e`.`fechaFin`,`u`.`nombreUsuario`,`u`.`contraseña`,`u`.`rutaImagen`,`c`.`idCargo`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
