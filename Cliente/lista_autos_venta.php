@@ -164,7 +164,7 @@ color:rgb(0,0,0);
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
-                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
                                     class="hide-menu">Vehiculos</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
@@ -181,48 +181,15 @@ color:rgb(0,0,0);
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="Form/gestion_sucursal.php" aria-expanded="false"><i class="mdi mdi-shopping"></i><span
-                                    class="hide-menu">Gestion Sucursal</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="Form/gestion_taller.php" aria-expanded="false"><i class="mdi mdi-cash"></i><span
-                                    class="hide-menu">Gestion de talleres</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
-                                    class="hide-menu">Solicitud mantenimiento </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="agregar_solicitud_mantenimiento.php"
-                                        class="sidebar-link"><i class="mdi mdi-playlist-plus"></i><span
-                                            class="hide-menu">
-                                            Agregar solicitud
-                                        </span></a></li>
-                                <li class="sidebar-item"><a href="ver_solicitud_mantenimiento.php"
-                                        class="sidebar-link"><i class="mdi mdi-format-list-bulleted"></i><span
-                                            class="hide-menu"> Ver las
-                                            solicitudes </span></a></li>
-                            </ul>
+                                href="quienes_somos.php" aria-expanded="false"><i
+                                    class="fas fa-users"></i><span class="hide-menu">Quienes somos</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="../grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
-                                    class="hide-menu">Repuestos</span></a></li>
-
-
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calculator"></i><span
-                                    class="hide-menu">Facturacion</span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="Factura_venta.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Venta
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="Factura_renta.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura Renta
-                                        </span></a></li>
-                                <li class="sidebar-item"><a href="Factura_mantenimiento.php" class="sidebar-link"><i
-                                            class="mdi mdi-file-document"></i><span class="hide-menu"> Factura
-                                            Mantenimiento
-                                        </span></a></li>
-                            </ul>
-                        </li>
+                                href="service.php" aria-expanded="false"><i class="fas fa-handshake"></i><span
+                                    class="hide-menu">Servicios</span></a></li>
+                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="sucursal.php" aria-expanded="false"><i class="mdi mdi-google-maps"></i><span
+                                    class="hide-menu">Sucursales</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
                                     class="hide-menu">Authentication </span></a>
@@ -235,6 +202,9 @@ color:rgb(0,0,0);
                                         </span></a></li>
                             </ul>
                         </li>
+
+
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

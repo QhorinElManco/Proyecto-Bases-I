@@ -112,10 +112,6 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <br>
-                                <div style="text-align:right; width:580px"><button type="button"
-                                        class="btn btn-dark btn-lg"><i class="mdi mdi-cart"> Comprar</i></button>
-                                </div>
                             </div>
                         </div>
                         <!--Fin Div Ficha Tecnica-->';

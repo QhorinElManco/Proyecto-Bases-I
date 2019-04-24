@@ -14,6 +14,8 @@
     <!-- Custom CSS -->
     <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
+    <!-- Custom CSS -->
+    <link href="assets/libs/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -189,12 +191,15 @@
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="quienes_somos.html" aria-expanded="false"><i
+                                href="quienes_somos.php" aria-expanded="false"><i
                                     class="fas fa-users"></i><span class="hide-menu">Quienes somos</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="Form/gestion_taller.php" aria-expanded="false"><i class="fas fa-handshake"></i><span
+                                href="service.php" aria-expanded="false"><i class="fas fa-handshake"></i><span
                                     class="hide-menu">Servicios</span></a></li>
+                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="sucursal.php" aria-expanded="false"><i class="fas fa-handshake"></i><span
+                                    class="hide-menu">Sucursales</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
                                     class="hide-menu">Authentication </span></a>
@@ -234,20 +239,47 @@
                         <div
                             style="background-image: url(assets/images/background/img1.jpg);background-repeat: no-repeat;background-size:cover;  width: 100%; height: 100vh;">
                             <div style="background-color: rgba(0, 0, 0, 0.5); height:100%; width:100%;">
-                                <div style="width:525px; height:400px; margin: auto; padding-top: 220px">
-                                    <h5 style="color: rgba(255, 255, 255, 0.7)">La empresa numero uno de vehiculos en el
-                                        país</h5>
+                                <div style="width:525px; height:400px; margin: auto; padding-top: 220px; text-align:center;">
+                                    <h1 style="color: rgb(255, 255, 255)">¿Quiénes somos?</h1>
                                     <br>
-                                    <h2 style="color: white;">LA COMODIDAD AL ALCANCE DE TUS MANOS</h2>
                                     <br>
-                                    <p style="color: rgba(255, 255, 255, 0.9)">La empresa con la mejor atencion y los
-                                        mejores precios en renta y venta de vehiculos con
-                                        cobertura a nivel nacional</p>
+                                    <h3 style="color: rgba(355, 255, 255, 0.9)">Somos el equipo que conforma la mejor empresa con los mejores beneficios que puedes obtener</h3>
 
-                                    <br>
-                                    <button type="button" class="btn btn-outline-warning"><a
-                                            href="ver_todos_autos.php">Explorar</a></button>
                                 </div>
+                                <div class="row el-element-overlay" style="padding-left: 150px; padding-right: 150px; padding-top: 70px;">
+                                        <div class="col-lg-3 col-md-6" style="background-color:rgba(0, 0, 0, 0.5)">
+                                            <div class="card" style="background-color:rgba(0, 0, 0, 0.5)">
+                                                <div class="el-card-item" style="background-color:rgba(0, 0, 0, 0.5)">
+                                                    <div class="el-card-avatar el-overlay-1" style="border-radius: 10px;"> <img src="assets/images/users/2.jpg" alt="user" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6" style="background-color:rgba(0, 0, 0, 0.5)">
+                                            <div class="card" style="background-color:rgba(0, 0, 0, 0.5)">
+                                                <div class="el-card-item" style="background-color:rgba(0, 0, 0, 0.5)">
+                                                    <div class="el-card-avatar el-overlay-1" style="border-radius: 10px;"> <img src="assets/images/users/4.jpg" alt="user" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6" style="background-color:rgba(0, 0, 0, 0.5)">
+                                            <div class="card" style="background-color:rgba(0, 0, 0, 0.5)">
+                                                <div class="el-card-item" style="background-color:rgba(0, 0, 0, 0.5)">
+                                                    <div class="el-card-avatar el-overlay-1" style="border-radius: 10px;"> <img src="assets/images/users/8.jpg" alt="user" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card" style="background-color:rgba(0, 0, 0, 0.5)">
+                                                <div class="el-card-item" tyle="background-color:rgba(0, 0, 0, 0.5)">
+                                                    <div class="el-card-avatar el-overlay-1" style="border-radius: 10px;"> <img src="assets/images/users/5.jpg" alt="user" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -290,17 +322,9 @@
     <script src="dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-    <!-- Charts js Files -->
-    <script src="assets/libs/flot/excanvas.js"></script>
-    <script src="assets/libs/flot/jquery.flot.js"></script>
-    <script src="assets/libs/flot/jquery.flot.pie.js"></script>
-    <script src="assets/libs/flot/jquery.flot.time.js"></script>
-    <script src="assets/libs/flot/jquery.flot.stack.js"></script>
-    <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
-    <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="dist/js/pages/chart/chart-page-init.js"></script>
+    <!-- this page js -->
+    <script src="assets/libs/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+    <script src="assets/libs/magnific-popup/meg.init.js"></script>
 
 </body>
 

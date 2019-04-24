@@ -137,7 +137,7 @@
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
-                <ul id="sidebarnav" class="p-t-30">
+                    <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-car"></i><span
                                     class="hide-menu">Vehiculos</span></a>
@@ -155,14 +155,15 @@
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="widgets.html" aria-expanded="false"><i class="mdi mdi-history"></i><span
-                                    class="hide-menu">Historial</span></a></li>
+                                href="quienes_somos.php" aria-expanded="false"><i
+                                    class="fas fa-users"></i><span class="hide-menu">Quienes somos</span></a>
+                        </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="tables.html" aria-expanded="false"><i class="mdi mdi-oil"></i><span
-                                    class="hide-menu">Mantenimiento</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="grid.html" aria-expanded="false"><i class="mdi mdi-view-grid"></i><span
-                                    class="hide-menu">Repuestos</span></a></li>
+                                href="service.php" aria-expanded="false"><i class="fas fa-handshake"></i><span
+                                    class="hide-menu">Servicios</span></a></li>
+                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="sucursal.php" aria-expanded="false"><i class="mdi mdi-google-maps"></i><span
+                                    class="hide-menu">Sucursales</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
                                     class="hide-menu">Authentication </span></a>
@@ -175,6 +176,9 @@
                                         </span></a></li>
                             </ul>
                         </li>
+
+
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

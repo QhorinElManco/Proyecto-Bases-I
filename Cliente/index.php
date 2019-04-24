@@ -189,12 +189,15 @@
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="Form/gestion_sucursal.php" aria-expanded="false"><i
+                                href="quienes_somos.php" aria-expanded="false"><i
                                     class="fas fa-users"></i><span class="hide-menu">Quienes somos</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="Form/gestion_taller.php" aria-expanded="false"><i class="fas fa-handshake"></i><span
+                                href="service.php" aria-expanded="false"><i class="fas fa-handshake"></i><span
                                     class="hide-menu">Servicios</span></a></li>
+                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="sucursal.php" aria-expanded="false"><i class="fas fa-handshake"></i><span
+                                    class="hide-menu">Sucursales</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
                                     class="hide-menu">Authentication </span></a>
